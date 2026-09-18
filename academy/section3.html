@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doofinder Academy</title>
+<link rel="stylesheet" href="css/style.css?v=209">
+</head>
+<body>
+<div id="app">
+
+  <header class="topbar">
+    <a class="brand" href="index.html" title="Back to Home">
+      <div class="brand-mark">df</div>
+      <div class="brand-name"><span>Doofinder</span> Academy</div>
+    </a>
+
+    <nav class="tabs">
+      <button class="tab-btn" data-view="course">Course Path</button>
+      <button class="tab-btn" data-view="demo">Demo Store</button>
+      <button class="tab-btn" data-view="scores">Scores</button>
+    </nav>
+
+    <div class="topbar-right">
+      <a class="home-btn" href="index.html">← Home</a>
+      <div class="progress-wrap">
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+        <div class="progress-label" id="progress-label">0% complete</div>
+      </div>
+      <div class="xp-badge">⚡ <span id="xp-label">0 points</span></div>
+      <button class="reset-btn" id="reset-btn">↺ Reset</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="main"><div class="main-inner" id="main-inner"></div></main>
+    <aside class="doclinks" id="doclinks"></aside>
+  </div>
+
+</div>
+
+<div class="lightbox" id="lightbox">
+  <img id="lightbox-img" src="" alt="">
+  <div class="lightbox-video" id="lightbox-video">
+    <iframe id="lightbox-video-iframe" src="" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+  </div>
+  <div class="lightbox-content" id="lightbox-content"></div>
+</div>
+
+<script src="js/data-section3.js?v=209"></script>
+<script src="js/app.js?v=209"></script>
+</body>
+</html>

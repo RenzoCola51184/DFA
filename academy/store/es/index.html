@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doostride</title>
+<link rel="stylesheet" href="../css/store.css?v=13">
+</head>
+<body>
+
+<div class="promo-bar" data-i18n="promo"></div>
+
+<header class="site-header">
+  <div class="header-top">
+    <div class="lang-switch" id="lang-switch">
+      <button class="lang-btn" data-action="toggle-lang-menu" type="button">
+        <span id="lang-current">Español</span> ▾
+      </button>
+      <div class="lang-menu" id="lang-menu">
+        <div data-action="set-lang" data-lang="en">English</div>
+        <div data-action="set-lang" data-lang="es">Español</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-main">
+    <a class="logo" href="#/">doo<span>stride</span></a>
+
+    <nav class="main-nav">
+      <div class="nav-dropdown">
+        <span data-i18n="navBrands">Marcas ▾</span>
+        <div class="dropdown-menu" id="brand-menu"></div>
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn search-toggle-btn" aria-label="Buscar" data-action="toggle-mobile-search" type="button">
+        <svg viewBox="0 0 24 24" width="19" height="19"><path fill="currentColor" d="M10 2a8 8 0 1 0 4.9 14.32l5.39 5.39 1.41-1.41-5.39-5.39A8 8 0 0 0 10 2Zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12Z"/></svg>
+      </button>
+      <div class="search-wrap">
+        <input id="doostride-search" type="text" autocomplete="off" />
+        <div id="df-results-mount"></div>
+      </div>
+      <button class="icon-btn" aria-label="Cuenta">
+        <svg viewBox="0 0 24 24" width="19" height="19"><path fill="currentColor" d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-4.4 0-8 2.2-8 5v3h16v-3c0-2.8-3.6-5-8-5Z"/></svg>
+      </button>
+      <button class="icon-btn cart-btn" aria-label="Carrito">
+        <svg viewBox="0 0 24 24" width="19" height="19"><path fill="currentColor" d="M7 4h-2v2h2l3.6 7.6-1.4 2.5A2 2 0 0 0 11 19h9v-2h-8.4l1.1-2h6.5a2 2 0 0 0 1.8-1.1l3-6A1 1 0 0 0 23 6H7.4l-.9-2H4v2ZM7 22a1.6 1.6 0 1 0 0-3.2A1.6 1.6 0 0 0 7 22Zm12 0a1.6 1.6 0 1 0 0-3.2A1.6 1.6 0 0 0 19 22Z"/></svg>
+        <span id="cart-count">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="cat-tiles" id="cat-tiles"></section>
+
+  <section class="catalog" id="catalog">
+    <div class="catalog-head">
+      <h2 id="catalog-title"></h2>
+      <div class="brand-chips" id="brand-chips"></div>
+    </div>
+    <div class="product-grid" id="product-grid"></div>
+  </section>
+</main>
+
+
+<script src="../../js/store-products-es.js?v=1"></script>
+<script src="../../js/search-engine.js?v=13"></script>
+<script src="../js/store.js?v=13"></script>
+</body>
+</html>
