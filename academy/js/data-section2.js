@@ -1002,12 +1002,15 @@ const COURSE = {
           outgoing: true,
           body: [
             "Hi John,",
-            "Good news — I dug into the <strong>Search Layer</strong>'s configuration and found what was causing the out-of-stock products showing up first.",
-            "They were tying in score with in-stock ones, so I added <strong>Availability</strong> as a tiebreak right after Score — in-stock products now win those ties, and price breaks any tie left after that.",
-            "Still working through the rest of what you flagged — more soon!",
+            "Good news — I dug into the <strong>Search Layer</strong>'s configuration and sorted out everything you flagged.",
+            "Out-of-stock products were tying in score with in-stock ones, so I added <strong>Availability</strong> as a tiebreak right after Score, with price breaking any tie left after that — in-stock products now always come first.",
+            "I also set up a <strong>Boosting Rule</strong> so our Nike and Adidas shoes get extra relevance no matter what's searched, which is why \"comfort\" was surfacing a Nike cap over our actual shoes.",
+            "\"Shoes on sale\" and \"shoes discounted\" now return a <strong>Custom Result</strong> scoped to whatever's currently discounted, so it stays accurate as sales start and end.",
+            "And I added <strong>mpn.light_explode</strong> to Search Fields, so typing part of a product code like SHOCON or SHODRMRED now finds every matching shoe, not just full codes.",
+            "Everything's live — happy to walk you through it whenever works for you.",
             "Best,<br>Amanda"
           ],
-          times: ["18:12", "18:12", "18:13", "18:14"]
+          times: ["18:12", "18:12", "18:13", "18:14", "18:15", "18:16", "18:16"]
         }
       }
     }
