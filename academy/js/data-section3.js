@@ -993,7 +993,7 @@ const COURSE = {
           body: [
             "Hey Amanda, hope you're enjoying the break! 🌴",
             "Quick update before you're back: variants are grouping properly now — a couple of the size variants had a typo in group_id, so I swapped in a clean feed and set a group_leader on each product.",
-            "Also excluded the whole Kids category, merged \"sneakers\" and \"trainers\" into one synonym set, and set up the redirection for \"return policy\".",
+            "Also excluded the whole Kids line, merged \"sneakers\" and \"trainers\" into one synonym set, and set up the redirection for \"return policy\".",
             "Black Friday banner is live too, and I copied everything over to the Spanish Search Engine — added it on top, so your política de privacidad redirection is still exactly where you left it.",
             "Enjoy the rest of your vacation, see you soon!"
           ],
