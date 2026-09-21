@@ -240,7 +240,7 @@ const COURSE = {
             heading: "Relevance Criteria and Grouping",
             pageBreak: true,
             html: `
-              <p>A couple of <strong>Relevance Criteria</strong> tweaks (Search → Advanced Preferences) pair well with grouping: sorting by <code>best_price</code> ascending surfaces the cheapest variant as the group leader, and sorting by <strong>Availability</strong> prioritizes an in-stock variant over an out-of-stock one — combining both keeps the cheapest available option in front.</p>
+              <p>A couple of <strong>Relevance Criteria</strong> tweaks pair well with grouping: sorting by <code>best_price</code> ascending surfaces the cheapest variant as the group leader, and sorting by <strong>Availability</strong> prioritizes an in-stock variant over an out-of-stock one — combining both keeps the cheapest available option in front.</p>
               <figure class="lesson-figure lesson-figure-left" style="width: 460px;">
                 <img src="img/grouping-variants-feed-example.png" alt="Sample data feed rows for the same product's three size variants, all sharing the same group_id value with group_leader set to true on only one row" data-action="zoom-image">
                 <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
