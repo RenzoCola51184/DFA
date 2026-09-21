@@ -121,7 +121,7 @@ const COURSE = {
                 <img src="img/excluded-results-out-of-stock.png" alt="Excluded Results screen with a rule set to availability is out of stock — the built-in shortcut for hiding out-of-stock products automatically" data-action="zoom-image">
                 <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
               </figure>
-              <p>Turning it on takes three steps, all from Configuration → Excluded Results: click "Add results" → "Rules", pick <code>availability</code> as the field and <code>out of stock</code> as its value, click "Add rule", then <strong>Save</strong>.</p>
+              <p>Turning it on takes three steps: click "Add results" → "Rules", pick <code>availability</code> as the field and <code>out of stock</code> as its value, click "Add rule", then <strong>Save</strong>.</p>
               <p>From then on it runs automatically: the moment a product's availability flips to "out of stock" in the feed, it disappears from results — and once it's back in stock, it reappears too, though only after the feed is <strong>reindexed</strong>. Like any other Excluded Results rule, it affects every <strong>Doofinder</strong> service fed by that Search Engine — Search, Recommendations, Quiz Maker, and the rest.</p>`
           }
         ]
