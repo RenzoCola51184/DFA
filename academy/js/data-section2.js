@@ -717,7 +717,13 @@ const COURSE = {
                 <li><strong>Broad Match</strong> — this Custom Result will be displayed if the text typed by the user contains the set search term.</li>
               </ul>
               <p>The way of including or excluding items from queries through Custom Results is similar to what we saw in Boosting Rules. That is, it can be applied at the level of individual products, or at the level of a group of products that meet given conditions — dictated by the indexed fields and their values, exactly as in Boosting Rules.</p>
-              <p>Within a rule, two types of conditions can be combined: "and" to display items that meet all the selected condition fields, and "or" to display items that meet one of the conditions within the same field. "And" logic can't be applied twice to the same field within one rule — though a field can still hold more than one value.</p>
+              <p>Within a rule, conditions can be combined:</p>
+              <ul>
+                <li>An <strong>AND</strong> condition happens automatically as soon as two filters with different attributes are used together — e.g. category "Shoes" and color "blue" only matches items that are both.</li>
+                <li>An <strong>OR</strong> condition happens by adding two or more values in the same row — e.g. color "blue" or "red" in the same rule matches items with either one.</li>
+                <li>Both can be combined at once: category "Shoes" whose color is "blue" or "red" mixes an AND (category + color) with an OR (blue vs red) in the same rule.</li>
+              </ul>
+              <p>"And" logic can't be applied twice to the same field within one rule — though a field can still hold more than one value.</p>
               <p>Within the same Custom Result, several rules can be applied (individual items or rules), and the arrangement of products depends on the disposition of these rules.</p>
               <p>In Custom Results you can decide between <strong>Display only the selected results</strong> or <strong>Display the selected results first, then natural results</strong>.</p>
               <p>Custom Results can be applied for a specific period, or it can always be active.</p>`
