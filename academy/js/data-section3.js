@@ -894,22 +894,22 @@ const COURSE = {
           {
             key: "grouping-feed",
             title: "2. Choosing the right data feed for grouping",
-            question: "You go check the data feed and find two other versions floating around from an earlier attempt at grouping.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Analyze the 3 data feeds below and figure out which one actually gets the AXEL RUNNER's variants to group correctly.",
+            question: "You go check the data feed and find two other versions of the whole catalogue floating around from an earlier attempt at grouping.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Analyze the 3 full data feeds below and figure out which one actually gets the AXEL RUNNER's variants — and every other product's — to group correctly.",
             beforeFields: `
               <div class="feed-preview-grid">
                 <div class="feed-preview-card">
                   <p class="feed-preview-label">Data feed 1</p>
-                  <img src="img/final-group-feed1-preview.png" alt="Preview of data feed 1: id, title, color, size and price columns — no group_id or group_leader column at all" data-action="zoom-image" class="feed-preview-img">
+                  <img src="img/final-group-feed1-preview.png" alt="Preview of the full catalogue feed: id, title, price, color, size and the rest of the usual columns — no group_id or group_leader column at all" data-action="zoom-image" class="feed-preview-img">
                   <a href="feeds/doostride-group-feed-1.csv" download class="btn btn-ghost feed-download-btn">Download data feed 1</a>
                 </div>
                 <div class="feed-preview-card">
                   <p class="feed-preview-label">Data feed 2</p>
-                  <img src="img/final-group-feed2-preview.png" alt="Preview of data feed 2: a group_id column present but spelled differently on each row (AXEL-RUNNER-01, AXEL-RUNNER-1, AXEL_RUNNER_01), and an empty group_leader column" data-action="zoom-image" class="feed-preview-img">
+                  <img src="img/final-group-feed2-preview.png" alt="Preview of the full catalogue feed with a group_id column added, but spelled differently on each row of the same product — for AXEL RUNNER: 7841002000, 78410020000, 784100200 — and an empty group_leader column" data-action="zoom-image" class="feed-preview-img">
                   <a href="feeds/doostride-group-feed-2.csv" download class="btn btn-ghost feed-download-btn">Download data feed 2</a>
                 </div>
                 <div class="feed-preview-card">
                   <p class="feed-preview-label">Data feed 3</p>
-                  <img src="img/final-group-feed3-preview.png" alt="Preview of data feed 3: a group_id column identical on every row (AXEL-RUNNER-01), with group_leader set to true on exactly one row and false on the rest" data-action="zoom-image" class="feed-preview-img">
+                  <img src="img/final-group-feed3-preview.png" alt="Preview of the full catalogue feed with a group_id column set to the group leader's own id on every row of that group — for AXEL RUNNER: 7841002000 on all 5 rows — and group_leader set to true on exactly the leader row, false on the rest" data-action="zoom-image" class="feed-preview-img">
                   <a href="feeds/doostride-group-feed-3.csv" download class="btn btn-ghost feed-download-btn">Download data feed 3</a>
                 </div>
               </div>
@@ -917,7 +917,7 @@ const COURSE = {
             fields: [
               { key: "validfeed", label: "", type: "choice", layout: "column", options: ["Data feed 1", "Data feed 2", "Data feed 3"], correct: "Data feed 3" }
             ],
-            explain: "Data feed 3 is the only one that works: every variant shares the exact same group_id (AXEL-RUNNER-01), and exactly one of them has group_leader set to true, so Doofinder knows which one to show first. Data feed 1 doesn't have a group_id column at all, so Doofinder has no way to know these four rows are the same product. Data feed 2 does have a group_id column, but each row's value is spelled slightly differently (AXEL-RUNNER-01, AXEL-RUNNER-1, AXEL_RUNNER_01) — since the values don't match exactly, Doofinder treats them as different groups, so nothing actually groups together."
+            explain: "Data feed 3 is the only one that works: every variant of a product shares the exact same group_id — its group leader's own id (for AXEL RUNNER, the leader is id 7841002000, so all 5 rows carry group_id 7841002000) — and exactly one row per group has group_leader set to true, so Doofinder knows which one to show first. Data feed 1 doesn't have a group_id column at all, so Doofinder has no way to know which rows belong together. Data feed 2 does have a group_id column, but each row's value is spelled slightly differently (7841002000, 78410020000, 784100200 for AXEL RUNNER alone) — since the values don't match exactly, Doofinder treats them as different groups, so nothing actually groups together."
           },
           {
             key: "excluded-results-kids",
