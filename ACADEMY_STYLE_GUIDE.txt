@@ -289,3 +289,8 @@ CHECKLIST TO RUN AGAINST ANY OTHER SECTION
 [ ] No forward reference names a specific module/section — always
     "later in the course".
 [ ] No generic, untested "best practice" filler paragraphs.
+[ ] No theory paragraph restates that a feature is Search Engine-specific
+    once an earlier lesson's overview already established that.
+[ ] No theory paragraph spells out a feature's Admin Panel navigation path
+    when the accompanying screenshot already shows it (in-screen click
+    sequences and quiz "where is it configured" questions are fine).
