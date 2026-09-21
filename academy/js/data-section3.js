@@ -228,7 +228,7 @@ const COURSE = {
         blocks: [
           {
             html: `
-              <p>It's turned on from Configuration → Search Engines → See indices → Indices → Configuration section: enable <strong>"Group variants as a single item"</strong>, then click <strong>Save</strong>. For it to actually work, every variant of the same product needs to share the same <code>group_id</code> value in the data feed (a string) — all items with the same <code>group_id</code> get displayed as one product only.</p>
+              <p>It's turned on by enabling <strong>"Group variants as a single item"</strong>, then clicking <strong>Save</strong>. For it to actually work, every variant of the same product needs to share the same <code>group_id</code> value in the data feed (a string) — all items with the same <code>group_id</code> get displayed as one product only.</p>
               <figure class="lesson-figure lesson-figure-right" style="width: 420px;">
                 <img src="img/grouping-variants-indices-config.png" alt="Indices Configuration section with the 'Group variants as a single item' toggle switched on" data-action="zoom-image">
                 <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
