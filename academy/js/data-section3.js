@@ -65,9 +65,11 @@ const COURSE = {
             ],
             times: ["09:14", "09:14", "09:15", "09:16", "09:17", "09:18", "09:19", "09:20", "09:21", "09:22"]
           },
-          slackNote: [
+          slackIntro: [
             "In this section, you are <strong>Samantha</strong>, Amanda House's assistant at Doostride. You've spent the last few months helping Amanda with day-to-day ecommerce tasks, and this is the first time she's leaving you in charge of the web on your own.",
-            "This morning, you got this message from <strong>Amanda</strong> on Slack.",
+            "This morning, you got this message from <strong>Amanda</strong> on Slack."
+          ],
+          slackNote: [
             "Before tackling her list, you'll need to get familiar with six more Doofinder features: <strong>Excluded Results</strong>, <strong>Grouping Product Variants</strong>, <strong>Synonyms</strong>, <strong>Redirections</strong>, <strong>Banners</strong> and <strong>Copy Settings</strong>.",
             "Your goal throughout this section is to learn how each one works, so that by the final exercise you can fix everything Amanda listed before she's back."
           ]
