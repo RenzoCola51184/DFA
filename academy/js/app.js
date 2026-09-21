@@ -782,13 +782,20 @@ function renderPresentationPage(pageData) {
 
   const slackCardHTML = pageData.slack ? renderSlackCard(pageData.slack) : "";
 
-  const slackHTML = !pageData.slack ? "" : pageData.slackNote ? `
-      <div class="whatsapp-split">
-        ${slackCardHTML}
-        <div class="whatsapp-note">
-          ${pageData.slackNote.map(p => `<p>${p}</p>`).join("")}
-        </div>
-      </div>` : slackCardHTML;
+  const slackIntroHTML = pageData.slackIntro ? `
+      <div class="intro-text">
+        ${pageData.slackIntro.map(p => `<p>${p}</p>`).join("")}
+      </div>` : "";
+
+  const slackNoteHTML = pageData.slackNote ? `
+      <div class="intro-text">
+        ${pageData.slackNote.map(p => `<p>${p}</p>`).join("")}
+      </div>` : "";
+
+  const slackHTML = !pageData.slack ? "" : `
+      ${slackIntroHTML}
+      <div class="slack-card-wide">${slackCardHTML}</div>
+      ${slackNoteHTML}`;
 
   const outroHTML = pageData.outro ? `
       <div class="intro-text">
