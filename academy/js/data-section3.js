@@ -492,7 +492,7 @@ const COURSE = {
                 <img src="img/redirections-add-form.png" alt="Add redirection form with Redirection name, Status toggle, Destination URL, a search term set to Broad Match, and the Enable automatic redirection checkbox" data-action="zoom-image">
                 <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
               </figure>
-              <p>Redirections are set up from the <strong>Admin Panel</strong>, under Search → Optimize → Redirections: pick the Search Engine, then click "Add redirection". A set of redirections can also be copied over to another Search Engine using the "Copy settings to..." dropdown next to that same button, followed by "Apply".</p>
+              <p>A set of redirections can also be copied over to another Search Engine using the "Copy settings to..." dropdown next to the "Add redirection" button, followed by "Apply".</p>
               <p>Creating one means filling in:</p>
               <ul>
                 <li>A <strong>Redirection name</strong>, to identify it later.</li>
