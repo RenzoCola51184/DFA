@@ -21,10 +21,10 @@ const runtime = {
   view: "course",
   sectionId: 0,
   coursePage: "theory", // "theory" | "quiz" — which page of a section is showing
-  theoryPage: 1,     // 1-based page within a section's theory (long sections split in two)
-  presentationPage: 1, // 1-based page within section 0.s presentation
+  activeAnchor: null,   // slug of the heading currently in view, for the doc-links scroll-spy
   quiz: {},         // sectionId -> { stage, index, selected, locked, results:[] }
-  exercise: {}      // sectionId -> wizard-exercise runtime state (see ensureExerciseRuntime)
+  exercise: {},     // sectionId -> wizard-exercise runtime state (see ensureExerciseRuntime)
+  theoryPage: {}    // sectionId -> index of the theory sub-page currently showing
 };
 
 /* ---------- Helpers ---------- */
@@ -33,6 +33,10 @@ function el(html) {
   t.innerHTML = html.trim();
   return t.content.firstElementChild;
 }
+function slugify(str) {
+  return String(str).replace(/<[^>]+>/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+const ZOOM_BADGE = `<span class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></span>`;
 function renderWhatsappCard(wa) {
   const bubbles = wa.body.map((p, i) => `
     <div class="whatsapp-msg">
@@ -46,6 +50,24 @@ function renderWhatsappCard(wa) {
         <div class="whatsapp-name">${wa.name}</div>
       </div>
       <div class="whatsapp-thread">${bubbles}</div>
+    </div>`;
+}
+
+function renderSlackCard(sl) {
+  const msgs = sl.body.map((p, i) => `
+    <div class="slack-msg">
+      <div class="slack-avatar ${sl.self ? "slack-avatar-self" : ""}">${sl.name.split(" ").map(w => w[0]).join("")}</div>
+      <div class="slack-msg-body">
+        <div class="slack-msg-head"><span class="slack-msg-name">${sl.name}</span><span class="slack-msg-time">${(sl.times && sl.times[i]) || ""}</span></div>
+        <p>${p}</p>
+      </div>
+    </div>`).join("");
+  return `
+    <div class="slack-card">
+      <div class="slack-channel-bar">
+        <span class="slack-hash">#</span>${sl.channel || "direct-message"}
+      </div>
+      <div class="slack-thread">${msgs}</div>
     </div>`;
 }
 
@@ -117,16 +139,17 @@ function renderDocLinks() {
 
   COURSE.sections.filter(s => s.docUrl && s.id !== 0).forEach(section => {
     const inSection = runtime.view === "course" && runtime.sectionId === section.id;
-    const currentPage = inSection ? (runtime.theoryPage || 1) : 0;
 
-    const docs = [{ label: section.navLabel, url: section.docUrl, fromPage: section.docFromPage || 1 }, ...(section.extraDocs || [])];
-    const activeDoc = inSection
-      ? docs.reduce((best, doc) => (doc.fromPage <= currentPage && (!best || doc.fromPage > best.fromPage) ? doc : best), null)
-      : null;
+    const docs = [
+      { label: section.navLabel, url: section.docUrl, anchor: null },
+      ...(section.extraDocs || []).map(d => ({ label: d.label, url: d.url, anchor: slugify(d.fromHeading) }))
+    ];
+    const activeAnchor = inSection ? runtime.activeAnchor : null;
+    const activeDoc = (activeAnchor && [...docs].reverse().find(d => d.anchor === activeAnchor)) || docs[0];
 
     docs.forEach((doc, i) => {
       const item = el(`
-        <div class="doclink-item ${i > 0 ? "doclink-item-extra" : ""} ${doc === activeDoc ? "active" : ""}">
+        <div class="doclink-item ${i > 0 ? "doclink-item-extra" : ""} ${inSection && doc === activeDoc ? "active" : ""}">
           <a href="${doc.url}" target="_blank" rel="noopener">${doc.label}</a>
         </div>`);
       aside.appendChild(item);
@@ -134,24 +157,44 @@ function renderDocLinks() {
   });
 }
 
-/* ---------- Theory rendering ---------- */
-function getTheoryPages(section) {
-  if (section.theory.pages) return section.theory.pages; // explicit page split, when the default 2-per-page grouping isn't the right fit
-  const blocks = section.theory.blocks || [];
-  const MAX_BLOCKS_PER_PAGE = 2; // keeps each page short enough to avoid scrolling to reach the footer button
-  const pages = [];
-  for (let i = 0; i < blocks.length; i += MAX_BLOCKS_PER_PAGE) {
-    pages.push(blocks.slice(i, i + MAX_BLOCKS_PER_PAGE));
-  }
-  return pages.length ? pages : [[]];
+/* ---------- Doc-links scroll-spy ---------- */
+let scrollSpyObserver = null;
+function setupScrollSpy() {
+  if (scrollSpyObserver) scrollSpyObserver.disconnect();
+  const headings = document.querySelectorAll("#main-inner [data-anchor]");
+  if (!headings.length) return;
+  scrollSpyObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        runtime.activeAnchor = entry.target.dataset.anchor;
+        renderDocLinks();
+      }
+    });
+  }, { root: document.querySelector(".main"), rootMargin: "-10% 0px -70% 0px", threshold: 0 });
+  headings.forEach(h => scrollSpyObserver.observe(h));
 }
 
+/* ---------- Theory rendering ----------
+   A theory's blocks normally render as one continuous page. A block flagged
+   `pageBreak: true` starts a new sub-page instead, shown behind a Continue
+   button — used when a topic deserves its own page within the lesson. */
+function splitTheoryPages(blocks) {
+  const pages = [[]];
+  (blocks || []).forEach(b => {
+    if (b.pageBreak) pages.push([]);
+    pages[pages.length - 1].push(b);
+  });
+  return pages;
+}
 function renderTheoryHTML(section, blocks, showLead) {
-  const blocksHTML = (blocks || []).map(b => `
+  const blocksHTML = (blocks || []).map(b => {
+    const anchor = b.heading ? slugify(b.heading) : "";
+    return `
     <div class="theory-block">
-      ${b.heading ? `<h3>${b.heading}</h3>` : ""}
+      ${b.heading ? `<h2 id="${anchor}" data-anchor="${anchor}">${b.heading}</h2>` : ""}
       ${b.html}
-    </div>`).join("");
+    </div>`;
+  }).join("");
   return `
     <div class="card theory-card">
       ${showLead ? `<p class="theory-lead">${section.theory.lead}</p>` : ""}
@@ -213,9 +256,11 @@ function renderQuizArea(section) {
         </div>`;
     }).join("");
 
+    const pointsPerQuestion = Math.round(20 / total);
+    const isCorrect = q.selected === question.correct;
     const feedback = q.locked ? `
-      <div class="quiz-feedback ${q.selected === question.correct ? "ok" : "bad"}">
-        <strong class="quiz-feedback-label">${q.selected === question.correct ? "Correct!" : "Not quite."}</strong>
+      <div class="quiz-feedback ${isCorrect ? "ok" : "bad"}">
+        <strong class="quiz-feedback-label">${isCorrect ? `Correct! +${pointsPerQuestion} points` : "Not quite."}</strong>
         ${question.explain}
       </div>` : "";
 
@@ -321,7 +366,7 @@ function handleExerciseSubmit(section, phaseIndex) {
   ex.errors[phaseIndex] = errors;
   ex.attempts[phaseIndex] = (ex.attempts[phaseIndex] || 0) + 1;
 
-  if (ex.firstTry[phaseIndex] === undefined) ex.firstTry[phaseIndex] = allValid;
+  if (phase.fields.length > 0 && ex.firstTry[phaseIndex] === undefined) ex.firstTry[phaseIndex] = allValid;
 
   if (phase.key === "store-ids" && allValid) {
     try { localStorage.setItem("dfa_demo_store_id", values.storeId.trim()); } catch (e) {}
@@ -356,7 +401,8 @@ function handleExerciseAdvanceFromExplain(section) {
 
 function handleExerciseSkip(section, phaseIndex) {
   const ex = ensureExerciseRuntime(section);
-  if (ex.firstTry[phaseIndex] === undefined) ex.firstTry[phaseIndex] = false;
+  const phase = section.exercise.phases[phaseIndex];
+  if (phase.fields.length > 0 && ex.firstTry[phaseIndex] === undefined) ex.firstTry[phaseIndex] = false;
   ex.attempts[phaseIndex] = (ex.attempts[phaseIndex] || 0) + 1;
   ex.sub = "form";
   advanceExercise(section);
@@ -381,6 +427,10 @@ function handleExerciseConfirm(section, phaseIndex) {
   advanceExercise(section);
 }
 
+function scoreablePhaseCount(section) {
+  return section.exercise.phases.filter(p => p.fields.length > 0).length;
+}
+
 function advanceExercise(section) {
   const ex = ensureExerciseRuntime(section);
   const total = section.exercise.phases.length;
@@ -388,7 +438,8 @@ function advanceExercise(section) {
     ex.stage = ex.stage + 1;
   } else {
     const score = Object.values(ex.firstTry).filter(Boolean).length;
-    markSectionDone(section.id, score, total, score * 10);
+    const scoreTotal = scoreablePhaseCount(section);
+    markSectionDone(section.id, score, scoreTotal, score * 10);
     ex.stage = "done";
   }
   renderMain();
@@ -399,24 +450,30 @@ function renderImageChoicePhase(sectionId, phaseIndex, phase, field, ex) {
   const savedValue = (ex.values[phaseIndex] && ex.values[phaseIndex][field.key]) || "";
   const hasError = !!(ex.errors[phaseIndex] && ex.errors[phaseIndex][field.key]);
   const thumbs = field.options.map(o => `
-    <div class="image-choice-thumb">
+    <div class="image-choice-thumb ${field.thumbAspect ? "fixed-ratio" : ""}" ${field.thumbAspect ? `style="aspect-ratio: ${field.thumbAspect};"` : ""}>
       <img src="${o.src}" alt="${o.alt || ""}" data-action="zoom-image-option" data-src="${o.src}" data-alt="${o.alt || ""}" class="exercise-scenario-img">
+      ${ZOOM_BADGE}
       ${o.caption ? `<div class="image-choice-caption">${o.caption}</div>` : ""}
     </div>`).join("");
   const options = field.options.map(o => `
     <div class="choice-option ${savedValue === o.value ? "selected" : ""}" data-action="select-choice-option" data-field-id="${id}" data-value="${o.value}" data-section-id="${sectionId}" data-phase="${phaseIndex}">${o.caption || o.value}</div>`).join("");
+  const rowStyle = field.thumbCols ? ` style="grid-template-columns: repeat(${field.thumbCols}, 1fr);"` : "";
+  const mediaStyle = field.mediaWidth ? ` style="width: ${field.mediaWidth}px; max-width: ${field.mediaWidth}px;"` : "";
+  const remainder = field.thumbCols ? field.options.length % field.thumbCols : 0;
+  const trailingNoteHTML = (field.trailingNote && remainder !== 0)
+    ? `<div class="image-choice-note" style="grid-column: span ${field.thumbCols - remainder};">${field.trailingNote}</div>`
+    : "";
   return `
-    <div class="exercise-scenario-split">
-      <div class="exercise-scenario-media image-choice-media">
-        <div class="image-choice-row">${thumbs}</div>
-        <div class="image-select-hint">Click an image to enlarge it</div>
+    <div class="exercise-scenario-split ${field.stacked ? "stacked-media" : ""}">
+      <div class="exercise-scenario-media image-choice-media"${mediaStyle}>
+        <div class="image-choice-row ${field.thumbCols ? "image-choice-grid" : ""}"${rowStyle}>${thumbs}${trailingNoteHTML}</div>
       </div>
       <div class="exercise-scenario-side">
         ${phase.question ? `<p class="exercise-scenario-text">${phase.question}</p>` : ""}
         <div class="field-row">
           ${field.label ? `<label class="field-label">${field.label}</label>` : ""}
           <input type="hidden" id="${id}" value="${savedValue}" />
-          <div class="choice-grid ${hasError ? "error" : ""}">${options}</div>
+          <div class="choice-grid ${field.layout === "column" ? "choice-grid-column" : ""} ${hasError ? "error" : ""}">${options}</div>
           ${hasError ? `<div class="field-error-msg">Not quite — check your choice and try again.</div>` : ""}
         </div>
       </div>
@@ -438,7 +495,7 @@ function renderExerciseField(sectionId, phaseIndex, field, ex) {
       <div class="choice-option ${savedValue === o ? "selected" : ""}" data-action="select-choice-option" data-field-id="${id}" data-value="${o}" data-section-id="${sectionId}" data-phase="${phaseIndex}">${o}</div>`).join("");
     inputHTML = `
       <input type="hidden" id="${id}" value="${savedValue}" />
-      <div class="choice-grid ${hasError ? "error" : ""}">${buttons}</div>`;
+      <div class="choice-grid ${field.layout === "column" ? "choice-grid-column" : ""} ${hasError ? "error" : ""}">${buttons}</div>`;
   } else {
     const safeVal = savedValue.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
     inputHTML = `<input id="${id}" class="field-input ${hasError ? "error" : ""}" type="text" placeholder="${field.placeholder || ""}" value="${safeVal}" autocomplete="off" />`;
@@ -452,13 +509,18 @@ function renderExerciseField(sectionId, phaseIndex, field, ex) {
 }
 
 function renderExerciseStepper(section, ex, phaseIndex) {
+  const total = section.exercise.phases.length;
   const dots = section.exercise.phases.map((p, i) => {
     let cls = "quiz-dot";
     if (i === phaseIndex) cls += " current";
     else if (i < phaseIndex) cls += " answered-correct";
     return `<span class="${cls}"></span>`;
   }).join("");
-  return `<div class="quiz-dots">${dots}</div>`;
+  return `
+    <div class="exercise-stepper">
+      <span class="exercise-step-label">Step ${phaseIndex + 1} of ${total}</span>
+      <div class="quiz-dots">${dots}</div>
+    </div>`;
 }
 
 function renderExerciseArea(section) {
@@ -486,15 +548,16 @@ function renderExerciseArea(section) {
 
   if (ex.stage === "done") {
     const score = Object.values(ex.firstTry).filter(Boolean).length;
+    const scoreTotal = scoreablePhaseCount(section);
     return `
       ${docsLink}
       <div class="card quiz-card">
         <div class="quiz-result">
-          <div class="score">${score}/${total}</div>
-          <div class="score-sub">Doostride is live in English and Spanish, and the local demo store can finally reach it.</div>
+          <div class="score">${score}/${scoreTotal}</div>
+          <div class="score-sub">${section.exercise.doneNote || ""}</div>
           <span class="badge pass">Exercise complete · +${score * 10} points</span>
           <div class="quiz-result-actions">
-            <button class="btn btn-primary" data-action="reply-to-john" data-id="${section.id}">Reply to John</button>
+            <button class="btn btn-primary" data-action="reply-to-john" data-id="${section.id}">${section.exercise.replyButtonLabel || "Reply"}</button>
             <button class="btn btn-ghost" data-action="retake-exercise" data-id="${section.id}">Retake Exercise</button>
           </div>
         </div>
@@ -503,8 +566,9 @@ function renderExerciseArea(section) {
 
   if (ex.stage === "reply") {
     const wa = section.exercise.replyWhatsapp;
+    const sl = section.exercise.replySlack;
     const email = section.exercise.replyEmail;
-    const messageHTML = wa ? renderWhatsappCard(wa) : `
+    const messageHTML = wa ? renderWhatsappCard(wa) : sl ? renderSlackCard(sl) : `
         <div class="email-card">
           <div class="email-head">
             <div class="email-avatar">${email.name.split(" ").map(w => w[0]).join("")}</div>
@@ -584,7 +648,7 @@ function renderExerciseArea(section) {
         <div class="quiz-header"><h2>${phase.title}</h2>${stepper}</div>
         ${phase.question ? `<p class="theory-lead" style="margin-bottom:16px;">${phase.question}</p>` : ""}
         <div class="quiz-feedback ${wasCorrect ? "ok" : "bad"}">
-          <strong class="quiz-feedback-label">${wasCorrect ? "Correct!" : "Not quite."}</strong>
+          <strong class="quiz-feedback-label">${wasCorrect ? "Correct! +10 points" : "Not quite."}</strong>
           ${phase.explain}
         </div>
         <div class="section-footer">
@@ -597,20 +661,27 @@ function renderExerciseArea(section) {
   const fieldsHTML = phase.fields.map(f => renderExerciseField(section.id, phaseIndex, f, ex)).join("");
   const hasScenarioImage = !!phase.scenarioImage;
   const hasScenarioVideo = !!phase.scenarioVideo;
-  const hasScenarioMedia = hasScenarioImage || hasScenarioVideo;
+  const hasScenarioFeed = !!phase.scenarioFeed;
+  const hasScenarioMedia = hasScenarioImage || hasScenarioVideo || hasScenarioFeed;
   const scenarioHTML = (phase.scenario && !hasScenarioMedia) ? `
     <div class="exercise-scenario">
       <p>${phase.scenario}</p>
       ${phase.consoleLine ? `<pre class="console-line">${phase.consoleLine}</pre>` : ""}
     </div>` : "";
   const scenarioMediaInnerHTML = hasScenarioImage
-    ? `<img src="${phase.scenarioImage.src}" alt="${phase.scenarioImage.alt || ""}" data-action="zoom-image" class="exercise-scenario-img">
-       <div class="image-select-hint">Click the image to enlarge it</div>`
+    ? `<img src="${phase.scenarioImage.src}" alt="${phase.scenarioImage.alt || ""}" data-action="zoom-image" class="exercise-scenario-img ${phase.scenarioImage.imgClass || ""}">
+       ${ZOOM_BADGE}`
     : hasScenarioVideo
     ? `<div class="exercise-scenario-video">
          <iframe src="${phase.scenarioVideo.embedUrl}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
        </div>
        <div class="video-enlarge-hint" data-action="zoom-video" data-embed="${phase.scenarioVideo.embedUrl}">⤢ Click to enlarge the video</div>`
+    : hasScenarioFeed
+    ? `<div class="feed-preview-card">
+         <p class="feed-preview-label">${phase.scenarioFeed.label}</p>
+         <img src="${phase.scenarioFeed.src}" alt="${phase.scenarioFeed.alt || ""}" data-action="zoom-image" class="feed-preview-img">
+         <a href="${phase.scenarioFeed.href}" download class="btn btn-ghost feed-download-btn">${phase.scenarioFeed.downloadLabel}</a>
+       </div>`
     : "";
   const scenarioSideHTML = `
     <div class="exercise-scenario-side">
@@ -625,7 +696,7 @@ function renderExerciseArea(section) {
     </div>`;
   const scenarioWithMediaHTML = hasScenarioMedia ? `
     <div class="exercise-scenario-split ${phase.stackedMedia ? "stacked-media" : ""}">
-      ${hasScenarioVideo ? scenarioSideHTML + scenarioMediaHTML : scenarioMediaHTML + scenarioSideHTML}
+      ${(hasScenarioVideo || phase.mediaRight) ? scenarioSideHTML + scenarioMediaHTML : scenarioMediaHTML + scenarioSideHTML}
     </div>` : "";
   const isAutoSubmit = !phase.reveal && phase.fields.length > 0 && isSelectionOnlyPhase(phase);
 
@@ -681,27 +752,8 @@ function refreshExerciseSubmitButton(section, phaseIndex) {
   btn.disabled = !allAnswered;
 }
 
-/* ---------- Section 0: presentation ---------- */
-function renderPresentation(section) {
-  const done = !!progress.completed[section.id];
-  const s = COURSE.storyline;
-  const pages = section.pages;
-  const totalPages = pages.length;
-  const page = Math.min(Math.max(runtime.presentationPage, 1), totalPages);
-  const isLastPage = page === totalPages;
-  const pageData = pages[page - 1];
-
-  let pager = "";
-  if (totalPages > 1) {
-    pager = `
-      <div class="page-pager">
-        ${pages.map((_, i) => `
-          <button class="btn ${page === i + 1 ? "btn-primary" : "btn-ghost"}" data-action="presentation-page" data-page="${i + 1}">
-            Page ${i + 1}
-          </button>`).join("")}
-      </div>`;
-  }
-
+/* ---------- Section 0/1: presentation (narrative intro pages) ---------- */
+function renderPresentationPage(pageData) {
   const emailHTML = pageData.email ? `
       <div class="email-card">
         <div class="email-head">
@@ -728,6 +780,16 @@ function renderPresentation(section) {
         </div>
       </div>` : whatsappCardHTML;
 
+  const slackCardHTML = pageData.slack ? renderSlackCard(pageData.slack) : "";
+
+  const slackHTML = !pageData.slack ? "" : pageData.slackNote ? `
+      <div class="whatsapp-split">
+        ${slackCardHTML}
+        <div class="whatsapp-note">
+          ${pageData.slackNote.map(p => `<p>${p}</p>`).join("")}
+        </div>
+      </div>` : slackCardHTML;
+
   const outroHTML = pageData.outro ? `
       <div class="intro-text">
         ${pageData.outro.map(p => `<p>${p}</p>`).join("")}
@@ -735,16 +797,7 @@ function renderPresentation(section) {
 
   const schemaHTML = pageData.schema ? pageData.schema : "";
 
-  const footerHTML = isLastPage
-    ? `
-      <div class="section-footer">
-        ${done
-          ? `<button class="btn btn-primary" data-action="select-section" data-id="${section.id + 1}">Continue →</button>`
-          : `<button class="btn btn-primary" data-action="mark-complete" data-id="${section.id}">Mark as Complete</button>`}
-      </div>` : "";
-
   return `
-    ${pager}
     <div class="card">
       <div class="intro-text">
         ${pageData.intro.map(p => `<p>${p}</p>`).join("")}
@@ -752,9 +805,23 @@ function renderPresentation(section) {
       ${schemaHTML}
       ${emailHTML}
       ${whatsappHTML}
+      ${slackHTML}
       ${outroHTML}
-    </div>
-    ${footerHTML}`;
+    </div>`;
+}
+
+function renderPresentation(section) {
+  const done = !!progress.completed[section.id];
+  const pagesHTML = section.pages.map(renderPresentationPage).join("");
+
+  const footerHTML = `
+    <div class="section-footer">
+      ${done
+        ? `<button class="btn btn-primary" data-action="select-section" data-id="${section.id + 1}">Continue →</button>`
+        : `<button class="btn btn-primary" data-action="mark-complete" data-id="${section.id}">Mark as Complete</button>`}
+    </div>`;
+
+  return `${pagesHTML}${footerHTML}`;
 }
 
 /* ---------- Course view ---------- */
@@ -771,29 +838,16 @@ function renderCourseView() {
   } else if (runtime.coursePage === "quiz") {
     body += section.exerciseType === "wizard" ? renderExerciseArea(section) : renderQuizArea(section);
   } else {
-    const pages = getTheoryPages(section);
-    const totalPages = pages.length;
-    const page = Math.min(Math.max(runtime.theoryPage, 1), totalPages);
-    const isLastPage = page === totalPages;
-
-    if (totalPages > 1) {
-      body += `
-        <div class="page-pager">
-          ${pages.map((_, i) => `
-            <button class="btn ${page === i + 1 ? "btn-primary" : "btn-ghost"}" data-action="theory-page" data-page="${i + 1}">
-              Page ${i + 1}
-            </button>`).join("")}
-        </div>`;
-    }
-
-    body += renderTheoryHTML(section, pages[page - 1], page === (section.leadPage || 1));
-
-    if (isLastPage) {
-      body += `
-        <div class="section-footer">
-          <button class="btn btn-primary" data-action="goto-quiz" data-id="${section.id}">Go to ${quizNoun(section)} →</button>
-        </div>`;
-    }
+    const theoryPages = splitTheoryPages(section.theory.blocks);
+    const pageIndex = Math.min(runtime.theoryPage[section.id] || 0, theoryPages.length - 1);
+    const isLastTheoryPage = pageIndex === theoryPages.length - 1;
+    body += renderTheoryHTML(section, theoryPages[pageIndex], pageIndex === 0);
+    body += `
+      <div class="section-footer">
+        ${isLastTheoryPage
+          ? `<button class="btn btn-primary" data-action="goto-quiz" data-id="${section.id}">Go to ${quizNoun(section)} →</button>`
+          : `<button class="btn btn-primary" data-action="theory-continue" data-id="${section.id}">Continue →</button>`}
+      </div>`;
   }
   return body;
 }
@@ -851,6 +905,7 @@ function renderMain() {
   renderSidebar();
   renderTopbar();
   renderDocLinks();
+  setupScrollSpy();
 }
 
 /* ---------- Event delegation ---------- */
@@ -863,6 +918,14 @@ document.addEventListener("click", e => {
 
   if (action === "zoom-image") {
     openLightbox(target.src, target.alt);
+  } else if (action === "carousel-next") {
+    const carousel = target.closest(".install-step-carousel");
+    const imgs = [...carousel.querySelectorAll("img")];
+    const activeIndex = imgs.findIndex(img => img.classList.contains("is-active"));
+    imgs[activeIndex].classList.remove("is-active");
+    imgs[(activeIndex + 1) % imgs.length].classList.add("is-active");
+  } else if (action === "toggle-gif") {
+    toggleGifPlayback(target);
   } else if (action === "zoom-video") {
     openVideoLightbox(target.dataset.embed);
   } else if (action === "zoom-image-option") {
@@ -880,15 +943,15 @@ document.addEventListener("click", e => {
     runtime.view = "course";
     runtime.sectionId = Number(target.dataset.id);
     runtime.coursePage = "theory";
-    runtime.theoryPage = 1;
-    runtime.presentationPage = 1;
+    runtime.activeAnchor = null;
+    runtime.theoryPage[runtime.sectionId] = 0;
     renderMain();
-  } else if (action === "theory-page") {
-    runtime.theoryPage = Number(target.dataset.page);
+  } else if (action === "theory-continue") {
+    const id = Number(target.dataset.id);
+    runtime.theoryPage[id] = (runtime.theoryPage[id] || 0) + 1;
+    runtime.activeAnchor = null;
     renderMain();
-  } else if (action === "presentation-page") {
-    runtime.presentationPage = Number(target.dataset.page);
-    renderMain();
+    document.querySelector(".main").scrollTo(0, 0);
   } else if (action === "goto-quiz") {
     const id = Number(target.dataset.id);
     runtime.sectionId = id;
@@ -899,6 +962,8 @@ document.addEventListener("click", e => {
   } else if (action === "goto-theory") {
     runtime.sectionId = Number(target.dataset.id);
     runtime.coursePage = "theory";
+    runtime.activeAnchor = null;
+    runtime.theoryPage[runtime.sectionId] = 0;
     renderMain();
   } else if (action === "mark-complete") {
     markSectionDone(Number(target.dataset.id), null, null, 0);
@@ -955,6 +1020,32 @@ function handleExerciseFieldLiveChange(e) {
 }
 document.addEventListener("input", handleExerciseFieldLiveChange);
 document.addEventListener("change", handleExerciseFieldLiveChange);
+
+/* ---------- Gif pause/play ----------
+   A raw <img> gif has no native pause, so "pausing" freezes the current
+   frame onto an overlaid canvas; resuming can only restart the gif from
+   its first frame, not from the frozen point. */
+const GIF_ICON_PAUSE = `<svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><rect x="3" y="2" width="3.4" height="12" rx="1"></rect><rect x="9.6" y="2" width="3.4" height="12" rx="1"></rect></svg>`;
+const GIF_ICON_PLAY = `<svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M4 2.5v11l10-5.5-10-5.5z"></path></svg>`;
+function toggleGifPlayback(btn) {
+  const wrap = btn.closest(".gif-image");
+  const img = wrap.querySelector("img");
+  const canvas = wrap.querySelector(".gif-freeze-canvas");
+  const isPaused = canvas.classList.contains("is-visible");
+  if (!isPaused) {
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+    canvas.classList.add("is-visible");
+    btn.innerHTML = GIF_ICON_PLAY;
+    btn.setAttribute("aria-label", "Play animation");
+  } else {
+    canvas.classList.remove("is-visible");
+    img.src = `${img.dataset.baseSrc}?r=${Date.now()}`;
+    btn.innerHTML = GIF_ICON_PAUSE;
+    btn.setAttribute("aria-label", "Pause animation");
+  }
+}
 
 /* ---------- Lightbox ---------- */
 function openLightbox(src, alt) {

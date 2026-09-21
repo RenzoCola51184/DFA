@@ -1,0 +1,274 @@
+DOOFINDER ACADEMY — STYLE GUIDE
+(distilled from Module 1, Section 1 — use this as the reference when redoing any other section)
+================================================================================
+
+1. PAGE / LESSON STRUCTURE
+--------------------------------------------------------------------------------
+- Every lesson's theory is built from `blocks: [...]`. A block WITHOUT a
+  `heading` is just a continuation of the previous block's prose — it must
+  never sit in its own block if the block before it is also headless.
+  RULE: merge any block that has no `heading` into whichever block came
+  right before it. Only blocks that open with a `heading` (a new subtopic)
+  get their own `.theory-block` div. This avoids the "double gap" bug
+  (each block wrapper has `margin-top: 22px`; two headless blocks in a row
+  stack that margin on top of a normal paragraph margin and create a gap
+  that looks like a mistake).
+- When a lesson covers more than one named subtopic and one of them
+  deserves to be read on its own (e.g. "Create a Search Engine" inside
+  "Installing Doofinder", or "The Product Data Feed" / "Field Name Mapping"
+  inside "Indices and the Data Feed"), mark that block with
+  `pageBreak: true` (in addition to its `heading`). This splits the lesson
+  into sub-pages behind a "Continue →" button instead of one long scroll.
+  Every block after a `pageBreak` block belongs to that same new page,
+  until the next `pageBreak`.
+- Intro copy for a set of steps gets ONE short framing sentence before the
+  list (e.g. "Once an account is created on Doofinder's website, getting it
+  live on a site consists of a guided flow through four steps.") — don't
+  also repeat that framing right before the list AND have a redundant lead.
+- If a list of steps will only make full sense once the learner sees it
+  used in the final exercise, say so in ONE plain sentence after the list,
+  phrased positively: "This flow will become clearer once you see it
+  applied in this section's final exercise." Never phrase this as an
+  apology ("it's normal to feel confused").
+- Forward references to content covered elsewhere ALWAYS say
+  "later in the course" — NEVER name a specific module or section number.
+  ("...will be covered in more detail later in the course.")
+
+2. IMAGES
+--------------------------------------------------------------------------------
+- A single illustrative image inside theory copy uses:
+    <figure class="lesson-figure lesson-figure-left|lesson-figure-right" style="width: NNNpx;">
+      <img src="img/....png" alt="<describes exactly what the screenshot shows>" data-action="zoom-image">
+      <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it">
+        <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6">
+          <circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line>
+        </svg>
+      </p>
+    </figure>
+  The default width is 320px — override with an inline `style="width: NNNpx;"`
+  case by case so the image's height roughly matches the height of the text
+  it floats beside (neither the text nor the image should trail far below
+  the other — check in the browser and adjust the width up or down).
+- NEVER use a text hint like "Click the image/an image to enlarge it" —
+  always the magnifying-glass badge above (`.example-caption` in data files,
+  or the `ZOOM_BADGE` constant in app.js for anything generated in JS).
+- A sequence of screenshots that shows one flow step by step (e.g. the 4
+  screens of creating a Store → Search Engine → connecting the script)
+  becomes a single-image-at-a-time carousel, not a stack of images:
+    <div class="install-step-carousel">
+      <img ... class="is-active"> <img ...> <img ...> ...
+      <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
+    </div>
+  Add `float-left` to the wrapper class when it needs to sit beside running
+  text (`.install-step-carousel.float-left` is fixed at 500px/400px tall).
+- A set of images the learner must compare and pick ONE of as the answer
+  (e.g. 3 possible mapping configs) uses the existing image-choice thumbnail
+  row (`.image-choice-row` / `.image-choice-thumb`), each thumb carrying an
+  orange pill label ("Option A", "Option B"...) — see section 4 below.
+- A downloadable file that has a visual shape worth previewing (a data
+  feed, a spreadsheet) gets its own preview image (a real screenshot of the
+  file's first rows rendered as a small table) plus a download button,
+  using the feed-preview-card pattern — see section 4.
+- When several of these preview cards sit side by side, wrap them in
+  `.feed-preview-grid` (flex row, wraps on narrow screens, NOT a column).
+
+3. GIFS / ANIMATIONS
+--------------------------------------------------------------------------------
+- An animated GIF used as a live demo gets a pause/play control, since a
+  raw <img> gif can't be paused natively:
+    <div class="gif-image">
+      <img data-base-src="img/xxx.gif" src="img/xxx.gif" data-action="zoom-image">
+      <canvas class="gif-freeze-canvas"></canvas>
+      <button class="gif-toggle-btn" data-action="toggle-gif" aria-label="Pause animation">...</button>
+      <p class="example-caption">...zoom badge...</p>
+    </div>
+  Pausing freezes the current frame on a canvas; resuming can only restart
+  the gif from its first frame (a real technical limitation of <img> gifs —
+  don't try to fake a resume-from-pause-point).
+- A gif that should read as a full-width demo (not squeezed beside text)
+  uses `.gif-preview.gif-preview-stacked` (image full width, text below).
+
+4. LABELS / BADGES
+--------------------------------------------------------------------------------
+- Any short "which one is this" identifier over an image (Option A/B/C,
+  Data feed 1/2/3, "Spanish data feed"...) is an ORANGE PILL overlaid on
+  the image's top-left corner — never plain heading text above the image:
+    background: var(--accent); color: #fff; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .4px; padding: 3px 8px;
+    border-radius: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.35);
+  (`.image-choice-caption` and `.feed-preview-label` both use this exact
+  style — keep them identical if a third case ever needs it.)
+
+5. ANSWER BUTTONS (quiz-style "choice" fields inside a final exercise)
+--------------------------------------------------------------------------------
+- Default layout is a wrapping row (`.choice-grid`).
+- Switch to `layout: "column"` on the field definition whenever the option
+  text is a full descriptive sentence rather than a short label — stacked,
+  full-width, left-aligned buttons read much better than a wrapped row of
+  long pills. This applies to both `type: "choice"` and `type: "image-select"`
+  fields (both read `field.layout === "column"` in app.js).
+- Prefer descriptive option text over cryptic short labels when the
+  difference between options is the whole point of the question, e.g.:
+  "1 Store & 2 Search Engines — one Store for the whole site, with a
+  separate Search Engine for each language" rather than just
+  "1 Store & 2 Search Engines".
+
+6. EXERCISE STEP LAYOUT (image/media beside text/fields)
+--------------------------------------------------------------------------------
+- Whenever a step needs an image (or feed preview, or video) reliably
+  beside its text AND its answer fields, use the built-in split system —
+  do NOT hand-roll it with CSS floats (floats only work for plain prose,
+  not for guaranteeing fields land beside media):
+    scenarioImage: { src, alt, imgClass? }   — a single image
+    scenarioFeed: { label, src, alt, href, downloadLabel }  — feed preview + download button
+    scenarioVideo: { embedUrl }              — an embed (text goes left of it automatically)
+    scenario: "..."                          — the side text, next to the media
+    fieldsRow: true                          — lays fields side by side instead of stacked, inside the side column
+    mediaRight: true                         — flips the order so the image is on the right instead of the left
+    smallMedia / mediumMedia: true           — 300px / 420px media column instead of the 620px default
+    scenarioImage.imgClass: "taller-scenario-img" — bumps a specific image's height (fixed height + object-fit:
+                                                     contain) when its natural aspect ratio leaves it too short
+  Floats (`.lesson-figure-left/right`, `float-left` on a carousel) are still
+  the right tool for a plain image beside a paragraph of running theory
+  text with no interactive fields attached.
+- Each final-exercise step has a numbered title ("4. ...") and the header
+  shows both the progress dots AND a plain-language "Step X of N" label
+  next to them (`.exercise-stepper` / `.exercise-step-label`).
+- Every correct-answer feedback line during a quiz shows the points earned
+  for that question immediately ("Correct! +N points"), not just a final
+  tally at the end of the quiz.
+
+7. TONE / VOICE
+--------------------------------------------------------------------------------
+- The course is a simulated support case: the learner is Mark Park, a
+  junior developer at Doostride (an online footwear/streetwear store),
+  reporting to John Smith (CEO) and Amanda House (ecommerce manager).
+  Keep every section's narrative consistent with that framing.
+- Explanations for a wrong quiz option should say why it's wrong, not just
+  that it is — the `explain` field is a teaching moment, not a scoreboard.
+- Keep sentences plain and un-padded — cut generic "best practice" advice
+  paragraphs that don't map to a concrete Doofinder mechanic and aren't
+  tested anywhere (they read as filler and make the lesson feel longer
+  than it needs to be).
+
+8. CREATING A NEW SECTION FROM SCRATCH
+--------------------------------------------------------------------------------
+This is the whole workflow, distilled from building Module 1 Section 3
+(Excluded Results, Grouping Product Variants, Synonyms, Redirections,
+Banners, Copy Settings) on top of Sections 1 & 2. To commission a new
+section, you only need to hand over TWO things:
+  1. The list of lesson topics, each with its support.doofinder.com URL
+     (docUrl, plus extraDocs for any named subtopic that has its own page).
+  2. A short narrative hint: who is messaging whom, on which platform
+     (WhatsApp / Slack / email), and roughly what's being asked for. One
+     sentence per topic is enough — e.g. "banners: we need something for
+     Black Friday" — everything else below is inferred from that.
+Everything else — persona continuity, file structure, quiz writing, image
+placeholders, and the final exercise — is derived automatically using the
+rules below.
+
+- FILE STRUCTURE (one data-sectionN.js, mirrors Sections 1 & 2 exactly):
+    id 0: "Recap: Section N-1" — hasQuiz:false, pages:[{intro, schema}],
+          a plain <ul> summarizing the previous section's lessons.
+    id 1: "Introduction" — hasQuiz:false, pages:[{intro:[], <platform>: {...},
+          <platform>Note:[...]}], see NARRATIVE below.
+    id 2..N-1: one lesson per topic — hasQuiz:true, theory:{lead, blocks:[...]},
+          quiz:[...]. See THEORY BLOCKS and QUIZZES below.
+    id N: "Final Exercise" — hasQuiz:true, quizLabel:"Guided Exercise",
+          exerciseType:"wizard", theory:{...} (short recap list) plus
+          exercise:{lead, doneNote, replyButtonLabel, phases:[...], reply<Platform>}.
+          See FINAL EXERCISE below.
+
+- PERSONA CONTINUITY: keep reusing Doostride and its cast (Mark Park,
+  John Smith, Amanda House, and now Samanta) unless told otherwise — a new
+  section is a new chapter in the same running story, not a new company.
+  Whoever is named in the narrative hint as "asking" becomes the message
+  sender; whoever is named as the learner becomes "you" for that section's
+  intro/outro copy (this can rotate — Section 1 was Mark, Section 2 was
+  Amanda, Section 3 is Samanta).
+
+- NARRATIVE (id 1 "Introduction"): reuse the existing whatsapp/whatsappNote
+  fields for a WhatsApp-style intro (`renderWhatsappCard` in app.js), or the
+  slack/slackNote fields for a Slack-style one (`renderSlackCard`) — pick
+  whichever platform the narrative hint names; an email variant also exists
+  (`email` field) for a more formal ask. The message body is a numbered list
+  of complaints/asks, ONE PER LESSON TOPIC IN THIS SECTION, in the same
+  order the lessons will be taught — this list is what the final exercise
+  will resolve, one phase per line. The side note (`*Note`) is 3-4 short
+  paragraphs: (1) who "you" are this section and your relationship to the
+  sender, (2) "this morning you got this message from X", (3) the list of
+  new features you're about to learn, (4) the explicit promise that the
+  final exercise will let you fix everything just asked for.
+
+- THEORY BLOCKS (per lesson): convert the linked support-doc content into
+  `theory: { lead, blocks: [...] }`, following ALL the rules already in this
+  guide (section 1: merge headless blocks; pageBreak only for a real named
+  subtopic; section 2: one figure per subtopic sized to match the text
+  beside it; section 7: keep the tone plain, cut generic filler). Do not
+  invent product behavior — only reformat and illustrate what the doc
+  (or previously verified lesson content) actually says.
+
+- QUIZZES: 6-9 questions per lesson, one correct answer each, an `explain`
+  that teaches (not just confirms), covering: the feature's core definition,
+  where it's configured, its limits/maximums, and 2-3 of its trickier rules
+  or edge cases (the kind of thing a quiz should actually catch someone on).
+  If a lesson already has a verified quiz from an earlier draft, keep it —
+  don't rewrite working questions just to rewrite them.
+
+- FINAL EXERCISE: one phase per lesson topic, in the same order as the
+  intro's complaint list, using only the established field types (select,
+  choice, text with freeform:true, image-select) — never invent a new field
+  type. Grouping/diagnostic topics that need two steps (e.g. "why isn't X
+  working" before "fix X") get two phases; everything else gets one. End
+  with `doneNote` (a one-sentence "state of the store now" recap) and
+  `replyButtonLabel` (e.g. "Reply to Amanda") — NEVER leave these two
+  unset for a new section, they are not auto-generated and default to
+  blank/"Reply". Close with a `reply<Platform>` matching the intro's
+  platform, written as the learner reporting back what got fixed, one line
+  per topic.
+
+- IMAGES: every figure and scenario image is a real <img> tag with a fully
+  descriptive alt attribute, exactly as if the screenshot already existed —
+  never a text placeholder in the copy itself. Since these screenshots
+  don't exist yet, at the end of the work, hand over one table: filename,
+  and one sentence describing exactly what it should show (this is the
+  only manual step left for a new section — everything else in this
+  workflow is self-contained).
+  EXCEPTION — tabular/data content (a feed preview, a CSV comparison):
+  generate this yourself as a real PNG (a simple rendered table, see the
+  Python/PIL snippet used for the Section 3 grouping-feed previews) plus
+  a real downloadable file under feeds/. These don't require a real Admin
+  Panel screenshot, so there's no reason to leave them as placeholders.
+
+- VERIFY BEFORE HANDING BACK: `node -c` every edited .js file; then use a
+  small throwaway HTML harness (load the section's data file + app.js,
+  force `runtime.sectionId`/`coursePage`/exercise stage, call `renderMain()`)
+  with a headless Chrome screenshot to actually look at: the intro card,
+  one lesson with a pageBreak, one quiz page, every final-exercise phase
+  type used (choice/select/text/image-select), the done screen, and the
+  reply screen. Delete the harness file and screenshots when done — they're
+  scratch, not part of the site.
+
+================================================================================
+CHECKLIST TO RUN AGAINST ANY OTHER SECTION
+================================================================================
+[ ] No two consecutive headless theory blocks (merge them).
+[ ] Long lessons with 2+ named subtopics are split into sub-pages via `pageBreak`.
+[ ] Every image has the magnifying-glass badge, never a text hint.
+[ ] Image widths are tuned so image height ≈ beside-text height (no big
+    empty gap under either one).
+[ ] Any multi-shot "here's the flow" sequence is a carousel, not a stack.
+[ ] Any "pick one of these images" question uses labelled thumbnails
+    (orange pill captions).
+[ ] Any downloadable file worth eyeballing gets a preview-card + download
+    button, cards laid out in a row (`.feed-preview-grid`), not a column.
+[ ] Quiz/exercise answer buttons use `layout: "column"` when the option
+    text is a full sentence.
+[ ] Exercise steps needing image+fields side by side use the
+    scenarioImage/scenarioFeed/scenarioVideo + scenario + fieldsRow system,
+    not floats.
+[ ] Exercise header shows "Step X of N" next to the dots.
+[ ] Quiz correct-answer feedback shows "+N points" per question.
+[ ] No forward reference names a specific module/section — always
+    "later in the course".
+[ ] No generic, untested "best practice" filler paragraphs.

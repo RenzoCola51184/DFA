@@ -1,8 +1,7 @@
-/* Doofinder Academy — course content
-   Summaries condensed from support.doofinder.com. Each section (2-9) has
-   a theory block and a step-by-step quiz, and section 10 is the final
-   guided exercise. Sections 0 and 1 are the course presentation and its
-   scene-setting intro, and have no quiz. */
+/* Doofinder Academy — course content (Module 1, Section 1)
+   Sections 2-6 each have a theory block and a step-by-step quiz.
+   Section 7 is the final guided exercise. Sections 0 and 1 are the
+   course presentation and its scene-setting intro, with no quiz. */
 
 const COURSE = {
   storyline: {
@@ -24,40 +23,34 @@ const COURSE = {
       pages: [
         {
           intro: [
-            "Welcome to the <strong>Doofinder Academy course!</strong>",
-            "This course is designed to provide a deep dive into the most important aspects of the <strong>Doofinder</strong> tool, giving the <strong>knowledge</strong> needed to become an <strong>expert</strong> in using it.",
-            "The course is organized into <strong>modules</strong>, each one covering a major area of <strong>Doofinder</strong>. Every module is broken down into <strong>sections</strong>, and each section focuses on a specific topic through a series of <strong>lessons</strong>.",
-            "Each section unfolds through a <strong>simulated real-world scenario</strong>, placing you in a specific role and set of tasks to work through <strong>Doofinder</strong>'s tools hands-on.",
-            "Every lesson ends with a short <strong>quiz</strong>, and every section wraps up with a <strong>final exercise</strong>. Each quiz contributes to the overall <strong>score</strong>, and all of those scores together make up the overall course score.",
+            "Welcome to the <strong>Doofinder Academy</strong> course!",
+            "This course is designed to provide a deep dive into the most important aspects of Doofinder, giving the knowledge needed to become an expert in using it.",
+            "The course is organized into <strong>modules</strong>, each one covering a major area of Doofinder. Every module is broken down into <strong>sections</strong>, and each section focuses on a specific topic through a series of <strong>lessons</strong>.",
+            "Each section unfolds through a simulated real-world scenario, placing you in a specific role and set of tasks to work through Doofinder's tools hands-on.",
+            "Every lesson ends with a short <strong>quiz</strong>, and every section wraps up with a <strong>final exercise</strong>. Each quiz contributes to the overall score, and all of those scores together make up the overall course score.",
             "Some lessons are backed by specific <strong>documentation</strong>, linked in the sidebar, to dive deeper into that lesson's particular topic.",
-            "The final exercise of each section is there to resolve the requests raised in that section's simulated scenario, putting into <strong>practice</strong> what the section has introduced.",
+            "The final exercise of each section is there to resolve the requests raised in that section's simulated scenario, putting into practice what the section has introduced.",
             "Here's how the course is laid out."
           ],
           schema: `
             <div class="course-index">
               <div class="course-index-module">
-                <div class="course-index-module-title">Module 1 - An introduction to <strong>Doofinder</strong> and its core features.</div>
+                <div class="course-index-module-title">Module 1 — An introduction to Doofinder and its core features</div>
                 <ol class="course-index-list">
                   <li><span class="course-index-section">Section 1</span> Getting started and Search Layer installation</li>
-                  <li><span class="course-index-section">Section 2</span> Search layer feature (relevance, boosting, custom results)</li>
-                  <li><span class="course-index-section">Section 3</span> Search layer optimization (excluded results, grouping variants, synonyms, redirections, banners, copy settings)</li>
+                  <li><span class="course-index-section">Section 2</span> How Doofinder Search Works: Relevance, Boosting and Custom Results</li>
+                  <li><span class="course-index-section">Section 3</span> Search Layer optimization — excluded results, grouping variants, synonyms, redirections, banners, copy settings</li>
                   <li><span class="course-index-section">Section 4</span> Quiz feature</li>
                   <li><span class="course-index-section">Section 5</span> AI feature</li>
                 </ol>
               </div>
-            </div>`
-        },
-        {
-          intro: [],
-          schema: `
-            <div class="course-index">
               <div class="course-index-module">
                 <div class="course-index-module-title">Module 2</div>
-                <p class="course-index-module-desc">Integrating <strong>Doofinder</strong> into a B2B environment on a custom platform, template customization, and advanced concepts.</p>
+                <p class="course-index-module-desc">Integrating Doofinder into a B2B environment on a custom platform, template customization, and advanced concepts.</p>
                 <ol class="course-index-list">
-                  <li><span class="course-index-section">Section 1</span> B2B (hidden prices for logged-out users, user variants and the multi-price concept)</li>
+                  <li><span class="course-index-section">Section 1</span> B2B — hidden prices for logged-out users, user variants and the multi-price concept</li>
                   <li><span class="course-index-section">Section 2</span> Template customization</li>
-                  <li><span class="course-index-section">Section 3</span> Advanced concepts (search params, JS events)</li>
+                  <li><span class="course-index-section">Section 3</span> Advanced concepts — search params, JS events</li>
                 </ol>
               </div>
               <div class="course-index-module">
@@ -66,9 +59,9 @@ const COURSE = {
                 <ol class="course-index-list">
                   <li><span class="course-index-section">Section 1</span> API search</li>
                   <li><span class="course-index-section">Section 2</span> API for managing data</li>
-                  <li><span class="course-index-section">Section 3</span> Common concepts across plugins (pagination, ...)</li>
+                  <li><span class="course-index-section">Section 3</span> Common concepts across plugins — pagination, and more</li>
                   <li><span class="course-index-section">Section 4</span> PrestaShop</li>
-                  <li><span class="course-index-section">Section 5</span> Shopify (Shopify web pixel...)</li>
+                  <li><span class="course-index-section">Section 5</span> Shopify — Shopify web pixel, and more</li>
                 </ol>
               </div>
               <div class="course-index-module">
@@ -96,29 +89,27 @@ const COURSE = {
       pages: [
         {
           intro: [
-            "Meet <strong>Doostride</strong>, an online store selling footwear and streetwear. In this section, you are <strong>Mark Park</strong>, a <strong>junior developer</strong> there, fresh out of university, hired a few months ago. This morning <strong>John Smith</strong>, Doostride's CEO, reached out with an email, cc'ing <strong>Amanda House</strong>, the site's ecommerce manager.",
+            "Meet <strong>Doostride</strong>, an online store selling footwear and streetwear. In this section, you are <strong>Mark Park</strong>, a junior developer there, fresh out of university, hired a few months ago. This morning <strong>John Smith</strong>, Doostride's CEO, reached out with an email, cc'ing <strong>Amanda House</strong>, the site's ecommerce manager.",
             "He's just sent you this email:"
           ],
           email: {
             name: "John Smith",
             address: "john.smith@doostride.com",
             cc: "Amanda House",
-            subject: "Trying out <strong>Doofinder</strong>'s Search layer on our site",
+            subject: "Trying out <strong>Doofinder</strong>'s Search Layer on our site",
             body: [
               "Hi,",
-              "Amanda and I came across <strong>Doofinder</strong> at an ecommerce expo in London, and it caught our attention. Looks like it actually bundles several different tools together — for now, what we'd really like to try is the <strong>Search layer</strong>.",
-              "Amanda gone ahead and created a <strong>Doofinder</strong> account for Doostride. Here's the link to <strong>Doofinder</strong>'s support page, in case it helps: <a href=\"https://support.doofinder.com\" target=\"_blank\" rel=\"noopener\">support.doofinder.com</a>.",
-              "Could you take a look and see what needs to be done to get the Search layer running on our local test copy of the site? We'd like to try it out there before we think about rolling it out on the live store.",
+              "Amanda and I came across <strong>Doofinder</strong> at an ecommerce expo in London, and it caught our attention. Looks like it actually bundles several different tools together — for now, what we'd really like to try is the Search Layer.",
+              "Amanda has gone ahead and created a Doofinder account for Doostride. Here's the link to Doofinder's support page, in case it helps: <a href=\"https://support.doofinder.com\" target=\"_blank\" rel=\"noopener\">support.doofinder.com</a>.",
+              "Could you take a look and see what needs to be done to get the Search Layer running on our local test copy of the site? We'd like to try it out there before we think about rolling it out on the live store.",
               "Let us know what you find out.",
               "Best,<br>John Smith<br>Doostride — CEO"
             ]
-          }
-        },
-        {
-          intro: [
+          },
+          outro: [
             "Before you can answer John, there's some groundwork to cover. You'll find the local test copy of the Doostride site under the <strong>Demo Store</strong> tab, at the top of this app — that's the local copy John is talking about, the one you'll be working on throughout this section.",
-            "As for the <strong>Doofinder</strong> account Amanda already set up, you won't be logging into that one — instead, use <strong>your own Doofinder account</strong> and treat it as if it were hers.",
-            "With that in place, your goal throughout this section is to get familiar with <strong>what Doofinder actually is</strong> and to <strong>set up its Search layer</strong> on Doostride's local copy. Once the Search layer is up and running, reply to John and Amanda to let them know it's done."
+            "As for the Doofinder account Amanda already set up, you won't be logging into that one — instead, use your own Doofinder account and treat it as if it were hers.",
+            "With that in place, your goal throughout this section is to get familiar with what Doofinder actually is and to set up its Search Layer on Doostride's local copy. Once the Search Layer is up and running, reply to John and Amanda to let them know it's done."
           ]
         }
       ]
@@ -134,41 +125,37 @@ const COURSE = {
       hasQuiz: true,
       docUrl: "https://support.doofinder.com/getting-started/what-is-doofinder",
       theory: {
-        lead: "<strong>Doofinder</strong> is a <strong>multi-product</strong> service that helps online shops increase sales by enhancing the <strong>search experience</strong> for users and potential customers, making it easier for them to find exactly what they're looking for.",
-        pages: [
-          [
-            {
-              html: `
-              <p><strong>Doofinder</strong> can be integrated into virtually any web or <strong>ecommerce platform</strong>. It can be integrated via <strong>script</strong> or via <strong>API</strong>. Most of the time integration is done via script, so throughout this course we'll focus on that approach, and cover the API separately in Module 3. <strong>Doofinder</strong> offers integration plugins, available for the most popular <strong>open source platforms</strong> — Shopify, WooCommerce, Magento, PrestaShop and 10+ others that helps <strong>Doofinder</strong> to be integrated but it can also be installed on a <strong>custom-built website</strong>.</p>
-              <p>To start using <strong>Doofinder</strong>, an <strong>account</strong> needs to be created on the <strong>Doofinder</strong> website. From the <strong>Admin Panel</strong>, <strong>Doofinder</strong> can be installed on different <strong>domains</strong>: each domain is linked to a <strong>Store</strong>, and every Store has its own <strong>Store ID</strong> to identify it, along with its own unique <strong>Installation Script</strong>.</p>
-              <p>A Store can have several <strong>Search Engines</strong>, each one configured with its own <strong>languages</strong> and <strong>currencies</strong> and identified by a unique <strong>Hash ID</strong>.</p>
-              <p>The <strong>Search Engine</strong> is where product data is managed. It's fed with all the information about the products, blog articles and pages in the shop.</p>
-              <p><strong>Doofinder</strong> is divided into <strong>five</strong> major products:</p>
+        lead: "<strong>Doofinder</strong> is a multi-product service that helps online shops increase sales by enhancing the search experience for users and potential customers, making it easier for them to find exactly what they're looking for.",
+        blocks: [
+          {
+            html: `
+              <p>Doofinder can be integrated into virtually any web or ecommerce platform, via script or via API. Most of the time integration is done via script, so throughout this course we'll focus on that approach, and cover the API separately later in the course. Doofinder offers integration plugins for the most popular platforms — Shopify, WooCommerce, Magento, PrestaShop and 10+ others — but it can also be installed on a custom-built website.</p>
+              <p>To start using Doofinder, an account needs to be created on the Doofinder website. From the <strong>Admin Panel</strong>, Doofinder can be installed on different domains: each domain is linked to a <strong>Store</strong>, and every Store has its own <strong>Store ID</strong> to identify it, along with its own unique <strong>Installation Script</strong>.</p>
+              <p>A Store can have several <strong>Search Engines</strong>, each one configured with its own languages and currencies and identified by a unique <strong>Hash ID</strong>.</p>
+              <p>The Search Engine is where product data is managed. It's fed with all the information about the products, blog articles and pages in the shop.</p>
+              <p>Doofinder is divided into five major products:</p>
               <ul>
                 <li><strong>Search Layer</strong> — the search box/results interface shown to the users.</li>
                 <li><strong>Recommendations</strong> — carousels generated from shopper behaviour, for cross-selling and upselling.</li>
                 <li><strong>Quiz Maker</strong> — guided quizzes that steer shoppers to matching products, with lead-generation forms built in.</li>
                 <li><strong>AI Assistant</strong> — a conversational assistant that helps shoppers find what they need through natural, chat-based search.</li>
                 <li><strong>Category Merchandising</strong> — controls how products are sorted and highlighted within category listing pages.</li>
-              </ul>`
-            }
-          ],
-          [
-            {
-              html: `
-              <div class="gif-preview">
+              </ul>
+
+              <div class="gif-preview gif-preview-stacked">
                 <div class="gif-image">
-                  <img src="img/search_layer_example.gif" alt="Animated example of the Doofinder Search Layer opening and returning results on a website" data-action="zoom-image">
-                  <p class="example-caption">Click the image to enlarge it</p>
+                  <img src="img/search_layer_example.gif" data-base-src="img/search_layer_example.gif" alt="Animated example of the Doofinder Search Layer opening and returning results on a website" data-action="zoom-image">
+                  <canvas class="gif-freeze-canvas"></canvas>
+                  <button type="button" class="gif-toggle-btn" data-action="toggle-gif" aria-label="Pause animation"><svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><rect x="3" y="2" width="3.4" height="12" rx="1"></rect><rect x="9.6" y="2" width="3.4" height="12" rx="1"></rect></svg></button>
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </div>
                 <div class="gif-text">
                   <p>Here's an example of how the <strong>Search Layer</strong> works on a website. Later in the course, examples of the other products will be covered too.</p>
-                  <p>As the animation shows, the <strong>Search Layer</strong> is an <strong>overlay</strong> that appears on the page and instantly <strong>displays results</strong> matching the search term as it's typed, letting users find the products they're looking for <strong>quickly</strong> and <strong>effortlessly</strong>.</p>
-                  <p>All of the Search Layer's features (as filter configuration, sorting configuration, etc.) will be covered in more detail in Section 2 of this module.</p>
+                  <p>As the animation shows, it's an overlay that appears on the page and instantly displays results matching the search term as it's typed, letting users find the products they're looking for quickly and effortlessly.</p>
+                  <p>All of the Search Layer's features — filter configuration, sorting configuration, and more — will be covered in more detail later in the course.</p>
                 </div>
               </div>`
-            }
-          ]
+          }
         ]
       },
       quiz: [
@@ -231,13 +218,13 @@ const COURSE = {
         {
           q: "What is the Search Engine responsible for?",
           options: [
-            "Managing your product data",
+            "Managing your product and content data",
             "Hosting your website",
             "Sending marketing emails",
             "Processing payments"
           ],
           correct: 0,
-          explain: "The Search Engine is where your product data is managed."
+          explain: "The Search Engine is where product data is managed, along with content data like blog articles and pages."
         },
         {
           q: "Which five major products is <strong>Doofinder</strong> divided into?",
@@ -263,37 +250,49 @@ const COURSE = {
       hasQuiz: true,
       docUrl: "https://support.doofinder.com/getting-started/installing-doofinder",
       extraDocs: [
-        { label: "Create a Search Engine", url: "https://support.doofinder.com/getting-started/create-a-search-engine", fromPage: 2 }
+        { label: "Create a Search Engine", url: "https://support.doofinder.com/getting-started/create-a-search-engine", fromHeading: "Create a Search Engine" }
       ],
       theory: {
-        lead: "Getting <strong>Doofinder</strong> live on a site comes down to <strong>four</strong> steps.",
+        lead: "Once an account is created on Doofinder's website, getting it live on a site consists of a guided flow through four steps.",
         blocks: [
           {
             html: `
               <ul>
-                <li><strong>Create a Store</strong> — provide the site's full <strong>URL</strong>, its <strong>industry</strong>, and the <strong>platform</strong> it runs on (custom sites are detected as "Other").</li>
-                <li><strong>Create a Search Engine</strong> — configure the data type (<strong>Product</strong> or <strong>Other data</strong>), the indexing method (<strong>File or Feed URL</strong> or <strong>API</strong>), the results <strong>language</strong>, and — for product data — the <strong>currency</strong>.</li>
-                <li><strong>Set the CSS selector manually</strong> — this <strong>identifies</strong> which <strong>element</strong> on the page needs to be <strong>clicked</strong> for the <strong>Search Layer</strong> to appear.</li>
-                <li><strong>Connect the store with an installation script</strong> — once the Store and Search Engine exist, <strong>add the script</strong> provided <strong>into the website's code</strong> to finish the connection.</li>
-              </ul>`
-          },
-          {
-            html: `
-              <p>The <strong>Doofinder</strong> script has this structure:</p>
+                <li><strong>Create a Store</strong> — provide the site's full URL, its industry, and the platform it runs on (custom sites are detected as "Other").</li>
+                <li><strong>Create a Search Engine</strong> — configure the data type (Product or Other data), the indexing method (File or Feed URL, or API), the results language, and — for product data — the currency.</li>
+                <li><strong>Set the CSS selector manually</strong> — this identifies which element on the page needs to be clicked for the Search Layer to appear.</li>
+                <li><strong>Connect the store with an installation script</strong> — once the Store and Search Engine exist, add the script provided into the website's code to finish the connection.</li>
+              </ul>
+
+              <div class="install-step-carousel float-left">
+                <img src="img/install-step1-create-store-landing.png" alt="Doofinder home screen with a Create store button, next to an explanation of what a Store is and why to create one" data-action="zoom-image" class="is-active">
+                <img src="img/install-step1-create-store-form.png" alt="Create Store form asking for the site's URL, the platform it runs on, and its industry" data-action="zoom-image">
+                <img src="img/install-step2-create-search-engine.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
+                <img src="img/install-step4-connect-store.png" alt="Store connection screen showing the installation script to copy into the website's code, with a stepper marking Store information, Search Engine creation and Search bar location as already complete" data-action="zoom-image">
+                <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
+              </div>
+              <p>The Doofinder script has this structure:</p>
               <pre class="code-block"><code>&lt;script src="https://<span class="tok">eu1</span>-config.doofinder.com/2.x/<span class="tok">STORE_ID</span>.js" async&gt;&lt;/script&gt;</code></pre>
-              <p>The <strong>Zone</strong> (<code>eu1</code> for Europe, <code>us1</code> for the Americas, or <code>ap1</code> for Asia-Pacific) identifies which <strong>Doofinder</strong> server the account resides on. The <strong>STORE_ID</strong> is the unique identifier generated when the Store is created, and it's what identifies that Store within the script.</p>
-              <p>This script needs to be added to the site's <strong>HTML code</strong> — ideally in the header or footer. The script can also be integrated via <strong>Google Tag Manager</strong>.</p>
-              <p>As already mentioned, <strong>Doofinder</strong> offers <strong>integration plugins</strong> for some platforms, which handle this process almost <strong>automatically</strong> (more on this in Module 3). In this case, the matching platform needs to be selected when creating the Store, and the plugin takes care of <strong>adding the script into the website's code</strong> automatically. <strong>It isn't mandatory</strong> to use the integration plugin on platforms where one is available — <strong>manual integration</strong> is still available, simply by selecting <strong>"Other"</strong> as the platform.</p>`
+              <p>The <strong>Zone</strong> (<code>eu1</code> for Europe, <code>us1</code> for the Americas, or <code>ap1</code> for Asia-Pacific) identifies which Doofinder server the account resides on, depending on which part of the world the account was created in. The <code>STORE_ID</code> is the unique identifier generated when the Store is created, and it's what identifies that Store within the script.</p>
+              <p>This script needs to be added to the site's HTML code — ideally in the header or footer. The script can also be integrated via Google Tag Manager.</p>
+              <p>As already mentioned, Doofinder offers integration plugins for some platforms, which handle this process almost automatically (more on this later in the course). In this case, the matching platform needs to be selected when creating the Store, and the plugin takes care of adding the script into the website's code automatically. It isn't mandatory to use the integration plugin on platforms where one is available — manual integration is still available, simply by selecting "Other" as the platform.</p>`
           },
           {
             heading: "Create a Search Engine",
+            pageBreak: true,
             html: `
-              <p>A <strong>Search Engine</strong> is a configured instance that stores and indexes a specific type of data — you can create several, e.g. one per language, each getting its own <strong>Hash ID</strong>.</p>
-              <p>For example, a store selling in both English and Spanish would typically create one Search Engine per language, each indexing its own <strong>translated catalogue</strong>. Splitting them this way also splits their <strong>statistics</strong>, since <strong>Doofinder</strong> reports them separately per Search Engine — useful for <strong>comparing how each one is performing</strong> on its own.</p>`
-          },
-          {
-            html: `
-              <p>Once <strong>indexing finishes successfully</strong>, Search, Recommendations and Quiz Maker all become configurable for that Search Engine. If indexing fails or <strong>returns zero products</strong>, the corresponding Layer stays in an <strong>error</strong> state until the <strong>underlying feed</strong> is fixed and <strong>re-indexed</strong> — the same behaviour already covered earlier in this lesson.</p>`
+              <figure class="lesson-figure lesson-figure-left">
+                <img src="img/install-step2-create-search-engine.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <figure class="lesson-figure lesson-figure-right">
+                <img src="img/create-search-engine-es-button.png" alt="Search Engine selector dropdown with the Create Search Engine button highlighted" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>A Search Engine is a configured instance that stores and indexes a specific type of data — once a Store has one, it's common to end up needing several more.</p>
+              <p>That's usually because ecommerces and websites often operate across different markets, each with its own language and currency. A store might sell to both an English-speaking and a Spanish-speaking market at the same time, or price the same products in different currencies depending on where they're sold. Products can even have different URLs between storefronts, since the same domain can serve more than one storefront configuration — each combination of language, currency and product links needs its own data feed, and therefore its own Search Engine, each getting its own Hash ID.</p>
+              <p>For example, a store selling in both English and Spanish would typically create one Search Engine per language, each indexing its own translated catalogue. Splitting them this way also splits their statistics, since Doofinder reports them separately per Search Engine — useful for comparing how each one is performing on its own.</p>
+              <p>Once indexing finishes successfully, Search, Recommendations and Quiz Maker all become configurable for that Search Engine. If indexing fails or returns zero products, the corresponding Layer stays in an error state until the underlying feed is fixed and re-indexed — the same behaviour already covered earlier in this lesson.</p>`
           }
         ]
       },
@@ -308,17 +307,6 @@ const COURSE = {
           ],
           correct: 1,
           explain: "It isn't mandatory to use the integration plugin on platforms where one is available — manual integration is still available, simply by selecting \"Other\" as the platform."
-        },
-        {
-          q: "Why does the CSS selector need to be configured?",
-          options: [
-            "To identify which element on the page needs to be clicked for the Search Layer to appear",
-            "To set the Store's currency",
-            "To generate the STORE_ID",
-            "To choose the deployment Zone"
-          ],
-          correct: 0,
-          explain: "The CSS selector needs to be configured so <strong>Doofinder</strong> knows which element on the page needs to be clicked for the Search Layer to appear."
         },
         {
           q: "What do you provide when creating a Store?",
@@ -351,7 +339,7 @@ const COURSE = {
             "The CSS selector to use"
           ],
           correct: 1,
-          explain: "The Zone (eu1, us1 or ap1) identifies which <strong>Doofinder</strong> server your account resides on."
+          explain: "The Zone (eu1, us1 or ap1) identifies which <strong>Doofinder</strong> server your account resides on, depending on which part of the world the account was created in."
         },
         {
           q: "Besides pasting it directly into the site's HTML, how else can the installation script be integrated?",
@@ -365,10 +353,26 @@ const COURSE = {
           explain: "The script can also be integrated via Google Tag Manager."
         },
         {
-          q: "What platform value do custom-built sites get detected as when creating a Store?",
-          options: ["Custom", "Manual", "Unknown", "Other"],
-          correct: 3,
-          explain: "Custom sites are detected as \"Other\" when creating a Store."
+          q: "What is a Search Engine, in <strong>Doofinder</strong> terms?",
+          options: [
+            "A configured instance that stores and indexes a specific type of data",
+            "The plugin that connects Doofinder to a platform",
+            "The physical server where Doofinder runs",
+            "A billing account for a specific market"
+          ],
+          correct: 0,
+          explain: "A Search Engine is a configured instance that stores and indexes a specific type of data, identified by its own Hash ID."
+        },
+        {
+          q: "Which of these is a reason a Store might need several Search Engines?",
+          options: [
+            "Operating across different markets, each with its own language and currency",
+            "Because <strong>Doofinder</strong> limits each Store to a single CSS selector",
+            "Because the installation script only supports one Zone",
+            "Because Recommendations requires a dedicated Search Engine"
+          ],
+          correct: 0,
+          explain: "Ecommerces often operate across different markets, each with its own language and currency, and sometimes with different product links per storefront — every such combination needs its own Search Engine."
         },
         {
           q: "Why is it useful to sometimes create several Search Engines within the same Store?",
@@ -380,6 +384,17 @@ const COURSE = {
           ],
           correct: 2,
           explain: "Splitting data across several Search Engines — e.g. one per language — also splits their statistics, so you can compare how each one is performing on its own."
+        },
+        {
+          q: "A domain has two storefronts in two different languages. How is this typically set up in <strong>Doofinder</strong>?",
+          options: [
+            "The same Store, and therefore the same installation script, is used — but each storefront is served by its own Search Engine",
+            "Two separate Stores must be created, each with its own installation script",
+            "A single Search Engine handles both languages automatically",
+            "Each storefront needs its own STORE_ID"
+          ],
+          correct: 0,
+          explain: "The same Store — and therefore the same installation script — can serve multiple storefronts. Each language or market gets its own Search Engine, so the same script keeps working across all of them."
         }
       ]
     },
@@ -395,43 +410,32 @@ const COURSE = {
       docUrl: "https://support.doofinder.com/getting-started/css-selector",
       theory: {
         lead: "A <strong>CSS Selector</strong> is the pattern that tells a browser which HTML element of a web page a style should apply to. The same syntax is also reused in JavaScript to target an element to hook a script or widget onto.",
-        pages: [
-          [
-            {
-              html: `
-                <p>In <strong>Doofinder</strong>, CSS Selectors are used, for example, to identify the element that should open the <strong>Search Layer</strong> (usually the site's search box), the container that should host a <strong>Recommendations</strong> carousel, or the button that should launch a <strong>Quiz</strong>.</p>
-                <p>So, a selector is just a short string that says "find this one element in the page", and there are three ways to write it, depending on what the underlying HTML gives to work with:</p>
-                <ul>
-                  <li><code>#custom-search</code> — an <strong>ID selector</strong>, prefixed with <code>#</code>. IDs are meant to be unique on a page, which makes this the safest and most precise option whenever the element has one.</li>
-                  <li><code>.search-field</code> — a <strong>class selector</strong>, prefixed with <code>.</code>. Classes are often shared by several elements, so make sure the one picked only matches the element actually wanted. An element can carry several classes at once (e.g. <code>class="search-field icon-search"</code>); to target that specific combination, chain them by replacing the space with a dot: <code>.search-field.icon-search</code>.</li>
-                  <li><code>input[name="s"]</code> — a <strong>name-attribute selector</strong>, useful for form fields that carry a <code>name</code> attribute but no ID or class of their own.</li>
-                </ul>
-                <p>The simplest way to find a CSS Selector is through the <strong>browser's dev tools</strong>: <strong>right-click the element</strong> and choose <strong>Inspect</strong> to open the <strong>Elements</strong> panel with its HTML highlighted, showing its <code>id</code>, <code>class</code> or <code>name</code> attribute. If it has none, dev tools also offer <strong>Copy &gt; Copy selector</strong> — but treat it as a last resort, since it generates a long, fragile path that breaks the moment the markup changes.</p>
-                <p>A few habits keep a selector from breaking after a redesign: prefer IDs and hand-placed wrapper <code>div</code>s over autogenerated classes; keep selectors short; and check both desktop and mobile in dev tools, <strong>combining both selectors with a comma</strong> when the markup differs between them (e.g. <code>#search-desktop, #search-mobile</code>).</p>
-                <p>In the <strong>Admin Panel</strong>, for some <strong>Doofinder</strong> products a <strong>visual placement tool</strong> can be used instead, writing a working selector automatically — just hover over the element, click it, and it's done.</p>`
-            }
-          ],
-          [
-            {
-              html: `
-                <div class="example-split">
-                  <div class="example-image">
-                    <img src="img/CSS_Selector.png" alt="Chrome dev tools Inspect panel highlighting the search box on Doostride's demo store, showing button.search-bar__input" data-action="zoom-image">
-                    <p class="example-caption">Click the image to enlarge it</p>
-                  </div>
-                  <div class="example-text">
-                    <p>Here's a real case: <strong>right-clicking</strong> the search box and choosing <strong>Inspect</strong>, in order to inspect that element.</p>
-                    <p>This element can be selected, for example, with these CSS Selectors:</p>
-                    <ul>
-                      <li><code>.search-bar__input</code> — the class selector. Easy to read and use, since it maps directly to the name shown in the HTML.</li>
-                      <li><code>button[name="q"]</code> — the name-attribute selector. Also lands on exactly this element, since <code>q</code> is the query-string parameter <strong>Doofinder</strong> submits the search under.</li>
-                      <li><code>button[type="text"]</code> — another name-attribute selector, matching on the <code>type</code> attribute instead.</li>
-                    </ul>
-                    <p>What to avoid: chaining the whole nested path, e.g. <code>.search-bar-top-wrapper &gt; .search-bar__top &gt; .search-bar__input-wrapper &gt; button</code> — it depends on every wrapper staying put, and breaks silently the moment a redesign moves one.</p>
-                  </div>
-                </div>`
-            }
-          ]
+        blocks: [
+          {
+            html: `
+              <p>In Doofinder, CSS Selectors are used, for example, to identify the element that should open the Search Layer (usually the site's search box), the container that should host a Recommendations carousel, or the button that should launch a Quiz.</p>
+              <p>So, a selector is just a short string that says "find this one element in the page", and there are three ways to write it, depending on what the underlying HTML gives to work with:</p>
+              <ul>
+                <li><code>#custom-search</code> — an <strong>ID selector</strong>, prefixed with <code>#</code>. IDs are meant to be unique on a page, which makes this the safest and most precise option whenever the element has one.</li>
+                <li><code>.search-field</code> — a <strong>class selector</strong>, prefixed with <code>.</code>. Classes are often shared by several elements, so make sure the one picked only matches the element actually wanted. An element can carry several classes at once (e.g. <code>class="search-field icon-search"</code>); to target that specific combination, chain them by replacing the space with a dot: <code>.search-field.icon-search</code>.</li>
+                <li><code>input[name="s"]</code> — a <strong>name-attribute selector</strong>, useful for form fields that carry a <code>name</code> attribute but no ID or class of their own.</li>
+              </ul>
+              <p>The simplest way to find a CSS Selector is through the browser's dev tools: right-click the element and choose <strong>Inspect</strong> to open the Elements panel with its HTML highlighted, showing its <code>id</code>, <code>class</code> or <code>name</code> attribute. If it has none, dev tools also offer <strong>Copy &gt; Copy selector</strong> — but treat it as a last resort, since it generates a long, fragile path that breaks the moment the markup changes.</p>
+              <p>A few habits keep a selector from breaking after a redesign: prefer IDs and hand-placed wrapper <code>div</code>s over autogenerated classes; keep selectors short; and check both desktop and mobile in dev tools, combining both selectors with a comma when the markup differs between them (e.g. <code>#search-desktop, #search-mobile</code>).</p>
+
+              <figure class="lesson-figure lesson-figure-left" style="width: 550px;">
+                <img src="img/CSS_Selector.png" alt="Chrome dev tools Inspect panel highlighting the search box on Doostride's demo store, showing button.search-bar__input" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>Here's a real case: right-clicking the search box and choosing Inspect, in order to inspect that element.</p>
+              <p>This element can be selected, for example, with these CSS Selectors:</p>
+              <ul>
+                <li><code>.search-bar__input</code> — the class selector. Easy to read and use, since it maps directly to the name shown in the HTML.</li>
+                <li><code>button[name="q"]</code> — the name-attribute selector. Also lands on exactly this element, since <code>q</code> is the query-string parameter Doofinder submits the search under.</li>
+                <li><code>button[type="text"]</code> — another name-attribute selector, matching on the <code>type</code> attribute instead.</li>
+              </ul>
+              <p>What to avoid: chaining the whole nested path, e.g. <code>.search-bar-top-wrapper &gt; .search-bar__top &gt; .search-bar__input-wrapper &gt; button</code> — it depends on every wrapper staying put, and breaks silently the moment a redesign moves one.</p>`
+          }
         ]
       },
       quiz: [
@@ -542,85 +546,65 @@ const COURSE = {
       hasQuiz: true,
       docUrl: "https://support.doofinder.com/getting-started/the-data-feed",
       extraDocs: [
-        { label: "The Product Data Feed", url: "https://support.doofinder.com/managing-data/the-product-data-feed", fromPage: 2 },
-        { label: "Field Name Mapping", url: "https://support.doofinder.com/managing-data/field-name-mapping", fromPage: 3 }
+        { label: "The Product Data Feed", url: "https://support.doofinder.com/managing-data/the-product-data-feed", fromHeading: "The Product Data Feed" },
+        { label: "Field Name Mapping", url: "https://support.doofinder.com/managing-data/field-name-mapping", fromHeading: "Field Name Mapping" }
       ],
       theory: {
         lead: "",
-        pages: [
-          [
-            {
-              html: `
-                <p>We've already said the <strong>Search Engine</strong> is where an item's data is managed. But how is that data actually stored? The data is stored in <strong>indices</strong>.</p>
-                <p>An <strong>index</strong> is like a box where data is processed and organized, ready to be searched. This process is called <strong>indexing</strong>.</p>
-                <div class="example-split">
-                  <div class="example-image" style="max-width: 48%;">
-                    <img src="img/indices-admin-panel.png" alt="Doofinder Admin Panel index screen, showing the products index with an Indexing with URL source and an Indexing with File source under Sources, plus an Add Source and a Process Now button" data-action="zoom-image" style="height: 260px;">
-                    <p class="example-caption">Click the image to enlarge it</p>
-                  </div>
-                  <div class="example-text">
-                    <p>There are two ways to feed an index:</p>
-                    <ul>
-                      <li><strong>Indexing via File or URL</strong>: upload a file, or point to a URL containing that file, to process it into the index. By default, indexing runs once a day — we'll go into more detail on this later in the course.</li>
-                      <li><strong>Indexing via API</strong>: sending API calls directly to the index, in order to upload, update or delete a product in the index.</li>
-                    </ul>
-                    <p>The main difference between these two ways is that, via <strong>File or URL</strong>, the index needs to be processed in order to keep the data updated in <strong>Doofinder</strong>, while via <strong>API</strong>, since the API calls are launched directly into the index, the index is kept updated in <strong>real time</strong>.</p>
-                  </div>
-                </div>
-                <p>A <strong>Search Engine</strong> can have more than one <strong>index</strong> — usually, each index stores a different kind of item, for example one index for the products, another for the blog articles, and so on.</p>
-                <p>All of a catalog item's information must live inside the same source — it can't be split across several sources.</p>
-                <p>In the image above, the <strong>products</strong> index is fed by two sources: one via <strong>URL</strong> (in <code>.xml</code> format), and one via <strong>File</strong> (in <code>.csv</code> format).</p>`
-            }
-          ],
-          [
-            {
-              heading: "The Product Data Feed",
-              html: `
-                <p>The most common way to index is via just one <strong>File</strong> or just one <strong>URL</strong>. Let's keep it simple for now and focus on using just <strong>one index</strong>, fed by just one <strong>product data feed</strong> (indexing via API, as well as the use of multiple indices, is explained later in the course).</p>
-                <p>A <strong>product data feed</strong> is a structured file that contains information about products and their attributes. <strong>Doofinder</strong> needs to be fed with this information in order to display results when a customer performs a search.</p>
-                <div class="example-split">
-                  <div class="example-text">
-                    <p>This is what a data feed could look like in practice: as shown here, it's a structure where each <strong>item's information</strong> is laid out according to a set of fields.</p>
-                    <p>The <strong>file</strong> can be in <code>.txt</code>, <code>.xml</code> or <code>.csv</code> format, optionally compressed as <code>.zip</code>, <code>.gz</code> or <code>.bz2</code>. A <strong>URL</strong> feed can also be in <code>.jsonl</code> format, optionally compressed as <code>.gz</code> or <code>.tgz</code>. The <strong>maximum file size</strong> is 625MB.</p>
-                    <p>The only <strong>mandatory</strong> fields are <code>id</code> and <code>title</code>, but there are also <strong>recommended</strong> fields, such as <code>link</code> and <code>image_link</code>, and depending on the type of item, other fields become <strong>strongly recommended</strong> too — for a product data feed, for example, <code>price</code> and <code>sale_price</code> are a must.</p>
-                    <p>The <code>id</code> field is a <strong>unique identifier</strong> — a number, a string, or an alphanumeric string — and it <strong>must be unique</strong> for every item in the feed. If two items share the same <code>id</code>, only one of them survives indexing: the one processed last <strong>overwrites</strong> the other.</p>
-                  </div>
-                  <div class="example-image" style="max-width: 48%;">
-                    <img src="img/data-feed-spreadsheet-example.png" alt="Sample of a data feed opened as a spreadsheet, with a header row of field names (brand, id, price, title) followed by one row per item" data-action="zoom-image" style="height: 340px;">
-                    <p class="example-caption">Click the image to enlarge it</p>
-                  </div>
-                </div>
-                <div class="example-split">
-                  <div class="example-image" style="max-width: 48%;">
-                    <img src="img/data-feed-xml-example.png" alt="Same data feed opened directly as a .xml file at a feed URL, showing the raw channel/item structure with fields like availability, brand, categories, description, id, image_link, link, price and title" data-action="zoom-image" style="height: 340px;">
-                    <p class="example-caption">Click the image to enlarge it</p>
-                  </div>
-                  <div class="example-text">
-                    <p>If a <strong>Google Shopping</strong> feed is already generated for advertising purposes, there's no need to build a separate one — <strong>Doofinder</strong> accepts that format as-is, with no reformatting required.</p>
-                    <p>When using <strong>Doofinder</strong>'s <strong>installation plugins</strong> for the different platforms, those plugins can create a data feed automatically, so there's no need to build one from scratch. As already mentioned for the <strong>installation script</strong>, using the data feed created by a plugin <strong>isn't mandatory</strong> even when the store runs on a supported platform — a custom data feed can still be used there too. The data feeds created by these plugins will be covered in more detail in Module 3.</p>
-                  </div>
-                </div>`
-            }
-          ],
-          [
-            {
-              heading: "Field Name Mapping",
-              html: `
-                <p><strong>Field Name Mapping</strong> links the field names in a feed to <strong>Doofinder</strong>'s standard ('normalized') field names, for when they differ — or when the value needed is buried inside a nested object.</p>
-                <div class="example-split">
-                  <div class="example-image" style="max-width: 48%;">
-                    <img src="img/field-name-mapping-popup.png" alt="Field name mapping pop-up, with a Normalized Field Name column (availability, brand, categories, description, group_id, gtin) next to a Field Aliases column listing the matching feed field names in several languages" data-action="zoom-image" style="height: 340px;">
-                    <p class="example-caption">Click the image to enlarge it</p>
-                  </div>
-                  <div class="example-text">
-                    <p>In the <strong>Admin Panel</strong> of <strong>Doofinder</strong>, there is a pop-up with two columns: <strong>Normalized Field Name</strong> (<strong>Doofinder</strong>'s standard name, e.g. <code>id</code>, <code>title</code>, <code>price</code>) and <strong>Field Aliases</strong> (the name(s) used in the feed itself, e.g. <code>product_id</code>, <code>name</code>, <code>base_price</code>).</p>
-                    <p>For example, if a field in the feed is called <code>sku</code>, mapping it as an alias of the normalized field <code>gtin</code> makes <strong>Doofinder</strong> process that field as <code>gtin</code>.</p>
-                    <p><strong>Basic mapping</strong> is a simple 1:1 rename, e.g. <code>product_id → id</code> or <code>name → title</code>. <strong>Deep mapping</strong> goes a step further, pulling a nested value out of an object or array and exposing it as a first-level field — this will be covered in more detail later in the course.</p>
-                    <p><strong>A few reasons this matters</strong>: <code>id</code> and <code>title</code> must always be mapped, or indexing fails with <em>"id attribute(s) missing"</em>; after deep mapping and re-indexing, only the mapped nested values survive; and mapping <code>image_link</code>, <code>price</code>, <code>sale_price</code> and <code>link</code> lets the Search Layer display them — missing data there usually just means one of these needs an alias.</p>
-                  </div>
-                </div>`
-            }
-          ]
+        blocks: [
+          {
+            html: `
+              <p>We've already said the Search Engine is where an item's data is managed. But how is that data actually stored? The data is stored in <strong>indices</strong>.</p>
+              <p>An index is like a box where data is processed and organized, ready to be searched. This process is called <strong>indexing</strong>.</p>
+              <figure class="lesson-figure lesson-figure-right" style="width: 550px;">
+                <img src="img/indices-admin-panel.png" alt="Doofinder Admin Panel index screen, showing the products index with an Indexing with URL source and an Indexing with File source under Sources, plus an Add Source and a Process Now button" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>There are two ways to feed an index:</p>
+              <ul>
+                <li><strong>Indexing via File or URL</strong>: upload a file, or point to a URL containing that file, to process it into the index. By default, indexing runs once a day — we'll go into more detail on this later in the course.</li>
+                <li><strong>Indexing via API</strong>: sending API calls directly to the index, in order to upload, update or delete a product in the index.</li>
+              </ul>
+              <p>The main difference between these two ways is that, via File or URL, the index needs to be processed in order to keep the data updated in Doofinder, while via API, since the API calls are launched directly into the index, the index is kept updated in real time.</p>
+              <p>A Search Engine can have more than one index — usually, each index stores a different kind of item, for example one index for the products, another for the blog articles, and so on.</p>
+              <p>All of a catalog item's information must live inside the same source — it can't be split across several sources. In the image above, the products index is fed by two sources: one via URL (in <code>.xml</code> format), and one via File (in <code>.csv</code> format).</p>`
+          },
+          {
+            heading: "The Product Data Feed",
+            pageBreak: true,
+            html: `
+              <p>The most common way to index is via just one File or just one URL, usually a product data feed (a source can be classifed as product or generic, this one for the content data). Let's keep it simple for now and focus on using just one index, fed by just one product data feed (indexing via API, as well as the use of multiple indices, is explained later in the course).</p>
+              <p>A product data feed is a structured file that contains information about products and their fields. Doofinder needs to be fed with this information in order to display results when a customer performs a search.</p>
+              <figure class="lesson-figure lesson-figure-right" style="width: 460px;">
+                <img src="img/data-feed-spreadsheet-example.png" alt="Sample of a data feed opened as a spreadsheet, with a header row of field names (brand, id, price, title) followed by one row per item" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>This is what a data feed could look like in practice: as shown in the image on the right, it's a structure where each item's information is laid out according to a set of fields.</p>
+              <p>The file can be in <code>.txt</code>, <code>.xml</code> or <code>.csv</code> format, optionally compressed as <code>.zip</code>, <code>.gz</code> or <code>.bz2</code>. A URL feed can also be in <code>.jsonl</code> format, optionally compressed as <code>.gz</code> or <code>.tgz</code>. The maximum file size is 625MB.</p>
+              <p>The only mandatory fields are <code>id</code> and <code>title</code>, but there are also recommended fields, such as <code>link</code> and <code>image_link</code>, and depending on the type of item, other fields become strongly recommended too — for a product data feed, for example, <code>price</code> and <code>sale_price</code> are a must.</p>
+              <p>The <code>id</code> field is a unique identifier — a number, a string, or an alphanumeric string — and it must be unique for every item in the feed. If two items share the same <code>id</code>, only one of them survives indexing: the one processed last overwrites the other.</p>
+              <figure class="lesson-figure lesson-figure-left" style="width: 300px;">
+                <img src="img/data-feed-xml-example.png" alt="Same data feed opened directly as a .xml file at a feed URL, showing the raw channel/item structure with fields like availability, brand, categories, description, id, image_link, link, price and title" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>In the image on the left, you can see what a data feed looks like in <code>.xml</code> format.</p>
+              <p>If a Google Shopping feed is already generated for advertising purposes, there's no need to build a separate one — Doofinder accepts that format as-is, with no reformatting required.</p>
+              <p>When using Doofinder's installation plugins for the different platforms, those plugins can create a data feed automatically, so there's no need to build one from scratch. As already mentioned for the installation script, using the data feed created by a plugin isn't mandatory even when the store runs on a supported platform — a custom data feed can still be used there too. The data feeds created by these plugins will be covered in more detail later in the course.</p>`
+          },
+          {
+            heading: "Field Name Mapping",
+            pageBreak: true,
+            html: `
+              <p><strong>Field Name Mapping</strong> links the field names in a feed to Doofinder's standard ('normalized') field names, for when they differ — or when the value needed is buried inside a nested object.</p>
+              <figure class="lesson-figure lesson-figure-right" style="width: 360px;">
+                <img src="img/field-name-mapping-popup.png" alt="Field name mapping pop-up, with a Normalized Field Name column (availability, brand, categories, description, group_id, gtin) next to a Field Aliases column listing the matching feed field names in several languages" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>In the Admin Panel, there is a pop-up with two columns: <strong>Normalized Field Name</strong> (Doofinder's standard name, e.g. <code>id</code>, <code>title</code>, <code>price</code>) and <strong>Field Aliases</strong> (the name(s) used in the feed itself, e.g. <code>product_id</code>, <code>name</code>, <code>base_price</code>).</p>
+              <p>For example, if a field in the feed is called <code>sku</code>, mapping it as an alias of the normalized field <code>gtin</code> makes Doofinder process that field as <code>gtin</code>.</p>
+              <p><strong>Basic mapping</strong> is a simple 1:1 rename, e.g. <code>product_id → id</code> or <code>name → title</code>. <strong>Deep mapping</strong> goes a step further, pulling a nested value out of an object or array and exposing it as a first-level field — this will be covered in more detail later in the course.</p>
+              <p>A few reasons this matters: <code>id</code> and <code>title</code> must always be mapped, or indexing fails with <em>"id attribute(s) missing"</em>; after deep mapping and re-indexing, only the mapped nested values survive; and mapping <code>image_link</code>, <code>price</code>, <code>sale_price</code> and <code>link</code> lets the Search Layer display them — missing data there usually just means one of these needs an alias.</p>`
+          }
         ]
       },
       quiz: [
@@ -721,7 +705,7 @@ const COURSE = {
       hasQuiz: true,
       docUrl: "https://support.doofinder.com/managing-data/security-settings",
       theory: {
-        lead: "<strong>Doofinder</strong> gives you <strong>two</strong> independent ways to control who can reach your Store:",
+        lead: "<strong>Doofinder</strong> gives you two independent ways to control who can reach your Store:",
         blocks: [
           {
             html: `
@@ -729,32 +713,27 @@ const COURSE = {
                 <li>an <strong>allowlist</strong> of domains that are trusted to query it from the browser</li>
                 <li>a <strong>blocklist</strong> of specific IPs that are denied outright</li>
               </ul>
-              <p>By default only allowlisted, or <strong>'authorized'</strong>, domains can query your Store client-side, while unwanted IPs can be shut out at the network level.</p>`
-          },
-          {
-            html: `
-              <p><strong>Authorized Domains</strong> is <strong>Doofinder</strong>'s CORS-based allowlist. Your <strong>main domain</strong> is enabled automatically, and so is <code>*.doofinder.com</code>, which keeps the <strong>Control Panel</strong> itself working.</p>
-              <p>So, if the same Store is meant to be used on other domains too, those need to be authorized as well. For example, a Store created for <code>doofinder.com</code> that should also work on <code>doofinder.it</code> needs <code>doofinder.it</code> added to its Authorized Domains.</p>
-              <p>Beyond that, the list supports <strong>wildcards</strong> with a few levels of precision: <code>*.mysafeshop.com</code> matches a single subdomain level, such as <code>www</code> or <code>blog</code>, <code>*.*.mysafeshop.com</code> matches two nested levels, and <code>**.mysafeshop.com</code> matches any number of nested subdomains at once.</p>
+              <p>By default only allowlisted, or 'authorized', domains can query your Store client-side, while unwanted IPs can be shut out at the network level.</p>
+              <figure class="lesson-figure lesson-figure-right" style="width: 460px;">
+                <img src="img/security-settings-tab.png" alt="Store General settings Security tab, showing the Enable CORS toggle, the Authorized domains list with two entries, and an empty Blocked IPs list" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p><strong>Authorized Domains</strong> is Doofinder's CORS-based allowlist. Your main domain is enabled automatically, and so is <code>*.doofinder.com</code>, which keeps the Admin Panel itself working.</p>
+              <p>So, if the same Store is meant to be used on other domains too, those need to be authorized as well. For example, a Store created for <code>mysafeshop.com</code> that should also work on <code>mysafeshop.it</code> needs <code>mysafeshop.it</code> added to its Authorized Domains.</p>
+              <p>Beyond that, the list supports wildcards with a few levels of precision: <code>*.mysafeshop.com</code> matches a single subdomain level, such as <code>www</code> or <code>blog</code>, <code>*.*.mysafeshop.com</code> matches two nested levels, and <code>**.mysafeshop.com</code> matches any number of nested subdomains at once.</p>
               <ul>
                 <li><code>*.mysafeshop.com</code> — one level: matches <code>www.mysafeshop.com</code>, <code>blog.mysafeshop.com</code>, but not <code>www.eu.mysafeshop.com</code></li>
                 <li><code>*.*.mysafeshop.com</code> — exactly two nested levels: matches <code>www.eu.mysafeshop.com</code>, but not <code>www.mysafeshop.com</code> or <code>www.eu.west.mysafeshop.com</code></li>
                 <li><code>**.mysafeshop.com</code> — any number of nested levels: matches <code>www.mysafeshop.com</code>, <code>www.eu.mysafeshop.com</code>, <code>a.b.c.mysafeshop.com</code></li>
               </ul>
-              <p>For local development, you add <code>localhost</code> or <code>127.0.0.1</code> <strong>without a port number</strong> — writing <code>localhost:8080</code> won't work, since <strong>Doofinder</strong> ignores the port entirely.</p>
-              <p>When a domain isn't authorized, the browser console shows an <strong>error</strong> along the lines of <em>"forbidden connection from www.example.com for…"</em>, and that's the first thing worth checking whenever a Layer works fine in the admin preview but not on the live site.</p>`
-          },
-          {
-            html: `
-              <p>The <strong>Blocked IPs</strong> list is where bot traffic gets shut out. You can block specific IPs or entire ranges, using <strong>CIDR notation</strong>, to stop bot attacks or other unwanted usage.</p>
+              <p>For local development, you add <code>localhost</code> or <code>127.0.0.1</code> without a port number — writing <code>localhost:8080</code> won't work, since Doofinder ignores the port entirely.</p>
+              <p>When a domain isn't authorized, the browser console shows an error along the lines of <em>"forbidden connection from www.example.com for…"</em>, and that's the first thing worth checking whenever a Layer works fine in the admin preview but not on the live site.</p>
+              <p>The <strong>Blocked IPs</strong> list is where bot traffic gets shut out. You can block specific IPs or entire ranges, using CIDR notation, to stop bot attacks or other unwanted usage.</p>
               <ul>
                 <li><code>203.0.113.42</code> — blocks that exact single IP</li>
                 <li><code>203.0.113.0/24</code> — blocks the entire range from <code>203.0.113.0</code> to <code>203.0.113.255</code> (256 IPs), useful when unwanted traffic comes from a whole subnet rather than one address</li>
               </ul>
-              <p>The number after the <code>/</code> is the prefix length: <code>/32</code> blocks a single IP, <code>/24</code> blocks 256 IPs, <code>/16</code> blocks 65,536 IPs — the lower the number, the wider the range.</p>
-              <p>It's worth <strong>reviewing that blocklist periodically</strong> rather than setting it once and forgetting about it, since IP addresses change over time and a stale list can end up missing new offenders while still blocking innocent traffic that has since moved on.</p>
-              <p>It also helps to tell <strong>beneficial bots</strong> apart from <strong>harmful ones</strong> before blocking anything: a legitimate crawler from a search engine tends to look like a handful of ordinary page visits, whereas abusive traffic can generate hundreds of requests in a short window with no real referral value behind them.</p>
-              <p>Treat IP blocking as an <strong>ongoing habit</strong>, paired with monitoring, rather than a one-off setup you never revisit.</p>`
+              <p>The number after the <code>/</code> is the prefix length: <code>/32</code> blocks a single IP, <code>/24</code> blocks 256 IPs, <code>/16</code> blocks 65,536 IPs — the lower the number, the wider the range.</p>`
           }
         ]
       },
@@ -774,7 +753,7 @@ const COURSE = {
           q: "Which domains are authorized automatically, without needing to add them?",
           options: ["Any .com domain", "Your main domain and *.doofinder.com", "Only localhost", "No domain is automatic"],
           correct: 1,
-          explain: "Your main domain and *.doofinder.com (so the Control Panel keeps working) are authorized automatically."
+          explain: "Your main domain and *.doofinder.com (so the Admin Panel keeps working) are authorized automatically."
         },
         {
           q: "If the same Store should also work on another domain, what needs to be done?",
@@ -825,42 +804,42 @@ const COURSE = {
       navGroup: "CONNECTING THE SEARCH LAYER TO THE DEMO STORE",
       navLabel: "Connecting the Search Layer to the demo store",
       eyebrow: "7. CONNECTING THE SEARCH LAYER TO THE DEMO STORE",
-      title: "Connecting the Search Layer to the demo store",
+      title: "Connecting the Search Layer to the Demo Store",
       hasQuiz: true,
       quizLabel: "Guided Exercise",
       exerciseType: "wizard",
       theory: {
-        lead: "Time to put everything you've <strong>learned</strong> into <strong>practice!</strong><br>This <strong>final exercise</strong> brings the <strong>Search Layer</strong> fully online on Doostride's demo store. These are the <strong>steps</strong> you'll need to follow:",
+        lead: "Time to put everything you've learned into practice! This final exercise brings the Search Layer fully online on Doostride's demo store. These are the steps you'll need to follow:",
         blocks: [
           {
             html: `
               <ul>
                 <li>Identify the domain's structure to decide how many <strong>Stores</strong> and <strong>Search Engines</strong> you need.</li>
-                <li>Create the <strong>Store(s)</strong> and the <strong>Search Engine(s)</strong>.</li>
-                <li>Upload the correct <strong>data feed(s)</strong>.</li>
-                <li>Identify the correct <strong>CSS selectors</strong> to trigger the Search Layer on the demo.</li>
-                <li>Fix the <strong>errors</strong>.</li>
+                <li>Create the Store(s) and the Search Engine(s).</li>
+                <li>Upload the correct data feed(s).</li>
+                <li>Identify the correct CSS selectors to trigger the Search Layer on the demo.</li>
+                <li>Fix the errors.</li>
               </ul>
-              <p>Work through <strong>each step</strong> the same way you would in the real <strong>Doofinder Admin Panel</strong>. This would help you to choose the right answers. You'll actually need to do them for real to finalize all the steps of the exercise.</p>`
+              <p>Work through each step the same way you would in the real Doofinder Admin Panel — that will help you choose the right answers, and you'll actually need to do them for real to finalize all the steps of the exercise.</p>`
           }
         ]
       },
       exercise: {
-        lead: `Now you have the knowledge to put the Search Layer on the demo page. These are the steps you need to do:</p>
-          <ul>
-            <li>Identify the domain's structure to decide how many <strong>Stores</strong> and <strong>Search Engines</strong> you need.</li>
-            <li>Create the <strong>Store(s)</strong> and the <strong>Search Engine(s)</strong>.</li>
-            <li>Upload the correct <strong>data feed(s)</strong>.</li>
-            <li>Identify the correct <strong>CSS selectors</strong> to trigger the Search Layer on the demo.</li>
-            <li>Fix the <strong>errors</strong>.</li>
-          </ul>`,
+        lead: "Now you have the knowledge to put the Search Layer on the demo page. Work through the steps below the same way you would in the real Doofinder Admin Panel.",
+        doneNote: "Doostride is live in English and Spanish, and the local demo store can finally reach it.",
+        replyButtonLabel: "Reply to John",
         phases: [
           {
             key: "structure",
             title: "1. Identify the <strong>structure</strong>",
             question: "Analyze the demo store's <strong>structure</strong> and work out how many <strong>Stores</strong> and <strong>Search Engines</strong> you need to make the catalogue work correctly, using a <strong>single installation script</strong>.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Choose one of the following answers:",
             fields: [
-              { key: "structure", label: "", type: "choice", options: ["1 Store & 1 Search Engine", "1 Store & 2 Search Engines", "2 Stores & 1 Search Engine", "2 Stores & 2 Search Engines"], correct: "1 Store & 2 Search Engines" }
+              { key: "structure", label: "", type: "choice", layout: "column", options: [
+                "1 Store & 1 Search Engine — a single Store and a single Search Engine handle both storefronts together",
+                "1 Store & 2 Search Engines — one Store for the whole site, with a separate Search Engine for each language",
+                "2 Stores & 1 Search Engine — a separate Store for each language, sharing one Search Engine between them",
+                "2 Stores & 2 Search Engines — a separate Store and a separate Search Engine for each language"
+              ], correct: "1 Store & 2 Search Engines — one Store for the whole site, with a separate Search Engine for each language" }
             ],
             explain: "A Store maps to a website, not a language — Doostride is a single site, so one Store covers it. The site has two language versions, English and Spanish, and in both prices are shown in EUR. Since each Search Engine has its own language, English and Spanish each need their own Search Engine under that one Store."
           },
@@ -869,14 +848,26 @@ const COURSE = {
             title: "2. Choose the correct data feed for the English Search Engine",
             question: "Now that you have the page's structure for <strong>Doofinder</strong>'s configuration in mind, let's start by creating the <strong>Store</strong> and the <strong>Search Engine</strong> for the English storefront.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Before doing that, you searched for the data feeds you could use to upload the English catalogue, and found these 3 data feeds:",
             beforeFields: `
-              <ul>
-                <li><a href="feeds/doostride-en-feed.csv" download>Download data feed 1</a></li>
-                <li><a href="feeds/doostride-en-feed-2.csv" download>Download data feed 2</a></li>
-                <li><a href="feeds/doostride-en-feed-3.csv" download>Download data feed 3</a></li>
-              </ul>
+              <div class="feed-preview-grid">
+                <div class="feed-preview-card">
+                  <p class="feed-preview-label">Data feed 1</p>
+                  <img src="img/feed1-preview.png" alt="Preview of data feed 1: rows of data starting immediately, with no header row naming the columns" data-action="zoom-image" class="feed-preview-img">
+                  <a href="feeds/doostride-en-feed.csv" download class="btn btn-ghost feed-download-btn">Download data feed 1</a>
+                </div>
+                <div class="feed-preview-card">
+                  <p class="feed-preview-label">Data feed 2</p>
+                  <img src="img/feed2-preview.png" alt="Preview of data feed 2: a header row naming id, title, link, image_link, price and sale_price" data-action="zoom-image" class="feed-preview-img">
+                  <a href="feeds/doostride-en-feed-2.csv" download class="btn btn-ghost feed-download-btn">Download data feed 2</a>
+                </div>
+                <div class="feed-preview-card">
+                  <p class="feed-preview-label">Data feed 3</p>
+                  <img src="img/feed3-preview.png" alt="Preview of data feed 3: a header row naming id, title, image_link, price, sale_price and brand — with no link column" data-action="zoom-image" class="feed-preview-img">
+                  <a href="feeds/doostride-en-feed-3.csv" download class="btn btn-ghost feed-download-btn">Download data feed 3</a>
+                </div>
+              </div>
               <p class="theory-lead" style="margin-bottom:16px;">Analyze the 3 feeds and figure out which one is the correct one. What is the correct one? Choose one of the following answers:</p>`,
             fields: [
-              { key: "validfeed", label: "", type: "choice", options: ["Data feed 1", "Data feed 2", "Data feed 3"], correct: "Data feed 2" }
+              { key: "validfeed", label: "", type: "choice", layout: "column", options: ["Data feed 1", "Data feed 2", "Data feed 3"], correct: "Data feed 2" }
             ],
             explain: "Data feed 2 is the only valid one: it has a header row with the field names, includes the mandatory id and title fields (which data feeds 2 and 3 both have), and also includes link, a strongly recommended field. Data feed 1 has no header row at all, so <strong>Doofinder</strong> has no way to know which column is which. Data feed 3 has a header but is missing link — without it, selecting a product in the Search Layer wouldn't redirect to that product's page."
           },
@@ -895,22 +886,19 @@ const COURSE = {
           },
           {
             key: "video-demo",
-            title: "4. Watch: creating the Store, Search Engine & processing the feed",
-            scenario: "Now, from your <strong>Doofinder</strong> control panel, try to create the <strong>Store</strong> and the <strong>Search Engine</strong> for the English website. Here's a video that can help you with that.</p><p class=\"exercise-scenario-text\">You'll need to do this because, later in the exercise, you'll be asked to enter the <strong>Store ID</strong> and the <strong>Hash IDs</strong> you created, to finalize the exercise and actually use the Search Layer on the demo store.",
-            scenarioVideo: { embedUrl: "https://www.loom.com/embed/b7f48830a1574e9b8fda97f090d5e832" },
+            title: "4. Creating the Store, Search Engine & processing the feed",
+            question: `<p class="theory-lead" style="margin-bottom:16px;">Now, from your Doofinder Admin Panel, try to create the <strong>Store</strong> and the <strong>Search Engine</strong> for the English website.</p>
+              <p class="theory-lead" style="margin-bottom:16px;">You'll need to do this because, later in the exercise, you'll be asked to enter the <strong>Store ID</strong> and the <strong>Hash IDs</strong> you created, to finalize the exercise and actually use the Search Layer on the demo store.</p>`,
             fields: []
           },
           {
             key: "search-es",
             title: "5. Create the Search Engine for the Spanish Storefront",
-            question: `Now that you've created the <strong>Store</strong> and the <strong>Search Engine</strong> for the English storefront, it's time to create a Search Engine for the Spanish storefront.</p>
-              <div style="max-width:420px;margin:4px 0 16px;">
-                <img src="img/create-search-engine-es-button.png" alt="Search Engine selector dropdown with the Create Search Engine button highlighted" data-action="zoom-image" class="exercise-scenario-img">
-                <div class="image-select-hint">Click the image to enlarge it</div>
-              </div>
-              <p class="theory-lead" style="margin-bottom:16px;">As shown in the image, click <strong>Create Search Engine</strong> and actually create it — remember that later in the exercise you'll be asked to add the Spanish storefront's <strong>Hash ID</strong> — uploading the data feed you can download below.</p>
-              <ul><li><a href="feeds/feed-es.csv" download>Download the Spanish feed</a></li></ul>
-              <p class="theory-lead" style="margin-bottom:16px;">To complete this step, choose the right configuration for each of the following:`,
+            question: `<p class="theory-lead" style="margin-bottom:16px;">Now that you've created the <strong>Store</strong> and the <strong>Search Engine</strong> for the English storefront, it's time to create a Search Engine for the Spanish storefront.</p>
+              <p class="theory-lead" style="margin-bottom:16px;">As shown in the image, click <strong>Create Search Engine</strong> and actually create it — remember that later in the exercise you'll be asked to add the Spanish storefront's <strong>Hash ID</strong> — uploading the data feed you can download below.</p>`,
+            scenario: "To complete this step, choose the right configuration for each of the following:",
+            scenarioFeed: { label: "Spanish data feed", src: "img/feed-es-preview.png", alt: "Preview of the Spanish data feed", href: "feeds/feed-es.csv", downloadLabel: "Download the Spanish feed" },
+            smallMedia: true,
             fieldsRow: true,
             fields: [
               { key: "language", label: "Which language is this Search Engine for?", type: "select", options: ["English", "Spanish", "French", "German"], correct: "Spanish" },
@@ -921,7 +909,7 @@ const COURSE = {
           {
             key: "store-ids",
             title: "6. Save the Store ID and Hash ID",
-            question: "Now try to create the <strong>Store</strong> and both <strong>Search Engines</strong> yourself, from your <strong>Doofinder</strong> Admin. When it asks for the page's URL, use <strong>http://doofinder.com/</strong> — you can't put a local page's URL there.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Then paste the <strong>Store ID</strong> and the two <strong>Hash IDs</strong> you just created below. Once you've completed this step, the script will be integrated into the demo store.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">If you try to use the Search Layer on the demo store, it won't work — there are a couple of errors you'll need to fix.",
+            question: "Now try to create the <strong>Store</strong> and both <strong>Search Engines</strong> yourself, from your Doofinder Admin Panel. When it asks for the page's URL, use <strong>http://doofinder.com/</strong> — you can't put a local page's URL there.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Then paste the <strong>Store ID</strong> and the two <strong>Hash IDs</strong> you just created below. Once you've completed this step, the script will be integrated into the demo store.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">If you try to use the Search Layer on the demo store, it won't work — there are a couple of errors you'll need to fix.",
             fields: [
               { key: "storeId", label: "Store ID", type: "text", freeform: true },
               { key: "hashEN", label: "Search Engine for English Storefront — Hash ID", type: "text", freeform: true },
@@ -931,55 +919,55 @@ const COURSE = {
           {
             key: "allowdomain",
             title: "7. Fix the Forbidden Domain Error",
-            scenario: "Convinced you've correctly installed the <strong>Doofinder</strong> script and set up everything needed to trigger the Search Layer on the storefronts, you try out the tool.</p><p class=\"exercise-scenario-text\">But clicking the search box, the Search Layer doesn't work. You open the <strong>browser console</strong> and see this error:</p><p class=\"exercise-scenario-text\">Choose one of the following options to fix the error:",
+            scenario: "Convinced you've correctly installed the Doofinder script and set up everything needed to trigger the Search Layer on the storefronts, you try out the tool.</p><p class=\"exercise-scenario-text\">But clicking the search box, the Search Layer doesn't work. You open the browser console and see this error:</p><p class=\"exercise-scenario-text\">Choose one of the following options to fix the error:",
             scenarioImage: { src: "img/forbidden-domain-console-error.png", alt: "Browser DevTools console showing a Doofinder error: Forbidden connection from localhost for hashid b80080205068d7aec31e931e976d6988" },
             mediumMedia: true,
+            mediaRight: true,
             fields: [
-              { key: "domain", label: "", type: "choice", options: [
+              { key: "domain", label: "", type: "choice", layout: "column", options: [
                 "Regenerate the Search Engine's Hash ID",
                 "Add localhost to Authorized Domains",
                 "Re-upload the data feed",
                 "Change the CSS selector that triggers the Search Layer"
               ], correct: "Add localhost to Authorized Domains" }
             ],
-            explain: "Lesson 7 covers this: for local testing, add localhost (or 127.0.0.1) to Authorized Domains — without a port number, since <strong>Doofinder</strong> ignores it entirely. The error is specifically about which domains are allowed to connect, so it has nothing to do with the Search Engine's credentials, the catalogue data, or how the Search Layer is triggered on the page — regenerating the Hash ID, re-uploading the feed, and changing the CSS selector would all leave the Forbidden connection error untouched."
+            explain: "Lesson 6 covers this: for local testing, add localhost (or 127.0.0.1) to Authorized Domains — without a port number, since Doofinder ignores it entirely. The error is specifically about which domains are allowed to connect, so it has nothing to do with the Search Engine's credentials, the catalogue data, or how the Search Layer is triggered on the page — regenerating the Hash ID, re-uploading the feed, and changing the CSS selector would all leave the Forbidden connection error untouched."
           },
           {
             key: "field-mapping",
             title: "8. Fix the Error in the Spanish data feed — Part 1",
             question: "After fixing the <strong>Authorized Domains</strong> error, you saw that the Search Layer works on the English storefront but not on the Spanish one.",
             scenario: "Access the <strong>Spanish Search Engine</strong> and, on the <strong>Indices</strong> tab, you'll see an error related to the data feed's upload:</p><p class=\"exercise-scenario-text\">So, since there are no products loaded, the Search Layer can't work.</p><p class=\"exercise-scenario-text\">Find out why you're getting this error, and choose one of the following answers:",
-            scenarioImage: { src: "img/field-name-mapping-error-indices.png", alt: "Indices screen showing the warning about a missing id attribute and the Field name mapping option in the source's menu" },
-            mediumMedia: true,
+            scenarioImage: { src: "img/field-name-mapping-error-indices.png", alt: "Indices screen showing the warning about a missing id attribute and the Field name mapping option in the source's menu", imgClass: "taller-scenario-img" },
             fields: [
-              { key: "what", label: "", type: "choice", options: ["It's missing one of the mandatory fields, and needs a Field Name Mapping", "It's missing one of the mandatory fields, and needs a new data feed", "It has all mandatory fields — no fix is needed", "The CSS selector needs to be changed"], correct: "It's missing one of the mandatory fields, and needs a Field Name Mapping" }
+              { key: "what", label: "", type: "choice", layout: "column", options: ["It's missing one of the mandatory fields, and needs a Field Name Mapping", "It's missing one of the mandatory fields, and needs a new data feed", "It has all mandatory fields — no fix is needed", "The CSS selector needs to be changed"], correct: "It's missing one of the mandatory fields, and needs a Field Name Mapping" }
             ],
-            explain: "This is straight out of Lesson 6: the feed is missing the mandatory id field — but it does have a column, product_code_identification, with the right characteristics to be used as one (a unique value per product). The fix is a Field Name Mapping (Configuration > Search Engines > See indices > Product tab > ⋮ next to the source > Field name mapping), setting Normalized Field Name to id and Field Alias to product_code_identification."
+            explain: "This is straight out of Lesson 5: the feed is missing the mandatory id field — but it does have a column, product_code_identification, with the right characteristics to be used as one (a unique value per product). The fix is a Field Name Mapping (Configuration > Search Engines > See indices > Product tab > ⋮ next to the source > Field name mapping), setting Normalized Field Name to id and Field Alias to product_code_identification."
           },
           {
             key: "mapping-image",
             title: "8. Fix the Error in the Spanish data feed — Part 2",
-            question: "In the image from the previous step, you'll have noticed the <strong>Field name mapping</strong> tab. Opening that section lets you configure the correct mapping so the data feed uploads properly.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Analyze the 3 images below, each showing a different mapping, and choose one of the following answers:",
+            question: "In the image from the previous step, you'll have noticed the <strong>Field name mapping</strong> tab. Opening that section lets you configure the correct mapping so the data feed uploads properly.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Analyze these 3 images, each showing a different mapping, and choose one of the following answers:",
             fields: [
-              { key: "correctmapping", type: "image-select", options: [
+              { key: "correctmapping", type: "image-select", layout: "column", options: [
                 { value: "correct", src: "img/field-mapping-correct.png", alt: "Field name mapping panel with product_code_identification added as an alias under the id row", caption: "Option A" },
                 { value: "missing-id", src: "img/field-mapping-missing-id.png", alt: "Field name mapping panel with no id row at all", caption: "Option B" },
                 { value: "inverted", src: "img/field-mapping-inverted.png", alt: "Field name mapping panel with product_code_identification as the Normalized Field Name and id as the Field Alias, the wrong way round", caption: "Option C" }
               ], correct: "correct" }
             ],
-            explain: "Option A is correct: product_code_identification was added as a Field Alias under the id Normalized Field Name. Option B is missing the id row entirely, so id still wouldn't be mapped and indexing would fail. Option C has it backwards — id was typed in as the Field Alias instead of the Normalized Field Name, so the mapping still doesn't tell <strong>Doofinder</strong> that product_code_identification means id."
+            explain: "Option A is correct: product_code_identification was added as a Field Alias under the id Normalized Field Name. Option B is missing the id row entirely, so id still wouldn't be mapped and indexing would fail. Option C has it backwards — id was typed in as the Field Alias instead of the Normalized Field Name, so the mapping still doesn't tell Doofinder that product_code_identification means id."
           }
         ],
         replyEmail: {
           name: "Mark Park",
           address: "To: john.smith@doostride.com",
           cc: "Amanda House",
-          subject: "Re: Trying out <strong>Doofinder</strong>'s Search layer on our site",
+          subject: "Re: Trying out <strong>Doofinder</strong>'s Search Layer on our site",
           body: [
             "Hi John, Hi Amanda,",
-            "Good news — the <strong>Search layer</strong> is up and running on our local test copy of the site.",
-            "It's live on both language versions, <strong>English</strong> and <strong>Spanish</strong>, and it works on <strong>mobile</strong> as well as desktop.",
-            "On the <strong>Doofinder</strong> side, the Store is configured with <strong>two Search Engines</strong>, one for each page — English/EUR and Spanish/EUR — both pulling from Doostride's catalogue data feed.",
+            "Good news — the Search Layer is up and running on our local test copy of the site.",
+            "It's live on both language versions, <strong>English</strong> and <strong>Spanish</strong>, and it works on mobile as well as desktop.",
+            "On the Doofinder side, the Store is configured with two Search Engines, one for each page — English/EUR and Spanish/EUR — both pulling from Doostride's catalogue data feed.",
             "Happy to walk you through it whenever works for you.",
             "Best,<br>Mark"
           ]

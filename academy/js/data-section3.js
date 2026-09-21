@@ -1,8 +1,7 @@
 /* Doofinder Academy — Module 1 Section 3 content
-   Summaries condensed from support.doofinder.com. Section 0 is a recap of
-   Module 1 Section 2 and section 1 is this section's introduction — neither
-   has a quiz. Sections 2-7 each have a theory block and a quiz. Section 8 is
-   the final exercise, still to be designed. */
+   Section 0 is a recap of Module 1 Section 2 and section 1 is this section's
+   introduction — neither has a quiz. Sections 2-7 each have a theory block
+   and a quiz. Section 8 is the final guided exercise. */
 
 const COURSE = {
   storageKey: "dfa_progress_section3_v1",
@@ -48,9 +47,29 @@ const COURSE = {
       hasQuiz: false,
       pages: [
         {
-          intro: [
-            "This section's introduction is still being written.",
-            "In the meantime, you can browse <strong>Doofinder</strong>'s support documentation directly at <a href=\"https://support.doofinder.com\" target=\"_blank\" rel=\"noopener\">support.doofinder.com</a>."
+          intro: [],
+          slack: {
+            name: "Amanda House",
+            channel: "amanda-samanta",
+            body: [
+              "Hey Samanta!",
+              "Big news — I'm finally taking the vacation I've been putting off. Two weeks, starting tomorrow. No laptop, I promise John.",
+              "Before I go, there's a short list of things piling up on Doostride's search that I'd like you to look into while I'm out.",
+              "Customers keep complaining that the same shoe shows up several times in a row, once per size — can you check why our variants aren't grouping into one result?",
+              "Also, we discontinued the whole Kids line last month, but a couple of those products are apparently still showing up in search.",
+              "Support also flagged that people search \"sneakers\" and \"trainers\" and get completely different results depending on which word they use.",
+              "We still don't have redirections set up for \"return policy\" or \"contact us\" either — right now those just show a results page full of nothing useful.",
+              "And Black Friday is coming up fast — we don't have a banner pointing people to the campaign page yet.",
+              "Once all of that's sorted on the English Search Engine, mirror it over to the Spanish one too — I don't want the two storefronts drifting apart.",
+              "I know that's a lot, but I trust you with it. I left you some reading below — you've got two weeks, and you've got this!"
+            ],
+            times: ["09:14", "09:14", "09:15", "09:16", "09:17", "09:18", "09:19", "09:20", "09:21", "09:22"]
+          },
+          slackNote: [
+            "In this section, you are <strong>Samanta</strong>, Amanda House's assistant at Doostride. You've spent the last few months helping Amanda with day-to-day ecommerce tasks, and this is the first time she's leaving you in charge of the Search Layer on your own.",
+            "This morning, you got this message from <strong>Amanda</strong> on Slack.",
+            "Before tackling her list, you'll need to get familiar with six more Doofinder features: <strong>Excluded Results</strong>, <strong>Grouping Product Variants</strong>, <strong>Synonyms</strong>, <strong>Redirections</strong>, <strong>Banners</strong> and <strong>Copy Settings</strong>.",
+            "Your goal throughout this section is to learn how each one works, so that by the final exercise you can fix everything Amanda listed before she's back."
           ]
         }
       ]
@@ -66,43 +85,43 @@ const COURSE = {
       hasQuiz: true,
       docUrl: "https://support.doofinder.com/getting-started/excluded-results",
       extraDocs: [
-        { label: "Out of Stock Items", url: "https://support.doofinder.com/search/promotional-tools/out-of-stock-items", fromPage: 3 }
+        { label: "Out of Stock Items", url: "https://support.doofinder.com/search/promotional-tools/out-of-stock-items", fromHeading: "Out of Stock Items" }
       ],
       theory: {
         lead: "In this lesson you'll learn how to make specific items disappear from <strong>Doofinder</strong>'s results entirely — and, briefly, about a ready-made shortcut for one of the most common cases: excluding out-of-stock products automatically.",
-        pages: [
-          [
-            {
-              html: `
-                <p><strong>Excluded Results</strong> lets you intentionally remove certain items from a Search Engine's results — whether that's a single product or a whole batch of them, picked out with filtering rules. It's configured from the <strong>Admin Panel</strong>, under Configuration → Excluded Results, on the Search Engine you want to affect. Since a Search Engine feeds every <strong>Doofinder</strong> product, excluding an item there affects all of them at once — Search, Recommendations, Quiz Maker, and so on.</p>
-                <p>There are two ways to exclude items:</p>
-                <ul>
-                  <li><strong>By item</strong> — click "+Add results" → "Individual items", type in the product as it's registered in the data feed, select it (more than one can be picked at a time) and click "Add item", then save. Up to 100 items can be excluded this way per Search Engine.</li>
-                  <li><strong>By rules</strong> — exclude by a filter instead of naming products one by one. The filter needs to already exist in the product data feed and be configured as a filter, whether or not it's set as visible on the Layer. Pick an attribute from the "Select field" dropdown (e.g. brand), a value from "select value" (e.g. Adidas), then click "Add rule" and save.</li>
-                </ul>
-                <p>Both approaches can be combined on the same Search Engine — excluding some items individually and others by rule at the same time.</p>`
-            }
-          ],
-          [
-            {
-              html: `
-                <p>Rules can also be combined into conditions:</p>
-                <ul>
-                  <li>An <strong>AND</strong> condition happens automatically as soon as two filters with different attributes are used together — e.g. category "Shoes" and color "blue" excludes only items that are both.</li>
-                  <li>An <strong>OR</strong> condition happens by adding two or more values in the same row — e.g. color "blue" or "red" in the same rule excludes items matching either one.</li>
-                  <li>Both can be combined at once: excluding every item in category "Shoes" whose color is "blue" or "red" mixes an AND (category + color) with an OR (blue vs red) in the same rule.</li>
-                </ul>`
-            }
-          ],
-          [
-            {
-              heading: "Out of Stock Items",
-              html: `
-                <p>Excluding out-of-stock products is such a common need that <strong>Doofinder</strong> ships a dedicated, automated shortcut for it, instead of having to build and maintain an exclusion rule by hand. It requires the data feed to already carry an <strong>availability</strong> field, with an "out of stock" value set on the relevant items.</p>
-                <p>Turning it on takes three steps, all from Configuration → Excluded Results: click "Add results" → "Rules", pick <code>availability</code> as the field and <code>out of stock</code> as its value, click "Add rule", then <strong>Save</strong>.</p>
-                <p>From then on it runs automatically: the moment a product's availability flips to "out of stock" in the feed, it disappears from results — and once it's back in stock, it reappears too, though only after the feed is <strong>reindexed</strong>. Like any other Excluded Results rule, it affects every <strong>Doofinder</strong> service fed by that Search Engine — Search, Recommendations, Quiz Maker, and the rest.</p>`
-            }
-          ]
+        blocks: [
+          {
+            html: `
+              <p><strong>Excluded Results</strong> lets you intentionally remove certain items from a Search Engine's results — whether that's a single product or a whole batch of them, picked out with filtering rules. It's configured from the <strong>Admin Panel</strong>, under Configuration → Excluded Results, on the Search Engine you want to affect. Since a Search Engine feeds every <strong>Doofinder</strong> product, excluding an item there affects all of them at once — Search, Recommendations, Quiz Maker, and so on.</p>
+              <figure class="lesson-figure lesson-figure-right" style="width: 420px;">
+                <img src="img/excluded-results-config.png" alt="Excluded Results screen in the Admin Panel, showing an Individual items list with one product added, a Rules table with a brand is Adidas filter, and an Add results button" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>There are two ways to exclude items:</p>
+              <ul>
+                <li><strong>By item</strong> — click "+Add results" → "Individual items", type in the product as it's registered in the data feed, select it (more than one can be picked at a time) and click "Add item", then save. Up to 100 items can be excluded this way per Search Engine.</li>
+                <li><strong>By rules</strong> — exclude by a filter instead of naming products one by one. The filter needs to already exist in the product data feed and be configured as a filter, whether or not it's set as visible on the Layer. Pick an attribute from the "Select field" dropdown (e.g. brand), a value from "select value" (e.g. Adidas), then click "Add rule" and save.</li>
+              </ul>
+              <p>Both approaches can be combined on the same Search Engine — excluding some items individually and others by rule at the same time.</p>
+              <p>Rules can also be combined into conditions:</p>
+              <ul>
+                <li>An <strong>AND</strong> condition happens automatically as soon as two filters with different attributes are used together — e.g. category "Shoes" and color "blue" excludes only items that are both.</li>
+                <li>An <strong>OR</strong> condition happens by adding two or more values in the same row — e.g. color "blue" or "red" in the same rule excludes items matching either one.</li>
+                <li>Both can be combined at once: excluding every item in category "Shoes" whose color is "blue" or "red" mixes an AND (category + color) with an OR (blue vs red) in the same rule.</li>
+              </ul>`
+          },
+          {
+            heading: "Out of Stock Items",
+            pageBreak: true,
+            html: `
+              <p>Excluding out-of-stock products is such a common need that <strong>Doofinder</strong> ships a dedicated, automated shortcut for it, instead of having to build and maintain an exclusion rule by hand. It requires the data feed to already carry an <strong>availability</strong> field, with an "out of stock" value set on the relevant items.</p>
+              <figure class="lesson-figure lesson-figure-left" style="width: 420px;">
+                <img src="img/excluded-results-out-of-stock.png" alt="Excluded Results screen with a rule set to availability is out of stock — the built-in shortcut for hiding out-of-stock products automatically" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>Turning it on takes three steps, all from Configuration → Excluded Results: click "Add results" → "Rules", pick <code>availability</code> as the field and <code>out of stock</code> as its value, click "Add rule", then <strong>Save</strong>.</p>
+              <p>From then on it runs automatically: the moment a product's availability flips to "out of stock" in the feed, it disappears from results — and once it's back in stock, it reappears too, though only after the feed is <strong>reindexed</strong>. Like any other Excluded Results rule, it affects every <strong>Doofinder</strong> service fed by that Search Engine — Search, Recommendations, Quiz Maker, and the rest.</p>`
+          }
         ]
       },
       quiz: [
@@ -204,23 +223,29 @@ const COURSE = {
       docUrl: "https://support.doofinder.com/managing-data/grouping-product-variants",
       theory: {
         lead: "<strong>Grouping Product Variants</strong> lets a product's different sizes, colors and other variants show up as a single result, with the variant filters still available — instead of the same item appearing over and over as a wall of near-identical products.",
-        pages: [
-          [
-            {
-              html: `
-                <p>It's turned on from Configuration → Search Engines → See indices → Indices → Configuration section: enable <strong>"Group variants as a single item"</strong>, then click <strong>Save</strong>. For it to actually work, every variant of the same product needs to share the same <code>group_id</code> value in the data feed (a string) — all items with the same <code>group_id</code> get displayed as one product only.</p>
-                <p>A second field, <code>group_leader</code> (a boolean — <code>true</code>/<code>false</code>, or the string equivalents), decides which variant represents the group: the one with <code>group_leader</code> set to <strong>true</strong> is the one shown first, while every other variant in that group should be set to <strong>false</strong>. If no variant is marked as the leader, other sort criteria decide which one shows instead.</p>
-                <p>Both the group leader and its child variants stay indexed even once grouped: the leader is what appears for a general search, but a search for one specific child's own SKU still returns that exact variant directly.</p>`
-            }
-          ],
-          [
-            {
-              html: `
-                <p>A couple of <strong>Relevance Criteria</strong> tweaks (Search → Advanced Preferences) pair well with grouping: sorting by <code>best_price</code> ascending surfaces the cheapest variant as the group leader, and sorting by <strong>Availability</strong> prioritizes an in-stock variant over an out-of-stock one — combining both keeps the cheapest available option in front.</p>
-                <p>Speaking of availability: if hiding out-of-stock items is enabled and every single variant in a group is out of stock, the whole grouped product disappears from results — sorting by Availability is what keeps an in-stock sibling visible above the rest whenever at least one exists.</p>
-                <p>A few more things worth knowing: updating a product's <code>group_id</code> changes its grouping right away; the price shown in results is the group leader's own price, not some average or combined figure; a specific child variant can still be hidden on its own with an <strong>Excluded Results</strong> rule, without breaking the rest of the group; and a custom feed that simply never indexes variants as separate items sidesteps all of this grouping logic entirely.</p>`
-            }
-          ]
+        blocks: [
+          {
+            html: `
+              <p>It's turned on from Configuration → Search Engines → See indices → Indices → Configuration section: enable <strong>"Group variants as a single item"</strong>, then click <strong>Save</strong>. For it to actually work, every variant of the same product needs to share the same <code>group_id</code> value in the data feed (a string) — all items with the same <code>group_id</code> get displayed as one product only.</p>
+              <figure class="lesson-figure lesson-figure-right" style="width: 420px;">
+                <img src="img/grouping-variants-indices-config.png" alt="Indices Configuration section with the 'Group variants as a single item' toggle switched on" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>A second field, <code>group_leader</code> (a boolean — <code>true</code>/<code>false</code>, or the string equivalents), decides which variant represents the group: the one with <code>group_leader</code> set to <strong>true</strong> is the one shown first, while every other variant in that group should be set to <strong>false</strong>. If no variant is marked as the leader, other sort criteria decide which one shows instead.</p>
+              <p>Both the group leader and its child variants stay indexed even once grouped: the leader is what appears for a general search, but a search for one specific child's own SKU still returns that exact variant directly.</p>`
+          },
+          {
+            heading: "Relevance Criteria and Grouping",
+            pageBreak: true,
+            html: `
+              <p>A couple of <strong>Relevance Criteria</strong> tweaks (Search → Advanced Preferences) pair well with grouping: sorting by <code>best_price</code> ascending surfaces the cheapest variant as the group leader, and sorting by <strong>Availability</strong> prioritizes an in-stock variant over an out-of-stock one — combining both keeps the cheapest available option in front.</p>
+              <figure class="lesson-figure lesson-figure-left" style="width: 460px;">
+                <img src="img/grouping-variants-feed-example.png" alt="Sample data feed rows for the same product's three size variants, all sharing the same group_id value with group_leader set to true on only one row" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>Speaking of availability: if hiding out-of-stock items is enabled and every single variant in a group is out of stock, the whole grouped product disappears from results — sorting by Availability is what keeps an in-stock sibling visible above the rest whenever at least one exists.</p>
+              <p>A few more things worth knowing: updating a product's <code>group_id</code> changes its grouping right away; the price shown in results is the group leader's own price, not some average or combined figure; a specific child variant can still be hidden on its own with an <strong>Excluded Results</strong> rule, without breaking the rest of the group; and a custom feed that simply never indexes variants as separate items sidesteps all of this grouping logic entirely.</p>`
+          }
         ]
       },
       quiz: [
@@ -326,31 +351,37 @@ const COURSE = {
       docUrl: "https://support.doofinder.com/search/optimize/synonyms",
       theory: {
         lead: "A synonym is a word that means the same as another — like 'small' and 'little' — and <strong>Doofinder</strong>'s <strong>Synonyms</strong> feature lets a search for one term also match the others in its set, even when the data feed itself never uses those other words.",
-        pages: [
-          [
-            {
-              html: `
-                <p>Synonyms live inside the <strong>Admin Panel</strong>, under Search → Optimize → Synonyms, and are configured separately per Store. Each Search Engine can hold up to 1,000 synonyms, and it's worth knowing upfront that using different terms from the same synonym set doesn't guarantee identical results for each one — it depends on how those terms actually show up across the indexed catalogue.</p>
-                <p>There are two ways to build a synonym set:</p>
-                <ul>
-                  <li><strong>AI SynonymBoost</strong> — an algorithm that looks for synonym patterns specific to the Store's configured industry and language, and suggests them automatically. Getting the industry setting right matters here, since a wrong one leads to irrelevant suggestions. Suggestions show up to 10 at a time in a carousel — click the "+" to accept one, or the trash icon to reject it, and once a decision is made new suggestions are generated to replace it, with the newest ones always shown first.</li>
-                  <li>manually created synonyms — built by hand instead of accepted from a suggestion.</li>
-                </ul>`
-            }
-          ],
-          [
-            {
-              html: `
-                <p>Manually created synonyms come in two types:</p>
-                <ul>
-                  <li><strong>Synonyms type</strong> — a simple list, written as <code>Synonym1, Synonym2, Synonym3</code>. For it to work, the first term in that list has to be one that actually appears in the indexed feed. For example, with <code>icebox, cooler, fridge</code> (where "icebox" is the feed's own term), searching for any of the three returns the same products.</li>
-                  <li><strong>Explicit Replacement type</strong> — written as <code>Term1, Term2 => Term1, Term2</code>, it swaps the original word out for the replacement(s) rather than adding to it. Searching <code>icebox => fridge</code> for "icebox" then returns nothing, since only "fridge" (which has to exist in the feed) actually returns results.</li>
-                </ul>
-                <p>A couple of quirks to keep in mind: commas are reserved as the separator between terms, so they can't appear inside a synonym itself; and hyphens are always normalized to spaces, since symbols get stripped out during indexing anyway — so a synonym is always saved and matched with spaces, never hyphens.</p>
-                <p>Existing synonyms can be copied across to another Search Engine, either merging into its existing settings or replacing them outright — the second option can't be undone, so it's worth being careful with it. Any synonym set can also be toggled off without deleting it, and the whole list can be imported or exported as a <strong>.csv</strong> file (skip the header row on import; each line reads like <code>sneaker, trainer, shoe</code>).</p>
-                <p>Under the hood, <strong>Doofinder</strong> re-crawls the product feed at least once a day (or on demand, from Indices), extracting its data into a file called the <strong>Index</strong>. Whenever synonyms are defined, that same indexing pass replaces every occurrence of a synonym with its whole set — which is exactly what lets a single search term surface products that only ever mention one of its synonyms in the feed.</p>`
-            }
-          ]
+        blocks: [
+          {
+            html: `
+              <p>Synonyms live inside the <strong>Admin Panel</strong>, under Search → Optimize → Synonyms, and are configured separately per Store. Each Search Engine can hold up to 1,000 synonyms, and it's worth knowing upfront that using different terms from the same synonym set doesn't guarantee identical results for each one — it depends on how those terms actually show up across the indexed catalogue.</p>
+              <figure class="lesson-figure lesson-figure-right" style="width: 460px;">
+                <img src="img/synonyms-ai-synonymboost.png" alt="Synonyms screen showing the AI SynonymBoost carousel with suggested synonym sets, an add (+) icon and a trash icon on each suggestion" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>There are two ways to build a synonym set:</p>
+              <ul>
+                <li><strong>AI SynonymBoost</strong> — an algorithm that looks for synonym patterns specific to the Store's configured industry and language, and suggests them automatically. Getting the industry setting right matters here, since a wrong one leads to irrelevant suggestions. Suggestions show up to 10 at a time in a carousel — click the "+" to accept one, or the trash icon to reject it, and once a decision is made new suggestions are generated to replace it, with the newest ones always shown first.</li>
+                <li>manually created synonyms — built by hand instead of accepted from a suggestion.</li>
+              </ul>`
+          },
+          {
+            heading: "Manual Synonyms",
+            pageBreak: true,
+            html: `
+              <p>Manually created synonyms come in two types:</p>
+              <ul>
+                <li><strong>Synonyms type</strong> — a simple list, written as <code>Synonym1, Synonym2, Synonym3</code>. For it to work, the first term in that list has to be one that actually appears in the indexed feed. For example, with <code>icebox, cooler, fridge</code> (where "icebox" is the feed's own term), searching for any of the three returns the same products.</li>
+                <li><strong>Explicit Replacement type</strong> — written as <code>Term1, Term2 => Term1, Term2</code>, it swaps the original word out for the replacement(s) rather than adding to it. Searching <code>icebox => fridge</code> for "icebox" then returns nothing, since only "fridge" (which has to exist in the feed) actually returns results.</li>
+              </ul>
+              <figure class="lesson-figure lesson-figure-left" style="width: 420px;">
+                <img src="img/synonyms-manual-types.png" alt="Add Synonym panel showing a Synonyms type field (icebox, cooler, fridge) and an Explicit Replacement type field (icebox => fridge)" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>A couple of quirks to keep in mind: commas are reserved as the separator between terms, so they can't appear inside a synonym itself; and hyphens are always normalized to spaces, since symbols get stripped out during indexing anyway — so a synonym is always saved and matched with spaces, never hyphens.</p>
+              <p>Existing synonyms can be copied across to another Search Engine, either merging into its existing settings or replacing them outright — the second option can't be undone, so it's worth being careful with it. Any synonym set can also be toggled off without deleting it, and the whole list can be imported or exported as a <strong>.csv</strong> file (skip the header row on import; each line reads like <code>sneaker, trainer, shoe</code>).</p>
+              <p>Under the hood, <strong>Doofinder</strong> re-crawls the product feed at least once a day (or on demand, from Indices), extracting its data into a file called the <strong>Index</strong>. Whenever synonyms are defined, that same indexing pass replaces every occurrence of a synonym with its whole set — which is exactly what lets a single search term surface products that only ever mention one of its synonyms in the feed.</p>`
+          }
         ]
       },
       quiz: [
@@ -451,28 +482,25 @@ const COURSE = {
       docUrl: "https://support.doofinder.com/search/optimize/redirections",
       theory: {
         lead: "A <strong>Redirection</strong> sends shoppers from the Search Layer straight to a URL of your choosing whenever they search for a specific term — instead of showing them a results page at all.",
-        pages: [
-          [
-            {
-              html: `
-                <p>A redirection takes a shopper from the <strong>Search Layer</strong> to another page, specified by a URL, the moment they type a given search term. It's a way to surface information that doesn't live in the catalogue itself — a privacy policy, a contact page, a company or blog page, or a campaign landing page tied to a brand or a season (Black Friday, a sale, Christmas, and so on).</p>
-                <p>Redirections are set up from the <strong>Admin Panel</strong>, under Search → Optimize → Redirections: pick the Search Engine, then click "Add redirection". A set of redirections can also be copied over to another Search Engine using the "Copy settings to..." dropdown next to that same button, followed by "Apply".</p>
-                <p>Creating one means filling in:</p>
-                <ul>
-                  <li>A <strong>Redirection name</strong>, to identify it later.</li>
-                  <li>A <strong>Status</strong> toggle, to enable or disable it.</li>
-                  <li>A <strong>Destination URL</strong>, the page it points to.</li>
-                  <li>One or more <strong>search terms</strong> that trigger it, each set to either <strong>Exact Match</strong> (only that exact term triggers it) or <strong>Broad Match</strong> (triggers as soon as the typed text contains that term).</li>
-                </ul>
-                <p>There's also an <strong>"Enable automatic redirection"</strong> checkbox: leave it unchecked and the redirection only fires once the shopper presses enter or actually searches; check it and it happens automatically, as soon as the matching term is typed in.</p>`
-            }
-          ],
-          [
-            {
-              html: `
-                <p>Each Search Engine can hold up to 100 redirections. Once saved, they show up in a list where each one can be activated or deactivated, edited or deleted from its three-dot menu — and the list itself can be searched, or filtered by date or by status, to make finding a specific one easier as the list grows.</p>`
-            }
-          ]
+        blocks: [
+          {
+            html: `
+              <p>A redirection takes a shopper from the <strong>Search Layer</strong> to another page, specified by a URL, the moment they type a given search term. It's a way to surface information that doesn't live in the catalogue itself — a privacy policy, a contact page, a company or blog page, or a campaign landing page tied to a brand or a season (Black Friday, a sale, Christmas, and so on).</p>
+              <figure class="lesson-figure lesson-figure-right" style="width: 420px;">
+                <img src="img/redirections-add-form.png" alt="Add redirection form with Redirection name, Status toggle, Destination URL, a search term set to Broad Match, and the Enable automatic redirection checkbox" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>Redirections are set up from the <strong>Admin Panel</strong>, under Search → Optimize → Redirections: pick the Search Engine, then click "Add redirection". A set of redirections can also be copied over to another Search Engine using the "Copy settings to..." dropdown next to that same button, followed by "Apply".</p>
+              <p>Creating one means filling in:</p>
+              <ul>
+                <li>A <strong>Redirection name</strong>, to identify it later.</li>
+                <li>A <strong>Status</strong> toggle, to enable or disable it.</li>
+                <li>A <strong>Destination URL</strong>, the page it points to.</li>
+                <li>One or more <strong>search terms</strong> that trigger it, each set to either <strong>Exact Match</strong> (only that exact term triggers it) or <strong>Broad Match</strong> (triggers as soon as the typed text contains that term).</li>
+              </ul>
+              <p>There's also an <strong>"Enable automatic redirection"</strong> checkbox: leave it unchecked and the redirection only fires once the shopper presses enter or actually searches; check it and it happens automatically, as soon as the matching term is typed in.</p>
+              <p>Each Search Engine can hold up to 100 redirections. Once saved, they show up in a list where each one can be activated or deactivated, edited or deleted from its three-dot menu — and the list itself can be searched, or filtered by date or by status, to make finding a specific one easier as the list grows.</p>`
+          }
         ]
       },
       quiz: [
@@ -573,35 +601,36 @@ const COURSE = {
       docUrl: "https://support.doofinder.com/search/promotional-tools/banners",
       theory: {
         lead: "<strong>Banners</strong> let you promote a specific product or a marketing campaign right inside the Search Layer's results, triggered by whichever search terms you choose.",
-        pages: [
-          [
-            {
-              html: `
-                <p>Banners can be shown for specific search terms, during a chosen time period, or set as the default banner shown across every other search. They're configured from the <strong>Admin Panel</strong>, under Search → Promotional Tools → Banners, by clicking "Add Banner".</p>
-                <p>Setting one up means filling in:</p>
-                <ul>
-                  <li>A <strong>Name</strong>, to tell it apart from the others.</li>
-                  <li>A <strong>Status</strong> checkbox, to enable or disable it without deleting it.</li>
-                  <li>Whether it's the <strong>Default Banner</strong> — the one shown for every search term that isn't otherwise covered. Only one banner can be default at a time; marking a new one as default automatically un-defaults whichever one held that spot before.</li>
-                  <li>An optional <strong>Duration</strong>, a date range the banner is limited to.</li>
-                  <li>Its search terms, each set to Exact Match (triggers only on that exact term) or Broad Match (triggers whenever the typed text contains it) — unless it's the default banner, which ignores search terms altogether.</li>
-                </ul>`
-            }
-          ],
-          [
-            {
-              html: `
-                <p>The banner's visuals are set either by uploading an image (or pasting a URL directly), a <strong>Target link</strong> for where a click should lead, and an "Open in new window" checkbox — or, for full control, with hand-written <strong>HTML code</strong>, which overrides those manual fields entirely and requires knowing HTML to use.</p>
-                <p>An uploaded image needs to be a .jpg, .jpeg, .gif or .png, no larger than 150 KB. <strong>Doofinder</strong> recommends roughly 150×500–800 pixels for desktop and 640×100 for mobile, though it's only a recommendation — a banner can be sized however best fits the Layer it's shown in. As with most configuration screens, remember to actually click Save before navigating away.</p>
-                <p>Existing banners can be edited by clicking their name, or through the three-dot menu, which also offers duplicate and delete; deleting instead works by ticking a banner's checkbox and confirming with the red delete button that appears.</p>`
-            }
-          ],
-          [
-            {
-              html: `
-                <p>The Banners list shows, per banner: its Name, the search terms that trigger it, its <strong>Impressions</strong> (counted once per minute regardless of how many times it actually appeared in that window), its Clicks, its <strong>CTR</strong> (click-through rate), the active date period, its Status (enabled, only if its search terms are matching, or disabled), and a star (⭐) marking whichever banner is currently the default.</p>`
-            }
-          ]
+        blocks: [
+          {
+            html: `
+              <p>Banners can be shown for specific search terms, during a chosen time period, or set as the default banner shown across every other search. They're configured from the <strong>Admin Panel</strong>, under Search → Promotional Tools → Banners, by clicking "Add Banner".</p>
+              <figure class="lesson-figure lesson-figure-right" style="width: 420px;">
+                <img src="img/banners-add-form.png" alt="Add Banner form with Name, Status, Default Banner toggle, an optional Duration date range, search terms, and image and Target link fields" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>Setting one up means filling in:</p>
+              <ul>
+                <li>A <strong>Name</strong>, to tell it apart from the others.</li>
+                <li>A <strong>Status</strong> checkbox, to enable or disable it without deleting it.</li>
+                <li>Whether it's the <strong>Default Banner</strong> — the one shown for every search term that isn't otherwise covered. Only one banner can be default at a time; marking a new one as default automatically un-defaults whichever one held that spot before.</li>
+                <li>An optional <strong>Duration</strong>, a date range the banner is limited to.</li>
+                <li>Its search terms, each set to Exact Match (triggers only on that exact term) or Broad Match (triggers whenever the typed text contains it) — unless it's the default banner, which ignores search terms altogether.</li>
+              </ul>
+              <p>The banner's visuals are set either by uploading an image (or pasting a URL directly), a <strong>Target link</strong> for where a click should lead, and an "Open in new window" checkbox — or, for full control, with hand-written <strong>HTML code</strong>, which overrides those manual fields entirely and requires knowing HTML to use.</p>
+              <p>An uploaded image needs to be a .jpg, .jpeg, .gif or .png, no larger than 150 KB. <strong>Doofinder</strong> recommends roughly 150×500–800 pixels for desktop and 640×100 for mobile, though it's only a recommendation — a banner can be sized however best fits the Layer it's shown in. As with most configuration screens, remember to actually click Save before navigating away.</p>
+              <p>Existing banners can be edited by clicking their name, or through the three-dot menu, which also offers duplicate and delete; deleting instead works by ticking a banner's checkbox and confirming with the red delete button that appears.</p>`
+          },
+          {
+            heading: "Banner Performance",
+            pageBreak: true,
+            html: `
+              <p>The Banners list shows, per banner: its Name, the search terms that trigger it, its <strong>Impressions</strong> (counted once per minute regardless of how many times it actually appeared in that window), its Clicks, its <strong>CTR</strong> (click-through rate), the active date period, its Status (enabled, only if its search terms are matching, or disabled), and a star (⭐) marking whichever banner is currently the default.</p>
+              <figure class="lesson-figure lesson-figure-left" style="width: 480px;">
+                <img src="img/banners-list-metrics.png" alt="Banners list showing Name, search terms, Impressions, Clicks, CTR, active date period, Status, and a star marking the current default banner" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>`
+          }
         ]
       },
       quiz: [
@@ -692,25 +721,22 @@ const COURSE = {
       docUrl: "https://support.doofinder.com/search/test-your-search-engine/copy-settings",
       theory: {
         lead: "<strong>Copy Settings</strong> lets a whole configuration — Custom Results, Banners, Redirections, Synonyms, Filters or Search Fields — be duplicated from one Search Engine to another within the same Store, instead of rebuilding it by hand every time.",
-        pages: [
-          [
-            {
-              html: `
-                <p>Before copying anything, it's worth checking that <strong>product names</strong> and the two Search Engines' <strong>languages</strong> actually match between source and destination — a mismatched value may simply not be recognized once it lands on the target Search Engine.</p>
-                <p>Using it means clicking <strong>"Copy Settings to…"</strong>, usually found at the top of a configuration's list (Custom Results, Banners, Redirections, Synonyms and so on each have their own). From there: pick the destination Search Engine(s) from the dropdown, click <strong>"Apply"</strong>, choose one of two options in the confirmation dialog that appears, then click <strong>"Yes, apply"</strong> to save the changes.</p>`
-            }
-          ],
-          [
-            {
-              html: `
-                <p>The confirmation dialog offers two very different options:</p>
-                <ul>
-                  <li><strong>Copy and Add to Existing Settings</strong> — adds the source Search Engine's configuration on top of the destination's, leaving whatever was already there untouched.</li>
-                  <li><strong>Copy and Replace Existing Settings</strong> — overwrites the destination's configuration entirely, deleting its original settings.</li>
-                </ul>
-                <p>That second option is worth treating with real caution: once a <strong>Replace</strong> has been applied, <strong>it can't be undone</strong>, and the destination's original settings can't be recovered.</p>`
-            }
-          ]
+        blocks: [
+          {
+            html: `
+              <p>Before copying anything, it's worth checking that <strong>product names</strong> and the two Search Engines' <strong>languages</strong> actually match between source and destination — a mismatched value may simply not be recognized once it lands on the target Search Engine.</p>
+              <figure class="lesson-figure lesson-figure-right" style="width: 420px;">
+                <img src="img/copy-settings-dialog.png" alt="Copy Settings confirmation dialog after clicking Apply, showing the choice between Copy and Add to Existing Settings and Copy and Replace Existing Settings" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>Using it means clicking <strong>"Copy Settings to…"</strong>, usually found at the top of a configuration's list (Custom Results, Banners, Redirections, Synonyms and so on each have their own). From there: pick the destination Search Engine(s) from the dropdown, click <strong>"Apply"</strong>, choose one of two options in the confirmation dialog that appears, then click <strong>"Yes, apply"</strong> to save the changes.</p>
+              <p>The confirmation dialog offers two very different options:</p>
+              <ul>
+                <li><strong>Copy and Add to Existing Settings</strong> — adds the source Search Engine's configuration on top of the destination's, leaving whatever was already there untouched.</li>
+                <li><strong>Copy and Replace Existing Settings</strong> — overwrites the destination's configuration entirely, deleting its original settings.</li>
+              </ul>
+              <p>That second option is worth treating with real caution: once a <strong>Replace</strong> has been applied, <strong>it can't be undone</strong>, and the destination's original settings can't be recovered.</p>`
+          }
         ]
       },
       quiz: [
@@ -813,15 +839,165 @@ const COURSE = {
       navLabel: "Final Exercise",
       eyebrow: "8. FINAL EXERCISE",
       title: "Final Exercise",
-      hasQuiz: false,
-      pages: [
-        {
-          intro: [
-            "This section's final exercise is still being designed.",
-            "Check back soon."
-          ]
+      hasQuiz: true,
+      quizLabel: "Guided Exercise",
+      exerciseType: "wizard",
+      theory: {
+        lead: "Time to work through Amanda's list! This final exercise brings Doostride's search back into shape before she's home. These are the things you'll need to sort out:",
+        blocks: [
+          {
+            html: `
+              <ul>
+                <li>Figure out why the shoe variants aren't grouping into a single result, and fix the data feed behind it.</li>
+                <li>Exclude the discontinued Kids line from search entirely.</li>
+                <li>Make "sneakers" and "trainers" return the same results.</li>
+                <li>Set up redirections so "return policy" and "contact us" land on the right page.</li>
+                <li>Get a Black Friday banner live, pointing to the campaign page.</li>
+                <li>Mirror the finished setup on the Spanish Search Engine.</li>
+              </ul>
+              <p>Work through each step the same way you would in the real Doofinder Admin Panel — that will help you choose the right answers, and you'll actually need to do them for real to finalize all the steps of the exercise.</p>`
+          }
+        ]
+      },
+      exercise: {
+        lead: `You reread Amanda's message on Slack and start working through her list, one task at a time.</p>
+          <ul>
+            <li>Figure out why Doostride's shoe variants aren't grouping into a single result.</li>
+            <li>Make sure discontinued Doostride Kids products stop showing up in search.</li>
+            <li>Make "sneakers" and "trainers" return the same results.</li>
+            <li>Set up redirections so "return policy" and "contact us" searches land on the right page.</li>
+            <li>Get a Black Friday banner live, pointing shoppers to the campaign page.</li>
+            <li>Mirror the finished setup on the Spanish Search Engine.</li>
+          </ul>`,
+        doneNote: "Doostride's search is clean and grouped again — Kids products are gone, sneakers and trainers behave the same, the right pages come up instantly, Black Friday is ready to go, and the Spanish storefront now matches too.",
+        replyButtonLabel: "Reply to Amanda",
+        phases: [
+          {
+            key: "grouping-diagnosis",
+            title: "1. Why aren't Doostride's variants grouping?",
+            question: "Amanda already enabled <strong>\"Group variants as a single item\"</strong> on the English Search Engine a while ago — the setting shown below has been on for weeks.",
+            scenarioImage: { src: "img/final-grouping-toggle-on.png", alt: "Indices Configuration section showing the 'Group variants as a single item' toggle already switched on" },
+            mediumMedia: true,
+            scenario: "Yet every size of the AXEL RUNNER shoe still shows up as a separate result in the Search Layer.</p><p class=\"exercise-scenario-text\">What's the most likely reason grouping still isn't working?",
+            fields: [
+              { key: "reason", label: "", type: "choice", layout: "column", options: [
+                "The variants in the data feed don't all share the same group_id, or none of them sets group_leader",
+                "The Search Engine needs to be deleted and recreated from scratch",
+                "Grouping only works when indexing via API, never via File or URL",
+                "The CSS Selector needs to include a comma-separated mobile selector"
+              ], correct: "The variants in the data feed don't all share the same group_id, or none of them sets group_leader" }
+            ],
+            explain: "Turning the toggle on only switches grouping on — it still depends entirely on the feed itself: every variant of the same product needs to share the exact same group_id, and ideally one of them needs group_leader set to true. Recreating the Search Engine, the indexing method, and the CSS Selector have nothing to do with how grouping resolves, so none of them would fix this."
+          },
+          {
+            key: "grouping-feed",
+            title: "2. Choosing the right data feed for grouping",
+            question: "You go check the data feed and find two other versions floating around from an earlier attempt at grouping.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Analyze the 3 data feeds below and figure out which one actually gets the AXEL RUNNER's variants to group correctly.",
+            beforeFields: `
+              <div class="feed-preview-grid">
+                <div class="feed-preview-card">
+                  <p class="feed-preview-label">Data feed 1</p>
+                  <img src="img/final-group-feed1-preview.png" alt="Preview of data feed 1: id, title, color, size and price columns — no group_id or group_leader column at all" data-action="zoom-image" class="feed-preview-img">
+                  <a href="feeds/doostride-group-feed-1.csv" download class="btn btn-ghost feed-download-btn">Download data feed 1</a>
+                </div>
+                <div class="feed-preview-card">
+                  <p class="feed-preview-label">Data feed 2</p>
+                  <img src="img/final-group-feed2-preview.png" alt="Preview of data feed 2: a group_id column present but spelled differently on each row (AXEL-RUNNER-01, AXEL-RUNNER-1, AXEL_RUNNER_01), and an empty group_leader column" data-action="zoom-image" class="feed-preview-img">
+                  <a href="feeds/doostride-group-feed-2.csv" download class="btn btn-ghost feed-download-btn">Download data feed 2</a>
+                </div>
+                <div class="feed-preview-card">
+                  <p class="feed-preview-label">Data feed 3</p>
+                  <img src="img/final-group-feed3-preview.png" alt="Preview of data feed 3: a group_id column identical on every row (AXEL-RUNNER-01), with group_leader set to true on exactly one row and false on the rest" data-action="zoom-image" class="feed-preview-img">
+                  <a href="feeds/doostride-group-feed-3.csv" download class="btn btn-ghost feed-download-btn">Download data feed 3</a>
+                </div>
+              </div>
+              <p class="theory-lead" style="margin-bottom:16px;">Choose the correct one:</p>`,
+            fields: [
+              { key: "validfeed", label: "", type: "choice", layout: "column", options: ["Data feed 1", "Data feed 2", "Data feed 3"], correct: "Data feed 3" }
+            ],
+            explain: "Data feed 3 is the only one that works: every variant shares the exact same group_id (AXEL-RUNNER-01), and exactly one of them has group_leader set to true, so Doofinder knows which one to show first. Data feed 1 doesn't have a group_id column at all, so Doofinder has no way to know these four rows are the same product. Data feed 2 does have a group_id column, but each row's value is spelled slightly differently (AXEL-RUNNER-01, AXEL-RUNNER-1, AXEL_RUNNER_01) — since the values don't match exactly, Doofinder treats them as different groups, so nothing actually groups together."
+          },
+          {
+            key: "excluded-results-kids",
+            title: "3. Hiding the discontinued Kids line",
+            question: "Doostride discontinued its entire <strong>Kids</strong> category last month, but a customer just complained about finding a Kids product in a search.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Choose the right way to make sure none of them show up again:",
+            scenarioImage: { src: "img/final-kids-still-showing.png", alt: "Search Layer results for a query still showing a Doostride Kids product, despite the Kids category being discontinued" },
+            smallMedia: true,
+            fields: [
+              { key: "method", label: "", type: "choice", layout: "column", options: [
+                "Add an Excluded Results rule: category is Kids",
+                "Add each Kids product individually to Excluded Results, one by one",
+                "Delete the Kids products from the data feed entirely",
+                "Add a Redirection for the term \"kids\""
+              ], correct: "Add an Excluded Results rule: category is Kids" }
+            ],
+            explain: "Since it's a whole discontinued line rather than one or two items, a rule is the right tool: category is Kids excludes every product in that category at once, and keeps working automatically if a Kids item is ever re-added by mistake. Excluding them one by one would work today but wouldn't cover anything added later, and it's more manual work than a single rule. Deleting them from the feed is unnecessary and riskier, since the same feed may be used elsewhere. A Redirection only fires for a search term typed by a shopper — it has nothing to do with products that already appear inside other, unrelated searches."
+          },
+          {
+            key: "synonyms-sneakers",
+            title: "4. Making \"sneakers\" and \"trainers\" return the same results",
+            question: "Support flagged that Doostride's own catalogue always calls this category <strong>\"sneakers\"</strong> (that's the word used in the feed's own <code>category</code> and <code>title</code> fields) — but plenty of shoppers search <strong>\"trainers\"</strong> instead, and currently get very different results.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Choose the synonym configuration that fixes this without breaking the existing \"sneakers\" searches:",
+            fields: [
+              { key: "synonymtype", label: "", type: "choice", layout: "column", options: [
+                "A Synonyms-type set: sneakers, trainers",
+                "A Synonyms-type set: trainers, sneakers",
+                "An Explicit Replacement set: sneakers => trainers",
+                "A Redirection pointing \"trainers\" to the sneakers category page"
+              ], correct: "A Synonyms-type set: sneakers, trainers" }
+            ],
+            explain: "A Synonyms-type set lists the terms as an equivalent group rather than swapping one for the other — searching either sneakers or trainers then returns the exact same results. For it to work, the first term listed has to be the one that actually exists in the feed, which is sneakers here, so sneakers, trainers is correct — trainers, sneakers has them the wrong way round. An Explicit Replacement set (sneakers => trainers) would substitute the feed's own working term for one that doesn't exist in the feed at all, breaking every \"sneakers\" search that used to work. A Redirection isn't the right tool either — it sends shoppers away from the Search Layer to a URL, it doesn't make two search terms return the same results."
+          },
+          {
+            key: "redirections-support-pages",
+            title: "5. Redirecting shoppers to the right page",
+            question: "Amanda also wants a search to skip the results page entirely and go straight to the page shoppers are actually looking for: <strong>\"return policy\"</strong> should land on Doostride's returns page.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Set up that redirection — choose the right configuration for each of the following:",
+            fields: [
+              { key: "matchtype", label: "Which match type should \"return policy\" use?", type: "select", options: ["Exact Match", "Broad Match"], correct: "Broad Match" },
+              { key: "auto", label: "Should \"Enable automatic redirection\" be checked?", type: "select", options: ["Yes, check it", "No, leave it unchecked"], correct: "No, leave it unchecked" },
+              { key: "url", label: "Destination URL", type: "text", freeform: true }
+            ],
+            explain: "Broad Match is the safer choice for a full phrase like this — it also catches close variants such as \"what's your return policy\" or \"return policy for shoes\", where Exact Match would only trigger on that exact wording. Leaving \"Enable automatic redirection\" unchecked means the redirect only fires once the shopper actually searches, instead of pulling them away mid-keystroke while they might still be typing something else entirely."
+          },
+          {
+            key: "banners-black-friday",
+            title: "6. Setting up the Black Friday banner",
+            question: "Black Friday is coming up, and Amanda wants a banner live for it, linking to Doostride's campaign landing page.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Analyze the 3 banner configurations below and choose the one that actually does what Amanda wants:",
+            fields: [
+              { key: "correctbanner", type: "image-select", layout: "column", thumbCols: 3, options: [
+                { value: "a", src: "img/final-banner-a.png", alt: "Add Banner form for 'BLACK FRIDAY', with the Default Banner toggle turned on instead of search terms, and Target link set to the Black Friday landing page", caption: "Option A" },
+                { value: "b", src: "img/final-banner-b.png", alt: "Add Banner form for 'BLACK FRIDAY' with the search term black friday set to Exact Match, and Target link set to the Black Friday landing page", caption: "Option B" },
+                { value: "c", src: "img/final-banner-c.png", alt: "Add Banner form for 'BLACK FRIDAY' with the search term black friday set to Broad Match, a Duration covering the Black Friday weekend, and Target link set to the Black Friday landing page", caption: "Option C" }
+              ], correct: "c" }
+            ],
+            explain: "Option C is correct: Broad Match on \"black friday\" also catches close searches like \"black friday sale\" or \"black friday deals\", it's scoped to a Duration instead of running forever, and it isn't marked Default, so it only shows for those searches rather than every single one. Option A marks it as the Default Banner, which ignores search terms entirely and would show the Black Friday banner on every search, not just Black Friday ones. Option B uses Exact Match, so it would only fire on the literal phrase \"black friday\" and miss every close variant."
+          },
+          {
+            key: "copy-settings-spanish",
+            title: "7. Mirroring everything on the Spanish Search Engine",
+            question: "With English sorted, Amanda wants the exact same Excluded Results, Synonyms, Redirections and Banners mirrored on the <strong>Spanish</strong> Search Engine — but the Spanish Search Engine already has its own Spanish-language redirection for \"política de privacidad\" that needs to stay untouched.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Choose the right Copy Settings option:",
+            fields: [
+              { key: "copymode", label: "", type: "choice", layout: "column", options: [
+                "Copy and Add to Existing Settings",
+                "Copy and Replace Existing Settings"
+              ], correct: "Copy and Add to Existing Settings" }
+            ],
+            explain: "Add to Existing Settings layers the English configuration on top of whatever the Spanish Search Engine already has, so the existing política de privacidad redirection survives untouched. Replace would wipe out the Spanish Search Engine's configuration entirely before applying the copy — including that existing redirection — and, as covered in the lesson, a Replace can't be undone afterward."
+          }
+        ],
+        replySlack: {
+          name: "Samanta",
+          channel: "amanda-samanta",
+          self: true,
+          body: [
+            "Hey Amanda, hope you're enjoying the break! 🌴",
+            "Quick update before you're back: variants are grouping properly now — a couple of the size variants had a typo in group_id, so I swapped in a clean feed and set a group_leader on each product.",
+            "Also excluded the whole Kids category, merged \"sneakers\" and \"trainers\" into one synonym set, and set up the redirection for \"return policy\".",
+            "Black Friday banner is live too, and I copied everything over to the Spanish Search Engine — added it on top, so your política de privacidad redirection is still exactly where you left it.",
+            "Enjoy the rest of your vacation, see you soon!"
+          ],
+          times: ["11:02", "11:02", "11:03", "11:04", "11:04"]
         }
-      ]
+      }
     }
   ]
 };
