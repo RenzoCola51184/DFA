@@ -606,7 +606,7 @@ const COURSE = {
         blocks: [
           {
             html: `
-              <p>Banners can be shown for specific search terms, during a chosen time period, or set as the default banner shown across every other search. They're configured from the <strong>Admin Panel</strong>, under Search → Promotional Tools → Banners, by clicking "Add Banner".</p>
+              <p>Banners can be shown for specific search terms, during a chosen time period, or set as the default banner shown across every other search.</p>
               <figure class="lesson-figure lesson-figure-right" style="width: 420px;">
                 <img src="img/banners-add-form.png" alt="Add Banner form with Name, Status, Default Banner toggle, an optional Duration date range, search terms, and image and Target link fields" data-action="zoom-image">
                 <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
