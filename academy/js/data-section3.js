@@ -105,12 +105,7 @@ const COURSE = {
                 <li><strong>By rules</strong> — exclude by a filter instead of naming products one by one. The filter needs to already exist in the product data feed and be configured as a filter, whether or not it's set as visible on the Layer. Pick an attribute from the "Select field" dropdown (e.g. brand), a value from "select value" (e.g. Adidas), then click "Add rule" and save.</li>
               </ul>
               <p>Both approaches can be combined on the same Search Engine — excluding some items individually and others by rule at the same time.</p>
-              <p>Rules can also be combined into conditions:</p>
-              <ul>
-                <li>An <strong>AND</strong> condition happens automatically as soon as two filters with different attributes are used together — e.g. category "Shoes" and color "blue" excludes only items that are both.</li>
-                <li>An <strong>OR</strong> condition happens by adding two or more values in the same row — e.g. color "blue" or "red" in the same rule excludes items matching either one.</li>
-                <li>Both can be combined at once: excluding every item in category "Shoes" whose color is "blue" or "red" mixes an AND (category + color) with an OR (blue vs red) in the same rule.</li>
-              </ul>`
+              <p>Rules can also be combined into AND/OR conditions, exactly like we saw in <strong>Custom Results</strong>: two different filters together (e.g. category "Shoes" and color "blue") act as an AND, two values in the same filter (e.g. color "blue" or "red") act as an OR, and both can be mixed in the same rule.</p>`
           },
           {
             heading: "Out of Stock Items",
