@@ -356,7 +356,7 @@ const COURSE = {
         blocks: [
           {
             html: `
-              <p>Synonyms live inside the <strong>Admin Panel</strong>, under Search → Optimize → Synonyms, and are configured separately per Store. Each Search Engine can hold up to 1,000 synonyms, and it's worth knowing upfront that using different terms from the same synonym set doesn't guarantee identical results for each one — it depends on how those terms actually show up across the indexed catalogue.</p>
+              <p>Synonyms are configured separately per Store. Each Search Engine can hold up to 1,000 synonyms, and it's worth knowing upfront that using different terms from the same synonym set doesn't guarantee identical results for each one — it depends on how those terms actually show up across the indexed catalogue.</p>
               <figure class="lesson-figure lesson-figure-right" style="width: 460px;">
                 <img src="img/synonyms-ai-synonymboost.png" alt="Synonyms screen showing the AI SynonymBoost carousel with suggested synonym sets, an add (+) icon and a trash icon on each suggestion" data-action="zoom-image">
                 <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
