@@ -284,6 +284,9 @@ html, body {
   .whatsapp-split .whatsapp-card, .whatsapp-split .slack-card { width: 100%; }
 }
 
+.slack-card-wide { margin: 18px 0; }
+.slack-card-wide .slack-card { max-width: none; margin: 0; }
+
 /* ---------- Slack ---------- */
 .slack-card {
   max-width: 960px; margin: 18px 0;
