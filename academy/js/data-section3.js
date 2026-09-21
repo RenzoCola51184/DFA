@@ -94,7 +94,7 @@ const COURSE = {
         blocks: [
           {
             html: `
-              <p><strong>Excluded Results</strong> lets you intentionally remove certain items from a Search Engine's results — whether that's a single product or a whole batch of them, picked out with filtering rules. It's configured from the <strong>Admin Panel</strong>, under Configuration → Excluded Results, on the Search Engine you want to affect. Since a Search Engine feeds every <strong>Doofinder</strong> product, excluding an item there affects all of them at once — Search, Recommendations, Quiz Maker, and so on.</p>
+              <p><strong>Excluded Results</strong> lets you intentionally remove certain items from a Search Engine's results — whether that's a single product or a whole batch of them, picked out with filtering rules. Since a Search Engine feeds every <strong>Doofinder</strong> product, excluding an item there affects all of them at once — Search, Recommendations, Quiz Maker, and so on.</p>
               <figure class="lesson-figure lesson-figure-right" style="width: 420px;">
                 <img src="img/excluded-results-config.png" alt="Excluded Results screen in the Admin Panel, showing an Individual items list with one product added, a Rules table with a brand is Adidas filter, and an Add results button" data-action="zoom-image">
                 <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
