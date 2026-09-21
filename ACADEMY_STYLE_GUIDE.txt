@@ -150,6 +150,23 @@ DOOFINDER ACADEMY — STYLE GUIDE
   paragraphs that don't map to a concrete Doofinder mechanic and aren't
   tested anywhere (they read as filler and make the lesson feel longer
   than it needs to be).
+- Once a section's overview lesson has established that a set of features
+  are Search Engine-level configuration (e.g. "How Doofinder Search Works"
+  in Section 2 lists Search Fields, Relevance Criteria, Boosting, Custom
+  Results, Excluded Results, Synonyms as "the Search Engine's own
+  configuration"), don't restate that framing in every later lesson that
+  covers one of those features individually — it's already established.
+- Don't spell out a feature's Admin Panel navigation path in theory prose
+  (e.g. "It's configured from the Admin Panel, under Configuration →
+  Excluded Results, on the Search Engine you want to affect") — the
+  lesson's own screenshot already shows where it lives. This applies to
+  the general "here's where you find it" sentence, not to an actual
+  in-screen click sequence that's part of a step-by-step instruction
+  (e.g. "click 'Add results' → 'Individual items'" is fine — it's telling
+  the learner what to click, not restating a location already visible in
+  the image). Quiz questions like "Where is X configured?" are unaffected —
+  they test recall of what the screenshot showed, they just don't need a
+  matching sentence in the theory copy above it.
 
 8. CREATING A NEW SECTION FROM SCRATCH
 --------------------------------------------------------------------------------
