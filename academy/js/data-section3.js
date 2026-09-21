@@ -922,18 +922,18 @@ const COURSE = {
           {
             key: "excluded-results-kids",
             title: "3. Hiding the discontinued Kids line",
-            question: "Doostride discontinued its entire <strong>Kids</strong> category last month, but a customer just complained about finding a Kids product in a search.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Choose the right way to make sure none of them show up again:",
-            scenarioImage: { src: "img/final-kids-still-showing.png", alt: "Search Layer results for a query still showing a Doostride Kids product, despite the Kids category being discontinued" },
+            question: "Doostride discontinued its entire <strong>Kids</strong> line last month, but a customer just complained about finding a Kids product in a search.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Choose the right way to make sure none of them show up again:",
+            scenarioImage: { src: "img/final-kids-still-showing.png", alt: "Search Layer results for a query still showing a Doostride Kids product, despite the Kids line being discontinued" },
             smallMedia: true,
             fields: [
               { key: "method", label: "", type: "choice", layout: "column", options: [
-                "Add an Excluded Results rule: category is Kids",
+                "Add an Excluded Results rule: gender is Kids",
                 "Add each Kids product individually to Excluded Results, one by one",
                 "Delete the Kids products from the data feed entirely",
                 "Add a Redirection for the term \"kids\""
-              ], correct: "Add an Excluded Results rule: category is Kids" }
+              ], correct: "Add an Excluded Results rule: gender is Kids" }
             ],
-            explain: "Since it's a whole discontinued line rather than one or two items, a rule is the right tool: category is Kids excludes every product in that category at once, and keeps working automatically if a Kids item is ever re-added by mistake. Excluding them one by one would work today but wouldn't cover anything added later, and it's more manual work than a single rule. Deleting them from the feed is unnecessary and riskier, since the same feed may be used elsewhere. A Redirection only fires for a search term typed by a shopper — it has nothing to do with products that already appear inside other, unrelated searches."
+            explain: "Since it's a whole discontinued line rather than one or two items, a rule is the right tool: gender is Kids excludes every product tagged for that audience at once — whatever its category, whether shoes, apparel or accessories — and keeps working automatically if a Kids item is ever re-added by mistake. Excluding them one by one would work today but wouldn't cover anything added later, and it's more manual work than a single rule. Deleting them from the feed is unnecessary and riskier, since the same feed may be used elsewhere. A Redirection only fires for a search term typed by a shopper — it has nothing to do with products that already appear inside other, unrelated searches."
           },
           {
             key: "synonyms-sneakers",
