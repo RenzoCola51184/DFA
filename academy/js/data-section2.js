@@ -53,12 +53,9 @@ const COURSE = {
             body: [
               "Hi Amanda,",
               "Everything good? So, I tried out the Doofinder Search Layer this morning — super cool!",
-              "There are a couple of things I'd like to improve, though. In some searches I noticed out-of-stock products showing up in the very first positions, and in others it's accessories or t-shirts mixed in — why does that happen? I'd like the search to stay focused on our main products, which are shoes.",
-              "Then, when I search \"comfortable\", some accessories or t-shirts are being displayed before shoes. I'd like the search to stay focused on our main products, which are Nike and Vans shoes.",
-              "Also, when I search for something like \"Baseball Hat\", shoes or socks show up too, with no obvious connection. I don't understand why.",
-              "Could you look into how the search actually works, and see if you can find a way to improve these things?"
+              "As you already know, our old search engine has had some issues for a while now. Could you look into how this new layer actually works, and see if there's a way to configure it so those issues get solved?"
             ],
-            times: ["16:42", "16:42", "16:43", "16:44", "16:44", "16:45"]
+            times: ["16:42", "16:42", "16:43"]
           },
           whatsappNote: [
             "In this section, you are <strong>Amanda House</strong>, Doostride's ecommerce manager. You joined the company as an intern and, thanks to your dedication, worked your way up to running ecommerce for the whole site. You haven't had the chance to try the Search Layer yet — the one <strong>Mark Park</strong> installed in the previous section.",
