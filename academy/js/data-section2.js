@@ -874,7 +874,7 @@ const COURSE = {
         ]
       },
       exercise: {
-        lead: `You open the <strong>Admin Panel</strong> and start working through John's WhatsApp message, one issue at a time.</p>
+        lead: `You open the <strong>Admin Panel</strong> and start digging into the old search engine's issues, one at a time.</p>
           <ul>
             <li>Figure out why <strong>out-of-stock</strong> products sometimes rank in the first positions.</li>
             <li>Figure out why searching "comfortable nike" surfaces the <strong>NIKE | SWOOSH PRO FLAT PEAK CAP</strong> before any actual Nike shoe.</li>
