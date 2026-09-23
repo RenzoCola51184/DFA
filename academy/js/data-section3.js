@@ -66,7 +66,7 @@ const COURSE = {
             times: ["09:14", "09:14", "09:15", "09:16", "09:17", "09:18", "09:19", "09:20", "09:21", "09:22"]
           },
           slackIntro: [
-            "In this section, you are <strong>Samantha Park</strong>, Amanda House's assistant at Doostride. You've spent the last few months helping Amanda with day-to-day ecommerce tasks, and this is the first time she's leaving you in charge of the web on your own.",
+            "In this section, you are <strong>Samantha Garden</strong>, Amanda House's assistant at Doostride. You've spent the last few months helping Amanda with day-to-day ecommerce tasks, and this is the first time she's leaving you in charge of the web on your own.",
             "This morning, you got this message from <strong>Amanda</strong> on Slack."
           ],
           slackNote: [
