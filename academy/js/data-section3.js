@@ -982,7 +982,7 @@ const COURSE = {
           }
         ],
         replySlack: {
-          name: "Samantha Park",
+          name: "Samantha Garden",
           channel: "amanda-samantha",
           self: true,
           body: [
