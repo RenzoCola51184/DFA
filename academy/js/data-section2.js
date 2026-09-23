@@ -61,7 +61,7 @@ const COURSE = {
             "In this section, you are <strong>Amanda House</strong>, Doostride's ecommerce manager. You joined the company as an intern and, thanks to your dedication, worked your way up to running ecommerce for the whole site. You haven't had the chance to try the Search Layer yet — the one <strong>Mark Park</strong> installed in the previous section.",
             "This afternoon you got this WhatsApp message from <strong>John Smith</strong>, Doostride's CEO.",
             "Before answering John, you need to actually understand how Doofinder's search decides and ranks what it shows, and how you can configure or change that.",
-            "Your goal throughout this section is to get familiar with how Doofinder's Search Layer works under the hood, so that, by the final exercise, you can diagnose and fix the issues John raised."
+            "Your goal throughout this section is to get familiar with how Doofinder's Search Layer works under the hood, so that, by the final exercise, you can look into the old search engine's issues and see whether it's possible to configure the Search Layer to solve them."
           ]
         }
       ]
