@@ -881,7 +881,7 @@ const COURSE = {
             <li>Figure out why searching "Baseball Hat" also returns shoes or socks.</li>
             <li>Make sure products with an active <strong>discount</strong> get more visibility across the whole store, not just on specific searches.</li>
           </ul>`,
-        doneNote: "All four issues John raised are fixed — Doostride's search now puts in-stock, on-brand and discounted products where they belong.",
+        doneNote: "All four issues are fixed — Doostride's search now puts in-stock, on-brand and discounted products where they belong.",
         replyButtonLabel: "Reply to John",
         phases: [
           {
