@@ -909,7 +909,7 @@ const COURSE = {
               { key: "f_stock_quantity", label: "stock_quantity", type: "select", options: ["Not used", "Highest to lowest", "Lowest to highest"], correct: "Not used" },
               { key: "f_title", label: "title", type: "select", options: ["Not used", "A to Z", "Z to A"], correct: "Not used" }
             ],
-            explain: "You need exactly three fields in Relevance Criteria: the default <strong>Score</strong> sorted <strong>Highest to lowest</strong> (most relevant first), <strong>availability</strong> sorted <strong>A to Z</strong> (so \"in stock\" sorts before \"out of stock\"), and <strong>best_price</strong> sorted <strong>Lowest to highest</strong> (cheapest first). brand, category, stock_quantity and title don't solve either problem John raised, so they stay unused. Their priority order — which one goes first, second and third — is what you'll work out in the next step."
+            explain: "You need exactly three fields in Relevance Criteria: the default <strong>Score</strong> sorted <strong>Highest to lowest</strong> (most relevant first), <strong>availability</strong> sorted <strong>A to Z</strong> (so \"in stock\" sorts before \"out of stock\"), and <strong>best_price</strong> sorted <strong>Lowest to highest</strong> (cheapest first). brand, category, stock_quantity and title don't solve either of these problems, so they stay unused. Their priority order — which one goes first, second and third — is what you'll work out in the next step."
           },
           {
             key: "relevance-criteria-config",
