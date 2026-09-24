@@ -94,145 +94,215 @@ const COURSE = {
       hasQuiz: true,
       docUrl: "https://support.doofinder.com/managing-data/grouping-product-variants",
       theory: {
-        lead: "<strong>Grouping Product Variants</strong> lets a product's different sizes, colors and other variants show up as a single result, with the variant filters still available — instead of the same item appearing over and over as a wall of near-identical products.",
+        lead: "Grouping product variants in the data feed that share the same basic set of attributes — the same product in different sizes or colors — makes them show up as a single search result, with all their variants still available in the filters.",
         blocks: [
           {
             html: `
-              <figure class="lesson-figure lesson-figure-right" style="width: 400px;">
-                  <img src="img/grouping-variants-indices-config.png" alt="Indices Configuration section with the 'Group variants as a single item' toggle switched on" data-action="zoom-image">
+              <h3>Why Group Variants</h3>
+              <figure class="lesson-figure lesson-figure-left" style="width: 340px;">
+                  <img src="img/grouping-variants-ungrouped-layer.png" alt="Search Layer showing two separate results, both titled Nike Sportswear Phoenix Hoodie at 68,00 € — one baby pink and one mint green — with Hoodies under Categories and Nike under Brands" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
-              <h3>Turning It On</h3>
-                  <p>It's turned on by enabling <strong>"Group variants as a single item"</strong>, then clicking <strong>Save</strong>. For it to actually work, the data feed needs these two fields:</p>
+              <p>Take these two hoodies in a data feed:</p>
+              <ul>
+                <li>Nike Sportswear Phoenix Hoodie (size: S; color: baby pink)</li>
+                <li>Nike Sportswear Phoenix Hoodie (size: M-L; color: mint green)</li>
+              </ul>
+              <p>They're two different products, so when searching for "hoodie", both show up in the search results as two separate items.</p>
+              <div style="clear: both;"></div>
+              <figure class="lesson-figure lesson-figure-right" style="width: 340px;">
+                  <img src="img/grouping-variants-grouped-layer.png" alt="Search Layer showing a single Nike Sportswear Phoenix Hoodie result at 68,00 €, with filters on the left for Price (68 € to 69 €), Color (Baby pink, Mint green) and Size (Large, Medium, Small)" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>Once they're grouped, a search for "Phoenix Hoodie" returns just one <strong>Nike Sportswear Phoenix Hoodie</strong> result, and every color and size is still available in the filters panel.</p>
+              <div style="clear: both;"></div>
 
-              <h3>The Fields Behind It</h3>
+              <h3>Turning It On</h3>
+              <figure class="lesson-figure lesson-figure-left" style="width: 460px;">
+                  <img src="img/grouping-variants-toggle.png" alt="Indices Configuration section with the 'Group variants as a single item' toggle switched on, the 'Automatic Indexing' toggle switched off, and a Save button" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>Grouping is turned on by enabling <strong>"Group variants as a single item"</strong>, then clicking <strong>"Save"</strong>. Then, the products to be grouped need to share the same <code>group_id</code> field in the data feed.</p>
+              <div style="clear: both;"></div>
+
+              <h3>The group_id Field</h3>
+              <p><code>group_id</code> is the item group id, Google's default standard for data feeds: all items with the same <code>group_id</code> are considered variants of the same item. With grouping turned on, they're displayed as one product only in the search results — while their variants, like color or size, are still displayed in the filters, as long as they're defined as filters.</p>
+              <p>For example, with these four rows in the data feed (simplified, for illustration only):</p>
               <table class="theory-table">
-                <thead><tr><th>Field</th><th>Type</th><th>What it does</th></tr></thead>
+                <thead><tr><th>Product</th><th>Size</th><th><code>group_id</code></th></tr></thead>
                 <tbody>
-                  <tr><td><code>group_id</code></td><td>A string</td><td>Every variant of the same product needs to share the same <code>group_id</code> value in the data feed — all items with the same <code>group_id</code> get displayed as one product only.</td></tr>
-                  <tr><td><code>group_leader</code></td><td>A boolean — <code>true</code>/<code>false</code>, or the string equivalents</td><td>Decides which variant represents the group: the one with <code>group_leader</code> set to <strong>true</strong> is the one shown first, while every other variant in that group should be set to <strong>false</strong>. If no variant is marked as the leader, other sort criteria decide which one shows instead.</td></tr>
+                  <tr><td>Classic Hoodie</td><td>S</td><td>H100</td></tr>
+                  <tr><td>Classic Hoodie</td><td>M</td><td>H100</td></tr>
+                  <tr><td>Classic Hoodie</td><td>L</td><td>H100</td></tr>
+                  <tr><td>Zip Hoodie</td><td>M</td><td>H200</td></tr>
                 </tbody>
               </table>
-              <p class="theory-callout">Both the group leader and its child variants stay indexed even once grouped: the leader is what appears for a general search, but a search for one specific child's own SKU still returns that exact variant directly.</p>`
+              <p>A search for "hoodie" returns two results: one <strong>Classic Hoodie</strong>, with sizes S, M and L in the filters, and one <strong>Zip Hoodie</strong>.</p>
+              <p class="theory-callout">Updating the <code>group_id</code> of an item affects the grouping. When indexing through API, the value for <code>group_id</code> needs to be a string.</p>
+
+              <h3>The group_leader Field</h3>
+              <figure class="lesson-figure lesson-figure-right" style="width: 340px;">
+                  <img src="img/grouping-variants-product-swatches.png" alt="Illustration of a product card: a red high-top sneaker as the main image, a dropdown, five color swatches of the same sneaker (red, blue, green, yellow and black) and an add-to-cart button" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>If an item in the group has the <code>group_leader</code> field set to <strong>true</strong>, that item is chosen as the group representative in the search results (if there are no other relevant sort criteria involved). All the other items in the group must have <code>group_leader</code> set to <strong>false</strong>, so the leader is differentiated from the rest.</p>
+              <p>When using the API, <code>group_leader</code> needs a boolean value — a pure boolean or a string is accepted: <code>true</code>, <code>false</code>, <code>"true"</code>, <code>"false"</code>.</p>
+              <p>Both field names, <code>group_id</code> and <code>group_leader</code>, are the same in text and XML feeds, and <code>group_id</code> works for every data type, not just the product data type.</p>
+              <div style="clear: both;"></div>
+              <p>For example, with the three sizes of the Classic Hoodie (simplified, for illustration only):</p>
+              <table class="theory-table">
+                <thead><tr><th>Product</th><th>Size</th><th><code>group_id</code></th><th><code>group_leader</code></th></tr></thead>
+                <tbody>
+                  <tr><td>Classic Hoodie</td><td>S</td><td>H100</td><td>false</td></tr>
+                  <tr><td>Classic Hoodie</td><td>M</td><td>H100</td><td>true</td></tr>
+                  <tr><td>Classic Hoodie</td><td>L</td><td>H100</td><td>false</td></tr>
+                </tbody>
+              </table>
+              <p>With no other relevant sort criteria involved, the size M item is the one representing the Classic Hoodie in the search results.</p>`
           },
           {
-            heading: "Relevance Criteria and Grouping",
+            heading: "Searching and Sorting Grouped Variants",
             pageBreak: true,
             html: `
-              <p>A couple of <strong>Relevance Criteria</strong> tweaks pair well with grouping:</p>
+              <h3>Variants Search</h3>
+              <p>When implementing with one of Doofinder's plugins, both the parent and the child products — the group leader and its variants — are indexed. If the products are grouped, the parent product acts as the leader and is the one displayed in the results. However, if a specific SKU of a child product is searched for, that child product is returned instead, since it was explicitly requested.</p>
               <table class="theory-table">
-                <thead><tr><th>Sorting by</th><th>Effect</th></tr></thead>
+                <thead><tr><th>Search</th><th>Returned</th></tr></thead>
                 <tbody>
-                  <tr><td><code>best_price</code> Lowest to highest</td><td>Surfaces the cheapest variant as the group leader</td></tr>
-                  <tr><td><strong>Availability</strong></td><td>Prioritizes an in stock variant over an out of stock one</td></tr>
-                  <tr><td>Both combined</td><td>Keeps the cheapest available option in front</td></tr>
+                  <tr><td>"phoenix hoodie"</td><td>The parent product, as the group leader</td></tr>
+                  <tr><td>The SKU of the baby pink, size S hoodie</td><td>That exact child product</td></tr>
                 </tbody>
               </table>
-              <figure class="lesson-figure lesson-figure-left" style="width: 440px;">
-                  <img src="img/grouping-variants-feed-example.png" alt="Sample data feed rows for the same product's three size variants, all sharing the same group_id value with group_leader set to true on only one row" data-action="zoom-image">
+              <p>An <strong>Excluded Results</strong> rule can hide the variants, so that only the parent product can be found — Excluded Results is covered later in this section. However, there's no option to change the variant links from Doofinder's side. To always use one single product, the Store needs to provide its own product data feed, and then there's no need to index variants.</p>
+
+              <h3>Sorting Variants by best_price</h3>
+              <figure class="lesson-figure lesson-figure-left" style="width: 420px;">
+                  <img src="img/grouping-variants-best-price.png" alt="Relevance Criteria with two fields: Score set to Highest to lowest, and best_price set to Lowest to highest" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
-              <p class="theory-callout">Speaking of availability: if hiding out of stock items is enabled and every single variant in a group is out of stock, the whole grouped product disappears from results — sorting by Availability is what keeps an in stock sibling visible above the rest whenever at least one exists.</p>
+              <p>When products are grouped as one and one of them has <code>group_leader</code> set to <strong>true</strong>, the price shown is the group leader's price. <strong>Relevance Criteria</strong> makes it possible to change that, so the variant with the smallest <code>best_price</code> is the one shown on the layer: adding <code>best_price</code> set to <strong>Lowest to highest</strong> makes the price shown first the lowest value.</p>
+              <div style="clear: both;"></div>
+              <p>For example, with three variants of the same backpack (simplified, for illustration only, with the variants tied on Score):</p>
+              <table class="theory-table">
+                <thead><tr><th>Variant</th><th><code>group_leader</code></th><th><code>best_price</code></th></tr></thead>
+                <tbody>
+                  <tr><td>20L</td><td>true</td><td>60</td></tr>
+                  <tr><td>30L</td><td>false</td><td>50</td></tr>
+                  <tr><td>40L</td><td>false</td><td>70</td></tr>
+                </tbody>
+              </table>
+              <p>With Relevance Criteria set to Score only, the result shows the group leader's price: 60. Adding <code>best_price</code> set to Lowest to highest, it shows the lowest one: 50.</p>
 
-              <h3>Good to Know</h3>
-              <p>A few more things worth knowing:</p>
-              <ul>
-                <li>Updating a product's <code>group_id</code> changes its grouping right away.</li>
-                <li>The price shown in results is the group leader's own price, not some average or combined figure.</li>
-                <li>A specific child variant can still be hidden on its own with an <strong>Excluded Results</strong> rule, without breaking the rest of the group.</li>
-                <li>A custom feed that simply never indexes variants as separate items sidesteps all of this grouping logic entirely.</li>
-              </ul>`
+              <h3>Variants Out of Stock</h3>
+              <figure class="lesson-figure lesson-figure-right" style="width: 420px;">
+                  <img src="img/grouping-variants-availability-price.png" alt="Relevance Criteria with three fields: Score set to Highest to lowest, availability set to A to Z, and best_price set to Lowest to highest" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>All out of stock products can be hidden at once — also covered in the Excluded Results lesson — but out of stock products can also be shown further down in the search instead of being hidden.</p>
+              <p>When items are grouped together and all the variants are out of stock, the product disappears entirely if out of stock products are being hidden.</p>
+              <p>When not all the variants are out of stock, adding <code>availability</code> to Relevance Criteria controls which variant comes first — for example, always displaying the in stock ones first. Combined with <code>best_price</code> set to Lowest to highest, the first variant shown is the first available and the cheapest one.</p>
+              <div style="clear: both;"></div>
+              <p>For example, with Relevance Criteria set to Score (Highest to lowest), availability (A to Z) and best_price (Lowest to highest), and three variants of the same T-shirt tied on Score (simplified, for illustration only):</p>
+              <table class="theory-table">
+                <thead><tr><th>Variant</th><th><code>availability</code></th><th><code>best_price</code></th><th>Result</th></tr></thead>
+                <tbody>
+                  <tr><td>Red</td><td>in stock</td><td>30</td><td>—</td></tr>
+                  <tr><td>Blue</td><td>out of stock</td><td>20</td><td>— (out of stock, even though it's the cheapest)</td></tr>
+                  <tr><td>Green</td><td>in stock</td><td>25</td><td>Shown first: available and cheapest</td></tr>
+                </tbody>
+              </table>
+              <p class="theory-callout">This configuration is very sensitive: don't remove Score, and revert the changes if any discrepancies show up in the search.</p>`
           }
         ]
       },
       quiz: [
         {
-          q: "What does Grouping Product Variants let you do?",
+          q: "A feed has a <strong>Linen Shirt</strong> as two separate rows: one white in size S, one blue in size M. Once they're grouped, what does a search for \"linen shirt\" show?",
           options: [
-            "Automatically translate product titles into other languages",
-            "Merge two Search Engines into one",
-            "Show a product's different variants as a single result, with filters still available",
-            "Hide every out of stock product permanently"
+            "Two Linen Shirt results, one per color",
+            "Only the white one, since it's listed first in the feed",
+            "One Linen Shirt result, with both colors and sizes available in the filters",
+            "No results, since grouped products can only be found by SKU"
           ],
           correct: 2,
-          explain: "Grouping folds a product's variants into a single result in the Search Layer, while keeping the variant filters available."
+          explain: "Grouping shows the variants as a single result, while their colors and sizes stay available in the filters panel. Two results is what happens without grouping, and the feed order doesn't decide which variant represents the group."
         },
         {
-          q: "Where is variant grouping turned on?",
+          q: "Where is \"Group variants as a single item\" turned on?",
           options: [
             "Configuration > Search Engines > See indices > Indices > Configuration section",
-            "Admin Panel > Managing Data > Security Settings",
-            "Search > Promotional Tools > Banners",
-            "Directly inside the installation script"
+            "Search > Advanced Preferences > Relevance Criteria",
+            "Configuration > Excluded Results",
+            "It can't be turned on — it's always active"
           ],
           correct: 0,
-          explain: "It's enabled from Configuration > Search Engines > See indices > Indices > Configuration section, toggling \"Group variants as a single item\"."
+          explain: "It's a toggle in the Configuration section of the Search Engine's indices, saved with the \"Save\" button. Relevance Criteria only changes which variant is shown first, and without turning the toggle on nothing gets grouped."
         },
         {
-          q: "What must every variant of the same product share in the data feed for grouping to work?",
+          q: "Grouping is on, and the feed has these rows: <strong>Rain Jacket S</strong> (group_id RJ-10), <strong>Rain Jacket M</strong> (group_id RJ-10) and <strong>Rain Jacket L</strong> (group_id RJ-11). How many Rain Jacket results does a search for \"rain jacket\" show?",
           options: [
-            "The same price",
-            "The same group_id value",
-            "The same image_link",
-            "The same title"
+            "One, since all three share the same title",
+            "Three, since grouping ignores group_id",
+            "None, since the group_id values don't all match",
+            "Two: S and M grouped together, and L on its own"
+          ],
+          correct: 3,
+          explain: "Only items with the same group_id are treated as variants of the same item. S and M share RJ-10, so they're shown as one result; L has RJ-11, so it's a group of its own. Grouping goes by group_id, not by the title."
+        },
+        {
+          q: "A boot comes in sizes 38, 40 and 42, all with the same group_id. Size 40 has group_leader set to true and the others to false. With no other relevant sort criteria involved, which size represents the boot in the results?",
+          options: [
+            "Size 38, since it's the smallest",
+            "Size 40",
+            "Size 42, since it's the last one indexed",
+            "A different size on every search"
           ],
           correct: 1,
-          explain: "All items sharing the same group_id value are displayed as a single grouped product."
+          explain: "The item with group_leader set to true is chosen as the group representative, as long as no other relevant sort criteria are involved. Size and indexing order don't decide it."
         },
         {
-          q: "What does setting group_leader to true on one variant do?",
+          q: "A <strong>Canvas Sneaker</strong> is grouped, and one of its child products has the SKU <strong>CS-42-WHT</strong>. What's returned when someone searches for \"CS-42-WHT\"?",
           options: [
-            "Marks it as the group's representative, shown first",
-            "Excludes it from the Search Engine",
-            "Doubles its boosting value",
-            "Deletes the other variants from the feed"
+            "That exact child product",
+            "The group leader, since grouped products always show the leader",
+            "Nothing, since only the leader is indexed",
+            "Every variant of the Canvas Sneaker as separate results"
           ],
           correct: 0,
-          explain: "The variant with group_leader set to true becomes the group's representative and is the one shown first — every other variant in that group should be set to false."
+          explain: "Both the parent and the child products are indexed. The leader is displayed for a general search, but when a specific child SKU is searched for, that child product is returned, since it was explicitly requested."
         },
         {
-          q: "Once products are grouped, what happens if a user searches for one specific child variant's own SKU?",
+          q: "A grouped lamp has three variants tied on Score: <strong>Small</strong> (group_leader true, best_price 45), <strong>Medium</strong> (false, 40) and <strong>Large</strong> (false, 55). Relevance Criteria is set to Score (Highest to lowest) and best_price (Lowest to highest). Which price is shown?",
           options: [
-            "Nothing is returned, since only the group leader is indexed",
-            "The Search Engine throws an indexing error",
-            "That exact child variant is returned directly",
-            "Only the group leader is ever returned, regardless of the search"
+            "45, the group leader's price",
+            "55, the highest price",
+            "The average of the three prices",
+            "40, the lowest price"
+          ],
+          correct: 3,
+          explain: "Without best_price in Relevance Criteria, the group leader's price (45) would be shown. With best_price set to Lowest to highest after Score, the variant with the lowest price comes first, so 40 is shown."
+        },
+        {
+          q: "Relevance Criteria is set to Score (Highest to lowest), availability (A to Z) and best_price (Lowest to highest). A grouped cap has three variants tied on Score: <strong>Black</strong> (in stock, 22), <strong>White</strong> (out of stock, 15) and <strong>Grey</strong> (in stock, 18). Which variant is shown first?",
+          options: [
+            "White, since it's the cheapest",
+            "Grey",
+            "Black, since it's the most expensive in stock",
+            "None, since one variant is out of stock"
+          ],
+          correct: 1,
+          explain: "availability comes before best_price, so the in stock variants go first — White is out of stock, even though it's the cheapest. Among the in stock ones, best_price Lowest to highest puts Grey (18) ahead of Black (22): the first available and the cheapest."
+        },
+        {
+          q: "Out of stock products are being hidden, and every variant of a grouped jacket is out of stock. What happens to the jacket in the search results?",
+          options: [
+            "Only the group leader stays visible",
+            "The variants are automatically ungrouped",
+            "The product disappears entirely",
+            "It's shown last, below the in stock products"
           ],
           correct: 2,
-          explain: "Both the group leader and its child variants stay indexed, so searching a specific child SKU still returns that exact variant."
-        },
-        {
-          q: "Sorting a grouped Search Engine by best_price (Lowest to highest) in Relevance Criteria does what?",
-          options: [
-            "Shows the most expensive variant as the group leader",
-            "Hides all variants above the average price",
-            "Has no effect on grouped products",
-            "Surfaces the cheapest variant as the group leader"
-          ],
-          correct: 3,
-          explain: "Sorting by best_price Lowest to highest makes the cheapest variant the one shown as the group's leader."
-        },
-        {
-          q: "If every variant in a group is out of stock and hiding out of stock items is enabled, what happens?",
-          options: [
-            "Only the group leader disappears, children stay visible",
-            "The entire grouped product disappears from results",
-            "The group is automatically un-grouped",
-            "Nothing — grouped products are always shown regardless of stock"
-          ],
-          correct: 1,
-          explain: "With every variant out of stock, the whole grouped product disappears from results — sorting by Availability helps keep an in stock sibling visible whenever at least one exists."
-        },
-        {
-          q: "How can one specific child variant be hidden without breaking the rest of its group?",
-          options: [
-            "By deleting the group_id field entirely",
-            "By setting its price to zero",
-            "It can't be done — hiding one variant removes the whole group",
-            "With an Excluded Results rule targeting that one variant"
-          ],
-          correct: 3,
-          explain: "An Excluded Results rule can hide one specific child variant on its own, without affecting the rest of the group."
+          explain: "When all the variants of a group are out of stock and out of stock products are hidden, the whole product disappears. Showing it further down instead is only possible when out of stock products aren't hidden."
         }
       ]
     },
