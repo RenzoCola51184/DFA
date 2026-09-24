@@ -94,215 +94,207 @@ const COURSE = {
       hasQuiz: true,
       docUrl: "https://support.doofinder.com/managing-data/grouping-product-variants",
       theory: {
-        lead: "Grouping product variants in the data feed that share the same basic set of attributes — the same product in different sizes or colors — makes them show up as a single search result, with all their variants still available in the filters.",
+        lead: "An ecommerce often has products that belong to the same product group, but are different variants of it — for example, the <strong>Nike Sportswear Phoenix Hoodie</strong> can come in different sizes and colors.",
         blocks: [
           {
             html: `
-              <h3>Why Group Variants</h3>
-              <figure class="lesson-figure lesson-figure-left" style="width: 340px;">
-                  <img src="img/grouping-variants-ungrouped-layer.png" alt="Search Layer showing two separate results, both titled Nike Sportswear Phoenix Hoodie at 68,00 € — one baby pink and one mint green — with Hoodies under Categories and Nike under Brands" data-action="zoom-image">
+              <h3>Every Variant Is Indexed</h3>
+              <figure class="lesson-figure lesson-figure-left" style="width: 440px; max-width: 55%;">
+                  <img src="img/grouping-feed-variants.png" alt="Data feed with the columns id, title, color and size, and two rows: 1001, Nike Sportswear Phoenix Hoodie, Baby pink, S; and 1002, Nike Sportswear Phoenix Hoodie, Mint green, M" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
-              <p>Take these two hoodies in a data feed:</p>
-              <ul>
-                <li>Nike Sportswear Phoenix Hoodie (size: S; color: baby pink)</li>
-                <li>Nike Sportswear Phoenix Hoodie (size: M-L; color: mint green)</li>
-              </ul>
-              <p>They're two different products, so when searching for "hoodie", both show up in the search results as two separate items.</p>
+              <p>For every variant to be searchable, each one needs to be indexed — so they all need to be loaded into the index. In the data feed, the two variants of the hoodie look like this.</p>
               <div style="clear: both;"></div>
-              <figure class="lesson-figure lesson-figure-right" style="width: 340px;">
-                  <img src="img/grouping-variants-grouped-layer.png" alt="Search Layer showing a single Nike Sportswear Phoenix Hoodie result at 68,00 €, with filters on the left for Price (68 € to 69 €), Color (Baby pink, Mint green) and Size (Large, Medium, Small)" data-action="zoom-image">
+              <figure class="lesson-figure lesson-figure-right" style="width: 300px; max-width: 55%;">
+                  <img src="img/grouping-layer-ungrouped.png" alt="Search Layer with the search Nike Sportswear Phoenix Hoodie: 2 results found, one Nike Sportswear Phoenix Hoodie in S / Baby pink and one in M / Mint green, both at 68,00 €, with Categories, Brands and Price filters on the left" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
-              <p>Once they're grouped, a search for "Phoenix Hoodie" returns just one <strong>Nike Sportswear Phoenix Hoodie</strong> result, and every color and size is still available in the filters panel.</p>
-              <div style="clear: both;"></div>
+              <p>But what happens when searching for "Nike Sportswear Phoenix Hoodie"? Both variants appear in the Search Layer. This can create some visual confusion, especially when a group is made up of many variants.</p>
+              <p>The solution is to show only one variant in the Search Layer, and then use a filter to choose the variant wanted. This lesson explains how to group the variants — applying filters in the Search Layer is covered later in the course.</p>
 
-              <h3>Turning It On</h3>
-              <figure class="lesson-figure lesson-figure-left" style="width: 460px;">
+              <h3>The group_id Field</h3>
+              <figure class="lesson-figure lesson-figure-right" style="width: 460px; max-width: 55%;">
+                  <img src="img/grouping-feed-group-id.png" alt="Data feed with the columns id, title, color, size and group_id: 1001, Nike Sportswear Phoenix Hoodie, Baby pink, S, H100; 1002, Nike Sportswear Phoenix Hoodie, Mint green, M, H100; and 1003, Nike Club Fleece Joggers, Black, M, J200" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>To group the variants, a field called <code>group_id</code> needs to be indexed: products with the same <code>group_id</code> can be grouped under the same group.</p>
+              <div style="clear: both;"></div>
+              <figure class="lesson-figure lesson-figure-left" style="width: 280px; max-width: 55%;">
+                  <img src="img/grouping-layer-grouped.png" alt="Search Layer with the search Nike Sportswear Phoenix Hoodie: 1 result found, the Nike Sportswear Phoenix Hoodie in S / Baby pink at 68,00 €, with only the Color (Baby pink, Mint green) and Size (S, M) filters on the left" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>In this feed, the two hoodies share the <code>group_id</code> <strong>H100</strong>, so they're grouped together and show up as a single result. The joggers have a different <code>group_id</code> (<strong>J200</strong>), so they stay a separate product.</p>
+              <p>With the two hoodies grouped, the same search for "Nike Sportswear Phoenix Hoodie" shows a single result, and both colors and sizes are available as filters to choose the variant wanted. The Search Layer shows 1 result found, with Baby pink and Mint green under Color, and S and M under Size.</p>
+
+              <h3>Group Variants As a Single Item</h3>
+              <figure class="lesson-figure lesson-figure-right" style="width: 520px; max-width: 55%;">
                   <img src="img/grouping-variants-toggle.png" alt="Indices Configuration section with the 'Group variants as a single item' toggle switched on, the 'Automatic Indexing' toggle switched off, and a Save button" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
-              <p>Grouping is turned on by enabling <strong>"Group variants as a single item"</strong>, then clicking <strong>"Save"</strong>. Then, the products to be grouped need to share the same <code>group_id</code> field in the data feed.</p>
-              <div style="clear: both;"></div>
+              <p>Besides indexing <code>group_id</code>, grouping needs to be turned on in the Search Engine:</p>
+              <ol>
+                <li>Go to <strong>Configuration &gt; Search Engines</strong> and click <strong>"See indices"</strong>.</li>
+                <li>In <strong>Indices</strong>, scroll down to the <strong>Configuration</strong> section.</li>
+                <li>Enable <strong>"Group variants as a single item"</strong>, then click <strong>"Save"</strong>.</li>
+              </ol>
 
-              <h3>The group_id Field</h3>
-              <p><code>group_id</code> is the item group id, Google's default standard for data feeds: all items with the same <code>group_id</code> are considered variants of the same item. With grouping turned on, they're displayed as one product only in the search results — while their variants, like color or size, are still displayed in the filters, as long as they're defined as filters.</p>
-              <p>For example, with these four rows in the data feed (simplified, for illustration only):</p>
+              <h3>Which Variant Is Shown</h3>
+              <p>Once the variants are grouped, the variant shown is the one with the most score for the query. If the variants have the same score, the first variant indexed is the one shown.</p>
+              <p>For example, with the two hoodies grouped under H100 (simplified numbers, for illustration only):</p>
               <table class="theory-table">
-                <thead><tr><th>Product</th><th>Size</th><th><code>group_id</code></th></tr></thead>
+                <thead><tr><th>Query</th><th>Baby pink (id 1001)</th><th>Mint green (id 1002)</th><th>Variant shown</th></tr></thead>
                 <tbody>
-                  <tr><td>Classic Hoodie</td><td>S</td><td>H100</td></tr>
-                  <tr><td>Classic Hoodie</td><td>M</td><td>H100</td></tr>
-                  <tr><td>Classic Hoodie</td><td>L</td><td>H100</td></tr>
-                  <tr><td>Zip Hoodie</td><td>M</td><td>H200</td></tr>
+                  <tr><td>"phoenix hoodie mint"</td><td>Score 3</td><td>Score 5</td><td>Mint green — it has the most score</td></tr>
+                  <tr><td>"phoenix hoodie"</td><td>Score 4</td><td>Score 4</td><td>Baby pink — same score, and it was indexed first</td></tr>
                 </tbody>
               </table>
-              <p>A search for "hoodie" returns two results: one <strong>Classic Hoodie</strong>, with sizes S, M and L in the filters, and one <strong>Zip Hoodie</strong>.</p>
-              <p class="theory-callout">Updating the <code>group_id</code> of an item affects the grouping. When indexing through API, the value for <code>group_id</code> needs to be a string.</p>
 
               <h3>The group_leader Field</h3>
-              <figure class="lesson-figure lesson-figure-right" style="width: 340px;">
-                  <img src="img/grouping-variants-product-swatches.png" alt="Illustration of a product card: a red high-top sneaker as the main image, a dropdown, five color swatches of the same sneaker (red, blue, green, yellow and black) and an add-to-cart button" data-action="zoom-image">
+              <figure class="lesson-figure lesson-figure-left" style="width: 500px; max-width: 55%;">
+                  <img src="img/grouping-feed-group-leader.png" alt="Data feed with the columns id, title, color, size, group_id and group_leader: 1001, Nike Sportswear Phoenix Hoodie, Baby pink, S, H100, false; and 1002, Nike Sportswear Phoenix Hoodie, Mint green, M, H100, true" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
-              <p>If an item in the group has the <code>group_leader</code> field set to <strong>true</strong>, that item is chosen as the group representative in the search results (if there are no other relevant sort criteria involved). All the other items in the group must have <code>group_leader</code> set to <strong>false</strong>, so the leader is differentiated from the rest.</p>
-              <p>When using the API, <code>group_leader</code> needs a boolean value — a pure boolean or a string is accepted: <code>true</code>, <code>false</code>, <code>"true"</code>, <code>"false"</code>.</p>
-              <p>Both field names, <code>group_id</code> and <code>group_leader</code>, are the same in text and XML feeds, and <code>group_id</code> works for every data type, not just the product data type.</p>
+              <p>A field called <code>group_leader</code> can be indexed to force a specific variant to appear when the variants have the same score. The leader's value needs to be <strong>true</strong>, while all the others are <strong>false</strong>.</p>
               <div style="clear: both;"></div>
-              <p>For example, with the three sizes of the Classic Hoodie (simplified, for illustration only):</p>
+              <p>With the Mint green hoodie set as the leader:</p>
               <table class="theory-table">
-                <thead><tr><th>Product</th><th>Size</th><th><code>group_id</code></th><th><code>group_leader</code></th></tr></thead>
+                <thead><tr><th>Query</th><th>Baby pink (false)</th><th>Mint green (true)</th><th>Variant shown</th></tr></thead>
                 <tbody>
-                  <tr><td>Classic Hoodie</td><td>S</td><td>H100</td><td>false</td></tr>
-                  <tr><td>Classic Hoodie</td><td>M</td><td>H100</td><td>true</td></tr>
-                  <tr><td>Classic Hoodie</td><td>L</td><td>H100</td><td>false</td></tr>
+                  <tr><td>"phoenix hoodie"</td><td>Score 4</td><td>Score 4</td><td>Mint green — same score, so the leader appears, even though Baby pink was indexed first</td></tr>
+                  <tr><td>"phoenix hoodie pink"</td><td>Score 5</td><td>Score 3</td><td>Baby pink — it has the most score, so the leader doesn't come into play</td></tr>
                 </tbody>
               </table>
-              <p>With no other relevant sort criteria involved, the size M item is the one representing the Classic Hoodie in the search results.</p>`
-          },
-          {
-            heading: "Searching and Sorting Grouped Variants",
-            pageBreak: true,
-            html: `
-              <h3>Variants Search</h3>
-              <p>When implementing with one of Doofinder's plugins, both the parent and the child products — the group leader and its variants — are indexed. If the products are grouped, the parent product acts as the leader and is the one displayed in the results. However, if a specific SKU of a child product is searched for, that child product is returned instead, since it was explicitly requested.</p>
-              <table class="theory-table">
-                <thead><tr><th>Search</th><th>Returned</th></tr></thead>
-                <tbody>
-                  <tr><td>"phoenix hoodie"</td><td>The parent product, as the group leader</td></tr>
-                  <tr><td>The SKU of the baby pink, size S hoodie</td><td>That exact child product</td></tr>
-                </tbody>
-              </table>
-              <p>An <strong>Excluded Results</strong> rule can hide the variants, so that only the parent product can be found — Excluded Results is covered later in this section. However, there's no option to change the variant links from Doofinder's side. To always use one single product, the Store needs to provide its own product data feed, and then there's no need to index variants.</p>
+              <p class="theory-callout"><code>group_leader</code> only decides between variants with the same score: a variant with more score for the query is still the one shown.</p>
+              <figure class="lesson-figure lesson-figure-right" style="width: 500px; max-width: 55%;">
+                  <img src="img/grouping-feed-group-leader-parent.png" alt="Data feed with the columns id, title, color, size, group_id and group_leader: 1000, Nike Sportswear Phoenix Hoodie, no color, no size, H100, true; 1001, Nike Sportswear Phoenix Hoodie, Baby pink, S, H100, false; and 1002, Nike Sportswear Phoenix Hoodie, Mint green, M, H100, false" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>Ideally, the group leader should be a product with no attributes, like size or color — that way, it's a true group leader, representing the product as a whole rather than one of its variants.</p>
+              <p>For example, in this feed the hoodie has a row of its own (id 1000) with no color and no size, set as the group leader, while the Baby pink and Mint green variants are both set to false.</p>
 
-              <h3>Sorting Variants by best_price</h3>
-              <figure class="lesson-figure lesson-figure-left" style="width: 420px;">
-                  <img src="img/grouping-variants-best-price.png" alt="Relevance Criteria with two fields: Score set to Highest to lowest, and best_price set to Lowest to highest" data-action="zoom-image">
-                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
-                </figure>
-              <p>When products are grouped as one and one of them has <code>group_leader</code> set to <strong>true</strong>, the price shown is the group leader's price. <strong>Relevance Criteria</strong> makes it possible to change that, so the variant with the smallest <code>best_price</code> is the one shown on the layer: adding <code>best_price</code> set to <strong>Lowest to highest</strong> makes the price shown first the lowest value.</p>
-              <div style="clear: both;"></div>
-              <p>For example, with three variants of the same backpack (simplified, for illustration only, with the variants tied on Score):</p>
+              <h3>Relevance Criteria</h3>
+              <p>The variant shown also depends on <strong>Relevance Criteria</strong>: if the first criterion isn't Score, the variant shown depends on the criteria listed before it.</p>
+              <p>For example, with Relevance Criteria set to <code>best_price</code> (Lowest to highest) first and Score (Highest to lowest) second:</p>
               <table class="theory-table">
-                <thead><tr><th>Variant</th><th><code>group_leader</code></th><th><code>best_price</code></th></tr></thead>
+                <thead><tr><th>Variant</th><th>Score</th><th><code>best_price</code></th><th>Variant shown</th></tr></thead>
                 <tbody>
-                  <tr><td>20L</td><td>true</td><td>60</td></tr>
-                  <tr><td>30L</td><td>false</td><td>50</td></tr>
-                  <tr><td>40L</td><td>false</td><td>70</td></tr>
+                  <tr><td>Baby pink</td><td>5</td><td>68</td><td>—</td></tr>
+                  <tr><td>Mint green</td><td>3</td><td>60</td><td>Mint green — best_price comes first, and it's the cheapest</td></tr>
                 </tbody>
-              </table>
-              <p>With Relevance Criteria set to Score only, the result shows the group leader's price: 60. Adding <code>best_price</code> set to Lowest to highest, it shows the lowest one: 50.</p>
-
-              <h3>Variants Out of Stock</h3>
-              <figure class="lesson-figure lesson-figure-right" style="width: 420px;">
-                  <img src="img/grouping-variants-availability-price.png" alt="Relevance Criteria with three fields: Score set to Highest to lowest, availability set to A to Z, and best_price set to Lowest to highest" data-action="zoom-image">
-                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
-                </figure>
-              <p>All out of stock products can be hidden at once — also covered in the Excluded Results lesson — but out of stock products can also be shown further down in the search instead of being hidden.</p>
-              <p>When items are grouped together and all the variants are out of stock, the product disappears entirely if out of stock products are being hidden.</p>
-              <p>When not all the variants are out of stock, adding <code>availability</code> to Relevance Criteria controls which variant comes first — for example, always displaying the in stock ones first. Combined with <code>best_price</code> set to Lowest to highest, the first variant shown is the first available and the cheapest one.</p>
-              <div style="clear: both;"></div>
-              <p>For example, with Relevance Criteria set to Score (Highest to lowest), availability (A to Z) and best_price (Lowest to highest), and three variants of the same T-shirt tied on Score (simplified, for illustration only):</p>
-              <table class="theory-table">
-                <thead><tr><th>Variant</th><th><code>availability</code></th><th><code>best_price</code></th><th>Result</th></tr></thead>
-                <tbody>
-                  <tr><td>Red</td><td>in stock</td><td>30</td><td>—</td></tr>
-                  <tr><td>Blue</td><td>out of stock</td><td>20</td><td>— (out of stock, even though it's the cheapest)</td></tr>
-                  <tr><td>Green</td><td>in stock</td><td>25</td><td>Shown first: available and cheapest</td></tr>
-                </tbody>
-              </table>
-              <p class="theory-callout">This configuration is very sensitive: don't remove Score, and revert the changes if any discrepancies show up in the search.</p>`
+              </table>`
           }
         ]
       },
       quiz: [
         {
-          q: "A feed has a <strong>Linen Shirt</strong> as two separate rows: one white in size S, one blue in size M. Once they're grouped, what does a search for \"linen shirt\" show?",
+          q: "A store sells a <strong>Trail Running Shoe</strong> in sizes 40, 41 and 42, and wants every size to be searchable. What does that require?",
           options: [
-            "Two Linen Shirt results, one per color",
-            "Only the white one, since it's listed first in the feed",
-            "One Linen Shirt result, with both colors and sizes available in the filters",
-            "No results, since grouped products can only be found by SKU"
-          ],
-          correct: 2,
-          explain: "Grouping shows the variants as a single result, while their colors and sizes stay available in the filters panel. Two results is what happens without grouping, and the feed order doesn't decide which variant represents the group."
-        },
-        {
-          q: "Where is \"Group variants as a single item\" turned on?",
-          options: [
-            "Configuration > Search Engines > See indices > Indices > Configuration section",
-            "Search > Advanced Preferences > Relevance Criteria",
-            "Configuration > Excluded Results",
-            "It can't be turned on — it's always active"
-          ],
-          correct: 0,
-          explain: "It's a toggle in the Configuration section of the Search Engine's indices, saved with the \"Save\" button. Relevance Criteria only changes which variant is shown first, and without turning the toggle on nothing gets grouped."
-        },
-        {
-          q: "Grouping is on, and the feed has these rows: <strong>Rain Jacket S</strong> (group_id RJ-10), <strong>Rain Jacket M</strong> (group_id RJ-10) and <strong>Rain Jacket L</strong> (group_id RJ-11). How many Rain Jacket results does a search for \"rain jacket\" show?",
-          options: [
-            "One, since all three share the same title",
-            "Three, since grouping ignores group_id",
-            "None, since the group_id values don't all match",
-            "Two: S and M grouped together, and L on its own"
-          ],
-          correct: 3,
-          explain: "Only items with the same group_id are treated as variants of the same item. S and M share RJ-10, so they're shown as one result; L has RJ-11, so it's a group of its own. Grouping goes by group_id, not by the title."
-        },
-        {
-          q: "A boot comes in sizes 38, 40 and 42, all with the same group_id. Size 40 has group_leader set to true and the others to false. With no other relevant sort criteria involved, which size represents the boot in the results?",
-          options: [
-            "Size 38, since it's the smallest",
-            "Size 40",
-            "Size 42, since it's the last one indexed",
-            "A different size on every search"
+            "Indexing only one size, and listing the others in its description",
+            "Indexing every size, so all of them are loaded into the index",
+            "Indexing only the size marked as group_leader",
+            "Nothing — Doofinder creates the variants on its own"
           ],
           correct: 1,
-          explain: "The item with group_leader set to true is chosen as the group representative, as long as no other relevant sort criteria are involved. Size and indexing order don't decide it."
+          explain: "For every variant to be searchable, each one needs to be indexed, so they all need to be loaded into the index. A variant that isn't indexed can't be found, and Doofinder doesn't create variants that aren't in the feed."
         },
         {
-          q: "A <strong>Canvas Sneaker</strong> is grouped, and one of its child products has the SKU <strong>CS-42-WHT</strong>. What's returned when someone searches for \"CS-42-WHT\"?",
+          q: "That shoe's three sizes are indexed as three rows, with no grouping set up. What does a search for \"trail running shoe\" show in the Search Layer?",
           options: [
-            "That exact child product",
-            "The group leader, since grouped products always show the leader",
-            "Nothing, since only the leader is indexed",
-            "Every variant of the Canvas Sneaker as separate results"
-          ],
-          correct: 0,
-          explain: "Both the parent and the child products are indexed. The leader is displayed for a general search, but when a specific child SKU is searched for, that child product is returned, since it was explicitly requested."
-        },
-        {
-          q: "A grouped lamp has three variants tied on Score: <strong>Small</strong> (group_leader true, best_price 45), <strong>Medium</strong> (false, 40) and <strong>Large</strong> (false, 55). Relevance Criteria is set to Score (Highest to lowest) and best_price (Lowest to highest). Which price is shown?",
-          options: [
-            "45, the group leader's price",
-            "55, the highest price",
-            "The average of the three prices",
-            "40, the lowest price"
-          ],
-          correct: 3,
-          explain: "Without best_price in Relevance Criteria, the group leader's price (45) would be shown. With best_price set to Lowest to highest after Score, the variant with the lowest price comes first, so 40 is shown."
-        },
-        {
-          q: "Relevance Criteria is set to Score (Highest to lowest), availability (A to Z) and best_price (Lowest to highest). A grouped cap has three variants tied on Score: <strong>Black</strong> (in stock, 22), <strong>White</strong> (out of stock, 15) and <strong>Grey</strong> (in stock, 18). Which variant is shown first?",
-          options: [
-            "White, since it's the cheapest",
-            "Grey",
-            "Black, since it's the most expensive in stock",
-            "None, since one variant is out of stock"
-          ],
-          correct: 1,
-          explain: "availability comes before best_price, so the in stock variants go first — White is out of stock, even though it's the cheapest. Among the in stock ones, best_price Lowest to highest puts Grey (18) ahead of Black (22): the first available and the cheapest."
-        },
-        {
-          q: "Out of stock products are being hidden, and every variant of a grouped jacket is out of stock. What happens to the jacket in the search results?",
-          options: [
-            "Only the group leader stays visible",
-            "The variants are automatically ungrouped",
-            "The product disappears entirely",
-            "It's shown last, below the in stock products"
+            "Only size 40, since it's the first one indexed",
+            "A single result with a size filter",
+            "All three sizes, as three separate results",
+            "No results, since the titles are duplicated"
           ],
           correct: 2,
-          explain: "When all the variants of a group are out of stock and out of stock products are hidden, the whole product disappears. Showing it further down instead is only possible when out of stock products aren't hidden."
+          explain: "Without grouping, every indexed variant that matches the query appears in the Search Layer as its own result — which is exactly the visual confusion grouping solves."
+        },
+        {
+          q: "A feed has these rows: <strong>Denim Jacket</strong> blue (group_id DJ1), <strong>Denim Jacket</strong> black (group_id DJ1) and <strong>Denim Shirt</strong> (group_id DS2). A search matches all three. How many results show up once grouping is set up?",
+          options: [
+            "Two: one Denim Jacket and one Denim Shirt",
+            "Three, since each row has its own color",
+            "One, since all three contain \"Denim\"",
+            "None, since the group_id values don't all match"
+          ],
+          correct: 0,
+          explain: "Products with the same group_id are grouped under the same group. Both jackets share DJ1, so they show up as one result; the shirt has DS2, so it stays separate. The title doesn't decide the grouping — group_id does."
+        },
+        {
+          q: "A grouped <strong>Leather Bag</strong> has two variants with no group_leader set. For a query, <strong>Brown</strong> (indexed first) has a score of 4 and <strong>Black</strong> (indexed second) has a score of 6. Which variant is shown?",
+          options: [
+            "Brown, since it was indexed first",
+            "Both, since their scores are different",
+            "Neither, since no group_leader is set",
+            "Black, since it has the most score"
+          ],
+          correct: 3,
+          explain: "The variant with the most score for the query is the one shown. The indexing order only matters when the variants have the same score."
+        },
+        {
+          q: "A grouped <strong>Wool Scarf</strong> has two variants with no group_leader set: <strong>Grey</strong>, indexed first, and <strong>Red</strong>, indexed second. For a query, both have a score of 5. Which variant is shown?",
+          options: [
+            "Red, since it was indexed last",
+            "Grey, since it was indexed first",
+            "Both, since they tie on score",
+            "Whichever is cheaper"
+          ],
+          correct: 1,
+          explain: "When the variants have the same score, the first variant indexed is the one shown — here, Grey."
+        },
+        {
+          q: "A grouped <strong>Canvas Sneaker</strong> has two variants tied on score for a query: <strong>White</strong>, indexed first with group_leader false, and <strong>Black</strong>, indexed second with group_leader true. Which variant is shown?",
+          options: [
+            "Black, since it's the group leader",
+            "White, since it was indexed first",
+            "Both, since they tie on score",
+            "Neither, since only one variant can be indexed"
+          ],
+          correct: 0,
+          explain: "With the same score, group_leader forces the variant set to true to appear — so Black is shown, even though White was indexed first."
+        },
+        {
+          q: "Same sneaker, but for a different query: <strong>White</strong> (group_leader false) has a score of 7, and <strong>Black</strong> (group_leader true) has a score of 3. Which variant is shown?",
+          options: [
+            "Black, since the group leader always appears",
+            "Both, since one is the leader and the other has more score",
+            "White, since it has the most score",
+            "Neither, since the leader has the lower score"
+          ],
+          correct: 2,
+          explain: "group_leader only decides between variants with the same score. Here White has more score for the query, so it's the one shown."
+        },
+        {
+          q: "A <strong>Cotton T-Shirt</strong> comes in white/S, white/M and black/L, all with the same group_id. Which of these feed setups follows the ideal way of choosing the group leader?",
+          options: [
+            "White/S set to true, since it's the first variant indexed",
+            "All three variants set to true",
+            "A fourth row for the Cotton T-Shirt with no color and no size, set to true, and the three variants set to false",
+            "Black/L set to true, since it's the only black one"
+          ],
+          correct: 2,
+          explain: "Ideally, the group leader is a product with no attributes like size or color: that way it's a true group leader, representing the product as a whole rather than one of its variants. Picking any single variant works, but it isn't the ideal setup — and only one item in the group can be true."
+        },
+        {
+          q: "Relevance Criteria is set to <code>best_price</code> (Lowest to highest) first and Score (Highest to lowest) second. A grouped <strong>Backpack</strong> has <strong>Blue</strong> (score 6, best_price 50) and <strong>Green</strong> (score 3, best_price 40). Which variant is shown?",
+          options: [
+            "Blue, since it has the most score",
+            "Blue, since Score always decides the variant shown",
+            "Both, since each one wins on a different criterion",
+            "Green, since best_price comes first and it's the cheapest"
+          ],
+          correct: 3,
+          explain: "When the first Relevance Criteria isn't Score, the variant shown depends on the criteria listed before it. best_price Lowest to highest comes first, so the cheaper Green is shown, even with less score."
+        },
+        {
+          q: "Which values does <code>group_leader</code> take within a group?",
+          options: [
+            "true on every variant of the group",
+            "true on the leader, and false on all the other variants",
+            "The leader's id, on every variant of the group",
+            "1 on the leader, and 2, 3, 4… on the others, in order of priority"
+          ],
+          correct: 1,
+          explain: "The leader's group_leader value needs to be true, while all the other variants in the group are false."
         }
       ]
     },
@@ -316,22 +308,41 @@ const COURSE = {
       title: "Excluded Results",
       hasQuiz: true,
       docUrl: "https://support.doofinder.com/getting-started/excluded-results",
-      extraDocs: [
-        { label: "Out of Stock Items", url: "https://support.doofinder.com/search/promotional-tools/out-of-stock-items", fromHeading: "Out of Stock Items" }
-      ],
       theory: {
-        lead: "This lesson covers how to make specific items disappear from <strong>Doofinder</strong>'s results entirely — and, briefly, about a ready-made shortcut for one of the most common cases: excluding out of stock products automatically.",
+        lead: "<strong>Excluded Results</strong> is a feature to remove products from a Search Engine, even though they're still loaded in its indices.",
         blocks: [
           {
             html: `
-              <figure class="lesson-figure lesson-figure-right" style="width: 400px;">
-                  <img src="img/excluded-results-config.png" alt="Excluded Results screen in the Admin Panel, showing an Individual items list with one product added, a Rules table with a brand is Adidas filter, and an Add results button" data-action="zoom-image">
+              <p>Since a Search Engine feeds every <strong>Doofinder</strong> product, excluded products don't appear in any of them — the Search Layer, Recommendations, Quiz Maker, and so on.</p>
+
+              <h3>An Example</h3>
+              <figure class="lesson-figure lesson-figure-left" style="width: 440px; max-width: 55%;">
+                  <img src="img/excluded-feed-sunglasses.png" alt="Data feed with the columns id, title, brand and price: 3001, Ray-Ban Unisex Sunglasses, Ray-Ban, 124.00; 3002, Ray-Ban Andy Sunglasses, Ray-Ban, 119.00; and 3003, Gucci GG Round Acetate Sunglasses, Gucci, 195.00" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
-              <p><strong>Excluded Results</strong> makes it possible to intentionally remove certain items from a Search Engine's results — whether that's a single product or a whole batch of them, picked out with filtering rules.</p>
-                  <p>Since a Search Engine feeds every <strong>Doofinder</strong> product, excluding an item there affects all of them at once — Search, Recommendations, Quiz Maker, and so on.</p>
+              <p>Take a data feed with these three sunglasses: two Ray-Ban models and one Gucci model. Each row is a product, with its <code>id</code>, <code>title</code>, <code>brand</code> and <code>price</code>, and all three are loaded into the index.</p>
+              <div style="clear: both;"></div>
+              <figure class="lesson-figure lesson-figure-right" style="width: 380px; max-width: 55%;">
+                  <img src="img/excluded-layer-before.png" alt="Search Layer with the search sunglasses: 3 results found — Ray-Ban Unisex Sunglasses at 124,00 €, Ray-Ban Andy Sunglasses at 119,00 € and Gucci GG Round Acetate Sunglasses at 195,00 € — with a Brands filter listing Ray-Ban (2) and Gucci (1)" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>Searching for "sunglasses" in the Search Layer, all three show up — each one with its image, title and price — and the Brands filter counts two Ray-Ban products and one Gucci product.</p>
+              <p>Now, the <strong>Gucci GG Round Acetate Sunglasses</strong> shouldn't show up anymore, but the product stays in the data feed. Excluded Results makes that possible without touching the feed at all.</p>
+              <div style="clear: both;"></div>
+              <figure class="lesson-figure lesson-figure-left" style="width: 360px; max-width: 55%;">
+                  <img src="img/excluded-admin-individual-item.png" alt="Excluded Results screen in the Admin Panel with the Gucci GG Round Acetate Sunglasses listed under Individual items, an Add results link and a Save button" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>In the Admin Panel, the product is added to <strong>Excluded Results</strong> as an individual item — clicking "+ Add results" → "Individual items", picking the product and clicking "Add item" — and the change is saved. More than one product can be picked at a time, if several need to be excluded.</p>
+              <div style="clear: both;"></div>
+              <figure class="lesson-figure lesson-figure-right" style="width: 380px; max-width: 55%;">
+                  <img src="img/excluded-layer-after.png" alt="Search Layer with the same search sunglasses: 2 results found — Ray-Ban Unisex Sunglasses at 124,00 € and Ray-Ban Andy Sunglasses at 119,00 € — with a Brands filter listing only Ray-Ban (2)" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>The same search for "sunglasses" now shows only the two Ray-Ban models. The Gucci sunglasses are still in the data feed and in the index — they just don't appear in the Search Layer, nor in Recommendations or Quiz Maker.</p>
 
-              <h3>Two Ways to Exclude Items</h3>
+              <h3>Selecting the Products</h3>
+              <p>Products are selected for Excluded Results the same way seen in the <strong>Custom Results</strong> lesson — here's a brief recap.</p>
               <p>There are two ways to exclude items:</p>
               <table class="theory-table">
                 <thead><tr><th>Method</th><th>How it works</th></tr></thead>
@@ -343,7 +354,7 @@ const COURSE = {
               <p>Both approaches can be combined on the same Search Engine — excluding some items individually and others by rule at the same time.</p>
 
               <h3>Combining Rules</h3>
-              <p>Rules can also be combined into AND/OR conditions, exactly like we saw in <strong>Custom Results</strong>:</p>
+              <p>Rules can also be combined into AND/OR conditions, exactly as in <strong>Custom Results</strong>:</p>
               <table class="theory-table">
                 <thead><tr><th>Condition</th><th>When it happens</th><th>Example</th></tr></thead>
                 <tbody>
@@ -351,27 +362,10 @@ const COURSE = {
                   <tr><td><strong>OR</strong></td><td>Two values in the same filter</td><td>Color "blue" or "red"</td></tr>
                   <tr><td><strong>Both</strong></td><td>AND and OR mixed in the same rule</td><td>—</td></tr>
                 </tbody>
-              </table>`
-          },
-          {
-            heading: "Out of Stock Items",
-            pageBreak: true,
-            html: `
-              <figure class="lesson-figure lesson-figure-left" style="width: 400px;">
-                  <img src="img/excluded-results-out-of-stock.png" alt="Excluded Results screen with a rule set to availability is out of stock — the built-in shortcut for hiding out of stock products automatically" data-action="zoom-image">
-                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
-                </figure>
-              <p>Excluding out of stock products is such a common need that <strong>Doofinder</strong> ships a dedicated, automated shortcut for it, instead of having to build and maintain an exclusion rule by hand. It requires the data feed to already carry an <strong>availability</strong> field, with an "out of stock" value set on the relevant items.</p>
-                  <p>Turning it on takes three steps:</p>
-                  <ol>
-                    <li>Click "Add results" → "Rules".</li>
-                    <li>Pick <code>availability</code> as the field and <code>out of stock</code> as its value, then click "Add rule".</li>
-                    <li>Click <strong>Save</strong>.</li>
-                  </ol>
+              </table>
 
-              <h3>How It Works</h3>
-              <p class="theory-callout">From then on it runs automatically: the moment a product's availability flips to "out of stock" in the feed, it disappears from results — and once it's back in stock, it reappears too, though only after the feed is <strong>reindexed</strong>.</p>
-              <p>Like any other Excluded Results rule, it affects every <strong>Doofinder</strong> service fed by that Search Engine — Search, Recommendations, Quiz Maker, and the rest.</p>`
+              <h3>Excluding Out of Stock Products</h3>
+              <p>One of the most important uses of <strong>Excluded Results</strong> is excluding products whose <code>availability</code> is <strong>out of stock</strong>. Out of stock products are usually indexed too, so an Excluded Results rule — <code>availability</code> is <code>out of stock</code> — is the easiest way to exclude them from the search, instead of removing them directly from the sources the indexing takes its data from.</p>`
           }
         ]
       },
@@ -439,26 +433,15 @@ const COURSE = {
           explain: "Adding two or more values in the same row generates an OR condition."
         },
         {
-          q: "What does <strong>Doofinder</strong>'s automated Out of Stock Items tool require the data feed to already have?",
+          q: "A Store indexes all its products, out of stock ones included, but doesn't want out of stock products to show up in the search. What's the easiest way to exclude them?",
           options: [
-            "A df_manual_boost field",
-            "A Field Name Mapping for id",
-            "An availability field, with an \"out of stock\" value set on the relevant items",
-            "A Redirection pointing to the product page"
+            "Removing them from the source the data feed is built from, before every indexing",
+            "A Custom Result for every search term, excluding them one by one",
+            "An Excluded Results rule: availability is out of stock",
+            "A synonym set that replaces \"out of stock\" with \"in stock\""
           ],
           correct: 2,
-          explain: "The automated Out of Stock exclusion rule needs the feed to already carry an availability field, with \"out of stock\" set on the items that should be hidden."
-        },
-        {
-          q: "Once a product is back in stock, when does it reappear in search results?",
-          options: [
-            "Immediately, with no further action needed",
-            "Only if it's manually re-added as an individual item",
-            "It never reappears automatically",
-            "Only after the feed is reindexed"
-          ],
-          correct: 3,
-          explain: "The availability value updates in the feed, but the product only reappears in results once that feed is reindexed."
+          explain: "Out of stock products are usually indexed too, and an Excluded Results rule on availability is the easiest way to exclude them from the search — much simpler than removing them from the indexing sources. Custom Results only apply to specific search terms, and a synonym doesn't remove any product."
         }
       ]
     },
@@ -473,146 +456,167 @@ const COURSE = {
       hasQuiz: true,
       docUrl: "https://support.doofinder.com/search/optimize/synonyms",
       theory: {
-        lead: "A synonym is a word that means the same as another — like 'small' and 'little' — and <strong>Doofinder</strong>'s <strong>Synonyms</strong> feature lets a search for one term also match the others in its set, even when the data feed itself never uses those other words.",
+        lead: "Sometimes a user searches for a product and doesn't find it, because the product is indexed with a different term from the one searched.",
         blocks: [
           {
             html: `
-              <figure class="lesson-figure lesson-figure-right" style="width: 420px;">
-                  <img src="img/synonyms-ai-synonymboost.png" alt="Synonyms screen showing the AI SynonymBoost carousel with suggested synonym sets, an add (+) icon and a trash icon on each suggestion" data-action="zoom-image">
+              <h3>The Problem</h3>
+              <figure class="lesson-figure lesson-figure-right" style="width: 190px; max-width: 55%;">
+                  <img src="img/synonyms-layer-before.png" alt="Search Layer with the search training: 0 results found and a No results found message" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
-              <p>Synonyms are configured separately per Store. Each Search Engine can hold up to <strong>1,000 synonyms</strong>.</p>
-                  <p class="theory-callout">It's worth knowing upfront that using different terms from the same synonym set doesn't guarantee identical results for each one — it depends on how those terms actually show up across the indexed catalogue.</p>
+              <p>For example, a Store's data feed has a product titled <strong>Sport Shoes</strong>. For a user, "sport shoes" and "training shoes" are the same thing — but a user who searches for "training" doesn't find it: the word "training" doesn't appear anywhere in the product's data, so the Search Layer shows 0 results.</p>
 
-              <h3>Two Ways to Build a Synonym Set</h3>
-              <p>There are two ways to build a synonym set:</p>
+              <h3>How Synonyms Work</h3>
+              <p><strong>Synonyms</strong> is a feature that helps fix this. It associates an indexed term with another term, so that the other term gets indexed too.</p>
+              <p>So, for the <strong>Sport Shoes</strong> to also be found with the query "training shoes", a synonym can be created between the two terms "sport" and "training".</p>
+              <div style="clear: both;"></div>
+              <figure class="lesson-figure lesson-figure-left" style="width: 330px; max-width: 55%;">
+                  <img src="img/synonyms-admin-set.png" alt="Add synonym dialog in the Admin Panel: Status toggle on, Synonym selected as the way to make the replacement (the other option is Explicit replacement), the terms sport, training in the list of terms separated by commas, and Cancel and Save buttons" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>In the Admin Panel, that's a synonym of the <strong>Synonyms</strong> type with the terms <code>sport</code> and <code>training</code>, written as <code>sport, training</code>.</p>
+              <p>In the <strong>Add synonym</strong> dialog, <strong>Synonym</strong> is selected as the way to make the replacement, the terms are added as a list separated by commas, and the synonym is saved with <strong>"Save"</strong>. The <strong>Status</strong> toggle, switched on, keeps the synonym active. In this case, it's as if the product were indexed as <strong>"Sport Training Shoes"</strong>.</p>
+              <div style="clear: both;"></div>
+              <figure class="lesson-figure lesson-figure-right" style="width: 190px; max-width: 55%;">
+                  <img src="img/synonyms-layer-after.png" alt="Search Layer with the search training: 1 result found, the Sport Shoes at 59,00 €" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>Now the same search for "training" finds the <strong>Sport Shoes</strong>, and so do "training shoes" and "sport shoes": both terms work.</p>
+
+              <h3>The Indexed Term Must Match Exactly</h3>
+              <p>The term the synonym is created from — the first one in the set — needs to be indexed exactly as it's written. For example, if the product were titled <strong>"Sports Shoes"</strong>, the synonym <code>sport, training</code> wouldn't be created for it, since "sport" isn't indexed as such. So before creating a synonym, it's worth checking how the term is actually written in the product's data.</p>
               <table class="theory-table">
-                <thead><tr><th>Method</th><th>How it works</th></tr></thead>
+                <thead><tr><th>Product title</th><th>Synonym</th><th>Search "training"</th></tr></thead>
                 <tbody>
-                  <tr><td><strong>AI SynonymBoost</strong></td><td>An algorithm that looks for synonym patterns specific to the Store's configured industry and language, and suggests them automatically. Getting the industry setting right matters here, since a wrong one leads to irrelevant suggestions. Suggestions show up to 10 at a time in a carousel — click the "+" to accept one, or the trash icon to reject it, and once a decision is made new suggestions are generated to replace it, with the newest ones always shown first.</td></tr>
-                  <tr><td><strong>Manually created synonyms</strong></td><td>Built by hand instead of accepted from a suggestion.</td></tr>
-                </tbody>
-              </table>`
-          },
-          {
-            heading: "Manual Synonyms",
-            pageBreak: true,
-            html: `
-              <p>Manually created synonyms come in two types:</p>
-              <table class="theory-table">
-                <thead><tr><th>Type</th><th>Written as</th><th>How it works</th></tr></thead>
-                <tbody>
-                  <tr><td><strong>Synonyms type</strong></td><td><code>Synonym1, Synonym2, Synonym3</code></td><td>A simple list. For it to work, the first term in that list has to be one that actually appears in the indexed feed. For example, with <code>icebox, cooler, fridge</code> (where "icebox" is the feed's own term), searching for any of the three returns the same products.</td></tr>
-                  <tr><td><strong>Explicit Replacement type</strong></td><td><code>Term1, Term2 => Term1, Term2</code></td><td>Swaps the original word out for the replacement(s) rather than adding to it. Searching <code>icebox => fridge</code> for "icebox" then returns nothing, since only "fridge" (which has to exist in the feed) actually returns results.</td></tr>
+                  <tr><td>Sport Shoes</td><td><code>sport, training</code></td><td>Finds the product — "sport" is indexed exactly as written</td></tr>
+                  <tr><td>Sports Shoes</td><td><code>sport, training</code></td><td>Doesn't find it — "sport" isn't indexed as such, only "sports" is</td></tr>
                 </tbody>
               </table>
-              <figure class="lesson-figure lesson-figure-left" style="width: 400px;">
-                  <img src="img/synonyms-manual-types.png" alt="Add Synonym panel showing a Synonyms type field (icebox, cooler, fridge) and an Explicit Replacement type field (icebox => fridge)" data-action="zoom-image">
+
+              <h3>Explicit Replacement Type</h3>
+              <p>Besides the <strong>Synonyms</strong> type, there's the <strong>Explicit Replacement</strong> type, written as <code>Term1 => Term2</code>. Instead of adding the other term, it replaces the indexed term with it: with <code>sport => training</code>, it's as if the product were indexed as "Training Shoes".</p>
+              <table class="theory-table">
+                <thead><tr><th>Type</th><th>Written as</th><th>Search "sport"</th><th>Search "training"</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Synonyms</strong></td><td><code>sport, training</code></td><td>Finds the Sport Shoes</td><td>Finds the Sport Shoes</td></tr>
+                  <tr><td><strong>Explicit Replacement</strong></td><td><code>sport => training</code></td><td>Doesn't find them anymore</td><td>Finds the Sport Shoes</td></tr>
+                </tbody>
+              </table>
+              <p class="theory-callout">With Explicit Replacement, the original indexed term stops working as a search term — only the replacement does. With the Synonyms type, both terms keep working.</p>
+
+              <h3>AI SynonymBoost</h3>
+              <figure class="lesson-figure lesson-figure-right" style="width: 420px; max-width: 55%;">
+                  <img src="img/synonyms-ai-synonymboost.png" alt="AI SynonymBoost section with a New synonyms to see label next to its title, and a carousel of suggested synonym sets — eyeliner, perfilador, lapiz de ojos; esmaltes, pintaúñas, laca de uñas — each with a + button and a trash button, and an arrow to see more" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
-              <h3>Quirks to Keep in Mind</h3>
-                  <p>A couple of quirks to keep in mind:</p>
-                  <ul>
-                    <li>Commas are reserved as the separator between terms, so they can't appear inside a synonym itself.</li>
-                    <li>Hyphens are always normalized to spaces, since symbols get stripped out during indexing anyway — so a synonym is always saved and matched with spaces, never hyphens.</li>
-                  </ul>
+              <p>Besides being created by hand, synonyms can come from <strong>AI SynonymBoost</strong>: an algorithm that looks for synonym patterns specific to the Store's configured industry and language, and suggests them automatically. Getting the industry setting right matters here, since a wrong one leads to irrelevant suggestions.</p>
+              <p>Suggestions show up to 10 at a time in a carousel: clicking the <strong>"+"</strong> accepts one, and the trash icon rejects it. Once a decision is made, new suggestions are generated to replace it, with the newest ones always shown first.</p>
 
-              <h3>Managing Synonyms</h3>
-              <ul>
-                <li>Existing synonyms can be copied across to another Search Engine, either merging into its existing settings or replacing them outright — the second option can't be undone, so it's worth being careful with it.</li>
-                <li>Any synonym set can also be toggled off without deleting it.</li>
-                <li>The whole list can be imported or exported as a <strong>.csv</strong> file (skip the header row on import; each line reads like <code>sneaker, trainer, shoe</code>).</li>
-              </ul>
-
-              <h3>Under the Hood</h3>
-              <p>Under the hood, <strong>Doofinder</strong> re-crawls the product feed at least once a day (or on demand, from Indices), extracting its data into a file called the <strong>Index</strong>.</p>
-              <p class="theory-callout">Whenever synonyms are defined, that same indexing pass replaces every occurrence of a synonym with its whole set — which is exactly what lets a single search term surface products that only ever mention one of its synonyms in the feed.</p>`
+              <h3>Import/Export</h3>
+              <p>The whole list of synonyms can also be imported or exported as a <strong>.csv</strong> file, with one set per line (e.g. <code>sneaker, trainer, shoe</code>).</p>`
           }
         ]
       },
       quiz: [
         {
-          q: "What is a synonym, as this lesson defines it?",
+          q: "A Store's feed has a product titled <strong>Leather Sofa</strong>. A user searches for \"couch\" and gets 0 results. Why?",
           options: [
-            "A word that means the same as another word in the same language",
-            "A misspelled version of a search term",
-            "A field name used in the data feed",
-            "A category shared by two products"
-          ],
-          correct: 0,
-          explain: "A synonym is a word that means the same as another — like 'small' and 'little'."
-        },
-        {
-          q: "Where are Synonyms configured?",
-          options: [
-            "Admin Panel > Configuration > Excluded Results",
-            "Admin Panel > Managing Data > Security Settings",
-            "Admin Panel > Search > Optimize > Synonyms",
-            "Directly inside the data feed file"
-          ],
-          correct: 2,
-          explain: "Synonyms live inside the Admin Panel, under Search > Optimize > Synonyms."
-        },
-        {
-          q: "What's the maximum number of synonyms allowed per Search Engine?",
-          options: ["10", "1,000", "100", "Unlimited"],
-          correct: 1,
-          explain: "Each Search Engine can hold up to 1,000 synonyms."
-        },
-        {
-          q: "Does using different terms from the same synonym set guarantee the same results for each one?",
-          options: [
-            "Yes, always identical",
-            "No — it depends on how those terms show up across the indexed catalogue",
-            "Only for Explicit Replacement sets",
-            "Only if <strong>Doofinder</strong>'s AI SynonymBoost created the set"
+            "The product is out of stock",
+            "The product is indexed with a different term: \"couch\" doesn't appear anywhere in its data",
+            "Searches with a single word never return results",
+            "The product needs a group_id to be found"
           ],
           correct: 1,
-          explain: "Using different terms from a set of synonyms does not guarantee the same search results for each term."
+          explain: "The product is indexed as \"sofa\", and the word \"couch\" doesn't appear anywhere in its data — so a search for \"couch\" can't find it, even though it means the same thing to the user. That's exactly the problem Synonyms helps fix."
         },
         {
-          q: "In a Synonyms-type set (e.g. icebox, cooler, fridge), what must the first term be?",
+          q: "What does the Synonyms feature do?",
           options: [
-            "The shortest word in the set",
-            "A term written in English",
-            "A term that actually appears in the indexed feed",
-            "It doesn't matter which term comes first"
-          ],
-          correct: 2,
-          explain: "For a Synonyms-type set to work, the first synonym listed must be an attribute that actually appears in the indexed feed."
-        },
-        {
-          q: "In an Explicit Replacement set written as icebox => fridge, what happens when a user searches \"icebox\"?",
-          options: [
-            "It returns nothing — only fridge returns results",
-            "It returns the same results as fridge",
-            "It returns every product in the catalogue",
-            "It triggers a Redirection instead"
-          ],
-          correct: 0,
-          explain: "Explicit Replacement substitutes the original word for the replacement — searching the replaced term returns nothing, only the replacement term works."
-        },
-        {
-          q: "How are hyphens handled when saving a synonym?",
-          options: [
-            "They're kept exactly as typed",
-            "They're converted to underscores",
-            "They cause the synonym to be rejected",
-            "They're always replaced with spaces"
+            "It renames products in the data feed",
+            "It redirects a search to a specific URL",
+            "It removes products from the Search Engine",
+            "It associates an indexed term with another term, so that the other term gets indexed too"
           ],
           correct: 3,
-          explain: "Hyphens are always normalized to spaces — a synonym is saved and matched using spaces, never hyphens."
+          explain: "Synonyms associates an indexed term with another term, so the other term gets indexed too — without changing the data feed itself."
         },
         {
-          q: "When does <strong>Doofinder</strong> actually apply synonym replacements to the catalogue?",
+          q: "A product is titled <strong>Wool Jumper</strong>, and a Synonyms-type set <code>jumper, sweater</code> is created. It's as if the product were indexed as…",
           options: [
-            "Immediately, the moment a synonym is saved, with no delay at all",
-            "Only when a user clicks a Search Suggestion",
-            "During indexing, when the feed is crawled and stored in the Index",
-            "Only during the AI SynonymBoost carousel review"
+            "\"Wool Jumper Sweater\"",
+            "\"Wool Sweater\"",
+            "\"Wool Jumper\", unchanged",
+            "\"Jumper Sweater\""
+          ],
+          correct: 0,
+          explain: "The Synonyms type adds the other term to the indexed one, so both \"jumper\" and \"sweater\" now find the product — it's as if it were indexed as \"Wool Jumper Sweater\". Replacing \"jumper\" with \"sweater\" is what the Explicit Replacement type does."
+        },
+        {
+          q: "A product is titled <strong>Wool Jumpers</strong>, and the synonym <code>jumper, sweater</code> is created. What happens when a user searches for \"sweater\"?",
+          options: [
+            "It finds the product, since jumper and jumpers are almost the same word",
+            "It finds every product in the catalogue",
+            "It doesn't find it, since \"jumper\" isn't indexed as such — only \"jumpers\" is",
+            "It finds it, but only in Recommendations"
           ],
           correct: 2,
-          explain: "<strong>Doofinder</strong> crawls the feed during indexing and, at that point, replaces every occurrence of a defined synonym with its whole set inside the Index."
+          explain: "The term the synonym is created from needs to be indexed exactly as it's written. The title says \"jumpers\", not \"jumper\", so the synonym isn't created for that product — just like \"Sports Shoes\" with the synonym sport, training."
+        },
+        {
+          q: "A feed calls a category <strong>\"jumper\"</strong>, and never uses the word \"sweater\". Which Synonyms-type set is written correctly?",
+          options: [
+            "sweater, jumper",
+            "jumper, sweater",
+            "sweater => jumper",
+            "Either order works the same way"
+          ],
+          correct: 1,
+          explain: "The term the synonym is created from — the first one in the set — needs to be the one indexed exactly as written: \"jumper\". So jumper, sweater is correct, and sweater, jumper has them the wrong way round. sweater => jumper is an Explicit Replacement, not a Synonyms-type set."
+        },
+        {
+          q: "An Explicit Replacement <code>jumper => sweater</code> is created for the <strong>Wool Jumper</strong>. What happens with the searches \"jumper\" and \"sweater\"?",
+          options: [
+            "Both find the product",
+            "Neither finds the product",
+            "\"jumper\" finds it, \"sweater\" doesn't",
+            "\"sweater\" finds it, \"jumper\" doesn't anymore"
+          ],
+          correct: 3,
+          explain: "Explicit Replacement replaces the indexed term with the other one: it's as if the product were indexed as \"Wool Sweater\". The original term, \"jumper\", stops working as a search term, and only \"sweater\" finds it."
+        },
+        {
+          q: "A Store wants both \"mobile\" and \"cellphone\" to find its products titled with \"mobile\". Which type should it use?",
+          options: [
+            "Synonyms: mobile, cellphone",
+            "Explicit Replacement: mobile => cellphone",
+            "Explicit Replacement: cellphone => mobile",
+            "None — only one term can ever find a product"
+          ],
+          correct: 0,
+          explain: "With the Synonyms type both terms keep working, and \"mobile\", the indexed term, goes first. mobile => cellphone would make \"mobile\" stop working, and cellphone => mobile starts from a term that isn't indexed."
+        },
+        {
+          q: "A Store selling kitchenware has its industry set to <strong>Fashion</strong> by mistake. What happens with AI SynonymBoost?",
+          options: [
+            "Nothing — AI SynonymBoost ignores the industry setting",
+            "Its suggestions are likely to be irrelevant, since it looks for synonym patterns specific to the configured industry and language",
+            "It stops suggesting synonyms altogether",
+            "It accepts every suggestion automatically"
+          ],
+          correct: 1,
+          explain: "AI SynonymBoost looks for synonym patterns specific to the Store's configured industry and language, so a wrong industry leads to irrelevant suggestions. Suggestions are never accepted automatically: each one is accepted with \"+\" or rejected with the trash icon."
+        },
+        {
+          q: "Which of these is written as an Explicit Replacement?",
+          options: [
+            "mobile, cellphone",
+            "mobile; cellphone",
+            "mobile => cellphone",
+            "mobile + cellphone"
+          ],
+          correct: 2,
+          explain: "Explicit Replacement is written as Term1 => Term2. A comma-separated list, like mobile, cellphone, is the Synonyms type."
         }
       ]
     },
@@ -637,7 +641,7 @@ const COURSE = {
               <p>Before copying anything, it's worth checking that <strong>product names</strong> and the two Search Engines' <strong>languages</strong> actually match between source and destination — a mismatched value may simply not be recognized once it lands on the target Search Engine.</p>
 
               <h3>How to Use It</h3>
-              <figure class="lesson-figure lesson-figure-right" style="width: 400px;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 400px; max-width: 55%;">
                   <img src="img/copy-settings-dialog.png" alt="Copy Settings confirmation dialog after clicking Apply, showing the choice between Copy and Add to Existing Settings and Copy and Replace Existing Settings" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -768,7 +772,7 @@ const COURSE = {
         blocks: [
           {
             html: `
-              <figure class="lesson-figure lesson-figure-right" style="width: 400px;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 400px; max-width: 55%;">
                   <img src="img/redirections-add-form.png" alt="Add redirection form with Redirection name, Status toggle, Destination URL, a search term set to Broad Match, and the Enable automatic redirection checkbox" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -896,7 +900,7 @@ const COURSE = {
         blocks: [
           {
             html: `
-              <figure class="lesson-figure lesson-figure-right" style="width: 380px;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 400px; max-width: 55%;">
                   <img src="img/banners-add-form.png" alt="Add Banner form with Name, Status, Default Banner toggle, an optional Duration date range, search terms, and image and Target link fields" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -939,12 +943,12 @@ const COURSE = {
             heading: "Banner Performance",
             pageBreak: true,
             html: `
-              <p>The Banners list shows, per banner:</p>
-              <figure class="lesson-figure lesson-figure-left" style="width: 380px;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 440px; max-width: 55%;">
                   <img src="img/banners-list-metrics.png" alt="Banners list showing Name, search terms, Impressions, Clicks, CTR, active date period, Status, and a star marking the current default banner" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
-              <table class="theory-table">
+              <p>The Banners list shows, per banner:</p>
+              <table class="theory-table" style="clear: none; width: auto;">
                     <thead><tr><th>Column</th><th>What it shows</th></tr></thead>
                     <tbody>
                       <tr><td><strong>Name</strong></td><td>The banner's name</td></tr>
@@ -1101,17 +1105,17 @@ const COURSE = {
             question: "You go check the data feed and find two other versions of the whole catalogue floating around from an earlier attempt at grouping.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Analyze the 3 full data feeds below and figure out which one actually gets the AXEL RUNNER's variants — and every other product's — to group correctly.",
             beforeFields: `
               <div class="feed-preview-grid">
-                <div class="feed-preview-card">
+                <div class="feed-preview-card" style="flex-basis: 0; min-width: 200px;">
                   <p class="feed-preview-label">Data feed 1</p>
                   <img src="img/final-group-feed1-preview.png" alt="Preview of the full catalogue feed: id, title, price, color, size and the rest of the usual columns — no group_id or group_leader column at all" data-action="zoom-image" class="feed-preview-img">
                   <a href="feeds/doostride-group-feed-1.csv" download class="btn btn-ghost feed-download-btn">Download data feed 1</a>
                 </div>
-                <div class="feed-preview-card">
+                <div class="feed-preview-card" style="flex-basis: 0; min-width: 200px;">
                   <p class="feed-preview-label">Data feed 2</p>
                   <img src="img/final-group-feed2-preview.png" alt="Preview of the full catalogue feed with a group_id column added, but spelled differently on each row of the same product — for AXEL RUNNER: 7841002000, 78410020000, 784100200 — and an empty group_leader column" data-action="zoom-image" class="feed-preview-img">
                   <a href="feeds/doostride-group-feed-2.csv" download class="btn btn-ghost feed-download-btn">Download data feed 2</a>
                 </div>
-                <div class="feed-preview-card">
+                <div class="feed-preview-card" style="flex-basis: 0; min-width: 200px;">
                   <p class="feed-preview-label">Data feed 3</p>
                   <img src="img/final-group-feed3-preview.png" alt="Preview of the full catalogue feed with a group_id column set to the group leader's own id on every row of that group — for AXEL RUNNER: 7841002000 on all 5 rows — and group_leader set to true on exactly the leader row, false on the rest" data-action="zoom-image" class="feed-preview-img">
                   <a href="feeds/doostride-group-feed-3.csv" download class="btn btn-ghost feed-download-btn">Download data feed 3</a>
@@ -1169,7 +1173,7 @@ const COURSE = {
             title: "5. Banners",
             question: "Black Friday is coming up, and Amanda wants a banner live for it, linking to Doostride's campaign landing page.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Analyze the 3 banner configurations below and choose the one that actually does what Amanda wants:",
             fields: [
-              { key: "correctbanner", type: "image-select", layout: "column", thumbCols: 3, options: [
+              { key: "correctbanner", type: "image-select", layout: "column", thumbCols: 3, mediaWidth: 800, options: [
                 { value: "a", src: "img/final-banner-a.png", alt: "Add Banner form for 'BLACK FRIDAY', with the Default Banner toggle turned on instead of search terms, and Target link set to the Black Friday landing page", caption: "Option A" },
                 { value: "b", src: "img/final-banner-b.png", alt: "Add Banner form for 'BLACK FRIDAY' with the search term black friday set to Exact Match, and Target link set to the Black Friday landing page", caption: "Option B" },
                 { value: "c", src: "img/final-banner-c.png", alt: "Add Banner form for 'BLACK FRIDAY' with the search term black friday set to Broad Match, a Duration covering the Black Friday weekend, and Target link set to the Black Friday landing page", caption: "Option C" }

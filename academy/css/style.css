@@ -163,6 +163,9 @@ html, body {
 }
 .main::-webkit-scrollbar { display: none; }
 .main-inner { max-width: 1200px; margin: 0 auto; }
+/* Course lessons, quizzes and exercises: cap the width so floated images keep
+   matching the height of the text beside them on wide screens */
+.main-inner:has(> .page-head) { max-width: 1000px; }
 .main-inner p, .main-inner li { text-align: justify; }
 
 .doclinks {
@@ -361,7 +364,7 @@ code { background: var(--bg-page); border: 1px solid var(--border); padding: 1px
 }
 .example-caption svg { display: block; }
 .theory-callout {
-  clear: both;
+  display: flow-root; /* sits beside a floated image instead of dropping below it */
   margin: 16px 0; padding: 13px 18px;
   border-left: 3px solid var(--accent);
   background: var(--accent-soft);

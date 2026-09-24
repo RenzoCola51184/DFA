@@ -73,8 +73,9 @@ one long run of paragraphs:
   (width: 100%) — even a very wide one floats to one side at ~420-520px
   with the text wrapping around it (it can still be enlarged via zoom).
   <h3> sub-headings do NOT clear floats (the next sub-topic flows up beside
-  the image too); tables and callouts DO clear, so they're never squeezed
-  beside an image. The zoom badge must sit inside a `position: relative`
+  the image too) and callouts don't either (they sit beside the image,
+  narrowed, via `display: flow-root`); tables DO clear, so they're never
+  squeezed beside an image. See section 2b for the full layout rules. The zoom badge must sit inside a `position: relative`
   wrapper (`.lesson-figure` and `.diagram-figure` both are).
 - Don't force structure: a plain step list or two short paragraphs can
   stay as they are.
@@ -107,7 +108,7 @@ RESTRUCTURING AN EXISTING LESSON — NEVER REMOVE CONTENT
         </svg>
       </p>
     </figure>
-  The default width is 320px — override with an inline `style="width: NNNpx;"`
+  The default width is 320px — override with an inline `style="width: NNNpx; max-width: 55%;"`
   case by case so the image's height roughly matches the height of the text
   it floats beside (neither the text nor the image should trail far below
   the other — check in the browser and adjust the width up or down).
@@ -133,6 +134,89 @@ RESTRUCTURING AN EXISTING LESSON — NEVER REMOVE CONTENT
   using the feed-preview-card pattern — see section 4.
 - When several of these preview cards sit side by side, wrap them in
   `.feed-preview-grid` (flex row, wraps on narrow screens, NOT a column).
+
+2b. LESSON LAYOUT — REFERENCE: Module 1 Section 3, "Grouping Product Variants"
+--------------------------------------------------------------------------------
+This lesson's page structure, text/image arrangement and image sizes are the
+approved model for every lesson and exercise. Relaying out a page changes
+ONLY layout and images — never the content (verify with a text diff, below).
+- FIGURES: every image is a floated
+    <figure class="lesson-figure lesson-figure-left|right" style="width: NNNpx; max-width: 55%;">
+  with the zoom badge, placed right BEFORE the paragraph(s) it goes with.
+  Always add `max-width: 55%` so on narrower screens the text beside it never
+  shrinks to a 2-3 word column. Sides alternate left/right.
+- SIZES: tune the width so the image's rendered height ≈ the height of the
+  text beside it. Rough guide: wide/short images (feed tables) 440-500px;
+  Search Layer / Admin Panel screenshots 300-420px.
+- NO EMPTY GAPS:
+  - Never put `<div style="clear: both;"></div>` right before an <h3> if it
+    leaves empty space beside an image: let the new sub-topic (h3 + text)
+    start beside the image.
+  - A `clear` is only for two consecutive image + paragraph pairs, so the
+    second image doesn't sit next to the first.
+  - Never leave a tall image beside one short line: move the figure one or
+    two paragraphs earlier/later WITHIN the same sub-topic, next to a longer
+    run of text (moving a figure is fine; moving text is not).
+  - `.theory-callout` sits beside a floated image (CSS: `display:
+    flow-root`, no `clear`), narrowed so it doesn't overlap it — use this to
+    fill the space instead of leaving it empty.
+- FILLING A GAP (image noticeably taller than the text beside it, checked
+  at 1920 / 1400 / 1200 wide), in this order of preference:
+  1. Move the figure one or two paragraphs earlier/later within the same
+     sub-topic, next to a longer run of text.
+  2. Remove a `clear` that isn't needed (never leave two images side by
+     side).
+  3. Adjust the figure width (keeping `max-width: 55%`) without making it
+     unreadable.
+  4. Crop the image's empty margins so it's shorter.
+  5. Only then, add or extend ONE sentence that is fully consistent with
+     the lesson: describe what the image shows (e.g. "each result with its
+     image, title and price, and the Brands filter counts two Ray-Ban
+     products and one Gucci product"), or restate a fact the lesson already
+     gives elsewhere. Never invent behaviour, numbers, limits or steps, never
+     add generic filler, never distort the context. Quizzes are not touched.
+- IMAGES:
+  - Crop tight: no big empty white/blank areas (crop with PIL). A
+    screenshot with a huge empty margin renders tiny and wastes space.
+  - Generated images are rendered at 2x (device scale factor 2) so they stay
+    crisp when zoomed.
+  - Feed/table images are generated PNGs in one style (see
+    img/grouping-feed-group-id.png): white bg, header row (243,244,248), bold
+    dark header, DejaVu Sans 13px at 2x, alternating row tint (247,248,251),
+    thin row lines (226,228,236). The data must match the text and the
+    downloadable CSV exactly.
+  - Search Layer examples (e.g. img/grouping-layer-ungrouped.png /
+    -grouped.png) are an HTML mock of the Search Layer (search bar, filter
+    column on the left, "N results found", product cards) screenshotted with
+    headless Chrome at 2x and cropped to the content. Product photos come
+    from real sources (e.g. the support article's images), never invented.
+    Show only the filters relevant to the point being made.
+  - A new image is created only when the user asks for it or when the text
+    already describes that data/screen and has no image for it — never
+    invent content for it.
+- EXERCISES: final-exercise steps keep the scenarioImage / scenarioFeed +
+  scenario split system (section 6). Only images (crop, crispness) and the
+  layout flags (smallMedia / mediumMedia / mediaRight) are tuned; related
+  cards (e.g. the three feed previews) must be the same size so none stands
+  out and hints at the answer.
+  With the 1000px cap, image-choice steps whose thumbnails don't fit beside
+  the text use `stacked: true` (images full width, question below) instead
+  of a `mediaWidth` that leaves an empty strip or overflows the card. A
+  scenarioImage shorter than its text column can use `imgClass:
+  "taller-scenario-img"`.
+- VERIFY:
+  - `node -c` the data file.
+  - Text diff: strip tags plus `alt=` / `style=` from the old and new file;
+    the visible text must be identical.
+  - Screenshot every lesson page (every pageBreak sub-page) and every
+    exercise step touched, at window widths 1920, 1400 AND 1200, and fix any
+    gap. Course pages are capped at 1000px wide (`.main-inner:has(>
+    .page-head)` in style.css) so a fixed-px image keeps matching its text
+    on wide screens; if a gap remains, first move the figure, then add a
+    sentence consistent with the content (e.g. describing what the image
+    shows) — never pad with filler.
+  - Bump the `?v=` cache version of every edited .js/.css in the section
+    .html files.
 
 3. GIFS / ANIMATIONS
 --------------------------------------------------------------------------------
@@ -248,6 +332,8 @@ RESTRUCTURING AN EXISTING LESSON — NEVER REMOVE CONTENT
   and its side note, the final-exercise intro and steps, the reply
   message, and quiz/exercise questions that set up a scenario for the
   learner ("You type 'comfort' into Results Preview...").
+- The person searching in the store is always the "user" / "users" —
+  never "shopper" / "customer".
 - Name settings exactly as the Admin Panel labels them, never with a
   generic synonym: Relevance Criteria sort orders are "Highest to lowest" /
   "Lowest to highest" (numeric) and "A to Z" / "Z to A" (text) — NOT
@@ -429,6 +515,12 @@ CHECKLIST TO RUN AGAINST ANY OTHER SECTION
 [ ] No two consecutive headless theory blocks (merge them).
 [ ] Long lessons with 2+ named subtopics are split into sub-pages via `pageBreak`.
 [ ] Every image has the magnifying-glass badge, never a text hint.
+[ ] No gaps beside images at 1920, 1400 and 1200 wide (section 2b, "Filling
+    a gap"); any sentence added to fill one is consistent with the lesson.
+[ ] Layout follows section 2b ("Grouping Product Variants" reference):
+    `max-width: 55%` on every figure, no clear before an <h3> that leaves a
+    gap, callouts beside images when that fills space, images cropped tight
+    and rendered at 2x, checked at 1400 and 1200 wide.
 [ ] Image widths are tuned so image height ≈ beside-text height (no big
     empty gap under either one).
 [ ] Any multi-shot "here's the flow" sequence is a carousel, not a stack.
