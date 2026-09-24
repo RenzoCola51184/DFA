@@ -34,6 +34,68 @@ DOOFINDER ACADEMY — STYLE GUIDE
   "later in the course" — NEVER name a specific module or section number.
   ("...will be covered in more detail later in the course.")
 
+1b. THEORY LAYOUT INSIDE A LESSON (reference: Module 1 Section 2,
+    "Results Preview" and its "Stemming and Character Cleaning" sub-page)
+--------------------------------------------------------------------------------
+Every lesson's theory is laid out as short, scannable sub-topics instead of
+one long run of paragraphs:
+- Keep the `lead` as the one-sentence framing at the top (or, if the lesson
+  opens with a diagram, it can live as the first paragraph of the
+  note beside the diagram).
+- Inside a block, split the content with <h3> sub-headings, one per
+  sub-topic (e.g. "What It Shows", "Score", "Query Types", "In Practice").
+  <h2> stays reserved for the block `heading` (it drives the doc-links
+  scroll-spy); <h3> is purely visual.
+- Anything that is naturally a list of "item → meaning / example" becomes a
+  `<table class="theory-table">`: query types (type | when | example),
+  score parts (value | what it means), selector types, feed fields,
+  formats, wildcard patterns (pattern | matches | doesn't match), boosting
+  values, Exact/Broad Match, AND/OR conditions, synonym types, form fields,
+  Add/Replace options... Put code-like values in <code>, labels in <strong>.
+- The single most important rule or gotcha of a sub-topic goes in ONE
+  `<p class="theory-callout">` (e.g. the match_and → match_or → fuzzy
+  fallback order, "Replace can't be undone", "only one default banner").
+  Don't stack several callouts in a row.
+- Images sit INSIDE the flowing text, magazine/newspaper-style: a float
+  (`<figure class="lesson-figure lesson-figure-left|right" style="width: NNNpx;">`)
+  placed right before the paragraphs it goes with, so the text wraps around
+  it and keeps flowing underneath once it's past the image — never a
+  two-column split, which leaves an empty gap under the shorter column.
+  Carousels do the same with `install-step-carousel float-left`; an SVG
+  diagram with `<div class="diagram-figure lesson-figure-left">`.
+  Alternate left/right between consecutive images for a magazine feel.
+  When two image + paragraph pairs follow each other (e.g. two
+  configurations being compared), put a `<div style="clear: both;"></div>`
+  between the pairs so the second image never sits beside the first one,
+  alternate the sides (first left, second right), and shrink the images
+  (~300px) so each one is roughly as tall as the paragraph next to it.
+  This applies to wide screenshots too: NEVER put an image at full width
+  (width: 100%) — even a very wide one floats to one side at ~420-520px
+  with the text wrapping around it (it can still be enlarged via zoom).
+  <h3> sub-headings do NOT clear floats (the next sub-topic flows up beside
+  the image too); tables and callouts DO clear, so they're never squeezed
+  beside an image. The zoom badge must sit inside a `position: relative`
+  wrapper (`.lesson-figure` and `.diagram-figure` both are).
+- Don't force structure: a plain step list or two short paragraphs can
+  stay as they are.
+- Concept examples (stemming, character cleaning, query types...) are
+  generic, simple and in English (run/runs/running, café/cafe,
+  résumé/resume, "red t-shirt") — NOT taken from the Doostride feeds or
+  products, unless the lesson is explicitly about Doostride's own data
+  (Results Preview screenshots, final exercise). Any stem/token shown must
+  be verified with a real stemmer (Snowball English), not guessed.
+
+RESTRUCTURING AN EXISTING LESSON — NEVER REMOVE CONTENT
+- When converting an existing lesson to this layout, change ONLY the
+  structure. Every concept, example, number, limit, product name and caveat
+  must survive — keep the original wording wherever it fits, and only
+  rephrase minimally to fit a table cell. Shortening or "simplifying" is a
+  separate request and needs to be asked for explicitly.
+- Verify it: split the old text (git HEAD) into clauses, list every clause
+  not present verbatim in the new text, and check each one by hand until
+  its concept is found in the new version. Also check the word count
+  didn't drop noticeably and every image/src is still there.
+
 2. IMAGES
 --------------------------------------------------------------------------------
 - A single illustrative image inside theory copy uses:
@@ -131,9 +193,39 @@ DOOFINDER ACADEMY — STYLE GUIDE
   Floats (`.lesson-figure-left/right`, `float-left` on a carousel) are still
   the right tool for a plain image beside a paragraph of running theory
   text with no interactive fields attached.
+- Final-exercise step titles are named after the FEATURE the step works
+  on, not after the problem: "3. Boosting", "5. Banners". When a feature
+  takes two steps (e.g. diagnose, then configure), both share the number
+  and add "— Part 1" / "— Part 2" ("2. Relevance Criteria — Part 1",
+  "2. Relevance Criteria — Part 2"). A first step that isn't about a
+  single feature (e.g. picking the right feature for each problem) keeps
+  a descriptive title.
+- The first step of each feature (its "Part 1", or its only step) opens
+  with "Quick reminder of what needs fixing: …" — the problem from the
+  intro list restated in DIFFERENT words (not copy-pasted) and without
+  hinting at the answer. Say it once: if the step already has a note that
+  restates the problem (e.g. an image-select `trailingNote`), prefix that
+  note instead of adding a second paragraph.
 - Each final-exercise step has a numbered title ("4. ...") and the header
   shows both the progress dots AND a plain-language "Step X of N" label
   next to them (`.exercise-stepper` / `.exercise-step-label`).
+- A step's `explain` only justifies THAT step's answer. It must never hint
+  at how to solve a later step (no "like Availability and Price", no
+  "brand = Nike or Adidas", no "can be matched partially" when those are
+  exactly what the next steps ask the learner to configure). Keep it to
+  what each feature does in general.
+- After the final reply message, a primary button leads to the next
+  section (e.g. "Go to Module 1 Section 2 →"). It's set per data file with
+  `nextSection: { label, href }` at the top of COURSE — a NEW section must
+  set it too (the last one points back to the Course Path), and the
+  previous last section must be updated to point to the new one.
+- Once a final-exercise step is answered, the step stays on screen exactly
+  like a quiz question: its options/fields stay visible and locked, the
+  correct option is marked green and the learner's wrong pick red (a
+  wrong dropdown/text value also shows "Correct answer: …" under it), and
+  the explanation appears below with the Continue button. The options
+  never disappear behind the explanation (handled in app.js by the
+  `locked` render of each phase — no per-step setup needed).
 - Every correct-answer feedback line during a quiz shows the points earned
   for that question immediately ("Correct! +N points"), not just a final
   tally at the end of the quiz.
@@ -142,8 +234,25 @@ DOOFINDER ACADEMY — STYLE GUIDE
 --------------------------------------------------------------------------------
 - The course is a simulated support case: the learner is Mark Park, a
   junior developer at Doostride (an online footwear/streetwear store),
-  reporting to John Smith (CEO) and Amanda House (ecommerce manager).
+  reporting to John River (CEO) and Amanda House (ecommerce manager).
   Keep every section's narrative consistent with that framing.
+- Theory copy (every lesson's `lead` and `blocks`) is IMPERSONAL — never
+  "you"/"your" addressing the learner. Use Doofinder, the feature, the
+  Store or a passive/neutral phrasing instead:
+    "With Doofinder you can configure..." → "Doofinder makes it possible to configure..."
+    "your Search Engine" → "a Search Engine" / "the Search Engine"
+    "In this lesson you'll learn..." → "This lesson covers..."
+    "you can decide between X or Y" → "X allows choosing between..."
+    "Before You Copy" (heading) → "Before Copying"
+  "You"/second person is only for the NARRATIVE layer: the intro message
+  and its side note, the final-exercise intro and steps, the reply
+  message, and quiz/exercise questions that set up a scenario for the
+  learner ("You type 'comfort' into Results Preview...").
+- Name settings exactly as the Admin Panel labels them, never with a
+  generic synonym: Relevance Criteria sort orders are "Highest to lowest" /
+  "Lowest to highest" (numeric) and "A to Z" / "Z to A" (text) — NOT
+  "ascending/descending". Same for toggles, buttons and options quoted in
+  theory or quizzes.
 - Explanations for a wrong quiz option should say why it's wrong, not just
   that it is — the `explain` field is a teaching moment, not a scoreboard.
 - Keep sentences plain and un-padded — cut generic "best practice" advice
@@ -197,7 +306,7 @@ rules below.
           See FINAL EXERCISE below.
 
 - PERSONA CONTINUITY: keep reusing Doostride and its cast (Mark Park,
-  John Smith, Amanda House, and now Samanta) unless told otherwise — a new
+  John River, Amanda House, and now Samanta) unless told otherwise — a new
   section is a new chapter in the same running story, not a new company.
   Whoever is named in the narrative hint as "asking" becomes the message
   sender; whoever is named as the learner becomes "you" for that section's
@@ -220,8 +329,9 @@ rules below.
 - THEORY BLOCKS (per lesson): convert the linked support-doc content into
   `theory: { lead, blocks: [...] }`, following ALL the rules already in this
   guide (section 1: merge headless blocks; pageBreak only for a real named
-  subtopic; section 2: one figure per subtopic sized to match the text
-  beside it; section 7: keep the tone plain, cut generic filler). Do not
+  subtopic; section 1b: h3 sub-topics, tables, callouts, floating images;
+  section 2: one figure per subtopic sized to match the text beside it;
+  section 7: keep the tone plain, cut generic filler). Do not
   invent product behavior — only reformat and illustrate what the doc
   (or previously verified lesson content) actually says.
 
@@ -231,11 +341,49 @@ rules below.
   or edge cases (the kind of thing a quiz should actually catch someone on).
   If a lesson already has a verified quiz from an earlier draft, keep it —
   don't rewrite working questions just to rewrite them.
+  The correct answer must NOT sit mostly in the same position: spread
+  `correct` evenly across 0/1/2/3 within each lesson and across the whole
+  section (shuffle the options, then set `correct` to the answer's new
+  index — and double-check options[correct] is still the right answer).
+  When a lesson has a sub-page (e.g. "Stemming and Character Cleaning"),
+  its quiz covers both pages — at least one question per sub-topic.
+  Avoid two questions with the same answer (e.g. two that both resolve to
+  "fuzzy"); test different concepts instead.
+- WORKED EXAMPLES: whenever a lesson explains a mechanic that produces a
+  result (a score, an order, a match / no match), add a small worked example
+  right after the rule — usually a theory-table with generic products and
+  their numbers (e.g. Boosting: Product | Boosting | Final score | Position;
+  Relevance Criteria: the same four products sorted by two different
+  configurations; Search Fields: the same query under two weight setups).
+  Mark made-up scores as "simplified numbers, for illustration only" when
+  they don't reflect how Doofinder really computes them.
+- QUIZ = ONLY WHAT THE LESSON TEACHES: every question (and its correct
+  answer and `explain`) must be answerable from the lesson's own theory.
+  If a fact isn't in the lesson (e.g. the valid range of df_manual_boost),
+  don't ask about it — replace the question with one on something the
+  lesson does cover, rather than adding the fact to the theory just to
+  justify the question.
+- EXAMPLE-BASED QUIZ QUESTIONS: for every worked example in the theory,
+  add at least one quiz question that checks the learner understood it,
+  built on a DIFFERENT example (other products, other fields, other numbers)
+  — never the same example copied from the theory, so it tests the rule and
+  not memory. E.g. theory uses "boots" with Relevance 4 vs 2 × 1.5; the quiz
+  uses "sandals" with 6 vs 3 × 1.5. The `explain` walks through the maths.
 
 - FINAL EXERCISE: one phase per lesson topic, in the same order as the
   intro's complaint list, using only the established field types (select,
-  choice, text with freeform:true, image-select) — never invent a new field
-  type. Grouping/diagnostic topics that need two steps (e.g. "why isn't X
+  choice, text with freeform:true, image-select, multi-choice) — never
+  invent a new field type.
+  `multi-choice` = a row of toggle buttons where the learner switches on
+  EVERY right option (correct: an array), then clicks Continue. Use it
+  instead of a column of "Not used / value" dropdowns whenever the task is
+  "which of these fields/items belong here?" — e.g. "Relevance Criteria —
+  which fields to add", listing all the indexed fields as buttons.
+  The buttons show FIELD NAMES only (brand, category…), never "field:
+  value" pairs — the values are worked out in the "Part 2" step. The
+  Part 1 question describes the problem in general terms (what's wrong and
+  what the goal is), without replaying a specific search or product, and
+  its `explain` doesn't reveal the values either. Grouping/diagnostic topics that need two steps (e.g. "why isn't X
   working" before "fix X") get two phases; everything else gets one. End
   with `doneNote` (a one-sentence "state of the store now" recap) and
   `replyButtonLabel` (e.g. "Reply to Amanda") — NEVER leave these two
@@ -251,6 +399,15 @@ rules below.
   and one sentence describing exactly what it should show (this is the
   only manual step left for a new section — everything else in this
   workflow is self-contained).
+  PREFERRED SOURCE — the lesson's own support article: before leaving a
+  placeholder, check the images on the lesson's `docUrl` page
+  (support.doofinder.com). Download the ones that illustrate the lesson
+  (the feature's form, a rule pop-up, a worked example and its result in
+  the Search Layer), save them under img/ with a descriptive name, LOOK at
+  each one, and write the alt + the text beside it from what the image
+  actually shows (the article's text and its screenshots don't always
+  match — e.g. the Custom Results "Learn By Example" text talks about Lego
+  while the screenshots show sunglasses; describe the screenshot).
   EXCEPTION — tabular/data content (a feed preview, a CSV comparison):
   generate this yourself as a real PNG (a simple rendered table, see the
   Python/PIL snippet used for the Section 3 grouping-feed previews) plus
@@ -294,3 +451,14 @@ CHECKLIST TO RUN AGAINST ANY OTHER SECTION
 [ ] No theory paragraph spells out a feature's Admin Panel navigation path
     when the accompanying screenshot already shows it (in-screen click
     sequences and quiz "where is it configured" questions are fine).
+[ ] Theory uses <h3> sub-topics, theory-table for item → meaning lists,
+    and at most one theory-callout per sub-topic (section 1b).
+[ ] Images float inside the text (magazine-style): text wraps around them
+    and continues underneath — no empty gap under the text beside an image.
+[ ] Concept examples are generic English examples, not Doostride feed data.
+[ ] Restructuring removed NO content (clause-by-clause check vs git HEAD).
+[ ] Quiz correct answers are spread evenly across positions 0-3.
+[ ] Theory copy is impersonal — no "you"/"your" outside the narrative layer.
+[ ] Every mechanic with a result (score, order, match) has a worked example.
+[ ] Every worked example has a quiz question built on a different example.
+[ ] Every quiz question is answerable from that lesson's theory alone.

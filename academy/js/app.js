@@ -59,7 +59,7 @@ function renderSlackCard(sl) {
       <div class="slack-avatar ${sl.self ? "slack-avatar-self" : ""}">${sl.name.split(" ").map(w => w[0]).join("")}</div>
       <div class="slack-msg-body">
         <div class="slack-msg-head"><span class="slack-msg-name">${sl.name}</span><span class="slack-msg-time">${(sl.times && sl.times[i]) || ""}</span></div>
-        <p>${p}</p>
+        ${[].concat(p).map(t => `<p>${t}</p>`).join("")}
       </div>
     </div>`).join("");
   return `
@@ -197,7 +197,7 @@ function renderTheoryHTML(section, blocks, showLead) {
   }).join("");
   return `
     <div class="card theory-card">
-      ${showLead ? `<p class="theory-lead">${section.theory.lead}</p>` : ""}
+      ${showLead && section.theory.lead ? `<p class="theory-lead">${section.theory.lead}</p>` : ""}
       ${blocksHTML}
     </div>`;
 }
@@ -344,6 +344,10 @@ function validateExerciseField(field, value) {
   const v = (value || "").trim();
   if (field.freeform) return v.length > 0;
   if (field.acceptAny) return field.acceptAny.some(a => v.toLowerCase() === a.toLowerCase());
+  if (field.type === "multi-choice") {
+    const picked = v ? v.split("|").sort() : [];
+    return picked.join("|") === [...field.correct].sort().join("|");
+  }
   if (field.type === "text") return v.toLowerCase() === (field.correct || "").toLowerCase();
   return v === field.correct;
 }
@@ -370,6 +374,7 @@ function handleExerciseSubmit(section, phaseIndex) {
 
   if (phase.key === "store-ids" && allValid) {
     try { localStorage.setItem("dfa_demo_store_id", values.storeId.trim()); } catch (e) {}
+    try { localStorage.setItem("dfa_demo_hash_en", values.hashEN.trim()); } catch (e) {}
   }
 
   if (phase.reveal) {
@@ -445,7 +450,16 @@ function advanceExercise(section) {
   renderMain();
 }
 
-function renderImageChoicePhase(sectionId, phaseIndex, phase, field, ex) {
+/* Once a step has been answered (its explanation is showing), its options stay
+   on screen, locked, and are marked the same way as in the quizzes: the correct
+   option in green, the learner's wrong pick in red. */
+function lockedChoiceClass(field, value, savedValue) {
+  if (value === field.correct) return " locked correct";
+  if (value === savedValue) return " locked wrong";
+  return " locked";
+}
+
+function renderImageChoicePhase(sectionId, phaseIndex, phase, field, ex, locked) {
   const id = `ex-f-${sectionId}-${phaseIndex}-${field.key}`;
   const savedValue = (ex.values[phaseIndex] && ex.values[phaseIndex][field.key]) || "";
   const hasError = !!(ex.errors[phaseIndex] && ex.errors[phaseIndex][field.key]);
@@ -455,10 +469,12 @@ function renderImageChoicePhase(sectionId, phaseIndex, phase, field, ex) {
       ${ZOOM_BADGE}
       ${o.caption ? `<div class="image-choice-caption">${o.caption}</div>` : ""}
     </div>`).join("");
-  const options = field.options.map(o => `
+  const options = field.options.map(o => locked
+    ? `<div class="choice-option${lockedChoiceClass(field, o.value, savedValue)}">${o.caption || o.value}</div>`
+    : `
     <div class="choice-option ${savedValue === o.value ? "selected" : ""}" data-action="select-choice-option" data-field-id="${id}" data-value="${o.value}" data-section-id="${sectionId}" data-phase="${phaseIndex}">${o.caption || o.value}</div>`).join("");
   const rowStyle = field.thumbCols ? ` style="grid-template-columns: repeat(${field.thumbCols}, 1fr);"` : "";
-  const mediaStyle = field.mediaWidth ? ` style="width: ${field.mediaWidth}px; max-width: ${field.mediaWidth}px;"` : "";
+  const mediaStyle = field.mediaWidth ? ` style="width: ${field.mediaWidth}px; max-width: 100%;"` : "";
   const remainder = field.thumbCols ? field.options.length % field.thumbCols : 0;
   const trailingNoteHTML = (field.trailingNote && remainder !== 0)
     ? `<div class="image-choice-note" style="grid-column: span ${field.thumbCols - remainder};">${field.trailingNote}</div>`
@@ -473,14 +489,14 @@ function renderImageChoicePhase(sectionId, phaseIndex, phase, field, ex) {
         <div class="field-row">
           ${field.label ? `<label class="field-label">${field.label}</label>` : ""}
           <input type="hidden" id="${id}" value="${savedValue}" />
-          <div class="choice-grid ${field.layout === "column" ? "choice-grid-column" : ""} ${hasError ? "error" : ""}">${options}</div>
-          ${hasError ? `<div class="field-error-msg">Not quite — check your choice and try again.</div>` : ""}
+          <div class="choice-grid ${field.layout === "column" ? "choice-grid-column" : ""} ${hasError && !locked ? "error" : ""}">${options}</div>
+          ${hasError && !locked ? `<div class="field-error-msg">Not quite — check your choice and try again.</div>` : ""}
         </div>
       </div>
     </div>`;
 }
 
-function renderExerciseField(sectionId, phaseIndex, field, ex) {
+function renderExerciseField(sectionId, phaseIndex, field, ex, locked) {
   const id = `ex-f-${sectionId}-${phaseIndex}-${field.key}`;
   const savedValue = (ex.values[phaseIndex] && ex.values[phaseIndex][field.key]) || "";
   const hasError = !!(ex.errors[phaseIndex] && ex.errors[phaseIndex][field.key]);
@@ -489,22 +505,43 @@ function renderExerciseField(sectionId, phaseIndex, field, ex) {
     const opts = [`<option value="">Choose…</option>`]
       .concat(field.options.map(o => `<option value="${o}" ${savedValue === o ? "selected" : ""}>${o}</option>`))
       .join("");
-    inputHTML = `<select id="${id}" class="field-input ${hasError ? "error" : ""}">${opts}</select>`;
+    inputHTML = locked
+      ? `<select id="${id}" class="field-input locked ${hasError ? "field-wrong" : "field-correct"}" disabled>${opts}</select>
+         ${hasError ? `<div class="field-correct-answer">Correct answer: <strong>${field.correct}</strong></div>` : ""}`
+      : `<select id="${id}" class="field-input ${hasError ? "error" : ""}">${opts}</select>`;
   } else if (field.type === "choice") {
-    const buttons = field.options.map(o => `
+    const buttons = field.options.map(o => locked
+      ? `<div class="choice-option${lockedChoiceClass(field, o, savedValue)}">${o}</div>`
+      : `
       <div class="choice-option ${savedValue === o ? "selected" : ""}" data-action="select-choice-option" data-field-id="${id}" data-value="${o}" data-section-id="${sectionId}" data-phase="${phaseIndex}">${o}</div>`).join("");
     inputHTML = `
       <input type="hidden" id="${id}" value="${savedValue}" />
-      <div class="choice-grid ${field.layout === "column" ? "choice-grid-column" : ""} ${hasError ? "error" : ""}">${buttons}</div>`;
+      <div class="choice-grid ${field.layout === "column" ? "choice-grid-column" : ""} ${hasError && !locked ? "error" : ""}">${buttons}</div>`;
+  } else if (field.type === "multi-choice") {
+    /* A row of toggle buttons: every right option has to be switched on. */
+    const picked = savedValue ? savedValue.split("|") : [];
+    const buttons = field.options.map(o => {
+      if (locked) {
+        const cls = field.correct.includes(o) ? " locked correct" : picked.includes(o) ? " locked wrong" : " locked";
+        return `<div class="choice-option${cls}">${o}</div>`;
+      }
+      return `<div class="choice-option ${picked.includes(o) ? "selected" : ""}" data-action="toggle-multi-option" data-field-id="${id}" data-value="${o}" data-section-id="${sectionId}" data-phase="${phaseIndex}">${o}</div>`;
+    }).join("");
+    inputHTML = `
+      <input type="hidden" id="${id}" value="${savedValue}" />
+      <div class="choice-grid ${hasError && !locked ? "error" : ""}">${buttons}</div>`;
   } else {
     const safeVal = savedValue.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
-    inputHTML = `<input id="${id}" class="field-input ${hasError ? "error" : ""}" type="text" placeholder="${field.placeholder || ""}" value="${safeVal}" autocomplete="off" />`;
+    inputHTML = locked
+      ? `<input id="${id}" class="field-input locked ${hasError ? "field-wrong" : "field-correct"}" type="text" value="${safeVal}" readonly />
+         ${hasError && !field.freeform ? `<div class="field-correct-answer">Correct answer: <strong>${field.correct}</strong></div>` : ""}`
+      : `<input id="${id}" class="field-input ${hasError ? "error" : ""}" type="text" placeholder="${field.placeholder || ""}" value="${safeVal}" autocomplete="off" />`;
   }
   return `
     <div class="field-row">
       ${field.label ? `<label class="field-label" for="${id}">${field.label}</label>` : ""}
       ${inputHTML}
-      ${hasError ? `<div class="field-error-msg">Not quite — check ${field.type === "select" || field.type === "image-select" || field.type === "choice" ? "your choice" : "the value"} and try again.</div>` : ""}
+      ${hasError && !locked ? `<div class="field-error-msg">Not quite — check ${field.type === "select" || field.type === "image-select" || field.type === "choice" ? "your choice" : "the value"} and try again.</div>` : ""}
     </div>`;
 }
 
@@ -590,6 +627,7 @@ function renderExerciseArea(section) {
       </div>
       <div class="section-footer">
         <button class="btn btn-ghost" data-action="retake-exercise" data-id="${section.id}">Retake Exercise</button>
+        ${COURSE.nextSection ? `<a class="btn btn-primary" href="${COURSE.nextSection.href}">${COURSE.nextSection.label}</a>` : ""}
       </div>`;
   }
 
@@ -639,26 +677,11 @@ function renderExerciseArea(section) {
       </div>`;
   }
 
-  if (phase.explain && ex.sub === "explain") {
-    const errs = ex.errors[phaseIndex] || {};
-    const wasCorrect = phase.fields.every(f => !errs[f.key]);
-    return `
-      ${docsLink}
-      <div class="card quiz-card">
-        <div class="quiz-header"><h2>${phase.title}</h2>${stepper}</div>
-        ${phase.question ? `<p class="theory-lead" style="margin-bottom:16px;">${phase.question}</p>` : ""}
-        <div class="quiz-feedback ${wasCorrect ? "ok" : "bad"}">
-          <strong class="quiz-feedback-label">${wasCorrect ? "Correct! +10 points" : "Not quite."}</strong>
-          ${phase.explain}
-        </div>
-        <div class="section-footer">
-          <button class="btn btn-primary" data-action="exercise-advance" data-id="${section.id}">Continue →</button>
-        </div>
-      </div>`;
-  }
+  const locked = !!(phase.explain && ex.sub === "explain");
+  const wasCorrect = locked && phase.fields.every(f => !(ex.errors[phaseIndex] || {})[f.key]);
 
   const imageChoiceField = phase.fields.find(f => f.type === "image-select");
-  const fieldsHTML = phase.fields.map(f => renderExerciseField(section.id, phaseIndex, f, ex)).join("");
+  const fieldsHTML = phase.fields.map(f => renderExerciseField(section.id, phaseIndex, f, ex, locked)).join("");
   const hasScenarioImage = !!phase.scenarioImage;
   const hasScenarioVideo = !!phase.scenarioVideo;
   const hasScenarioFeed = !!phase.scenarioFeed;
@@ -705,15 +728,23 @@ function renderExerciseArea(section) {
     <div class="card quiz-card">
       <div class="quiz-header"><h2>${phase.title}</h2>${stepper}</div>
       ${imageChoiceField
-        ? renderImageChoicePhase(section.id, phaseIndex, phase, imageChoiceField, ex)
+        ? renderImageChoicePhase(section.id, phaseIndex, phase, imageChoiceField, ex, locked)
         : `${phase.question ? `<p class="theory-lead" style="margin-bottom:16px;">${phase.question}</p>` : ""}${hasScenarioMedia ? scenarioWithMediaHTML : `${scenarioHTML}${phase.beforeFields || ""}${fieldsHTML}${phase.afterFields || ""}`}`}
+      ${locked ? `
+      <div class="quiz-feedback ${wasCorrect ? "ok" : "bad"}">
+        <strong class="quiz-feedback-label">${wasCorrect ? "Correct! +10 points" : "Not quite."}</strong>
+        ${phase.explain}
+      </div>
+      <div class="section-footer">
+        <button class="btn btn-primary" data-action="exercise-advance" data-id="${section.id}">Continue →</button>
+      </div>` : `
       <div class="section-footer">
         ${isAutoSubmit ? "" : `
         <button class="btn btn-primary" id="ex-submit-${section.id}-${phaseIndex}" data-action="exercise-submit" data-id="${section.id}" data-phase="${phaseIndex}" ${phaseAllAnswered(section, phaseIndex, ex) ? "" : "disabled"}>
           ${phase.reveal ? "Create →" : "Continue →"}
         </button>`}
         <button class="btn btn-ghost" data-action="exercise-skip" data-id="${section.id}" data-phase="${phaseIndex}">Skip →</button>
-      </div>
+      </div>`}
     </div>`;
 }
 
@@ -913,6 +944,7 @@ function renderMain() {
   renderTopbar();
   renderDocLinks();
   setupScrollSpy();
+  syncLiveStoreId();
 }
 
 /* ---------- Event delegation ---------- */
@@ -946,6 +978,14 @@ document.addEventListener("click", e => {
     target.parentElement.querySelectorAll(".choice-option").forEach(el => el.classList.remove("selected"));
     target.classList.add("selected");
     autoSubmitIfPhaseComplete(Number(target.dataset.sectionId), Number(target.dataset.phase));
+  } else if (action === "toggle-multi-option") {
+    const input = document.getElementById(target.dataset.fieldId);
+    const picked = new Set(input.value ? input.value.split("|") : []);
+    if (picked.has(target.dataset.value)) picked.delete(target.dataset.value);
+    else picked.add(target.dataset.value);
+    input.value = [...picked].join("|");
+    target.classList.toggle("selected");
+    refreshExerciseSubmitButton(getSection(Number(target.dataset.sectionId)), Number(target.dataset.phase));
   } else if (action === "select-section") {
     runtime.view = "course";
     runtime.sectionId = Number(target.dataset.id);
@@ -1019,9 +1059,25 @@ document.addEventListener("click", e => {
   }
 });
 
+/* Any `.live-store-id` element (e.g. the installation script shown in an
+   exercise step) mirrors whatever is typed into a Store ID field. */
+function syncLiveStoreId() {
+  const input = document.querySelector('input[id^="ex-f-"][id$="-storeId"]');
+  const value = input && input.value.trim() ? input.value.trim() : "STORE_ID";
+  document.querySelectorAll(".live-store-id").forEach(el => { el.textContent = value; });
+  /* The English Search Engine's Hash ID saved in Section 1's final exercise,
+     shown wherever a later section refers to it. */
+  let hashEN = "";
+  try { hashEN = localStorage.getItem("dfa_demo_hash_en") || ""; } catch (e) {}
+  document.querySelectorAll(".live-hash-en").forEach(el => {
+    el.innerHTML = hashEN ? `<code>${hashEN.replace(/</g, "&lt;")}</code>` : el.dataset.fallback || "";
+  });
+}
+
 function handleExerciseFieldLiveChange(e) {
   const el = e.target;
   if (!el.id || !el.id.startsWith("ex-f-")) return;
+  if (el.id.endsWith("-storeId")) syncLiveStoreId();
   const parts = el.id.split("-");
   autoSubmitIfPhaseComplete(Number(parts[2]), Number(parts[3]));
 }

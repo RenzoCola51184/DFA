@@ -4,6 +4,7 @@
    and a quiz. Section 8 is the final guided exercise. */
 
 const COURSE = {
+  nextSection: { label: "Go to Module 1 Section 3 →", href: "section3.html" },
   storageKey: "dfa_progress_section2_v1",
   sections: [
     {
@@ -23,7 +24,7 @@ const COURSE = {
           schema: `
             <div class="theory-block">
               <ul>
-                <li><strong>Introduction</strong> — Doostride is an online footwear and streetwear store; you are Mark Park, a junior developer there, and John Smith, the CEO, asked you to get familiar with what Doofinder actually is and set up its Search Layer on the local demo copy of the site.</li>
+                <li><strong>Introduction</strong> — Doostride is an online footwear and streetwear store; you are Mark Park, a junior developer there, and John River, the CEO, asked you to get familiar with what Doofinder actually is and set up its Search Layer on the local demo copy of the site.</li>
                 <li><strong>What is Doofinder</strong> — Doofinder is a multi-product service (Search Layer, Recommendations, Quiz Maker, AI Assistant and Category Merchandising) built around Stores and Search Engines, each identified by a Store ID and a Hash ID.</li>
                 <li><strong>Installing Doofinder</strong> — the four steps to get it live: create a Store, create a Search Engine, set the CSS Selector, and add the installation script (Zone + STORE_ID) to the site.</li>
                 <li><strong>CSS Selector</strong> — how to identify an element with an ID, class or name-attribute selector, using the browser's dev tools, and how to combine a desktop and a mobile selector with a comma.</li>
@@ -49,7 +50,7 @@ const COURSE = {
         {
           intro: [],
           whatsapp: {
-            name: "John Smith",
+            name: "John River",
             body: [
               "Hi Amanda,",
               "Everything good? So, I tried out the Doofinder Search Layer this morning — super cool!",
@@ -58,10 +59,12 @@ const COURSE = {
             times: ["16:42", "16:42", "16:43"]
           },
           whatsappNote: [
-            "Your goal throughout this section is to get familiar with how Doofinder's Search Layer works under the hood, so that, by the final exercise — where these issues will be listed one at a time — you can see whether it's possible to configure the Search Layer to solve them.",
             "In this section, you are <strong>Amanda House</strong>, Doostride's ecommerce manager. You joined the company as an intern and, thanks to your dedication, worked your way up to running ecommerce for the whole site. You haven't had the chance to try the Search Layer yet — the one <strong>Mark Park</strong> installed in the previous section.",
-            "This afternoon you got this WhatsApp message from <strong>John Smith</strong>, Doostride's CEO.",
+            "This afternoon you got this WhatsApp message from <strong>John River</strong>, Doostride's CEO.",
             "Before answering John, you need to actually understand how Doofinder's search decides and ranks what it shows, and how you can configure or change that."
+          ],
+          outro: [
+            "Your goal throughout this section is to get familiar with how Doofinder's Search Layer works under the hood, so that, by the final exercise — where these issues will be listed one at a time — you can see whether it's possible to configure the Search Layer to solve them."
           ]
         }
       ]
@@ -77,12 +80,10 @@ const COURSE = {
       hasQuiz: true,
       docUrl: "https://support.doofinder.com/search/search-setup/how-doofinder-search-works",
       theory: {
-        lead: "Results change the moment something is typed into the search bar. But how does the <strong>Search Layer</strong> actually do that, and what decides which results show up — and in what order?",
         blocks: [
           {
             html: `
-              <div class="diagram-split">
-                <div class="diagram-figure">
+              <div class="diagram-figure lesson-figure-left">
                 <div class="theory-diagram">
                   <svg viewBox="0 0 320 320" role="img" data-action="zoom-diagram" aria-label="Diagram: the user's browser and Doofinder's servers exchange data over a WebSocket connection, while the Store's backend separately feeds the script and product feed to the browser and sends the feed for indexing to Doofinder's servers.">
                     <defs>
@@ -114,28 +115,34 @@ const COURSE = {
                 </div>
                 <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </div>
-                <div class="diagram-note">
-                  <p>Clicking a site's search box activates the Search Layer — the client-side widget running in the user's browser — which opens a <strong>WebSocket</strong> connection directly to Doofinder's servers, pointing to the <strong>Search Engine</strong> of the web. From that point on, every time something is typed, a call is launched to Doofinder's search API. The API responds with the items to display in the Search Layer, ranked according to certain criteria.</p>
+              <p>The <strong>Search Layer</strong> updates its results the moment something is typed into a site's search box. But how does it actually do that, and what decides which results show up — and in what order?</p>
+                  <p>Clicking a site's search box activates the Search Layer — the client-side widget running in the user's browser — which opens a <strong>WebSocket</strong> connection directly to Doofinder's servers, pointing to the <strong>Search Engine</strong> of the web. From that point on, every time something is typed, a call is launched to Doofinder's search API. What the user types into the search box is called the <strong>query</strong> — the search term (one or more words) Doofinder has to find results for. The API responds with the items to display in the Search Layer, ranked according to certain criteria.</p>
                   <p>The Store's backend isn't part of that WebSocket connection at all — it's simply where the script that the Search Layer loads actually lives.</p>
-                  <p>This module won't go into the mechanics of that connection, or the technology behind the search API itself — built on <strong>OpenSearch</strong> — but it's worth briefly touching on the different types of calls it can launch, since understanding them matters for figuring out why certain products show up for a query and others don't.</p>
-                </div>
-              </div>
+                  <p>This module won't go into the mechanics of that connection, or the technology behind the search API itself — built on <strong>OpenSearch</strong> — but it's worth briefly touching on the different types of calls it can launch, since understanding them matters for figuring out why certain products show up for a query and others don't. These call types are covered later in this section.</p>
 
+              <h3 style="clear: both;">What Decides the Quality of Results</h3>
               <p>Beyond the search technology Doofinder uses, the quality of the results it returns depends mainly on two things:</p>
-              <ul>
-                <li>The content and structure of the <strong>data feed</strong> indexed in the Search Engine — if an item isn't indexed at all, it simply can't be found through search. Likewise, if an item's entry is missing a specific piece of information, it can't be found by searching for that particular detail.</li>
-                <li>The Search Engine's own configuration — every Search Engine is set up around a handful of features:
-                  <ul>
-                    <li><strong>Search Fields</strong> — decides which parts of a product's data get searched, and how much weight each one carries.</li>
-                    <li><strong>Relevance Criteria</strong> — decides the order results are displayed in, breaking ties beyond the base Score.</li>
-                    <li><strong>Boosting</strong> — changes a product's relevance in the results, based on configuration or shopper behavior.</li>
-                    <li><strong>Custom Results</strong> — includes or excludes specific items from the results of particular search terms.</li>
-                    <li><strong>Excluded Results</strong> — intentionally removes specific items from a Search Engine's results altogether.</li>
-                    <li><strong>Synonyms</strong> — lets a search for one term also match others that mean the same thing, even if the feed itself never uses those other words.</li>
-                  </ul>
-                  Excluded Results and Synonyms are covered in more detail later in the course.
-                </li>
-              </ul>`
+              <table class="theory-table">
+                <thead><tr><th>Factor</th><th>Why it matters</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>The data feed's content and structure</strong></td><td>The content and structure of the <strong>data</strong> indexed in the Search Engine — if an item isn't indexed at all, it simply can't be found through search. Likewise, if an item's entry is missing a specific piece of information, it can't be found by searching for that particular detail.</td></tr>
+                  <tr><td><strong>The Search Engine's configuration</strong></td><td>The Search Engine's own configuration — every Search Engine is set up around a handful of features, listed below.</td></tr>
+                </tbody>
+              </table>
+
+              <h3>Search Engine Features</h3>
+              <table class="theory-table">
+                <thead><tr><th>Feature</th><th>What it does</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Search Fields</strong></td><td>Decides which parts of a product's data get searched, and how much weight each one carries.</td></tr>
+                  <tr><td><strong>Relevance Criteria</strong></td><td>Decides the order results are displayed in, breaking ties beyond the base Score.</td></tr>
+                  <tr><td><strong>Boosting</strong></td><td>Changes a product's relevance in the results, based on configuration or user behavior.</td></tr>
+                  <tr><td><strong>Custom Results</strong></td><td>Includes or excludes specific items from the results of particular search terms.</td></tr>
+                  <tr><td><strong>Excluded Results</strong></td><td>Intentionally removes specific items from a Search Engine's results altogether.</td></tr>
+                  <tr><td><strong>Synonyms</strong></td><td>Lets a search for one term also match others that mean the same thing, even if the feed itself never uses those other words.</td></tr>
+                </tbody>
+              </table>
+              <p>Excluded Results and Synonyms are covered in more detail later in the course.</p>`
           }
         ]
       },
@@ -144,15 +151,15 @@ const COURSE = {
           q: "According to this lesson, what is the <strong>Search Layer</strong>?",
           options: [
             "A server-side script that runs on Doofinder's infrastructure",
-            "The client-side widget running in the user's browser",
             "A database table inside the Search Engine",
-            "A configuration screen in the Admin Panel"
+            "A configuration screen in the Admin Panel",
+            "The client-side widget running in the user's browser"
           ],
-          correct: 1,
+          correct: 3,
           explain: "The Search Layer is described as the client-side widget running in the user's browser."
         },
         {
-          q: "Once that connection is active, what happens every time a shopper types something?",
+          q: "Once that connection is active, what happens every time a user types something?",
           options: [
             "A call is launched to <strong>Doofinder</strong>'s search API",
             "The page reloads entirely",
@@ -163,25 +170,25 @@ const COURSE = {
           explain: "Every time something is typed, a call is launched to <strong>Doofinder</strong>'s search API with that search query."
         },
         {
-          q: "What does the Search Layer open when a shopper clicks the site's search box?",
+          q: "What does the Search Layer open when a user clicks the site's search box?",
           options: [
             "A new browser tab",
+            "A WebSocket connection directly to Doofinder's servers, pointing to the Search Engine of the web",
             "A connection to the site's own database",
-            "A download of the installation script",
-            "A WebSocket connection directly to Doofinder's servers, pointing to the Search Engine of the web"
+            "A download of the installation script"
           ],
-          correct: 3,
+          correct: 1,
           explain: "Clicking the search box activates the Search Layer — the client-side widget running in the user's browser — which opens a WebSocket connection directly to Doofinder's servers, pointing to the Search Engine of the web."
         },
         {
           q: "What does the search API respond with?",
           options: [
             "A list of Authorized Domains",
-            "The products to display in the Search Layer, ranked according to certain criteria",
             "The installation script",
+            "The products to display in the Search Layer, ranked according to certain criteria",
             "A new data feed"
           ],
-          correct: 1,
+          correct: 2,
           explain: "The API responds with the items to display in the Search Layer, ranked according to certain criteria."
         },
         {
@@ -196,25 +203,25 @@ const COURSE = {
           explain: "Understanding the different types of calls matters for figuring out why certain products show up for a query and others don't."
         },
         {
-          q: "A product isn't listed anywhere in the data feed. What happens when a shopper searches for it?",
+          q: "A product isn't listed anywhere in the data feed. What happens when a user searches for it?",
           options: [
             "It's found automatically through a Custom Result",
+            "It can't be found, since the Search Engine can't search a product that isn't in the feed",
             "It's found only using Boosting",
-            "It's found through Relevance Criteria",
-            "It can't be found, since the Search Engine can't search a product that isn't in the feed"
+            "It's found through Relevance Criteria"
           ],
-          correct: 3,
+          correct: 1,
           explain: "If a product isn't in the data feed at all, it simply can't be found through search."
         },
         {
           q: "Besides the data feed's content and structure, what else shapes the quality of search results?",
           options: [
-            "The Store's billing plan",
             "The Search Engine's own configuration — Search Fields, Relevance Criteria, Boosting, Custom Results, Excluded Results and Synonyms",
+            "The Store's billing plan",
             "The number of Authorized Domains",
             "The site's hosting provider"
           ],
-          correct: 1,
+          correct: 0,
           explain: "The other main factor is the Search Engine's own configuration, built around features like Search Fields, Relevance Criteria, Boosting, Custom Results, Excluded Results and Synonyms."
         }
       ]
@@ -229,35 +236,90 @@ const COURSE = {
       title: "Results Preview",
       hasQuiz: true,
       docUrl: "https://support.doofinder.com/search/test-your-search-engine/results-preview",
+      extraDocs: [
+        { label: "Stemming and Character Cleaning", url: "https://support.doofinder.com/troubleshooting-articles/unexpected-results", fromHeading: "Stemming and Character Cleaning" }
+      ],
       theory: {
         lead: "<strong>Results Preview</strong> is the section where Doofinder's response to a query can be tested — typing in a search term and seeing exactly what the Search Layer would return for it.",
         blocks: [
           {
             html: `
-              <p>Just below the search bar, it's possible to see the number of results for that query, the type of query that was launched, and whether certain configuration features are being applied — such as Custom Results or Relevance Criteria.</p>
-              <p>Below that, the list of products for that query appears, in the order they'd show up in the Search Layer. Next to each product sits its <strong>Score</strong>: the total value of a product, which determines how close the result is to the search query — the more relevant the product, the higher the score. Score is the multiplication of <strong>Relevance</strong> (the original score of each product for the search query, before any boosting factor is applied) and <strong>Boosting</strong> (the total boosting value after every boosting factor has been applied — the feature that multiplies the original Relevance score).</p>
-              <p>For each product in the list, clicking its "+" button shows every piece of information loaded for it, field by field, according to the uploaded data feed and the mapping applied — making it easy to see what information a product actually has loaded, without needing to check the data feed directly.</p>
-
-              <p>Also, it's possible to see which <strong>query type</strong> has been launched, which indicates whether the results shown are an exact match for the search performed, an approximate one, or no match at all. There are four possible query types: <code>match_and</code>, <code>match_or</code>, <code>fuzzy</code>, and <code>match_all</code>.</p>
-              <ul>
-                <li><code>match_and</code> — a perfect correspondence between the search terms and the indexed ones; used for both single-term queries (e.g. "Nike" returning exact matches like "Nike shoes") and multi-term ones, where every term needs to be present (e.g. "red t-shirt" returning results containing both words).</li>
-                <li><code>match_or</code> — a broader match, returning content that contains at least one of the terms in a multi-term query; for "red t-shirts", that could mean "red" and "t-shirts" matching separately rather than together.</li>
-                <li><code>fuzzy</code> — no exact match between what was searched and what's indexed, typically due to a typo, e.g. searching "tsirt" instead of "t-shirt".</li>
-                <li><code>match_all</code> — the entire catalogue, shown before any term is typed, or when Custom Results are configured for that specific search.</li>
-              </ul>
-              <p>So, when a search is performed with one or more terms, Doofinder first looks for products that contain all of the search terms — if that returns something, it's a <code>match_and</code>, returning only the products with those terms. If there's no <code>match_and</code>, it falls back to <code>match_or</code>; and if there's no <code>match_or</code> either, it falls back to <code>fuzzy</code>, using that same logic for returning products.</p>
-
-              <figure class="lesson-figure lesson-figure-left">
-                <img src="img/results-preview-example.png" alt="Results Preview panel for the query 'shoe', showing 159 results with query type match_and, a Synonym indicator, and the first product expanded to reveal all of its loaded fields" data-action="zoom-image">
+              <figure class="lesson-figure lesson-figure-right" style="width: 520px;">
+                <img src="img/results-preview-overview.png" alt="Results Preview screen in the Admin Panel: a search bar with a Refresh button, below it Results: 56, Query type: match_all and Custom Sorting: _score, and a product list with Item, Relevance, Boosting and Score columns, each row with a + button" data-action="zoom-image">
                 <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
               </figure>
-              <p>Here's what this looks like in practice, for the query "shoe":</p>
-              <ul>
-                <li>Just under the search bar, <strong>Results: 159</strong> and <strong>Query type: match_and</strong> confirm how many products matched and which query type produced them, with a shortcut to Relevance Criteria right next to it.</li>
-                <li>A <strong>Synonym</strong> indicator ("shoe, boot") shows up too, meaning the search term was expanded through a configured synonym.</li>
-                <li>Each row lists a product with its Relevance, Boosting and Total — for the first item, <strong>DR MARTENS | 1461 DMC 3-EYE SHOE | BLACK SMOOTH</strong>, Relevance is 3.76 and Boosting is 1.5, giving a Total of 5.64.</li>
-                <li>That first item is expanded, revealing every field loaded for it — price, brand, categories, description, image link and more — exactly as clicking its "+" button would show.</li>
-              </ul>`
+              <h3>What It Shows</h3>
+              <p>Just below the search bar, Results Preview shows the number of results, the <strong>query type</strong> launched, and whether features like Custom Results or Relevance Criteria are being applied. Below that, the products appear in the same order the Search Layer would show them — and clicking a product's <strong>"+"</strong> button shows every piece of information loaded for it, field by field, according to the uploaded data feed and the mapping applied — making it easy to see what information a product actually has loaded, without needing to check the data feed directly.</p>
+
+              <h3>Score</h3>
+              <p>Next to each product sits its <strong>Score</strong>: the total value of a product, which determines how close the result is to the search query — the more relevant the product, the higher the score. It's made of two parts:</p>
+              <table class="theory-table">
+                <thead><tr><th>Value</th><th>What it means</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Relevance</strong></td><td>The product's original score for the query, before any boosting</td></tr>
+                  <tr><td><strong>Boosting</strong></td><td>The total boosting value, after every boosting factor has been applied — the feature that multiplies the original Relevance score</td></tr>
+                  <tr><td><strong>Score</strong> (Total)</td><td><strong>Relevance × Boosting</strong> — e.g. 3.76 × 1.5 = 5.64</td></tr>
+                </tbody>
+              </table>
+
+              <h3>Query Types</h3>
+              <p>The query type indicates whether the results are an exact match for the search, an approximate one, or no match at all:</p>
+              <table class="theory-table">
+                <thead><tr><th>Query type</th><th>When it's launched</th><th>Example</th></tr></thead>
+                <tbody>
+                  <tr><td><code>match_and</code></td><td>A perfect correspondence between the search terms and the indexed ones — for single-term queries, and for multi-term ones where every term needs to be present</td><td>"Nike" → exact matches like "Nike shoes"; "red t-shirt" → products containing both words</td></tr>
+                  <tr><td><code>match_or</code></td><td>A broader match: content containing at least one of the terms in a multi-term query</td><td>"red t-shirts" → "red" and "t-shirts" matched separately rather than together</td></tr>
+                  <tr><td><code>fuzzy</code></td><td>No exact match between what was searched and what's indexed, typically due to a typo</td><td>"tsirt" instead of "t-shirt"</td></tr>
+                  <tr><td><code>match_all</code></td><td>The entire catalogue</td><td>Shown before any term is typed, or when Custom Results are configured for that specific search</td></tr>
+                </tbody>
+              </table>
+              <p class="theory-callout">When a search is performed with one or more terms, Doofinder first looks for products that contain all of the search terms — if that returns something, it's a <code>match_and</code>, returning only the products with those terms. If there's no <code>match_and</code>, it falls back to <code>match_or</code>; and if there's no <code>match_or</code> either, it falls back to <code>fuzzy</code>, using that same logic for returning products.</p>
+
+              <h3>In Practice</h3>
+              <figure class="lesson-figure lesson-figure-left" style="width: 420px;">
+                  <img src="img/results-preview-example.png" alt="Results Preview panel for the query 'shoe', showing 159 results with query type match_and, a Synonym indicator, and the first product expanded to reveal all of its loaded fields" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>The screenshot at the start of this page shows Results Preview completely by default: no query launched, and nothing configured in that Search Engine — no Boosting, no Custom Results, no other settings changed. That's why the query type is <code>match_all</code> (the whole catalogue, 56 results) and every product has the same Relevance and Score of 1.0, with no boosting applied.</p>
+                <p>Here's what this looks like in practice when a query — "shoe" — is launched in a Search Engine with Boosting Rules applied:</p>
+                <ul>
+                  <li>Just under the search bar, <strong>Results: 159</strong> and <strong>Query type: match_and</strong> confirm how many products matched and which query type produced them, with a shortcut to Relevance Criteria right next to it.</li>
+                  <li>A <strong>Synonym</strong> indicator ("shoe, boot") shows up too, meaning the search term was expanded through a configured synonym.</li>
+                  <li>Each row lists a product with its Relevance, Boosting and Total — for the first item, <strong>DR MARTENS | 1461 DMC 3-EYE SHOE | BLACK SMOOTH</strong>, Relevance is 3.76 and Boosting is 1.5, giving a Total of 5.64.</li>
+                  <li>That first item is expanded, revealing every field loaded for it — price, brand, categories, description, image link and more — exactly as clicking its "+" button would show.</li>
+                </ul>`
+          },
+          {
+            heading: "Stemming and Character Cleaning",
+            pageBreak: true,
+            html: `
+              <p><strong>Doofinder</strong>'s search, built on <strong>OpenSearch</strong>, never compares text exactly as it's written. Both the indexed products and every search term go through two filters, always in this order: <strong>stemming</strong>, then <strong>character cleaning</strong>. This is why Results Preview sometimes shows products that don't literally contain the searched term — or misses some that seem to.</p>
+
+              <h3>Stemming</h3>
+              <p>Stemming reduces each word to its root, or <strong>stem</strong>, cutting off endings such as plurals or <em>-ing</em>. Words that share a stem match each other — and the stem doesn't need to be a real word:</p>
+              <table class="theory-table">
+                <thead><tr><th>Words</th><th>Stem</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>run</strong>, <strong>runs</strong>, <strong>running</strong></td><td><code>run</code></td></tr>
+                  <tr><td><strong>jacket</strong>, <strong>jackets</strong></td><td><code>jacket</code></td></tr>
+                  <tr><td><strong>battery</strong>, <strong>batteries</strong></td><td><code>batteri</code></td></tr>
+                </tbody>
+              </table>
+              <p>So if the query is <strong>"run"</strong>, a product titled <strong>"Ultralight Trail Running Shoes"</strong> shows up too — "running" is indexed as <code>run</code>, exactly like the query.</p>
+
+              <h3>Character Cleaning</h3>
+              <p>Character cleaning then replaces special characters with their plain equivalent — <code>é</code> → <code>e</code>, <code>ñ</code> → <code>n</code>, <code>ü</code> → <code>u</code>, and so on. So <strong>"café"</strong> and <strong>"cafe"</strong>, or <strong>"jalapeño"</strong> and <strong>"jalapeno"</strong>, end up as the same word.</p>
+              <p>So if the query is <strong>"cafe"</strong>, a product titled <strong>"Café Racer Leather Jacket"</strong> shows up too — "café" is indexed as <code>cafe</code>, exactly like the query.</p>
+
+              <h3>Why the Order Matters</h3>
+              <p class="theory-callout">The stemmer needs to read words as they're correctly written, so it runs <em>before</em> character cleaning. The side effect: a word typed without its accent may be read as a different word, and get a different stem.</p>
+              <table class="theory-table">
+                <thead><tr><th>Typed</th><th>After stemming</th><th>After cleaning</th><th>Result</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>résumé</strong></td><td><code>résumé</code></td><td><code>resume</code></td><td>Matches products written as "résumé"</td></tr>
+                  <tr><td><strong>resume</strong></td><td><code>resum</code></td><td><code>resum</code></td><td>Read as the verb "resume", so the final "e" gets cut — it no longer matches <code>resume</code></td></tr>
+                </tbody>
+              </table>`
           }
         ]
       },
@@ -265,57 +327,13 @@ const COURSE = {
         {
           q: "What is Results Preview used for?",
           options: [
-            "Testing <strong>Doofinder</strong>'s response to a query and seeing exactly what the Search Layer would return",
             "Uploading a new data feed",
             "Setting the Store's currency",
-            "Creating a new Search Engine"
+            "Creating a new Search Engine",
+            "Testing <strong>Doofinder</strong>'s response to a query and seeing exactly what the Search Layer would return"
           ],
-          correct: 0,
+          correct: 3,
           explain: "Results Preview lets a search term be typed in to see exactly what the Search Layer would return for it."
-        },
-        {
-          q: "What can be seen just below the search bar in Results Preview?",
-          options: [
-            "The number of results, the query type, and whether certain configuration features are being applied",
-            "The Store's billing plan",
-            "The installation script",
-            "The list of Authorized Domains"
-          ],
-          correct: 0,
-          explain: "Just below the search bar, the number of results, the query type, and whether certain configuration features are applied can all be seen."
-        },
-        {
-          q: "What does a product's Score represent?",
-          options: [
-            "Its total value, determining how close the result is to the search query",
-            "Its price before tax",
-            "Its stock level",
-            "Its position in the data feed"
-          ],
-          correct: 0,
-          explain: "Score is the total value of a product — the more relevant the product is to the search query, the higher the score."
-        },
-        {
-          q: "What does Relevance show?",
-          options: [
-            "The original score of a product for the search query, before any boosting factor is applied",
-            "The final score after boosting",
-            "The product's stock level",
-            "The product's price"
-          ],
-          correct: 0,
-          explain: "Relevance shows the original score of each product according to the search query, before applying any boosting factor."
-        },
-        {
-          q: "What does Boosting display, and what does it do to the score?",
-          options: [
-            "The total boosting value after every boosting factor has been applied — it multiplies the original Relevance score",
-            "The product's price after a discount",
-            "The number of Authorized Domains",
-            "The Store's currency"
-          ],
-          correct: 0,
-          explain: "Boosting displays the total boosting value after applying any boosting factor, and is the feature that multiplies the original score (Relevance)."
         },
         {
           q: "How is a product's Score calculated?",
@@ -331,19 +349,58 @@ const COURSE = {
         {
           q: "What does clicking a product's \"+\" button reveal in Results Preview?",
           options: [
-            "Every piece of information loaded for that product, field by field, according to the feed and mapping applied",
             "The product's price history",
             "A list of similar products",
-            "The Search Engine's Hash ID"
+            "The Search Engine's Hash ID",
+            "Every piece of information loaded for that product, field by field, according to the feed and mapping applied"
           ],
-          correct: 0,
+          correct: 3,
           explain: "The \"+\" button shows all the information loaded for a product, field by field, making it easy to check without going through the data feed directly."
         },
         {
+          q: "A user searches \"red jacket\". No product contains both words, but some contain \"red\" and others \"jacket\". Which query type is launched?",
+          options: ["<code>match_and</code>", "<code>match_or</code>", "<code>fuzzy</code>", "<code>match_all</code>"],
+          correct: 1,
+          explain: "match_and needs every term in the same product, so it returns nothing here — Doofinder falls back to match_or, which returns products containing at least one of the terms. fuzzy would only kick in if match_or found nothing either, e.g. with a typo."
+        },
+        {
           q: "If a query returns no <code>match_and</code> and no <code>match_or</code>, what does it fall back to?",
-          options: ["Fuzzy", "Match_all", "It returns no results at all", "It retries match_and"],
-          correct: 0,
+          options: ["Match_all", "It returns no results at all", "Fuzzy", "It retries match_and"],
+          correct: 2,
           explain: "The fallback order is match_and, then match_or, and finally fuzzy, all using the same logic for returning products."
+        },
+        {
+          q: "What does stemming do to a word?",
+          options: [
+            "Replaces accented characters with plain ones",
+            "Corrects typos in the search term",
+            "Translates it into the Search Engine's language",
+            "Reduces it to its root, cutting off endings such as plurals or masculine/feminine forms"
+          ],
+          correct: 3,
+          explain: "Stemming reduces a word to its stem — \"running\" and \"runs\" both become \"run\", so they match each other. Replacing accented characters is character cleaning, a separate filter."
+        },
+        {
+          q: "A user searches \"jackets\". Thanks to stemming, which of these products also shows up?",
+          options: [
+            "A product titled \"Rain Coat\"",
+            "A product titled \"Rain Jacket\"",
+            "A product titled \"Jack Boots\"",
+            "A product titled \"Jacquard Scarf\""
+          ],
+          correct: 1,
+          explain: "Stemming cuts the plural off, so \"jackets\" and \"jacket\" both become the stem \"jacket\" and match each other. \"Jack\" and \"Jacquard\" only look similar — their stems are \"jack\" and \"jacquard\", so they don't match. \"Coat\" means something similar, but stemming doesn't understand meaning: that would need a synonym."
+        },
+        {
+          q: "Why can \"resume\" (without accents) miss products written as \"résumé\"?",
+          options: [
+            "Character cleaning deletes words without accents",
+            "Doofinder ignores words longer than 12 characters",
+            "Without the accents it's read as a different word, so it gets a different stem that no longer matches",
+            "Unaccented words are only searched with fuzzy"
+          ],
+          correct: 2,
+          explain: "\"résumé\" is left whole by stemming and becomes \"resume\" after cleaning, while \"resume\" is read as the verb and cut to \"resum\" — the two differ, so the products don't match."
         }
       ]
     },
@@ -358,31 +415,55 @@ const COURSE = {
       hasQuiz: true,
       docUrl: "https://support.doofinder.com/search/search-setup/search-fields",
       theory: {
-        lead: "With <strong>Doofinder</strong> you can configure and choose which fields — loaded through the data feed — your Search Engine should take into account when searching for products, and how important each one is relative to the rest.",
+        lead: "<strong>Doofinder</strong> makes it possible to configure and choose which fields — loaded through the data feed — a Search Engine should take into account when searching for products, and how important each one is relative to the rest.",
         blocks: [
           {
             html: `
-              <figure class="lesson-figure lesson-figure-right">
-                <img src="img/search-fields-advanced-preferences.png" alt="Advanced Preferences > Search Fields screen, with a warning about the impact of changes, a Field/Weight selector to add a new field, and a configured list showing brand, categories, description, df_all, gtin, mpn, title and title.autocomplete with their weights" data-action="zoom-image">
-                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
-              </figure>
+              <h3>Field Weights</h3>
+              <figure class="lesson-figure lesson-figure-left" style="width: 400px;">
+                  <img src="img/search-fields-advanced-preferences.png" alt="Advanced Preferences > Search Fields screen, with a warning about the impact of changes, a Field/Weight selector to add a new field, and a configured list showing brand, categories, description, df_all, gtin, mpn, title and title.autocomplete with their weights" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
               <p>Each field that's selected can be assigned a weight of its own.</p>
-              <p>An important factor influencing which terms surface in the results is that the larger a field's content is in the index, the more irrelevant the terms inside it become. In other words, if a keyword sits inside the <strong>description</strong>, for instance, it will be less relevant than if it sits inside a shorter field.</p>
+              <p>Not every indexed field takes part in this logic, though: only text fields and a few specific ones can be used as Search Fields. The different field types will be covered in more detail later in the course.</p>
+                  <p>By default, weight doesn't apply to every field, only to the ones that have been selected (weight ranges from 1 to 10). By default, the <strong>title</strong> carries a higher weight than the rest of the fields.</p>
+                  <p>So, when a search is performed for a given term, among the products that have that term indexed in some field, a product with the term in its title will score higher than a product that only has it in another field.</p>
+              <p>For example, take the query <strong>"waterproof"</strong> and two products: <strong>"Waterproof Hiking Jacket"</strong>, with the term in its title, and <strong>"Trail Running Shoes"</strong>, with "waterproof" only in its description. Changing the weights changes their score for that query — and with it, their order (simplified numbers, for illustration only):</p>
+              <table class="theory-table">
+                <thead><tr><th>Weights</th><th>Waterproof Hiking Jacket</th><th>Trail Running Shoes</th><th>First result</th></tr></thead>
+                <tbody>
+                  <tr><td><code>title</code> 3, <code>description</code> 1</td><td>Score 3.0</td><td>Score 1.0</td><td>The jacket</td></tr>
+                  <tr><td><code>title</code> 1, <code>description</code> 3</td><td>Score 1.0</td><td>Score 3.0</td><td>The shoes</td></tr>
+                </tbody>
+              </table>
+              <p class="theory-callout">An important factor influencing which terms surface in the results is that the larger a field's content is in the index, the more irrelevant the terms inside it become. In other words, if a keyword sits inside the <strong>description</strong>, for instance, it will be less relevant than if it sits inside a shorter field.</p>
+
+              <h3>The df_all Field</h3>
               <p>By default, the configuration includes a field called <code>df_all</code>. This isn't a field that comes from the data feed itself — it's a field Doofinder creates automatically, which makes the Search Engine take into account every field loaded from the feed.</p>
-              <p>By default, weight doesn't apply to every field, only to the ones that have been selected (weight ranges from 1 to 10). By default, the <strong>title</strong> carries a higher weight than the rest of the fields.</p>
-              <p>So, when a search is performed for a given term, among the products that have that term indexed in some field, a product with the term in its title will score higher than a product that only has it in another field.</p>
               <p>If <code>df_all</code> is removed, the Search Engine will only search within the fields that have been explicitly selected.</p>
 
+              <h3>Fields Outside the Data Feed</h3>
               <p>On top of a feed's own fields, there are other fields that already exist (or can be created) which don't belong to the data feed but can still be added to the Search Fields configuration:</p>
-              <ul>
-                <li><code>brand.autocomplete</code> — designed to search based on parts of the brand name.</li>
-                <li><code>id.light_explode</code> — improves relevance for searches using the <code>id</code> field.</li>
-                <li><code>df_all</code> — folds in the content of every field in the feed, so searches also reach fields that weren't expressly selected; since it's so broad, it should be given a low weight.</li>
-                <li><code>gtin.light_explode</code> and <code>mpn.light_explode</code> — let a search use parts of a product's reference number.</li>
-                <li><code>title.autocomplete</code> — for searching based on parts of the title.</li>
-                <li><code>title.autocomplete_start</code> — boosts relevance for single-term searches whenever the title starts with that same word.</li>
-              </ul>
-              <p>The exact fields on offer can vary between sites and platforms.</p>`
+              <table class="theory-table">
+                <thead><tr><th>Field</th><th>What it does</th></tr></thead>
+                <tbody>
+                  <tr><td><code>brand.autocomplete</code></td><td>Designed to search based on parts of the brand name.</td></tr>
+                  <tr><td><code>id.light_explode</code></td><td>Improves relevance for searches using the <code>id</code> field.</td></tr>
+                  <tr><td><code>df_all</code></td><td>Folds in the content of every field in the feed, so searches also reach fields that weren't expressly selected; since it's so broad, it should be given a low weight.</td></tr>
+                  <tr><td><code>gtin.light_explode</code> and <code>mpn.light_explode</code></td><td>Let a search use parts of a product's reference number.</td></tr>
+                  <tr><td><code>title.autocomplete</code></td><td>For searching based on parts of the title.</td></tr>
+                  <tr><td><code>title.autocomplete_start</code></td><td>Boosts relevance for single-term searches whenever the title starts with that same word.</td></tr>
+                </tbody>
+              </table>
+              <p>Two quick examples of how these fields work:</p>
+              <table class="theory-table">
+                <thead><tr><th>Field added</th><th>Query</th><th>Also finds</th></tr></thead>
+                <tbody>
+                  <tr><td><code>brand.autocomplete</code></td><td><strong>"das"</strong></td><td>Products whose brand is <strong>Adidas</strong> — any part of the brand name is enough, even from the middle of the word</td></tr>
+                  <tr><td><code>id.light_explode</code></td><td><strong>"JKT209"</strong></td><td>The product whose <code>id</code> is <strong>JKT20931</strong> — the code can be typed partially, as long as it's read from left to right: "JKT", "JKT2" or "JKT20" work, "T20" doesn't</td></tr>
+                </tbody>
+              </table>
+              <p>Without those two fields, the same queries would only match the complete brand name or the complete <code>id</code>.</p>`
           }
         ]
       },
@@ -390,12 +471,12 @@ const COURSE = {
         {
           q: "What can be configured in Search Fields?",
           options: [
-            "Which fields, loaded through the data feed, the Search Engine should take into account when searching for products, and how important each is relative to the rest",
             "The Store's billing plan",
+            "Which fields, loaded through the data feed, the Search Engine should take into account when searching for products, and how important each is relative to the rest",
             "Which Search Engine is currently active",
             "The layout of the Search Layer"
           ],
-          correct: 0,
+          correct: 1,
           explain: "Search Fields lets you choose which fields — loaded through the data feed — the Search Engine should take into account when searching for products, and their importance relative to the rest."
         },
         {
@@ -412,35 +493,35 @@ const COURSE = {
         {
           q: "What is <code>df_all</code>?",
           options: [
-            "A field automatically created by <strong>Doofinder</strong> that makes the Search Engine take into account every field loaded from the feed",
             "A field that must be added manually to the data feed",
+            "A field automatically created by <strong>Doofinder</strong> that makes the Search Engine take into account every field loaded from the feed",
             "A setting that disables every other Search Field",
             "A fixed weight reserved for the title"
           ],
-          correct: 0,
+          correct: 1,
           explain: "<code>df_all</code> isn't a field coming from the data feed — <strong>Doofinder</strong> creates it automatically so the Search Engine takes into account every field that's been loaded."
         },
         {
           q: "By default, which fields does weight apply to, and on what scale?",
           options: [
-            "Only the fields that have been selected, on a scale from 1 to 10",
             "Every field loaded from the feed, automatically",
             "Only <code>df_all</code>",
-            "None, unless enabled first in Relevance Criteria"
+            "None, unless enabled first in Relevance Criteria",
+            "Only the fields that have been selected, on a scale from 1 to 10"
           ],
-          correct: 0,
+          correct: 3,
           explain: "By default weight only applies to the fields that have been selected, not to every field, and it ranges from 1 to 10."
         },
         {
-          q: "A search term appears in one product's title and, for another product, only in its description. What happens to their scores?",
+          q: "Search Fields has <code>brand</code> with weight 1 and <code>categories</code> with weight 4. For the query \"nomad\", product A has Nomad as its brand, and product B sits in the \"Nomad Collection\" category. Which one scores higher?",
           options: [
-            "The product with the term in its title scores higher",
-            "Both products get exactly the same score",
-            "The product with the term in its description scores higher",
-            "Neither product appears in the results"
+            "Product A, because a brand match always wins",
+            "They get the same score, since both contain the term",
+            "Product B, because the term sits in the field with the higher weight",
+            "Neither shows up, because the term isn't in the title"
           ],
-          correct: 0,
-          explain: "By default the title carries a higher weight than the rest of the fields, so a product with the term in its title scores higher than one that only has it in another field."
+          correct: 2,
+          explain: "Weight decides how much a match in each field counts: \"nomad\" appears in categories (weight 4) for product B and only in brand (weight 1) for product A, so B scores higher. There's no rule that brand always wins, and the title isn't required — any selected field can match."
         },
         {
           q: "What happens if <code>df_all</code> is removed from the configuration?",
@@ -456,24 +537,24 @@ const COURSE = {
         {
           q: "Which field types let a search use parts of a product's reference number?",
           options: [
-            "gtin.light_explode and mpn.light_explode",
             "brand.autocomplete and title.autocomplete",
             "df_all and id.light_explode",
-            "title.autocomplete_start and df_all"
+            "title.autocomplete_start and df_all",
+            "gtin.light_explode and mpn.light_explode"
           ],
-          correct: 0,
+          correct: 3,
           explain: "gtin.light_explode and mpn.light_explode let a search use parts of a product's reference number."
         },
         {
-          q: "Are the exact field types on offer the same across every site and platform?",
+          q: "<code>gtin.light_explode</code> has been added to Search Fields. A product's GTIN is 8412345678905. Which query finds it through that field?",
           options: [
-            "No — the exact fields on offer can vary between sites and platforms",
-            "Yes, they're always identical everywhere",
-            "Only <code>df_all</code> varies; the rest are fixed",
-            "They vary by language, but not by platform"
+            "\"5678905\"",
+            "\"841234\"",
+            "\"345678\"",
+            "\"8905\""
           ],
-          correct: 0,
-          explain: "The exact fields on offer can vary between sites and platforms."
+          correct: 1,
+          explain: "light_explode lets a code be typed partially, but only read from left to right: \"841234\" is the beginning of the GTIN, so it matches. \"5678905\", \"345678\" and \"8905\" are parts from the middle or the end, so they don't."
         }
       ]
     },
@@ -492,22 +573,49 @@ const COURSE = {
         blocks: [
           {
             html: `
-              <p>More than one criterion can be used at once, and each one can be configured as <strong>ascending</strong> or <strong>descending</strong> — how that works depends on the type of criterion.</p>
-              <p>If a criterion is represented by numeric values, the order follows that number: configured as descending, items are sorted from the highest value of that criterion down to the lowest; configured as ascending, from the lowest up to the highest. If the criterion uses text values instead, the order follows the alphabet — A→Z or Z→A.</p>
-              <p>By default, there's only one criterion: <strong>Score</strong>, configured as descending. So the more score an item has, the higher up it's displayed in the list.</p>
-              <p>Up to five criteria can be added. The extra ones are fields indexed from the feed — for example, <code>price</code>, <code>title</code> or <code>categories</code> — as long as they aren't <strong>Keyword</strong>-type fields, such as <code>id</code> (field types will be covered further ahead).</p>
-              <p>The order in which the criteria are listed affects how results end up arranged.</p>
+              <h3>Sort Order</h3>
+              <p>More than one criterion can be used at once, and each one gets its own sort order — the options depend on the type of criterion:</p>
+              <table class="theory-table">
+                <thead><tr><th>Criterion type</th><th colspan="2">Sort order options</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Numeric values</strong> — the order follows that number</td><td><strong>Highest to lowest</strong> — from the highest value of that criterion down to the lowest</td><td><strong>Lowest to highest</strong> — from the lowest up to the highest</td></tr>
+                  <tr><td><strong>Text values</strong> — the order follows the alphabet</td><td><strong>A to Z</strong></td><td><strong>Z to A</strong></td></tr>
+                </tbody>
+              </table>
+              <p>One special case is the <code>availability</code> field: it's a text field (usually "in stock" / "out of stock"), but it still sorts cleanly — set to <strong>A to Z</strong>, in stock items come before out of stock ones.</p>
 
-              <figure class="lesson-figure lesson-figure-right">
-                <img src="img/relevance-criteria-score-price.png" alt="Relevance Criteria screen with Score listed first (Highest to lowest) and best_price listed second (Highest to lowest)" data-action="zoom-image">
+              <h3>Default and Additional Criteria</h3>
+              <figure class="lesson-figure lesson-figure-right" style="width: 420px;">
+                <img src="img/relevance-criteria-default.png" alt="Advanced Preferences > Relevance criteria tab in its default configuration: a warning that changing the Score field position may decrease search quality, a single Score field set to Highest to Lowest, an Add field button and a Save button" data-action="zoom-image">
                 <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
               </figure>
+              <p>By default, there's only one criterion: <strong>Score</strong>, configured as <strong>Highest to lowest</strong>. So the more score an item has, the higher up it's displayed in the list.</p>
+              <p>Up to five criteria can be added. The extra ones are fields indexed from the feed — for example, <code>price</code>, <code>title</code> or <code>categories</code> — as long as they aren't <strong>Keyword</strong>-type fields, such as <code>id</code> (field types will be covered later in the course).</p>
+              <p class="theory-callout">It's recommended to always keep <strong>Score</strong> in first position, set to <strong>Highest to lowest</strong>, and never remove it: the search depends on it to work properly, and so do other promotional tools such as <strong>Boosting</strong> and <strong>Custom Results</strong>. The Admin Panel itself warns about it: "Changing the Score field position may decrease search quality".</p>
+
+              <h3>Why the Order Matters</h3>
+              <p class="theory-callout">Criteria are applied one after the other, in the order they're listed: if products tie on the first criterion, the second one decides between them, and so on. That's why the order in which the criteria are listed affects how results end up arranged.</p>
+              <figure class="lesson-figure lesson-figure-left" style="width: 300px;">
+                  <img src="img/relevance-criteria-score-price.png" alt="Relevance Criteria screen with Score listed first (Highest to lowest) and best_price listed second (Highest to lowest)" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
               <p>With a Relevance Criteria configuration like this one — <strong>Score</strong> (Highest to lowest) listed first, then <strong>best_price</strong> (Highest to lowest) — products are sorted from the highest score to the lowest, and products that share the same score are then sorted by price, from highest to lowest.</p>
-              <figure class="lesson-figure lesson-figure-left" style="clear: both;">
-                <img src="img/relevance-criteria-price-score.png" alt="Relevance Criteria screen with best_price listed first (Highest to lowest) and Score listed second (Highest to lowest)" data-action="zoom-image">
-                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
-              </figure>
-              <p>With the criteria in the opposite order instead — <strong>best_price</strong> (Highest to lowest) first, then <strong>Score</strong> (Highest to lowest) — items are sorted from the highest price to the lowest, and products that share the same price are then sorted by score, from highest to lowest.</p>`
+              <p>For example, with these four products: Product C comes first with the highest score; Products B and A tie on score, so the higher price puts B ahead of A; Product D, with the lowest score, comes last.</p>
+              <table class="theory-table">
+                <thead><tr><th>Position</th><th>Product</th><th>Score</th><th>best_price</th></tr></thead>
+                <tbody><tr><td>1</td><td><strong>Product C</strong></td><td>7</td><td>50</td></tr><tr><td>2</td><td><strong>Product B</strong></td><td>5</td><td>120</td></tr><tr><td>3</td><td><strong>Product A</strong></td><td>5</td><td>80</td></tr><tr><td>4</td><td><strong>Product D</strong></td><td>3</td><td>80</td></tr></tbody>
+              </table>
+              <div style="clear: both;"></div>
+              <figure class="lesson-figure lesson-figure-right" style="width: 300px;">
+                  <img src="img/relevance-criteria-price-score.png" alt="Relevance Criteria screen with best_price listed first (Highest to lowest) and Score listed second (Highest to lowest)" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>With the criteria in the opposite order instead — <strong>best_price</strong> (Highest to lowest) first, then <strong>Score</strong> (Highest to lowest) — items are sorted from the highest price to the lowest, and products that share the same price are then sorted by score, from highest to lowest.</p>
+              <p>With the same four products: Product B now comes first with the highest price; Products A and D tie on price, so the higher score puts A ahead of D; Product C, the cheapest, drops to last despite having the highest score.</p>
+              <table class="theory-table">
+                <thead><tr><th>Position</th><th>Product</th><th>Score</th><th>best_price</th></tr></thead>
+                <tbody><tr><td>1</td><td><strong>Product B</strong></td><td>5</td><td>120</td></tr><tr><td>2</td><td><strong>Product A</strong></td><td>5</td><td>80</td></tr><tr><td>3</td><td><strong>Product D</strong></td><td>3</td><td>80</td></tr><tr><td>4</td><td><strong>Product C</strong></td><td>7</td><td>50</td></tr></tbody>
+              </table>`
           }
         ]
       },
@@ -515,78 +623,78 @@ const COURSE = {
         {
           q: "What does Relevance Criteria decide?",
           options: [
-            "Which criteria are used to sort the results a query displays",
             "Which fields get indexed from the data feed",
             "Which fields the search engine looks at when matching a query",
+            "Which criteria are used to sort the results a query displays",
             "How many results a query returns"
           ],
-          correct: 0,
+          correct: 2,
           explain: "Relevance Criteria decides which criteria are used to sort the results displayed for a query."
         },
         {
           q: "Can more than one criterion be used at the same time, and how is each one configured?",
           options: [
-            "Yes — more than one can be used, and each is configured independently as ascending or descending",
             "No, only one criterion can ever be active",
-            "Yes, but all of them must share the same ascending/descending setting",
+            "Yes, but all of them must share the same sort order",
+            "Yes — more than one can be used, and each one gets its own sort order",
             "Yes, but a maximum of two at a time"
           ],
-          correct: 0,
-          explain: "More than one criterion can be used at once, and each one can be configured on its own as ascending or descending."
+          correct: 2,
+          explain: "More than one criterion can be used at once, and each one gets its own sort order — Highest to lowest / Lowest to highest for numeric values, A to Z / Z to A for text."
         },
         {
-          q: "For a criterion represented by numeric values and configured as descending, how are items ordered?",
+          q: "For a criterion represented by numeric values and set to Highest to lowest, how are items ordered?",
           options: [
-            "From the highest value of that criterion down to the lowest",
             "From the lowest value of that criterion up to the highest",
+            "From the highest value of that criterion down to the lowest",
             "Alphabetically, A to Z",
             "Randomly among tied values"
           ],
-          correct: 0,
-          explain: "For a numeric criterion, descending order sorts items from the highest value of that criterion down to the lowest."
+          correct: 1,
+          explain: "For a numeric criterion, Highest to lowest sorts items from the highest value of that criterion down to the lowest."
         },
         {
           q: "How is a criterion that uses text values ordered?",
           options: [
-            "A→Z (ascending) or Z→A (descending)",
+            "A to Z or Z to A",
             "Always from shortest text to longest",
             "By numeric value only",
             "It can't be used as a sorting criterion"
           ],
           correct: 0,
-          explain: "Criteria with text values are ordered following the alphabet — A→Z or Z→A."
+          explain: "Criteria with text values are ordered following the alphabet — A to Z or Z to A."
         },
         {
           q: "By default, what single criterion does Relevance Criteria use, and how is it configured?",
           options: [
-            "Score, descending",
-            "Price, ascending",
-            "Title, A→Z",
-            "Categories, descending"
+            "Price, Lowest to highest",
+            "Title, A to Z",
+            "Categories, Z to A",
+            "Score, Highest to lowest"
           ],
-          correct: 0,
-          explain: "By default there's only one criterion, Score, configured as descending — so the more score an item has, the higher up it's displayed."
+          correct: 3,
+          explain: "By default there's only one criterion, Score, set to Highest to lowest — so the more score an item has, the higher up it's displayed."
         },
         {
           q: "At most how many criteria can be added, and what can the extra ones be?",
           options: [
-            "Up to five, using fields indexed from the feed, such as price, title or categories",
             "Up to five, using text fields only",
+            "Up to five, using fields indexed from the feed, such as price, title or categories",
             "Up to three, using any field at all",
             "Unlimited, as long as they're numeric"
           ],
-          correct: 0,
+          correct: 1,
           explain: "Up to five criteria can be added, and the extra ones are fields indexed from the feed, like price, title or categories."
         },
         {
           q: "Can a Keyword-type field, such as <code>id</code>, be added as an extra Relevance Criteria field?",
           options: [
-            "No — extra criteria can't be Keyword-type fields, such as id",
             "Yes, id is the recommended second criterion",
             "Yes, but only after removing Score",
+            "No — extra criteria can't be Keyword-type fields, such as id",
             "There's no restriction on which fields can be added"
           ],
-          correct: 0,
+          correct: 2,
           explain: "Extra criteria have to be fields indexed from the feed that aren't Keyword-type — id, for example, can't be used."
         },
         {
@@ -617,30 +725,72 @@ const COURSE = {
         blocks: [
           {
             html: `
+              <h3>How Boosting Changes Positions</h3>
               <p>By default, if no search query is being made, a <code>match_all</code> query is launched, rendering all the indexed items in the results (unless some of them are being excluded — but that's covered later in the course).</p>
               <p>The score of all the items is <strong>1</strong>, and if Relevance Criteria is set to only Score, the order of appearance is given solely by the indexation order, as we saw in one of the previous lessons.</p>
-              <p>But if we put a boosting (a multiplier) on the "natural" score of a given product, that product's natural position will change. If we apply a positive boosting (for example, <strong>1.5</strong>), that product will appear in first position. If we apply a negative boosting, it will appear in last position.</p>
-              <p>It's a multiplier applied regardless of the query launched. This also means that if, for a given search, that same product doesn't appear in the results list — having a score of <strong>0</strong> — that multiplier won't have any influence on the final score. That is, it can't make the product appear if it isn't in the natural list of products for a given query. This also means that if a product has a low score for a given query, even if a boosting is applied, it's not guaranteed that product will appear in first position.</p>
-              <p>If a very high boosting is given to a given product, you risk putting it in first position in every search where it appears, even if naturally it wouldn't be relevant in some of them.</p>
-              <p>You can also give a negative boosting, using a number between <strong>0.1</strong> and <strong>0.9</strong> (using a boosting of <strong>0</strong> removes it from every type of search).</p>
+              <p>But if we put a boosting (a multiplier) on the "natural" score of a given product, that product's natural position will change:</p>
+              <table class="theory-table">
+                <thead><tr><th>Boosting value</th><th>Effect</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Positive</strong> (for example, <strong>1.5</strong>)</td><td>The product will appear in first position</td></tr>
+                  <tr><td><strong>Negative</strong> — a negative boosting can also be given, using a number between <strong>0.1</strong> and <strong>0.9</strong></td><td>The product will appear in last position</td></tr>
+                  <tr><td><strong>0</strong></td><td>Using a boosting of 0 removes it from every type of search</td></tr>
+                </tbody>
+              </table>
+              <p>For example, with no query launched, four products all start with a score of 1:</p>
+              <table class="theory-table">
+                <thead><tr><th>Product</th><th>Boosting</th><th>Final score</th><th>Position</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Canvas Tote Bag</strong></td><td>1.5</td><td>1 × 1.5 = 1.5</td><td>First</td></tr>
+                  <tr><td><strong>Denim Jacket</strong></td><td>—</td><td>1</td><td>Second</td></tr>
+                  <tr><td><strong>Wool Scarf</strong></td><td>0.5</td><td>1 × 0.5 = 0.5</td><td>Last</td></tr>
+                  <tr><td><strong>Straw Hat</strong></td><td>0</td><td>—</td><td>Removed from the results</td></tr>
+                </tbody>
+              </table>
 
+              <h3>How the Multiplier Works</h3>
+              <p class="theory-callout">It's a multiplier applied regardless of the query launched. This also means that if, for a given search, that same product doesn't appear in the results list, that multiplier won't have any influence on the final score. That is, it can't make the product appear if it isn't in the natural list of products for a given query. This also means that if a product has a low score for a given query, even if a boosting is applied, it's not guaranteed that product will appear in first position.</p>
+              <p>For example, for the query <strong>"boots"</strong>:</p>
+              <table class="theory-table">
+                <thead><tr><th>Product</th><th>Relevance</th><th>Boosting</th><th>Final score</th><th>Result</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Leather Boots</strong></td><td>4</td><td>—</td><td>4</td><td>First</td></tr>
+                  <tr><td><strong>Rain Boots</strong></td><td>2</td><td>1.5</td><td>2 × 1.5 = 3</td><td>Second — the boost raises its score, but not enough to pass Leather Boots</td></tr>
+                  <tr><td><strong>Wool Scarf</strong></td><td>—</td><td>3</td><td>—</td><td>Not shown — it doesn't match "boots", so its boost has nothing to multiply</td></tr>
+                </tbody>
+              </table>
+              <p>If a very high boosting is given to a given product, there's a risk of putting it in first position in every search where it appears, even if naturally it wouldn't be relevant in some of them.</p>
+
+              <h3>Four Ways to Apply It</h3>
               <p>There are four ways to apply it:</p>
-              <figure class="lesson-figure lesson-figure-right" style="width: 260px;">
-                <img src="img/boosting-rules-edit-example.png" alt="Edit Boosting Rule panel named 'Expensive Shoes' with a Boost value of 1.5, Search Terms disabled, and conditions requiring all results to match categories Is Shoes and best_price Not in range 0.0–100.0" data-action="zoom-image">
-                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
-              </figure>
-              <ul>
-                <li><strong>Manual Boosting</strong> — the possibility of applying a boosting to a single product, as seen previously.</li>
-                <li><strong>Boosting Rules</strong> — the possibility of applying a boosting to every product that matches given conditions. The conditions are related to the indexed fields, several conditions can be applied at once, and the boosting can be set to apply to products that meet all of those conditions or at least one of them.</li>
-                <li><strong>Automatic Boosting</strong> — an option that, when active, automatically adds boost to products that, over the last 15 days, have been clicked and viewed more than the average of all products.</li>
-                <li><strong>Boosting Through Data Feed</strong> — by indexing the <code>df_manual_boost</code> field, a manual boosting can be applied to products directly through indexation, and it overwrites whatever manual boost was set in the Admin Panel.</li>
-              </ul>
+              <table class="theory-table">
+                <thead><tr><th>Type</th><th>How it works</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Manual Boosting</strong></td><td>The possibility of applying a boosting to a single product, as seen previously.</td></tr>
+                  <tr><td><strong>Boosting Rules</strong></td><td>The possibility of applying a boosting to every product that matches given conditions. The conditions are related to the indexed fields, several conditions can be applied at once, and the boosting can be set to apply to products that meet all of those conditions or at least one of them.</td></tr>
+                  <tr><td><strong>Automatic Boosting</strong></td><td>An option that, when active, automatically adds boost to products that, over the last 15 days, have been clicked and viewed more than the average of all products.</td></tr>
+                  <tr><td><strong>Boosting Through Data Feed</strong></td><td>By indexing the <code>df_manual_boost</code> field, a manual boosting can be applied to products directly through indexation, and it overwrites whatever manual boost was set in the Admin Panel.</td></tr>
+                </tbody>
+              </table>
+              <figure class="lesson-figure lesson-figure-left" style="width: 230px;">
+                  <img src="img/boosting-rules-edit-example.png" alt="Edit Boosting Rule panel named 'Expensive Shoes' with a Boost value of 1.5, Search Terms disabled, and conditions requiring all results to match categories Is Shoes and best_price Not in range 0.0–100.0" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
               <p>Here's what a Boosting Rule looks like once configured: this one, named <strong>Expensive Shoes</strong>, applies a <strong>1.5</strong> boost to every product that has "shoes" indexed as its category and a best price of 100 or more.</p>
-              <p>These four ways apply simultaneously to the final score. Combining a manual boosting of <strong>1.5</strong> with a Boosting Rules value of another <strong>1.5</strong> takes a product's initial score of <strong>1</strong> up to <strong>2.25</strong>: 1 × 1.5 × 1.5 = 2.25.</p>
-              <figure class="lesson-figure lesson-figure-left">
-                <img src="img/boosting-final-score-example.png" alt="Results Preview row for a product showing an info tooltip with Automatic boosting: -, Manual boosting: 1.5, Boosting rules: 1.5, and Final Boosting: 1.5 x 1.5 = 2.25, next to a Total of 2.25" data-action="zoom-image">
-                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
-              </figure>
+              <p>Reading the panel from top to bottom:</p>
+              <ul>
+                <li><strong>Status</strong> is on, so the rule is active.</li>
+                <li><strong>Boost</strong> is <strong>1.5</strong> — the multiplier applied to every product the rule matches.</li>
+                <li><strong>Search Terms</strong> is switched off, so the rule isn't tied to specific searches and applies to every search.</li>
+                <li><strong>Results match all conditions</strong> is selected, so a product needs to meet both conditions at once: <code>categories</code> <strong>is</strong> Shoes, and <code>best_price</code> <strong>Not in range</strong> 0.0–100.0.</li>
+              </ul>
+
+              <h3 style="clear: both;">Combining Them</h3>
+              <p class="theory-callout">These four ways apply simultaneously to the final score. Combining a manual boosting of <strong>1.5</strong> with a Boosting Rules value of another <strong>1.5</strong> takes a product's initial score of <strong>1</strong> up to <strong>2.25</strong>: 1 × 1.5 × 1.5 = 2.25.</p>
+              <figure class="lesson-figure lesson-figure-right" style="width: 400px;">
+                  <img src="img/boosting-final-score-example.png" alt="Results Preview row for a product showing an info tooltip with Automatic boosting: -, Manual boosting: 1.5, Boosting rules: 1.5, and Final Boosting: 1.5 x 1.5 = 2.25, next to a Total of 2.25" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
               <p>Results Preview breaks that total down the same way, listing each boosting source next to the final multiplication that produced the product's Total score.</p>`
           }
         ]
@@ -650,46 +800,95 @@ const COURSE = {
           q: "What does a boosting factor do to a product's existing relevance score?",
           options: [
             "It replaces the score entirely",
-            "It multiplies the score, pushing the product up or down the results",
             "It only affects the product's price",
-            "It only applies to out-of-stock products"
+            "It only applies to out of stock products",
+            "It multiplies the score, pushing the product up or down the results"
           ],
-          correct: 1,
+          correct: 3,
           explain: "A boosting factor multiplies a result's existing score, moving that product further up or down the list."
         },
         {
           q: "In Manual Boosting, what does a value below 1.0 (but above 0) do to a product?",
-          options: ["Raises its ranking", "Lowers its ranking", "Removes it from results entirely", "Has no effect"],
-          correct: 1,
+          options: ["Lowers its ranking", "Raises its ranking", "Removes it from results entirely", "Has no effect"],
+          correct: 0,
           explain: "In Manual Boosting, values above 1.0 raise a product's ranking, while values below 1.0 (but above 0) lower it."
         },
         {
           q: "What does Automatic Boosting reward?",
           options: [
             "Products added most recently to the feed",
-            "Products that have been performing well recently, based on a balance of visits and clicks",
             "Products with the lowest price",
+            "Products that have been performing well recently, based on a balance of visits and clicks",
             "Products with the most fields filled in"
           ],
-          correct: 1,
+          correct: 2,
           explain: "Automatic Boosting rewards products that have been performing well recently, using a recent (last 15 days) balance of visits and clicks, and only applies to above-average performers."
         },
         {
-          q: "What's the valid range for the <code>df_manual_boost</code> field?",
-          options: ["0 to 100", "0.1 to 19.99", "1 to 10", "-1 to 1"],
+          q: "What's the risk of giving a very high boosting to a product?",
+          options: [
+            "The product gets removed from every search",
+            "It can end up in first position in every search where it appears, even where it wouldn't naturally be relevant",
+            "The boosting is ignored above a value of 10",
+            "Every other product in the catalogue loses its score"
+          ],
           correct: 1,
-          explain: "<code>df_manual_boost</code> accepts values from 0.1 to 19.99 — 0, negative numbers, or 20 and above trigger an indexing error."
+          explain: "Since boosting multiplies the score in every search where the product appears, a very high value can push it to the top even for searches where it isn't really relevant. It doesn't remove the product (only 0 does that) and it doesn't touch other products' scores."
         },
         {
           q: "If <code>df_manual_boost</code> is set in the feed and a manual boost was also set in the Admin Panel, what happens?",
           options: [
             "Both are averaged together",
-            "The feed value overwrites the Admin Panel value",
             "The Admin Panel value always wins",
-            "<strong>Doofinder</strong> throws an error and ignores both"
+            "<strong>Doofinder</strong> throws an error and ignores both",
+            "The feed value overwrites the Admin Panel value"
+          ],
+          correct: 3,
+          explain: "<code>df_manual_boost</code>, coming from the feed (or API), overwrites whatever manual boost value was set through the Admin Panel."
+        },
+        {
+          q: "No query has been launched, so every product has a score of 1. A <strong>Sun Visor</strong> gets a boosting of 0.7 and no other product is boosted. Where does the Sun Visor appear?",
+          options: [
+            "In last position",
+            "In first position",
+            "It disappears from the results",
+            "Its position doesn't change"
+          ],
+          correct: 0,
+          explain: "0.7 is a negative boosting (between 0.1 and 0.9): its score becomes 1 × 0.7 = 0.7, lower than everyone else's 1, so it drops to last. Only a boosting of 0 removes a product, and a value above 1 would push it to first."
+        },
+        {
+          q: "For the query \"sandals\", <strong>Beach Sandals</strong> has a Relevance of 6 and no boost, while <strong>Sport Sandals</strong> has a Relevance of 3 and a boosting of 1.5. Which one comes first?",
+          options: [
+            "Sport Sandals, because it's the only boosted product",
+            "Beach Sandals, because 6 is still higher than 3 × 1.5 = 4.5",
+            "They tie, because boosting evens out the scores",
+            "Sport Sandals, because boosting always guarantees first position"
           ],
           correct: 1,
-          explain: "<code>df_manual_boost</code>, coming from the feed (or API), overwrites whatever manual boost value was set through the Admin Panel."
+          explain: "Boosting multiplies the existing score: Sport Sandals goes from 3 to 4.5, which still isn't enough to pass Beach Sandals' 6. Boosting never guarantees first position — it depends on the natural score it multiplies."
+        },
+        {
+          q: "A <strong>Floor Rug</strong> has a boosting of 5. A user searches \"desk lamp\", and the rug doesn't match that query at all. What happens?",
+          options: [
+            "It appears in first position thanks to its high boost",
+            "It appears in last position",
+            "It doesn't appear — its boost has nothing to multiply for that query",
+            "It appears only if Relevance Criteria is set to Score"
+          ],
+          correct: 2,
+          explain: "Boosting can't make a product appear if it isn't in the natural results for that query: the rug doesn't match \"desk lamp\", so no matter how high its boost is, it isn't shown."
+        },
+        {
+          q: "A product has a Relevance of 2 for a query. It has a Manual Boosting of 2 and also matches a Boosting Rule of 1.5. What's its final score?",
+          options: [
+            "5.5, because the boosts are added up",
+            "6, because 2 × 2 × 1.5 = 6",
+            "4, because only the highest boost counts",
+            "3, because only the Boosting Rule applies"
+          ],
+          correct: 1,
+          explain: "The different ways of boosting apply simultaneously and multiply each other: 2 × 2 × 1.5 = 6. They're never added up, and one doesn't cancel the other."
         }
       ]
     },
@@ -708,28 +907,82 @@ const COURSE = {
         blocks: [
           {
             html: `
+              <h3>Match Types</h3>
               <p>The query can be configured in two ways:</p>
-              <ul>
-                <li><strong>Exact Match</strong> — this Custom Result will be displayed only if the user types the exact search term or terms chain.</li>
-                <li><strong>Broad Match</strong> — this Custom Result will be displayed if the text typed by the user contains the set search term.</li>
-              </ul>
+              <table class="theory-table">
+                <thead><tr><th>Match type</th><th>When the Custom Result is displayed</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Exact Match</strong></td><td>Only if the user types the exact search term or terms chain.</td></tr>
+                  <tr><td><strong>Broad Match</strong></td><td>If the text typed by the user contains the set search term.</td></tr>
+                </tbody>
+              </table>
+              <p>For example, with the search term <strong>"sunglasses"</strong>:</p>
+              <table class="theory-table">
+                <thead><tr><th>User types</th><th>Exact Match</th><th>Broad Match</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>sunglasses</strong></td><td>Displayed</td><td>Displayed</td></tr>
+                  <tr><td><strong>ray-ban sunglasses</strong></td><td>Not displayed — it isn't the exact term</td><td>Displayed — the text contains "sunglasses"</td></tr>
+                </tbody>
+              </table>
+
+              <h3>Including and Excluding Items</h3>
               <p>The way of including or excluding items from queries through Custom Results is similar to what we saw in Boosting Rules. That is, it can be applied at the level of individual products, or at the level of a group of products that meet given conditions — dictated by the indexed fields and their values, exactly as in Boosting Rules.</p>
               <p>Within a rule, conditions can be combined:</p>
-              <ul>
-                <li>An <strong>AND</strong> condition happens automatically as soon as two filters with different attributes are used together — e.g. category "Shoes" and color "blue" only matches items that are both.</li>
-                <li>An <strong>OR</strong> condition happens by adding two or more values in the same row — e.g. color "blue" or "red" in the same rule matches items with either one.</li>
-                <li>Both can be combined at once: category "Shoes" whose color is "blue" or "red" mixes an AND (category + color) with an OR (blue vs red) in the same rule.</li>
-              </ul>
-              <p>"And" logic can't be applied twice to the same field within one rule — though a field can still hold more than one value.</p>
+              <table class="theory-table">
+                <thead><tr><th>Condition</th><th>How it happens</th><th>Example</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>AND</strong></td><td>Automatically, as soon as two filters with different attributes are used together</td><td>Category "Shoes" and color "blue" only matches items that are both</td></tr>
+                  <tr><td><strong>OR</strong></td><td>By adding two or more values in the same row</td><td>Color "blue" or "red" in the same rule matches items with either one</td></tr>
+                  <tr><td><strong>AND + OR</strong></td><td>Both can be combined at once</td><td>Category "Shoes" whose color is "blue" or "red" mixes an AND (category + color) with an OR (blue vs red) in the same rule</td></tr>
+                </tbody>
+              </table>
+              <p class="theory-callout">"And" logic can't be applied twice to the same field within one rule — though a field can still hold more than one value.</p>
+              <figure class="lesson-figure lesson-figure-left" style="width: 300px;">
+                <img src="img/custom-results-and-rule.png" alt="Include Rule pop-up with two conditions on separate rows: categories SHOES and brand NIKE, with an Add condition button and an Add rule button" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>This rule has two conditions on two different fields — <code>categories</code> is SHOES and <code>brand</code> is NIKE — so it's an <strong>AND</strong>: only Nike shoes enter the list. A pair of Adidas shoes or a Nike cap wouldn't match.</p>
+              <div style="clear: both;"></div>
+              <figure class="lesson-figure lesson-figure-right" style="width: 300px;">
+                <img src="img/custom-results-or-rule.png" alt="Include Rule pop-up with a single brand condition holding three values in the same row: ADIDAS, NIKE and VANS" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>This rule has three values in the same row of the same field — <code>brand</code> is ADIDAS, NIKE or VANS — so it's an <strong>OR</strong>: any product from any of those three brands enters the list.</p>
+              <div style="clear: both;"></div>
               <p>Within the same Custom Result, several rules can be applied (individual items or rules), and the arrangement of products depends on the disposition of these rules.</p>
-              <p>In Custom Results you can decide between <strong>Display only the selected results</strong> or <strong>Display the selected results first, then natural results</strong>.</p>
-              <p>Custom Results can be applied for a specific period, or it can always be active.</p>`
+
+              <h3>Display and Duration</h3>
+              <figure class="lesson-figure lesson-figure-right" style="width: 420px;">
+                <img src="img/custom-results-form.png" alt="Custom Result form with numbered fields: 1 Name, 2 Status toggle, 3 Duration (ongoing or set date period), 4 Display results (only the selected results, or the selected results first then natural results), 5 Search Terms with Exact Match and Add term, 6 Included results and 7 Excluded results, each with an Add results button" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>Custom Results allows choosing between <strong>Display only the selected results</strong> or <strong>Display the selected results first, then natural results</strong>.</p>
+              <p>For example, a Custom Result for "sunglasses" includes three products:</p>
+              <ul>
+                <li>With <strong>Display only the selected results</strong>, the search shows those three products and nothing else.</li>
+                <li>With <strong>Display the selected results first, then natural results</strong>, the three products come first, followed by every other product that naturally matches "sunglasses".</li>
+              </ul>
+              <p>Custom Results can be applied for a specific period, or it can always be active.</p>
+
+              <h3 style="clear: both;">An Example</h3>
+              <figure class="lesson-figure lesson-figure-left" style="width: 400px;">
+                <img src="img/custom-results-example-config.png" alt="Custom Result configured with the Exact Match search terms sun accesories, sunnies and sunglasses; Included results Ray-Ban Unisex Sunglasses, Ray-Ban Andy Sunglasses and Gucci GG Round Acetate Sunglasses; Excluded results Gucci Web GG Rectangular Flat-Top Acetate Sunglasses" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>This Custom Result is triggered by three Exact Match search terms — "sun accesories", "sunnies" and "sunglasses". It includes three products, in this order: Ray-Ban Unisex Sunglasses, Ray-Ban Andy Sunglasses and Gucci GG Round Acetate Sunglasses. It also excludes one: Gucci Web GG Rectangular Flat-Top Acetate Sunglasses.</p>
+              <div style="clear: both;"></div>
+              <figure class="lesson-figure lesson-figure-right" style="width: 400px;">
+                <img src="img/custom-results-example-layer.png" alt="Search Layer for the query sunglasses showing Products (3): Ray-Ban Unisex Sunglasses, Ray-Ban Andy Sunglasses and Gucci GG Round Acetate Sunglasses, in that order" data-action="zoom-image">
+                <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+              </figure>
+              <p>Searching <strong>"sunglasses"</strong> in the Search Layer, the three included products show up in exactly that order, and the excluded Gucci Web GG model doesn't appear at all.</p>`
           },
           {
             heading: "Combining Relevance Criteria, Boosting and Custom Results",
             pageBreak: true,
             html: `
               <p>These three features can be active at the same time. For a given search, the products may be sorted according to Relevance Criteria, a Custom Result may be forcing certain items into (or out of) that list, and some of those items may also carry a boost. Since they overlap, it's worth being precise about how they interact — and which one has the final word.</p>
+              <h3>Custom Results and Relevance Criteria</h3>
               <p class="theory-callout">Custom Results decides which products enter the list, but not necessarily how they're ordered. The arrangement a Custom Result sets is only preserved while <strong>Score</strong> is the <em>first</em> Relevance Criteria. As soon as a different field is placed first, that field takes over and re-sorts the forced products, regardless of the order Custom Results gave them — a criterion listed after Score, on the other hand, never gets the chance to do that.</p>
               <p>Take a Custom Result that forces this order, with both products indexed at the same score:</p>
               <table class="theory-table">
@@ -748,6 +1001,7 @@ const COURSE = {
                 </tbody>
               </table>
               <p>Had Category been left in second place instead, behind Score, nothing would have changed — with Score first, the two products already tie, and the original Custom Result order stands.</p>
+              <h3>Custom Results and Boosting</h3>
               <p class="theory-callout">Boosting can't touch the order among products a Custom Result has already forced into the list — those products carry a score that Custom Results itself fixes, and boosting has no effect on it. What boosting can still do is reorder products through Relevance Criteria, wherever a Custom Result isn't already deciding the arrangement.</p>
               <p>Take three products with no Custom Result involved, all sharing the same score, sorted by <strong>Category (Z → A)</strong> first and <strong>Score (Highest to lowest)</strong> second:</p>
               <table class="theory-table">
@@ -774,80 +1028,85 @@ const COURSE = {
         {
           q: "What is the purpose of Custom Results?",
           options: [
-            "To automatically reorder every result by price",
             "To include or exclude specific items from search results for particular terms",
+            "To automatically reorder every result by price",
             "To translate product titles",
             "To generate the installation script"
           ],
-          correct: 1,
+          correct: 0,
           explain: "Custom Results let specific items be included in or excluded from the results shown for particular search terms."
         },
         {
-          q: "What does the Status toggle let you do?",
-          options: [
-            "Permanently delete a Custom Result",
-            "Enable or disable a Custom Result without deleting it",
-            "Change its Search Terms",
-            "Merge it with another Custom Result"
-          ],
-          correct: 1,
-          explain: "Status enables or disables a Custom Result without deleting it, so it can be paused and reactivated later."
-        },
-        {
-          q: "What's the difference between Included Items and Excluded Items?",
+          q: "What's the difference between Included results and Excluded results?",
           options: [
             "They're the same list, shown twice",
-            "Included Items adds specific products to the results; Excluded Items removes them",
-            "Included Items only works with rules, Excluded Items only with individual products",
-            "Excluded Items only applies to out-of-stock products"
+            "Included results only works with rules, Excluded results only with individual products",
+            "Excluded results only applies to out of stock products",
+            "Included results adds specific products to the results; Excluded results removes them"
           ],
-          correct: 1,
-          explain: "Included Items and Excluded Items share the same structure — added individually or via rules — but one adds products to a Custom Result's results and the other removes them."
+          correct: 3,
+          explain: "Included results and Excluded results share the same structure — added individually or via rules — but one adds products to a Custom Result's results and the other removes them."
         },
         {
-          q: "A rule requires category = shoes AND brand = Nike. Which condition logic is this?",
-          options: ["Or", "And", "Broad Match", "Exact Match"],
-          correct: 1,
-          explain: "And conditions require every filter to be satisfied at once — here, both category = shoes and brand = Nike."
-        },
-        {
-          q: "Where do Custom Results integrate with the Search Layer's initial view?",
-          options: [
-            "Layer Settings > Search Sequence > Query for recommended products",
-            "Managing Data > Field Name Mapping",
-            "Search > Relevance Criteria",
-            "Store > Authorized Domains"
-          ],
-          correct: 0,
-          explain: "Custom Results can populate the 'Query for recommended products' field under Layer Settings > Search Sequence, showing preferred products when the layer opens."
-        },
-        {
-          q: "What can cause a product to show as 'not indexed' inside a Custom Result?",
-          options: [
-            "Being out of stock, already excluded elsewhere, a changed product ID, or not being an indexed product at all",
-            "Having too high a boosting value",
-            "Being part of Relevance Criteria",
-            "Using a wildcard domain"
-          ],
-          correct: 0,
-          explain: "Products can show as 'not indexed' for several reasons: out-of-stock status, prior exclusion, a changed ID, or simply not being indexed at all."
-        },
-        {
-          q: "How many Custom Results can a Store have at most?",
-          options: ["10", "50", "100", "Unlimited"],
+          q: "A rule requires <code>categories</code> is Backpacks and <code>brand</code> is Herschel, on two separate rows. Which condition logic is this?",
+          options: ["Or", "Broad Match", "And", "Exact Match"],
           correct: 2,
-          explain: "A Store can have up to 100 Custom Results."
+          explain: "And conditions require every filter to be satisfied at once — here, both categories = Backpacks and brand = Herschel."
         },
         {
-          q: "When copying a Custom Results configuration to another Search Engine, what does 'Copy and Replace Existing Settings' do?",
+          q: "A Custom Result has the search term \"running shoes\" set as <strong>Broad Match</strong>. A user types \"red running shoes\". Is the Custom Result displayed?",
           options: [
-            "Adds the copied results on top of the existing ones",
-            "Overwrites the destination's existing results, and can't be undone",
-            "Only copies the Name field",
-            "Requires a support ticket"
+            "No, because the user typed an extra word",
+            "Yes, because the typed text contains \"running shoes\"",
+            "Only if Relevance Criteria is set to Score",
+            "Only if \"red\" is also added as a search term"
           ],
           correct: 1,
-          explain: "'Copy and Replace Existing Settings' overwrites the destination Search Engine's existing Custom Results, and that action is irreversible."
+          explain: "Broad Match displays the Custom Result whenever the typed text contains the set search term — \"red running shoes\" contains \"running shoes\". With Exact Match it wouldn't be displayed, since the user didn't type the exact term."
+        },
+        {
+          q: "A Custom Result has the search term \"gift card\" set as <strong>Exact Match</strong>. Which search displays it?",
+          options: [
+            "\"gift card\"",
+            "\"gift card 50\"",
+            "\"birthday gift card\"",
+            "All three"
+          ],
+          correct: 0,
+          explain: "Exact Match only displays the Custom Result when the user types the exact search term. \"gift card 50\" and \"birthday gift card\" contain it, but that's only enough with Broad Match."
+        },
+        {
+          q: "An Include rule has two rows: <code>categories</code> is Boots, and <code>color</code> is black or brown (both values in the same row). Which product enters the list?",
+          options: [
+            "Black sneakers",
+            "Red boots",
+            "A brown belt",
+            "Brown boots"
+          ],
+          correct: 3,
+          explain: "Two different fields combine as an AND (category Boots and a matching color), while the two values in the same row work as an OR (black or brown). Only brown boots meet both: the sneakers and the belt aren't Boots, and the red boots don't have one of the two colors."
+        },
+        {
+          q: "A Custom Result for \"backpack\" includes two products and is set to <strong>Display the selected results first, then natural results</strong>. What does the search show?",
+          options: [
+            "Only the two included products",
+            "The natural results first, then the two included products",
+            "The two included products first, then the other products that naturally match \"backpack\"",
+            "The two included products mixed randomly among the natural results"
+          ],
+          correct: 2,
+          explain: "With this option the selected products come first and the natural results follow. \"Display only the selected results\" would show the two products and nothing else."
+        },
+        {
+          q: "A Custom Result forces Product X (category \"Wallets\") first and Product Y (category \"Belts\") second, both with the same score. Relevance Criteria is set to <strong>Category (A to Z)</strong> first, then <strong>Score (Highest to lowest)</strong>. Which one appears first?",
+          options: [
+            "Product X, because the Custom Result always keeps its order",
+            "Product Y, because Category is the first criterion and \"Belts\" sorts before \"Wallets\"",
+            "Neither, because Custom Results and Relevance Criteria can't be active together",
+            "Product X, because Score breaks the tie"
+          ],
+          correct: 1,
+          explain: "The order a Custom Result sets is only preserved while Score is the first Relevance Criteria. Here Category comes first, so it re-sorts the forced products A to Z and \"Belts\" goes ahead of \"Wallets\"."
         }
       ]
     },
@@ -876,45 +1135,39 @@ const COURSE = {
       exercise: {
         lead: `You open the <strong>Admin Panel</strong> and start digging into the old search engine's issues, one at a time.</p>
           <ul>
-            <li>Figure out why <strong>out-of-stock</strong> products sometimes rank in the first positions.</li>
+            <li>Figure out why <strong>out of stock</strong> products sometimes rank in the first positions.</li>
             <li>Figure out why searching "comfortable nike" surfaces the <strong>NIKE | SWOOSH PRO FLAT PEAK CAP</strong> before any actual Nike shoe.</li>
             <li>Figure out why searching "Baseball Hat" also returns shoes or socks.</li>
             <li>Make sure products with an active <strong>discount</strong> get more visibility across the whole store, not just on specific searches.</li>
           </ul>`,
-        doneNote: "All four issues are fixed — Doostride's search now puts in-stock, on-brand and discounted products where they belong.",
+        doneNote: "All four issues are fixed — Doostride's search now puts in stock, on-brand and discounted products where they belong.",
         replyButtonLabel: "Reply to John",
         phases: [
           {
             key: "problem-features",
             title: "1. Picking the right feature for each problem",
-            question: "Before touching any configuration, you go back over the four issues you found and work out which <strong>Doofinder</strong> feature is the right tool for each one.</p><ul style=\"margin:0 0 16px; padding-left:20px;\"><li style=\"margin-bottom:14px;\"><strong>Problem 1:</strong> On some searches, out-of-stock products showed up before ones that were actually in stock, and even among in-stock products, pricier items tended to rank above cheaper ones. You need a feature that lets in-stock products always show up before out-of-stock ones — no matter the search term — while also sorting by price from cheapest to most expensive, but only as a tiebreak: a cheaper, less relevant product still shouldn't outrank a pricier one that's more relevant.</li><li style=\"margin-bottom:14px;\"><strong>Problem 2:</strong> The store's main products are shoes, ideally from Nike or Adidas — but there was no way to make shoes from these brands more important than the rest. You need a feature that gives extra relevance to products with these characteristics, while still letting other products outrank them whenever a specific search makes them more relevant.</li><li style=\"margin-bottom:14px;\"><strong>Problem 3:</strong> Looking at the old engine's stats, you found plenty of searches like \"shoes on sale\" and \"shoes discounted\" — but their results weren't limited to Doostride's actually discounted shoes. You need a feature that lets you force what shows up for these specific searches, if needed even by picking the products by hand.</li><li><strong>Problem 4:</strong> Every product has a reference code made of 4 blocks — category, brand, color and size. For example, <code>SHODRMBLA005</code> means Shoes (<code>SHO</code>), Dr Martens (<code>DRM</code>), black (<code>BLA</code>), size 5 (<code>005</code>). You want the team to be able to search by just part of that code: typing <code>SHOCON</code> should find every Shoes product from Converse, and <code>SHODRMRED</code> every red Shoes product from Dr Martens — without anyone needing to type the complete code. You need a feature that makes this possible.</li></ul><p class=\"theory-lead\" style=\"margin-bottom:16px;\">For each problem below, choose the feature that should be used to solve it:",
+            question: "Before touching any configuration, you go back over the four issues you found and work out which <strong>Doofinder</strong> feature, among the ones you've learned so far — <strong>Search Fields</strong>, <strong>Relevance Criteria</strong>, <strong>Boosting</strong> and <strong>Custom Results</strong> — is the right tool for each one.</p><ul style=\"margin:0 0 16px; padding-left:20px;\"><li style=\"margin-bottom:14px;\"><strong>Problem 1:</strong> On some searches, out of stock products showed up before ones that were actually in stock, and even among in stock products, pricier items tended to rank above cheaper ones. You need a feature that lets in stock products always show up before out of stock ones — no matter the search term — while also sorting by price from cheapest to most expensive, but only as a tiebreak: a cheaper, less relevant product still shouldn't outrank a pricier one that's more relevant.</li><li style=\"margin-bottom:14px;\"><strong>Problem 2:</strong> The store's main products are shoes, ideally from Nike or Adidas — but there was no way to make shoes from these brands more important than the rest of the products. You need a feature that gives extra relevance to products with these characteristics, while still letting other products outrank them whenever a specific search makes them more relevant.</li><li style=\"margin-bottom:14px;\"><strong>Problem 3:</strong> Looking at the old engine's stats, you found plenty of searches like \"shoes on sale\" and \"shoes discounted\" — but their results weren't limited to Doostride's actually discounted shoes. You need a feature that lets you force what shows up for these specific searches, if needed even by picking the products by hand.</li><li><strong>Problem 4:</strong> Every product has a reference code made of 4 blocks — category, brand, color and size. For example, <code>SHODRMBLA005</code> means a pair of shoes (<code>SHO</code>) from the Dr Martens brand (<code>DRM</code>), in black (<code>BLA</code>) and size 5 (<code>005</code>). You want the team to be able to search by just part of that code: typing <code>SHOCON</code> should find every Shoes product from Converse, and <code>SHODRMRED</code> every red Shoes product from Dr Martens — without anyone needing to type the complete code. You need a feature that makes this possible.</li></ul><p class=\"theory-lead\" style=\"margin-bottom:16px;\">For each problem below, choose the most suitable feature to solve it. Each feature can only be used once — the same feature can't solve more than one problem:",
             fields: [
-              { key: "problem1", label: "Problem 1", type: "select", options: ["Relevance Criteria", "Boosting", "Custom Results", "Search Fields"], correct: "Relevance Criteria" },
-              { key: "problem2", label: "Problem 2", type: "select", options: ["Boosting", "Relevance Criteria", "Custom Results", "Search Fields"], correct: "Boosting" },
-              { key: "problem3", label: "Problem 3", type: "select", options: ["Custom Results", "Relevance Criteria", "Boosting", "Search Fields"], correct: "Custom Results" },
-              { key: "problem4", label: "Problem 4", type: "select", options: ["Search Fields", "Relevance Criteria", "Boosting", "Custom Results"], correct: "Search Fields" }
+              { key: "problem1", label: "Problem 1", type: "select", options: ["Boosting", "Custom Results", "Relevance Criteria", "Search Fields"], correct: "Relevance Criteria" },
+              { key: "problem2", label: "Problem 2", type: "select", options: ["Boosting", "Custom Results", "Relevance Criteria", "Search Fields"], correct: "Boosting" },
+              { key: "problem3", label: "Problem 3", type: "select", options: ["Boosting", "Custom Results", "Relevance Criteria", "Search Fields"], correct: "Custom Results" },
+              { key: "problem4", label: "Problem 4", type: "select", options: ["Boosting", "Custom Results", "Relevance Criteria", "Search Fields"], correct: "Search Fields" }
             ],
-            explain: "<strong>Relevance Criteria</strong> fixes the first problem: it lets you stack extra sorting factors — like Availability and Price — on top of Score, each one only stepping in to break a tie left by the one before it. <strong>Boosting</strong> fixes the second: it can raise a product's relevance based on its own fields, like brand = Nike or Adidas, no matter what was searched — while other, more relevant products for a specific query can still outrank it. <strong>Custom Results</strong> fixes the third: it lets you force a specific set of results for specific searches, whether by hand-picking products or through a rule that decides automatically. <strong>Search Fields</strong> fixes the fourth: it controls which fields are searched and how, including whether a field like a product code can be matched partially instead of only as an exact, complete value. In the next steps, you'll work out how to configure each of these."
+            explain: "<strong>Relevance Criteria</strong> fixes the first problem: it decides the order in which results are displayed, adding extra sorting criteria on top of Score. <strong>Boosting</strong> fixes the second: it makes certain products more relevant than the rest, whatever is searched. <strong>Custom Results</strong> fixes the third: it forces which products are shown for specific searches. <strong>Search Fields</strong> fixes the fourth: it controls which fields are searched and how. In the next steps, you'll work out how to configure each of these."
           },
           {
             key: "relevance-criteria-fields",
-            title: "2. Which fields to add, and how to sort each one",
-            question: "Before working out the priority order, you first need to decide which fields belong in Relevance Criteria.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">For each field below, choose its Order value — or \"Not used\" if it shouldn't be part of Relevance Criteria at all:",
+            title: "2. Relevance Criteria — Part 1",
+            question: "Quick reminder of what needs fixing: in some searches, products that can't be bought right now appear above the ones that are available, and among the available ones the more expensive products tend to come first. The goal is for available products to come first whatever the user searches for, with relevance still deciding the order among them — and price, from cheapest to most expensive, only settling the cases where two products are equally relevant.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Before working out the priority order, you first need to decide which fields belong in Relevance Criteria.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">These are the fields available. Click every field that should be part of Relevance Criteria, then click Continue:",
             fields: [
-              { key: "f_score", label: "Score", type: "select", options: ["Not used", "Highest to lowest", "Lowest to highest"], correct: "Highest to lowest" },
-              { key: "f_availability", label: "availability", type: "select", options: ["Not used", "A to Z", "Z to A"], correct: "A to Z" },
-              { key: "f_best_price", label: "best_price", type: "select", options: ["Not used", "Lowest to highest", "Highest to lowest"], correct: "Lowest to highest" },
-              { key: "f_brand", label: "brand", type: "select", options: ["Not used", "A to Z", "Z to A"], correct: "Not used" },
-              { key: "f_category", label: "category", type: "select", options: ["Not used", "A to Z", "Z to A"], correct: "Not used" },
-              { key: "f_stock_quantity", label: "stock_quantity", type: "select", options: ["Not used", "Highest to lowest", "Lowest to highest"], correct: "Not used" },
-              { key: "f_title", label: "title", type: "select", options: ["Not used", "A to Z", "Z to A"], correct: "Not used" }
+              { key: "rc_fields", label: "", type: "multi-choice", options: ["availability", "best_price", "brand", "category", "color", "description", "gender", "Score", "size", "title"], correct: ["Score", "availability", "best_price"] }
             ],
-            explain: "You need exactly three fields in Relevance Criteria: the default <strong>Score</strong> sorted <strong>Highest to lowest</strong> (most relevant first), <strong>availability</strong> sorted <strong>A to Z</strong> (so \"in stock\" sorts before \"out of stock\"), and <strong>best_price</strong> sorted <strong>Lowest to highest</strong> (cheapest first). brand, category, stock_quantity and title don't solve either of these problems, so they stay unused. Their priority order — which one goes first, second and third — is what you'll work out in the next step."
+            explain: "You need exactly three fields in Relevance Criteria: the default <strong>Score</strong>, which keeps relevance deciding the order; <strong>availability</strong>, to separate the products in stock from the ones out of stock; and <strong>best_price</strong>, to sort by price. The other fields don't solve any part of this problem, so they stay out. How to sort each one, and in which order, is what you'll work out in the next step."
           },
           {
             key: "relevance-criteria-config",
-            title: "3. Configuring Relevance Criteria",
-            question: "You want in-stock products to always show up first — no matter how relevant they are to the search term — and, whenever two products tie on that, the cheapest one should come first.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Analyze these 4 images, each showing a different Relevance Criteria configuration, and choose the one that gets you what you want:",
+            title: "2. Relevance Criteria — Part 2",
+            question: "You want in stock products to always show up first — no matter how relevant they are to the search term — and, whenever two products tie on that, the cheapest one should come first.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Analyze these 4 images, each showing a different Relevance Criteria configuration, and choose the one that gets you what you want:",
             fields: [
               { key: "correctconfig", type: "image-select", layout: "column", thumbCols: 2, options: [
                 { value: "a", src: "img/relevance-criteria-final-a.png", alt: "Relevance Criteria with availability (A to Z) first, Score (Highest to lowest) second, best_price (Lowest to highest) third", caption: "Option A" },
@@ -923,26 +1176,20 @@ const COURSE = {
                 { value: "d", src: "img/relevance-criteria-final-d.png", alt: "Relevance Criteria with availability (A to Z) first, best_price (Lowest to highest) second, Score (Highest to lowest) third", caption: "Option D" }
               ], correct: "a" }
             ],
-            explain: "Option A is correct: with availability listed first (A to Z, so \"in stock\" sorts before \"out of stock\"), in-stock products always come first regardless of relevance — Score only breaks ties between products with the same availability, and best_price only breaks ties left after that. Options B and C put Score or best_price ahead of availability, so out-of-stock products could still outrank in-stock ones whenever they score higher or cost less. Option D puts best_price before Score, so among in-stock products the cheapest one wins the tie instead of the most relevant one — the wrong tiebreak order."
+            explain: "Option A is correct: with availability listed first (A to Z, so \"in stock\" sorts before \"out of stock\"), in stock products always come first regardless of relevance — Score only breaks ties between products with the same availability, and best_price only breaks ties left after that. Options B and C put Score or best_price ahead of availability, so out of stock products could still outrank in stock ones whenever they score higher or cost less. Option D puts best_price before Score, so among in stock products the cheapest one wins the tie instead of the most relevant one — the wrong tiebreak order."
           },
           {
             key: "boosting-fields",
-            title: "4. \"comfort\" surfaces the wrong products",
-            question: "You type \"comfort\" into the <strong>Results Preview</strong>. The very first result is the <strong>NIKE | SWOOSH PRO FLAT PEAK CAP</strong>, and further down several products from brands other than Nike or Adidas outrank Doostride's actual Nike and Adidas shoes.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">You decide to set up a <strong>Boosting Rule</strong> so Nike and Adidas shoes always get more relevance, no matter what's searched.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">For each field below, choose the value the Boosting Rule should boost — or \"Not used\" if that field shouldn't be part of this rule at all:",
+            title: "3. Boosting — Part 1",
+            question: "Quick reminder of what needs fixing: the shoes from Doostride's two leading brands are its most important products, yet nothing makes them stand out — other, less important products keep ranking above them whatever is searched. The goal is to give those shoes extra weight in every search, while still letting another product come first when a search makes it clearly more relevant.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">You decide to set up a <strong>Boosting Rule</strong> that gives those main products more relevance than the rest, for every search.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">These are the indexed fields. Click every field the Boosting Rule should use to identify those products, then click Continue:",
             fields: [
-              { key: "f_category", label: "category", type: "select", options: ["Not used", "Shoes", "Apparel", "Accessories"], correct: "Shoes" },
-              { key: "f_brand", label: "brand", type: "select", options: ["Not used", "Nike", "Adidas", "Nike or Adidas", "Puma"], correct: "Nike or Adidas" },
-              { key: "f_price", label: "price", type: "select", options: ["Not used", "Under 50", "Over 100"], correct: "Not used" },
-              { key: "f_availability", label: "availability", type: "select", options: ["Not used", "In stock", "Out of stock"], correct: "Not used" },
-              { key: "f_title", label: "title", type: "select", options: ["Not used", "Contains \"comfort\"", "Contains \"nike\""], correct: "Not used" },
-              { key: "f_description", label: "description", type: "select", options: ["Not used", "Contains \"comfort\"", "Contains \"nike\""], correct: "Not used" },
-              { key: "f_color", label: "color", type: "select", options: ["Not used", "Black", "White"], correct: "Not used" }
+              { key: "br_fields", label: "", type: "multi-choice", options: ["availability", "brand", "calculated_discount", "category", "color", "description", "gender", "price", "size", "title"], correct: ["brand", "category"] }
             ],
-            explain: "Two conditions get you what you want: <strong>category</strong> = <strong>Shoes</strong> and <strong>brand</strong> = <strong>Nike or Adidas</strong>. That's exactly Doostride's main products — Nike and Adidas shoes — no matter what's searched. price, availability, title, description and color don't identify \"our main products\" the way category and brand do, so they stay unused. Basing the rule on the product's own fields, rather than on a specific Search Term, is also why it keeps working for \"comfort\" as well as for any other query. In the next step, you'll work out exactly how to set these two conditions up."
+            explain: "The main products are defined by two things: what kind of product they are and which brand makes them — so the rule needs <strong>category</strong> and <strong>brand</strong>. The other fields describe characteristics that products of any kind or brand can share, so they don't identify the main products and stay out. Basing the rule on the products' own fields, rather than on specific search terms, is what makes it apply to every search. In the next step, you'll work out exactly how to set it up."
           },
           {
             key: "boosting-config",
-            title: "5. Configuring the Boosting Rule",
+            title: "3. Boosting — Part 2",
             question: "You now need to actually build the <strong>Boosting Rule(s)</strong> around <strong>category</strong> = <strong>Shoes</strong> and <strong>brand</strong> = <strong>Nike or Adidas</strong>.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Analyze these 3 images, each showing a different Boosting configuration, and choose the one that gets you what you want:",
             fields: [
               { key: "correctconfig", type: "image-select", layout: "column", thumbCols: 2, thumbAspect: "2.45", options: [
@@ -955,22 +1202,16 @@ const COURSE = {
           },
           {
             key: "custom-results-filter",
-            title: "6. Searches for discounted products return nothing useful",
-            question: "Looking at the old search engine's stats, you find plenty of searches like \"shoes discounted\" and \"shoes on sale\" — but none of them ever surfaced Doostride's actual discounted products.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">You decide to set up a <strong>Custom Result</strong> scoped to those two search terms. Instead of manually picking products one by one — a list that would go stale the moment a discount starts or ends — you want it to automatically show whichever products are currently discounted.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">For each field below, choose the value range the Custom Result should filter by — or \"Not used\" if that field shouldn't be part of this filter at all:",
+            title: "4. Custom Results — Part 1",
+            question: "Quick reminder of what needs fixing: users who search for shoes on sale get results that aren't limited to the shoes that are actually discounted. The goal is for those searches to show exactly the discounted shoes — and to keep doing so on their own as discounts come and go.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">You decide to set up a <strong>Custom Result</strong> for those searches. Instead of picking products by hand — a list that would go stale as soon as a discount starts or ends — you want it to automatically show whichever shoes are discounted at any given moment.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">These are the indexed fields. Click every field the Custom Result should use to find those products, then click Continue:",
             fields: [
-              { key: "f_calculated_discount", label: "calculated_discount", type: "select", options: ["Not used", "0 to 100", "50 to 100", "Greater than 50"], correct: "0 to 100" },
-              { key: "f_price", label: "price", type: "select", options: ["Not used", "Under 50", "Over 100"], correct: "Not used" },
-              { key: "f_sale_price", label: "sale_price", type: "select", options: ["Not used", "Under 50", "Over 100"], correct: "Not used" },
-              { key: "f_availability", label: "availability", type: "select", options: ["Not used", "In stock", "Out of stock"], correct: "Not used" },
-              { key: "f_category", label: "category", type: "select", options: ["Not used", "Shoes", "Apparel"], correct: "Shoes" },
-              { key: "f_brand", label: "brand", type: "select", options: ["Not used", "Nike", "Adidas"], correct: "Not used" },
-              { key: "f_gender", label: "gender", type: "select", options: ["Not used", "Man", "Woman", "Unisex"], correct: "Not used" }
+              { key: "cr_fields", label: "", type: "multi-choice", options: ["availability", "brand", "calculated_discount", "category", "gender", "price", "sale_price", "size", "title"], correct: ["calculated_discount", "category"] }
             ],
-            explain: "Two conditions get you what you want: <strong>calculated_discount</strong> from <strong>0 to 100</strong> catches every product that has any discount at all, whatever its size, and <strong>category</strong> = <strong>Shoes</strong> keeps the result scoped to shoes, matching what \"shoes discounted\" and \"shoes on sale\" are actually asking for. Since it's a filter rather than a manually curated list, the Custom Result stays accurate on its own as discounts start and end — no one has to remember to update it. price and sale_price only describe how much something costs, not whether it's discounted right now; availability, brand and gender don't identify discounted shoes either, so they stay unused. In the next step, you'll see how this looks once it's actually configured."
+            explain: "The products to show are defined by two things: they have a discount, and they are shoes — so the Custom Result needs <strong>calculated_discount</strong> and <strong>category</strong>. <strong>price</strong> and <strong>sale_price</strong> only say how much a product costs, not whether it's discounted right now, and the other fields don't identify discounted shoes either, so they stay out. Since it's a filter rather than a hand-picked list, the Custom Result stays accurate on its own as discounts start and end. In the next step, you'll see how this looks once it's actually configured."
           },
           {
             key: "custom-results-config",
-            title: "7. Configuring the Custom Result",
+            title: "4. Custom Results — Part 2",
             question: "You now need to actually build the <strong>Custom Result</strong>, named \"SHOES IN SALE\" and scoped to the exact-match terms \"shoes on sale\" and \"shoes discounted\", around <strong>calculated_discount</strong> (0 to 100) and <strong>category</strong> = <strong>Shoes</strong>.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Analyze these 4 images, each showing a different configuration, and choose the one that gets you what you want:",
             fields: [
               { key: "correctconfig", type: "image-select", layout: "column", thumbCols: 2, mediaWidth: 560, options: [
@@ -984,11 +1225,11 @@ const COURSE = {
           },
           {
             key: "search-fields-config",
-            title: "8. Searching by code isn't flexible",
+            title: "5. Search Fields",
             question: "Analyze the 5 images above, each showing a different Search Fields configuration, and choose the one that gets you what you want:",
             fields: [
               { key: "correctconfig", type: "image-select", layout: "column", thumbCols: 4, thumbAspect: "1.65", stacked: true, mediaWidth: 1000,
-                trailingNote: "Doostride's catalogue now has an <strong>mpn</strong> field: 4 three-character blocks — category, brand, color and size — like <code>SHODRMBLA005</code> for a size 5 black Dr Martens shoe. You want the team to search by just <strong>part</strong> of that code: typing <code>SHOCON</code> should find every <strong>Shoes</strong> product from <strong>Converse</strong>, and <code>SHODRMRED</code> every red <strong>Shoes</strong> product from <strong>Dr Martens</strong> — without anyone typing the full code.",
+                trailingNote: "Quick reminder of what needs fixing: Doostride's catalogue now has an <strong>mpn</strong> field: 4 three-character blocks — category, brand, color and size — like <code>SHODRMBLA005</code> for a size 5 black Dr Martens shoe. You want the team to search by just <strong>part</strong> of that code: typing <code>SHOCON</code> should find every <strong>Shoes</strong> product from <strong>Converse</strong>, and <code>SHODRMRED</code> every red <strong>Shoes</strong> product from <strong>Dr Martens</strong> — without anyone typing the full code.",
                 options: [
                 { value: "a", src: "img/search-fields-final-a.png", alt: "Search Fields with brand 2, categories 2, description 1, df_all 1, gtin 1, mpn 1, mpn.light_explode 1, title 3, title.autocomplete 1", caption: "Option A" },
                 { value: "b", src: "img/search-fields-final-b.png", alt: "Search Fields with brand 2, categories 2, description 1, df_all 1, gtin 1, mpn 8, title 8, title.autocomplete 1 — no mpn.light_explode field at all", caption: "Option B" },
@@ -998,6 +1239,40 @@ const COURSE = {
               ], correct: "a" }
             ],
             explain: "Option A is correct: it keeps every existing field as it was and simply adds <strong>mpn.light_explode</strong> with a weight of 1, which is exactly what unlocks partial-code matches like <code>SHOCON</code> or <code>SHODRMRED</code> without disturbing anything else. Option B skips <code>mpn.light_explode</code> entirely and instead cranks up the weight of plain <strong>mpn</strong> (and <strong>title</strong>) to 8 — a huge, risky weight change that still only rewards the complete code, since a bigger weight doesn't add the ability to match a partial one. Option C adds <code>id.light_explode</code> instead of <code>mpn.light_explode</code> — the wrong field, since it unpacks the <strong>id</strong> field, not <strong>mpn</strong>, so partial mpn codes still won't match — and it also drops <strong>description</strong> from the list entirely. Options D and E don't add any <code>light_explode</code> field at all; they add <code>brand.autocomplete</code> and <code>color</code> instead (E also throws in <code>size</code>), which help with other kinds of searches but do nothing for a compound code with no word boundaries to split on."
+          },
+          {
+            key: "check-results",
+            title: "6. Checking the Results",
+            question: "Time to put it all into practice. The images below show the correct configuration for each feature — recreate every one of them from the Doofinder Admin Panel, only in the English Search Engine, the one with Hash ID <span class=\"live-hash-en\" data-fallback=\"you saved in the final exercise of the previous section\"></span>.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">The questions below can only be answered by looking at <strong>Results Preview</strong> once all four features are configured — so the exercise can't be completed without setting them up for real.",
+            beforeFields: `
+              <div class="feed-preview-grid">
+                <div class="feed-preview-card">
+                  <p class="feed-preview-label">Relevance Criteria</p>
+                  <div style="position: relative;"><img src="img/relevance-criteria-final-a.png" alt="Relevance Criteria with availability (A to Z) first, Score (Highest to lowest) second, best_price (Lowest to highest) third" data-action="zoom-image" class="feed-preview-img"><p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p></div>
+                </div>
+                <div class="feed-preview-card">
+                  <p class="feed-preview-label">Boosting</p>
+                  <div style="position: relative;"><img src="img/boosting-final-a.png" alt="Two separate Global Boosting Rules: SHOES with condition categories is Shoes and boost 2.0, and NIKE / ADIDAS with condition brand is ADIDAS, NIKE and boost 1.5, both enabled" data-action="zoom-image" class="feed-preview-img"><p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p></div>
+                </div>
+                <div class="feed-preview-card">
+                  <p class="feed-preview-label">Custom Results</p>
+                  <div style="position: relative;"><img src="img/custom-results-final-a.png" alt="Custom Result showing only the selected results, with a single Included results row: calculated_discount between 0.0 and 100.0 and categories is Shoes" data-action="zoom-image" class="feed-preview-img"><p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p></div>
+                </div>
+                <div class="feed-preview-card">
+                  <p class="feed-preview-label">Search Fields</p>
+                  <div style="position: relative;"><img src="img/search-fields-final-a.png" alt="Search Fields with brand 2, categories 2, description 1, df_all 1, gtin 1, mpn 1, mpn.light_explode 1, title 3, title.autocomplete 1" data-action="zoom-image" class="feed-preview-img"><p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p></div>
+                </div>
+              </div>`,
+            fields: [
+              { key: "comfortpos", label: "After configuring everything, you run a few tests in Results Preview. When you search \"comfort\", in which position does the product with id 37938304254122 appear?", type: "select", options: ["7", "12", "23", "35", "48", "56"], correct: "12" },
+              { key: "comfortwhy", label: "Why does that product appear for the query \"comfort\"?", type: "choice", layout: "column", options: [
+                "Because the Boosting Rule on Nike products forces it into the results",
+                "Because it's a fuzzy match, as if \"comfort\" were a typo",
+                "Because of stemming: its description contains \"comfortable\", which shares the stem \"comfort\" with the query",
+                "Because a Custom Result includes it for the query \"comfort\""
+              ], correct: "Because of stemming: its description contains \"comfortable\", which shares the stem \"comfort\" with the query" }
+            ],
+            explain: "The product doesn't contain the word \"comfort\" as such: its description says \"comfortable\". Stemming reduces both words to the same stem, <code>comfort</code>, so the product matches the query — Boosting can't make a product appear if it doesn't match, there's no typo involved, and no Custom Result is set up for \"comfort\". With all four configurations in place, Results Preview shows it in 12th position."
           }
         ],
         replyWhatsapp: {
@@ -1005,15 +1280,15 @@ const COURSE = {
           outgoing: true,
           body: [
             "Hi John,",
-            "Good news — I dug into the <strong>Search Layer</strong>'s configuration and sorted out everything you flagged.",
-            "Out-of-stock products were tying in score with in-stock ones, so I added <strong>Availability</strong> as a tiebreak right after Score, with price breaking any tie left after that — in-stock products now always come first.",
-            "I also set up a <strong>Boosting Rule</strong> so our Nike and Adidas shoes get extra relevance no matter what's searched, which is why \"comfort\" was surfacing a Nike cap over our actual shoes.",
-            "\"Shoes on sale\" and \"shoes discounted\" now return a <strong>Custom Result</strong> scoped to whatever's currently discounted, so it stays accurate as sales start and end.",
-            "And I added <strong>mpn.light_explode</strong> to Search Fields, so typing part of a product code like SHOCON or SHODRMRED now finds every matching shoe, not just full codes.",
-            "Everything's live — happy to walk you through it whenever works for you.",
+            "Good news — I looked into how the new Search Layer works and managed to fix all the issues we had with the old search engine.",
+            "Products that are in stock now always show up before the ones that are sold out, and among them the cheaper ones come first when two products are equally relevant.",
+            "Our Nike and Adidas shoes now get more visibility in every search, so they no longer end up below less important products.",
+            "When someone searches for shoes on sale, they now see exactly the shoes that are discounted — and it updates on its own whenever a discount starts or ends.",
+            "And the team can now find a product by typing just the beginning of its reference code, without needing the full code.",
+            "I'm still getting the hang of how the search works, but little by little it's starting to make sense. Happy to walk you through it whenever works for you.",
             "Best,<br>Amanda"
           ],
-          times: ["18:12", "18:12", "18:13", "18:14", "18:15", "18:16", "18:16"]
+          times: ["18:12", "18:12", "18:13", "18:13", "18:14", "18:15", "18:16", "18:16"]
         }
       }
     }
