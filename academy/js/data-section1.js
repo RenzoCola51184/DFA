@@ -273,6 +273,12 @@ const COURSE = {
         blocks: [
           {
             html: `
+              <figure class="lesson-figure lesson-figure-right" style="width: 340px; max-width: 55%;">
+                  <img src="img/install-home-create-store.png" alt="Doofinder Home section with the Welcome to Doofinder screen, explaining what a Store is and why to create one, and the Create store button" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>To create the account's first Store, go to the <strong>Home</strong> section of the account and click <strong>Create store</strong>. This opens the guided flow.</p>
+
               <h3>The Four Steps</h3>
               <table class="theory-table">
                 <thead><tr><th>Step</th><th>What it involves</th></tr></thead>
@@ -283,18 +289,18 @@ const COURSE = {
                   <tr><td><strong>4. Connect the store with an installation script</strong></td><td>Once the Store and Search Engine exist, add the script provided into the website's code to finish the connection</td></tr>
                 </tbody>
               </table>
-
-              <h3>The Installation Script</h3>
-              <p>The Doofinder script has this structure:</p>
-              <pre class="code-block"><code>&lt;script src="https://<span class="tok">eu1</span>-config.doofinder.com/2.x/<span class="tok">STORE_ID</span>.js" async&gt;&lt;/script&gt;</code></pre>
-              <div class="install-step-carousel float-left">
+              <div class="install-step-carousel">
                   <img src="img/install-step1-create-store-landing.png" alt="Doofinder home screen with a Create store button, next to an explanation of what a Store is and why to create one" data-action="zoom-image" class="is-active">
                   <img src="img/install-step1-create-store-form.png" alt="Create Store form asking for the site's URL, the platform it runs on, and its industry" data-action="zoom-image">
                   <img src="img/install-step2-create-search-engine.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
                   <img src="img/install-step3-css-selector.png" alt="Tell us where your search bar is screen, with a CSS selector field that accepts a format like #search-box, input[name='q'], .input-search, and a Create button" data-action="zoom-image">
                   <img src="img/install-step4-connect-store.png" alt="Store connection screen showing the installation script to copy into the website's code, with a stepper marking Store information, Search Engine creation and Search bar location as already complete" data-action="zoom-image">
                   <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
-                </div>
+              </div>
+
+              <h3>The Installation Script</h3>
+              <p>The Doofinder script has this structure:</p>
+              <pre class="code-block"><code>&lt;script src="https://<span class="tok">eu1</span>-config.doofinder.com/2.x/<span class="tok">STORE_ID</span>.js" async&gt;&lt;/script&gt;</code></pre>
               <p>The <strong>Zone</strong> identifies which Doofinder server the account resides on, depending on which part of the world the account was created in: <code>eu1</code> for Europe, <code>us1</code> for the Americas, or <code>ap1</code> for Asia-Pacific.</p>
                 <p>The <code>STORE_ID</code> is the unique identifier generated when the Store is created, and it's what identifies that Store within the script.</p>
                 <p>This script needs to be added to the site's HTML code — ideally in the header or footer. The script can also be integrated via Google Tag Manager.</p>
