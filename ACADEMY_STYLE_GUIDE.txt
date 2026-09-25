@@ -577,7 +577,9 @@ CHECKLIST TO RUN AGAINST ANY OTHER SECTION
     and rendered at 2x, checked at 1400 and 1200 wide.
 [ ] Image widths are tuned so image height ≈ beside-text height (no big
     empty gap under either one).
-[ ] Any multi-shot "here's the flow" sequence is a carousel, not a stack.
+[ ] Any multi-shot "here's the flow" sequence is a carousel, not a stack —
+    preferably with step captions beside it (section 2, one caption per
+    image), checked at 1920, 1400 and 1200 wide.
 [ ] Any "pick one of these images" question uses labelled thumbnails
     (orange pill captions).
 [ ] Any downloadable file worth eyeballing gets a preview-card + download
