@@ -407,8 +407,10 @@ code { background: var(--bg-page); border: 1px solid var(--border); padding: 1px
 .install-steps .install-step-caption.is-active { opacity: 1; border-left-color: var(--accent); background: var(--accent-soft); }
 .install-steps .install-step-caption > strong { font-size: 16px; }
 .install-steps .install-step-caption p { font-size: 14px; line-height: 1.55; margin-top: 4px; }
+/* Carousel on the right, captions on the left */
+.install-steps.install-steps-reverse { flex-direction: row-reverse; }
 @media (max-width: 1500px) {
-  .install-steps { flex-direction: column; align-items: stretch; }
+  .install-steps, .install-steps.install-steps-reverse { flex-direction: column; align-items: stretch; }
   .install-steps .install-step-carousel { flex: none; width: 100%; max-width: none; height: 560px; }
 }
 /* Carousel with a step-caption band on top (see style guide, section 2) */

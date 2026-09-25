@@ -124,12 +124,26 @@ RESTRUCTURING AN EXISTING LESSON — NEVER REMOVE CONTENT
     </div>
   Add `float-left` to the wrapper class when it needs to sit beside running
   text (`.install-step-carousel.float-left` is fixed at 720px wide (max 60%), 580px tall).
-- CAROUSEL WITH STEP CAPTIONS (preferred for a guided flow — reference:
-  Module 1 Section 1, "Installing Doofinder" → The Four Steps, and its
-  "Create a Search Engine" sub-page). A caption band INSIDE the carousel
-  frame, above the image, shows ONE caption at a time; "Next step →" swaps
-  image and caption together. The screenshot below the band is never
-  covered:
+- WHERE A FEATURE LIVES: a lesson about an Admin Panel feature opens (right
+  after the lead) with ONE sentence saying how to reach it, using inline UI
+  images (see "inline-ui-img" below) — not a carousel. Pattern:
+    "<Feature> is found by clicking the magnifying glass icon [icon] in the
+    left menu, selecting the Store [Store] and the Search Engine [SE] at the
+    top, and opening [menu item] under <strong>Promotional tools</strong>."
+  Rules: no "(Search)"/"(Configuration)" after the icon; the Store/SE
+  images are the LABEL only (img/label-store.png, img/label-se.png), never
+  the dropdown with a URL; tabs are cropped as written in the Admin Panel
+  ("Search fields", "Relevance criteria"). Store-level features (gear icon)
+  select only the Store. References: Module 1 Section 2 lessons (Results
+  Preview → Custom Results) and Section 1 (Create a Search Engine, Indices
+  and the Data Feed, Security Settings). The lesson's existing screenshot
+  of the feature stays as a floated figure.
+- CAROUSEL WITH STEP CAPTIONS — ONLY for a real multi-screen guided flow
+  (reference: Module 1 Section 1, "Installing Doofinder" → The Four Steps).
+  Never turn a "where is it" path into a carousel (tried and rejected in
+  Create a Search Engine, Indices and the Data Feed, Security Settings).
+  Old BAND variant, kept for reference only: a caption band INSIDE the
+  carousel frame, above the image, shows ONE caption at a time:
     <div class="install-step-carousel has-captions">
       <div class="install-step-captions">
         <div class="install-step-caption is-active"><span class="install-step-caption-label">Step 1 of 2</span><strong>Short action title</strong><p>One or two sentences on what this screen does.</p></div>
@@ -153,8 +167,7 @@ RESTRUCTURING AN EXISTING LESSON — NEVER REMOVE CONTENT
     - BAND (no longer used — every step carousel uses SIDE): captions inside the
       frame, above the image, as in the HTML above. Full-width block, 820px
       tall (600px under 1300px wide). For short captions / wide shots.
-    - SIDE (reference: The Four Steps, "Create a Search Engine", and
-      "Indices and the Data Feed" — the ONLY layout to use): a smaller carousel with the
+    - SIDE (reference: The Four Steps — the ONLY layout to use): a smaller carousel with the
       captions in a column beside it. Wrap both in `.install-steps` and put
       `.install-step-captions` AFTER the carousel, not inside it; the
       carousel has no `has-captions` class:
@@ -168,6 +181,9 @@ RESTRUCTURING AN EXISTING LESSON — NEVER REMOVE CONTENT
       carousel to that slide. The carousel is 560px wide and stretches to
       the height of the caption column (min 420px); below 1500px wide the
       captions stack under a full-width, 560px-tall carousel.
+      Add `install-steps-reverse` to the wrapper to put the carousel on
+      the RIGHT and the captions on the left; below 1500px it stacks like
+      the others.
       ALWAYS use this side layout for step carousels, even with wide
       screenshots — never a full-width carousel with the captions below
       (tried and rejected). When the steps follow a floated figure, put the
@@ -185,8 +201,7 @@ RESTRUCTURING AN EXISTING LESSON — NEVER REMOVE CONTENT
     tight from the slide's own screenshot, upscale it 2x, and put it inline:
     <img class="inline-ui-img" src="img/icon-....png" alt="Search icon">
     (2.1em tall; works anywhere in theory text, not only in captions).
-    Reference: every caption of The Four Steps and "Create a Search Engine"
-    (Module 1 Section 1). Each caption ends with the button that moves the
+    Reference: every caption of The Four Steps (Module 1 Section 1). Each caption ends with the button that moves the
     flow on ("then click [Continue]"), shown as its inline image; icons and
     buttons replace the bolded word, but a tile too small to read (e.g. the
     "Other" platform tile) keeps its word next to it. Low-res sources: crop

@@ -244,6 +244,8 @@ const COURSE = {
         blocks: [
           {
             html: `
+              <p>Results Preview is found by clicking the magnifying glass icon <img class="inline-ui-img" src="img/icon-search-magnifier.png" alt="Search icon"> in the left menu, selecting the Store <img class="inline-ui-img" src="img/label-store.png" alt="Store selector label"> and the Search Engine <img class="inline-ui-img" src="img/label-se.png" alt="SE selector label"> to test at the top, and opening <img class="inline-ui-img" src="img/menu-results-preview.png" alt="Results preview menu item">.</p>
+
               <h3>What It Shows</h3>
               <figure class="lesson-figure lesson-figure-right" style="width: 720px; max-width: 60%;">
                 <img src="img/results-preview-overview.png" alt="Results Preview screen in the Admin Panel: a search bar with a Refresh button, below it Results: 56, Query type: match_all and Custom Sorting: _score, and a product list with Item, Relevance, Boosting and Score columns, each row with a + button" data-action="zoom-image">
@@ -419,6 +421,8 @@ const COURSE = {
         blocks: [
           {
             html: `
+              <p>Search Fields are found by clicking the magnifying glass icon <img class="inline-ui-img" src="img/icon-search-magnifier.png" alt="Search icon"> in the left menu, selecting the Store <img class="inline-ui-img" src="img/label-store.png" alt="Store selector label"> and the Search Engine <img class="inline-ui-img" src="img/label-se.png" alt="SE selector label"> at the top, opening <img class="inline-ui-img" src="img/menu-advanced-preferences.png" alt="Advanced preferences menu item"> and going to the <img class="inline-ui-img" src="img/tab-search-fields.png" alt="Search fields tab"> tab.</p>
+
               <h3>Field Weights</h3>
               <figure class="lesson-figure lesson-figure-left" style="width: 580px; max-width: 60%;">
                   <img src="img/search-fields-advanced-preferences.png" alt="Advanced Preferences > Search Fields screen, with a warning about the impact of changes, a Field/Weight selector to add a new field, and a configured list showing brand, categories, description, df_all, gtin, mpn, title and title.autocomplete with their weights" data-action="zoom-image">
@@ -573,6 +577,8 @@ const COURSE = {
         blocks: [
           {
             html: `
+              <p>Relevance Criteria is found by clicking the magnifying glass icon <img class="inline-ui-img" src="img/icon-search-magnifier.png" alt="Search icon"> in the left menu, selecting the Store <img class="inline-ui-img" src="img/label-store.png" alt="Store selector label"> and the Search Engine <img class="inline-ui-img" src="img/label-se.png" alt="SE selector label"> at the top, opening <img class="inline-ui-img" src="img/menu-advanced-preferences.png" alt="Advanced preferences menu item"> and going to the <img class="inline-ui-img" src="img/tab-relevance-criteria.png" alt="Relevance criteria tab"> tab.</p>
+
               <h3>Sort Order</h3>
               <p>More than one criterion can be used at once, and each one gets its own sort order — the options depend on the type of criterion:</p>
               <table class="theory-table">
@@ -725,6 +731,8 @@ const COURSE = {
         blocks: [
           {
             html: `
+              <p>Boosting is found by clicking the magnifying glass icon <img class="inline-ui-img" src="img/icon-search-magnifier.png" alt="Search icon"> in the left menu, selecting the Store <img class="inline-ui-img" src="img/label-store.png" alt="Store selector label"> and the Search Engine <img class="inline-ui-img" src="img/label-se.png" alt="SE selector label"> at the top, and opening <img class="inline-ui-img" src="img/menu-boosting.png" alt="Boosting menu item"> under <strong>Promotional tools</strong>.</p>
+
               <h3>How Boosting Changes Positions</h3>
               <p>By default, if no search query is being made, a <code>match_all</code> query is launched, rendering all the indexed items in the results (unless some of them are being excluded — but that's covered later in the course).</p>
               <p>The score of all the items is <strong>1</strong>, and if Relevance Criteria is set to only Score, the order of appearance is given solely by the indexation order, as we saw in one of the previous lessons.</p>
@@ -907,6 +915,8 @@ const COURSE = {
         blocks: [
           {
             html: `
+              <p>Custom Results is found by clicking the magnifying glass icon <img class="inline-ui-img" src="img/icon-search-magnifier.png" alt="Search icon"> in the left menu, selecting the Store <img class="inline-ui-img" src="img/label-store.png" alt="Store selector label"> and the Search Engine <img class="inline-ui-img" src="img/label-se.png" alt="SE selector label"> at the top, and opening <img class="inline-ui-img" src="img/menu-custom-results.png" alt="Custom results menu item"> under <strong>Promotional tools</strong>.</p>
+
               <h3>Match Types</h3>
               <p>The query can be configured in two ways:</p>
               <table class="theory-table">

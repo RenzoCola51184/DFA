@@ -308,19 +308,13 @@ const COURSE = {
             pageBreak: true,
             html: `
               <p>A Search Engine is a configured instance that stores and indexes a specific type of data — once a Store has one, it's common to end up needing several more.</p>
-              <div class="install-steps">
-                <div class="install-step-carousel">
-                  <img src="img/create-search-engine-se-selector-padded.png" alt="Search section of the Admin Panel on Results preview, with the Store and SE selectors at the top and the SE dropdown open showing the current Search Engine, a Create Search Engine button and a View all button" data-action="zoom-image" class="is-active">
-                  <img src="img/install-step2-create-search-engine-wide.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
-                  <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
-                </div>
-                <div class="install-step-captions">
-                  <div class="install-step-caption is-active" data-action="carousel-goto"><span class="install-step-caption-label">Step 1 of 2</span><strong>Click Create Search Engine</strong><p>Click the magnifying glass icon <img class="inline-ui-img" src="img/icon-search-magnifier.png" alt="Search icon"> (<strong>Search</strong>) in the left menu, open the <strong>SE</strong> (Search Engine) dropdown at the top and click <img class="inline-ui-img" src="img/btn-create-search-engine.png" alt="Create Search Engine button">.</p></div>
-                  <div class="install-step-caption" data-action="carousel-goto"><span class="install-step-caption-label">Step 2 of 2</span><strong>Configure the Search Engine</strong><p>Choose the data type (Product or Other data), the indexing method (File or Feed URL, or API), the results language, and — for product data — the currency.</p></div>
-                </div>
-              </div>
+              <p>A new Search Engine is created by clicking the gear icon <img class="inline-ui-img" src="img/icon-configuration-gear.png" alt="Configuration icon"> in the left menu, selecting the Store <img class="inline-ui-img" src="img/label-store.png" alt="Store selector label"> at the top and clicking <img class="inline-ui-img" src="img/btn-create-search-engine-config.png" alt="Create Search Engine button">.</p>
 
               <h3>Why Several Search Engines</h3>
+              <figure class="lesson-figure lesson-figure-right" style="width: 460px; max-width: 60%;">
+                  <img src="img/install-step2-create-search-engine.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
               <p>That's usually because ecommerces and websites often operate across different markets, each with its own language and currency. A store might sell to both an English-speaking and a Spanish-speaking market at the same time, or price the same products in different currencies depending on where they're sold.</p>
                   <p>Products can even have different URLs between storefronts, since the same domain can serve more than one storefront configuration — each combination of language, currency and product links needs its own data feed, and therefore its own Search Engine, each getting its own Hash ID.</p>
                   <p>For example, a store selling in both English and Spanish would typically create one Search Engine per language, each indexing its own translated catalogue. Splitting them this way also splits their statistics, since Doofinder reports them separately per Search Engine — useful for comparing how each one is performing on its own.</p>
@@ -598,19 +592,7 @@ const COURSE = {
           {
             html: `
               <p>We've already said the Search Engine is where an item's data is managed. But how is that data actually stored? The data is stored in <strong>indices</strong>.</p>
-              <div class="install-steps">
-                <div class="install-step-carousel">
-                  <img src="img/add-source-step1-search-engines.png" alt="Configuration section of the Admin Panel on Search Engines, listing the published Search Engine with its language, currency, last indexing date and a See indices button" data-action="zoom-image" class="is-active">
-                  <img src="img/add-source-step2-add-source.png" alt="Indices tab of a Search Engine, showing the products index with an Indexing with File source under Sources and an Add source button below it" data-action="zoom-image">
-                  <img src="img/add-source-step3-new-source.png" alt="New source box marked Not added yet, with a field to enter a feed URL or drop a file, an Upload file button and an Add button, below the existing Indexing with File source" data-action="zoom-image">
-                  <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
-                </div>
-                <div class="install-step-captions">
-                  <div class="install-step-caption is-active" data-action="carousel-goto"><span class="install-step-caption-label">Step 1 of 3</span><strong>Open the Search Engine's indices</strong><p>Click the gear icon <img class="inline-ui-img" src="img/icon-configuration-gear.png" alt="Configuration icon"> (<strong>Configuration</strong>) in the left menu, go to <strong>Search Engines</strong> and click <img class="inline-ui-img" src="img/btn-see-indices.png" alt="See indices button"> on the Search Engine.</p></div>
-                  <div class="install-step-caption" data-action="carousel-goto"><span class="install-step-caption-label">Step 2 of 3</span><strong>Click Add source</strong><p>In the <strong>Indices</strong> tab, the index lists its current sources under <strong>Sources</strong>. Below them, click <img class="inline-ui-img" src="img/btn-add-source.png" alt="Add source button">.</p></div>
-                  <div class="install-step-caption" data-action="carousel-goto"><span class="install-step-caption-label">Step 3 of 3</span><strong>Add the new source</strong><p>A <strong>New source</strong> box appears, marked "Not added yet". Enter the feed URL, or upload a file with <img class="inline-ui-img" src="img/btn-upload-file.png" alt="Upload file button">, then click <img class="inline-ui-img" src="img/btn-add-source-add.png" alt="Add button">.</p></div>
-                </div>
-              </div>
+              <p>A Search Engine's indices are found by clicking the gear icon <img class="inline-ui-img" src="img/icon-configuration-gear.png" alt="Configuration icon"> in the left menu, going to <strong>Search Engines</strong> and clicking <img class="inline-ui-img" src="img/btn-see-indices.png" alt="See indices button"> on that Search Engine.</p>
               <p>An index is like a box where data is processed and organized, ready to be searched. This process is called <strong>indexing</strong>.</p>
 
               <h3>Two Ways to Feed an Index</h3>
@@ -837,6 +819,7 @@ const COURSE = {
                 <li>a <strong>blocklist</strong> of specific IPs that are denied outright</li>
               </ul>
               <p>By default only allowlisted, or 'authorized', domains can query the Store client-side, while unwanted IPs can be shut out at the network level.</p>
+              <p>Both lists are found by clicking the gear icon <img class="inline-ui-img" src="img/icon-configuration-gear.png" alt="Configuration icon"> in the left menu, selecting the Store <img class="inline-ui-img" src="img/label-store.png" alt="Store selector label"> at the top, opening <img class="inline-ui-img" src="img/menu-general-settings.png" alt="General settings menu item"> and going to the <img class="inline-ui-img" src="img/tab-security.png" alt="Security tab"> tab.</p>
 
               <h3>Authorized Domains</h3>
               <figure class="lesson-figure lesson-figure-right" style="width: 600px; max-width: 60%;">
