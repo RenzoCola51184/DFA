@@ -160,6 +160,12 @@ RESTRUCTURING AN EXISTING LESSON — NEVER REMOVE CONTENT
     tight from the slide's own screenshot, upscale it 2x, and put it inline:
     <img class="inline-ui-img" src="img/icon-....png" alt="Search icon">
     (1.8em tall; works anywhere in theory text, not only in captions).
+    Reference: every caption of The Four Steps and "Create a Search Engine"
+    (Module 1 Section 1). Each caption ends with the button that moves the
+    flow on ("then click [Continue]"), shown as its inline image; icons and
+    buttons replace the bolded word, but a tile too small to read (e.g. the
+    "Other" platform tile) keeps its word next to it. Low-res sources: crop
+    at 4x instead of 2x. File names: icon-*.png, btn-*.png, tile-*.png.
   · No JS needed: the existing `carousel-next` handler syncs the captions
     (it only counts direct-child <img> as slides, so inline images are safe).
     After editing style.css/app.js, bump their `?v=` in every *.html or the
