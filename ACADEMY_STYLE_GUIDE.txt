@@ -126,18 +126,18 @@ RESTRUCTURING AN EXISTING LESSON — NEVER REMOVE CONTENT
   text (`.install-step-carousel.float-left` is fixed at 500px/400px tall).
 - CAROUSEL WITH STEP CAPTIONS (preferred for a guided flow — reference:
   Module 1 Section 1, "Installing Doofinder" → The Four Steps, and its
-  "Create a Search Engine" sub-page). A text panel beside the carousel shows
-  ONE caption at a time, and "Next step →" swaps image and caption together:
-    <div class="install-steps">
-      <div class="install-step-carousel">
-        <img src="img/..." alt="..." data-action="zoom-image" class="is-active">
-        <img src="img/..." alt="..." data-action="zoom-image">
-        <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
-      </div>
+  "Create a Search Engine" sub-page). A caption band INSIDE the carousel
+  frame, above the image, shows ONE caption at a time; "Next step →" swaps
+  image and caption together. The screenshot below the band is never
+  covered:
+    <div class="install-step-carousel has-captions">
       <div class="install-step-captions">
         <div class="install-step-caption is-active"><span class="install-step-caption-label">Step 1 of 2</span><strong>Short action title</strong><p>One or two sentences on what this screen does.</p></div>
         <div class="install-step-caption"><span class="install-step-caption-label">Step 2 of 2</span><strong>...</strong><p>...</p></div>
       </div>
+      <img src="img/..." alt="..." data-action="zoom-image" class="is-active">
+      <img src="img/..." alt="..." data-action="zoom-image">
+      <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
     </div>
   Rules:
   · Exactly one caption per image, in the same order (caption N = image N);
@@ -149,12 +149,19 @@ RESTRUCTURING AN EXISTING LESSON — NEVER REMOVE CONTENT
   · Title = the action in a few words ("Click Create Search Engine");
     body = what the screen asks for. When the captions replace a table or
     paragraphs, move that text into them — don't keep it twice.
-  · Don't float it — the wrapper is a flex row (carousel 500px, 420px under
-    1500px wide) and stacks the caption under the image below 1300px.
+  · Don't float it and don't put text beside it — `.has-captions` is a
+    full-width block, 620px tall (480px under 1300px wide), on its own row.
+    Tried and rejected: captions in a column beside the carousel, and a
+    synced step list beside it.
   · Never crop away UI context from a screenshot (e.g. the Store selector
     next to the SE dropdown) just to make it render bigger — wide/short
     shots stay whole; ask before trimming anything but empty background.
-  · No JS needed: the existing `carousel-next` handler syncs the captions.
+  · To show a UI element the caption names (an icon, a button), crop it
+    tight from the slide's own screenshot, upscale it 2x, and put it inline:
+    <img class="inline-ui-img" src="img/icon-....png" alt="Search icon">
+    (1.8em tall; works anywhere in theory text, not only in captions).
+  · No JS needed: the existing `carousel-next` handler syncs the captions
+    (it only counts direct-child <img> as slides, so inline images are safe).
     After editing style.css/app.js, bump their `?v=` in every *.html or the
     browser shows the cached old CSS (all captions stacked, unstyled).
 - A set of images the learner must compare and pick ONE of as the answer
@@ -579,7 +586,7 @@ CHECKLIST TO RUN AGAINST ANY OTHER SECTION
 [ ] Image widths are tuned so image height ≈ beside-text height (no big
     empty gap under either one).
 [ ] Any multi-shot "here's the flow" sequence is a carousel, not a stack —
-    preferably with step captions beside it (section 2, one caption per
+    preferably with a step-caption band inside it (section 2, one caption per
     image), checked at 1920, 1400 and 1200 wide.
 [ ] Any "pick one of these images" question uses labelled thumbnails
     (orange pill captions).

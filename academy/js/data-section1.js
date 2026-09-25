@@ -274,15 +274,7 @@ const COURSE = {
           {
             html: `
               <h3>The Four Steps</h3>
-              <div class="install-steps">
-                <div class="install-step-carousel">
-                    <img src="img/install-step1-create-store-landing.png" alt="Doofinder home screen with a Create store button, next to an explanation of what a Store is and why to create one" data-action="zoom-image" class="is-active">
-                    <img src="img/install-step1-create-store-form.png" alt="Create Store form asking for the site's URL, the platform it runs on, and its industry" data-action="zoom-image">
-                    <img src="img/install-step2-create-search-engine.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
-                    <img src="img/install-step3-css-selector.png" alt="Tell us where your search bar is screen, with a CSS selector field that accepts a format like #search-box, input[name='q'], .input-search, and a Create button" data-action="zoom-image">
-                    <img src="img/install-step4-connect-store.png" alt="Store connection screen showing the installation script to copy into the website's code, with a stepper marking Store information, Search Engine creation and Search bar location as already complete" data-action="zoom-image">
-                    <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
-                </div>
+              <div class="install-step-carousel has-captions">
                 <div class="install-step-captions">
                   <div class="install-step-caption is-active"><span class="install-step-caption-label">Getting started</span><strong>Click Create store</strong><p>To create the account's first Store, go to the <strong>Home</strong> section of the account and click <strong>Create store</strong>. This opens the guided flow.</p></div>
                   <div class="install-step-caption"><span class="install-step-caption-label">Step 1 of 4</span><strong>Create a Store</strong><p>Provide the site's full URL, its industry, and the platform it runs on (custom sites are detected as "Other").</p></div>
@@ -290,6 +282,12 @@ const COURSE = {
                   <div class="install-step-caption"><span class="install-step-caption-label">Step 3 of 4</span><strong>Set the CSS selector manually</strong><p>This identifies which element on the page needs to be clicked for the Search Layer to appear.</p></div>
                   <div class="install-step-caption"><span class="install-step-caption-label">Step 4 of 4</span><strong>Connect the store with an installation script</strong><p>Once the Store and Search Engine exist, add the script provided into the website's code to finish the connection.</p></div>
                 </div>
+                <img src="img/install-step1-create-store-landing.png" alt="Doofinder home screen with a Create store button, next to an explanation of what a Store is and why to create one" data-action="zoom-image" class="is-active">
+                <img src="img/install-step1-create-store-form.png" alt="Create Store form asking for the site's URL, the platform it runs on, and its industry" data-action="zoom-image">
+                <img src="img/install-step2-create-search-engine.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
+                <img src="img/install-step3-css-selector.png" alt="Tell us where your search bar is screen, with a CSS selector field that accepts a format like #search-box, input[name='q'], .input-search, and a Create button" data-action="zoom-image">
+                <img src="img/install-step4-connect-store.png" alt="Store connection screen showing the installation script to copy into the website's code, with a stepper marking Store information, Search Engine creation and Search bar location as already complete" data-action="zoom-image">
+                <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
               </div>
 
               <h3>The Installation Script</h3>
@@ -308,16 +306,14 @@ const COURSE = {
             pageBreak: true,
             html: `
               <p>A Search Engine is a configured instance that stores and indexes a specific type of data — once a Store has one, it's common to end up needing several more.</p>
-              <div class="install-steps">
-                <div class="install-step-carousel">
-                  <img src="img/create-search-engine-es-button.png" alt="Store and SE selectors at the top of the Admin Panel, with the SE dropdown open showing the current Search Engine and a Create Search Engine button" data-action="zoom-image" class="is-active">
-                  <img src="img/install-step2-create-search-engine.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
-                  <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
-                </div>
+              <div class="install-step-carousel has-captions">
                 <div class="install-step-captions">
-                  <div class="install-step-caption is-active"><span class="install-step-caption-label">Step 1 of 2</span><strong>Click Create Search Engine</strong><p>Open the <strong>SE</strong> (Search Engine) selector next to the Store selector and click <strong>Create Search Engine</strong>.</p></div>
+                  <div class="install-step-caption is-active"><span class="install-step-caption-label">Step 1 of 2</span><strong>Click Create Search Engine</strong><p>Click the magnifying glass icon <img class="inline-ui-img" src="img/icon-search-magnifier.png" alt="Search icon"> (<strong>Search</strong>) in the left menu, open the <strong>SE</strong> (Search Engine) dropdown at the top and click <img class="inline-ui-img" src="img/btn-create-search-engine.png" alt="Create Search Engine button">.</p></div>
                   <div class="install-step-caption"><span class="install-step-caption-label">Step 2 of 2</span><strong>Configure the Search Engine</strong><p>Choose the data type (Product or Other data), the indexing method (File or Feed URL, or API), the results language, and — for product data — the currency.</p></div>
                 </div>
+                <img src="img/create-search-engine-se-selector.png" alt="Search section of the Admin Panel on Results preview, with the Store and SE selectors at the top and the SE dropdown open showing the current Search Engine, a Create Search Engine button and a View all button" data-action="zoom-image" class="is-active">
+                <img src="img/install-step2-create-search-engine.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
+                <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
               </div>
 
               <h3>Why Several Search Engines</h3>

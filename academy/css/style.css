@@ -393,24 +393,30 @@ code { background: var(--bg-page); border: 1px solid var(--border); padding: 1px
 }
 .install-step-carousel img.is-active { display: block; }
 .install-step-carousel img:hover { filter: brightness(1.08); }
-.install-steps { display: flex; gap: 24px; align-items: center; margin: 10px 0 16px; }
-.install-steps .install-step-carousel { flex: 0 0 500px; height: 400px; margin-top: 0; }
-.install-step-captions { flex: 1; min-width: 0; }
+/* Carousel with a step-caption band on top (see style guide, section 2) */
+.install-step-carousel.has-captions {
+  display: flex; flex-direction: column; overflow: hidden;
+  max-width: none; width: 100%; height: 620px; margin: 10px 0 16px;
+}
+.install-step-carousel.has-captions img { flex: 1; min-height: 0; height: auto; border-radius: 0; }
+.install-step-captions {
+  flex: none; padding: 14px 18px;
+  background: var(--bg-card); border-bottom: 1px solid var(--border);
+}
 .install-step-caption { display: none; text-align: left; }
 .install-step-caption.is-active { display: block; }
 .install-step-caption-label {
-  display: block; margin-bottom: 6px;
+  display: block; margin-bottom: 4px;
   color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
 }
-.install-step-caption > strong { display: block; color: var(--text-primary); font-size: 18px; }
-.install-step-caption p { margin: 8px 0 0; text-align: left; }
-@media (max-width: 1500px) {
-  .install-steps .install-step-carousel { flex-basis: 420px; height: 340px; }
-}
+.install-step-caption > strong { display: block; color: var(--text-primary); font-size: 16px; }
+.install-step-caption p { margin: 4px 0 0; font-size: 14px; line-height: 1.5; text-align: left; }
 @media (max-width: 1300px) {
-  .install-steps { flex-direction: column; align-items: stretch; }
-  .install-steps .install-step-carousel { flex: none; width: 100%; }
+  .install-step-carousel.has-captions { height: 480px; }
 }
+/* Small cropped UI element (icon, button) shown inline in running text */
+.inline-ui-img,
+.install-step-carousel .install-step-caption img.inline-ui-img { display: inline-block; height: 1.8em; width: auto; vertical-align: middle; border-radius: 4px; }
 .carousel-next-btn {
   position: absolute; right: 8px; bottom: 8px; z-index: 1;
   padding: 5px 12px; border: 1px solid rgba(255, 255, 255, .1);
