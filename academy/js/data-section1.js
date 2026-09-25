@@ -40,7 +40,7 @@ const COURSE = {
                 <ol class="course-index-list">
                   <li><span class="course-index-section">Section 1</span> Getting started and Search Layer installation</li>
                   <li><span class="course-index-section">Section 2</span> How Doofinder Search Works and Search Engine Features: Relevance, Boosting and Custom Results</li>
-                  <li><span class="course-index-section">Section 3</span> Search Layer optimization — excluded results, grouping variants, synonyms, redirections, banners, copy settings</li>
+                  <li><span class="course-index-section">Section 3</span> More Search Engine Features: Grouping Variants, Excluded Results, Synonyms, Copy Settings, Redirections and Banners</li>
                   <li><span class="course-index-section">Section 4</span> Quiz feature</li>
                   <li><span class="course-index-section">Section 5</span> AI feature</li>
                 </ol>
@@ -291,6 +291,7 @@ const COURSE = {
                   <img src="img/install-step1-create-store-landing.png" alt="Doofinder home screen with a Create store button, next to an explanation of what a Store is and why to create one" data-action="zoom-image" class="is-active">
                   <img src="img/install-step1-create-store-form.png" alt="Create Store form asking for the site's URL, the platform it runs on, and its industry" data-action="zoom-image">
                   <img src="img/install-step2-create-search-engine.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
+                  <img src="img/install-step3-css-selector.png" alt="Tell us where your search bar is screen, with a CSS selector field that accepts a format like #search-box, input[name='q'], .input-search, and a Create button" data-action="zoom-image">
                   <img src="img/install-step4-connect-store.png" alt="Store connection screen showing the installation script to copy into the website's code, with a stepper marking Store information, Search Engine creation and Search bar location as already complete" data-action="zoom-image">
                   <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
                 </div>

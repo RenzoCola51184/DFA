@@ -714,7 +714,7 @@ function renderExerciseArea(section) {
       ${hasScenarioMedia ? (phase.afterFields || "") : ""}
     </div>`;
   const scenarioMediaHTML = `
-    <div class="exercise-scenario-media ${hasScenarioVideo ? "video-media" : ""} ${phase.smallMedia ? "small-media" : ""} ${phase.mediumMedia ? "medium-media" : ""}">
+    <div class="exercise-scenario-media ${hasScenarioVideo ? "video-media" : ""} ${phase.smallMedia ? "small-media" : ""} ${phase.mediumMedia ? "medium-media" : ""} ${phase.wideMedia ? "wide-media" : ""}">
       ${scenarioMediaInnerHTML}
     </div>`;
   const scenarioWithMediaHTML = hasScenarioMedia ? `

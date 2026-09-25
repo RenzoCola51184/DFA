@@ -62,8 +62,8 @@ const COURSE = {
                 "I don't get why the same shoe shows up several times in a row, once per size — it would be much better if only one result showed up for all its variants. Can you look into it?",
                 "Also, we discontinued the whole Kids line last month, but a couple of those products are apparently still showing up in search.",
                 "Searching \"trainers\" doesn't return any results at all — we need to fix that.",
-                "We still don't have redirections set up for \"return policy\" or \"contact us\" either — right now those just show a results page full of nothing useful.",
-                "And Black Friday is coming up fast — we don't have a banner pointing people to the campaign page yet."
+                "Searching \"return policy\" or \"contact us\" just shows a results page full of nothing useful — those searches should take people straight to the right page.",
+                "And Black Friday is coming up fast — there's nothing in the search pointing people to the campaign page yet."
               ],
               [
                 "Once all of that's sorted on the English Search Engine, mirror it over to the Spanish one too — I don't want the two storefronts drifting apart.",
@@ -635,34 +635,62 @@ const COURSE = {
         blocks: [
           {
             html: `
-              <p>There are two more features that can be copied from one Search Engine to another — <strong>Redirections</strong> and <strong>Banners</strong>. They don't affect search results, and they're covered later in this section.</p>
+              <p>There are two more features that can be copied from one Search Engine to another — <strong>Redirections</strong> and <strong>Banners</strong>. They don't affect search results, and they're covered later in this section. Altogether, the sets that can be copied are <strong>Custom Results</strong>, <strong>Banners</strong>, <strong>Redirections</strong>, <strong>Synonyms</strong>, <strong>Filters</strong> and <strong>Search Fields</strong>.</p>
 
               <h3>Before Copying</h3>
-              <p>Before copying anything, it's worth checking that <strong>product names</strong> and the two Search Engines' <strong>languages</strong> actually match between source and destination — a mismatched value may simply not be recognized once it lands on the target Search Engine.</p>
+              <p>Before copying anything, it's worth checking that <strong>product names</strong> and the two Search Engines' <strong>languages</strong> actually match between source and destination — a mismatched value may simply not be recognized once it lands on the target Search Engine. For example, a synonym set like <code>sneakers, trainers</code> copied from an English Search Engine to a Spanish one may not be considered, since the Spanish products aren't indexed with those English terms.</p>
 
               <h3>How to Use It</h3>
-              <figure class="lesson-figure lesson-figure-right" style="width: 400px; max-width: 55%;">
-                  <img src="img/copy-settings-dialog.png" alt="Copy Settings confirmation dialog after clicking Apply, showing the choice between Copy and Add to Existing Settings and Copy and Replace Existing Settings" data-action="zoom-image">
+              <figure class="lesson-figure lesson-figure-right gif-image" style="width: 460px; max-width: 55%;">
+                  <img src="img/copy-settings-flow.gif" data-base-src="img/copy-settings-flow.gif" alt="Animation of Copy Settings in the Synonyms list: the Copy Settings to... dropdown opens next to Add Synonym, one Search Engine of the Store (DE) is ticked, Apply is clicked, the Copy settings mode pop-up appears with Copy and Add to Existing Settings selected, and Yes, apply is clicked" data-action="zoom-image">
+                  <canvas class="gif-freeze-canvas"></canvas>
+                  <button type="button" class="gif-toggle-btn" data-action="toggle-gif" aria-label="Pause animation"><svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><rect x="3" y="2" width="3.4" height="12" rx="1"></rect><rect x="9.6" y="2" width="3.4" height="12" rx="1"></rect></svg></button>
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
-              <p>Using it means clicking <strong>"Copy Settings to…"</strong>, usually found at the top of a configuration's list (Custom Results, Banners, Redirections, Synonyms and so on each have their own). From there:</p>
-                  <ol>
-                    <li>Pick the destination Search Engine(s) from the dropdown.</li>
-                    <li>Click <strong>"Apply"</strong>.</li>
-                    <li>Choose one of two options in the confirmation dialog that appears.</li>
-                    <li>Click <strong>"Yes, apply"</strong> to save the changes.</li>
-                  </ol>
+              <p>Using it means clicking <strong>"Copy Settings to…"</strong>, usually found at the top of a configuration's list (Custom Results, Banners, Redirections, Synonyms and so on each have their own — in Synonyms, it sits next to the "Add Synonym" button). From there:</p>
+              <ol>
+                <li>Pick the destination Search Engine(s) from the dropdown — one, several, or all of them with "Select all".</li>
+                <li>Click <strong>"Apply"</strong>.</li>
+                <li>Choose one of two options in the <strong>Copy settings mode</strong> pop-up that appears.</li>
+                <li>Click <strong>"Yes, apply"</strong> to save the changes.</li>
+              </ol>
 
               <h3>Add or Replace</h3>
-              <p>The confirmation dialog offers two very different options:</p>
+              <p>The pop-up offers two very different options:</p>
               <table class="theory-table">
                 <thead><tr><th>Option</th><th>What it does</th></tr></thead>
                 <tbody>
-                  <tr><td><strong>Copy and Add to Existing Settings</strong></td><td>Adds the source Search Engine's configuration on top of the destination's, leaving whatever was already there untouched.</td></tr>
-                  <tr><td><strong>Copy and Replace Existing Settings</strong></td><td>Overwrites the destination's configuration entirely, deleting its original settings.</td></tr>
+                  <tr><td><strong>Copy and Add to Existing Settings</strong></td><td>Adds all the source Search Engine's sets on top of the destination's. The sets already created in the destination Search Engine remain untouched.</td></tr>
+                  <tr><td><strong>Copy and Replace Existing Settings</strong></td><td>Replaces all the sets in the destination Search Engine with the source's. The sets already created in the destination Search Engine are deleted.</td></tr>
                 </tbody>
               </table>
-              <p class="theory-callout">That second option is worth treating with real caution: once a <strong>Replace</strong> has been applied, <strong>it can't be undone</strong>, and the destination's original settings can't be recovered.</p>`
+              <figure class="lesson-figure lesson-figure-left" style="width: 360px; max-width: 55%;">
+                  <img src="img/copy-settings-mode-dialog.png" alt="Copy settings mode pop-up with the heading Choose how you want to copy settings between Search Engines and two options: Copy and Add to Existing Settings (selected) — This option will merge settings from the source Search Engine with the existing items in the destination Search Engine — and Copy and Replace Existing Settings — This option will overwrite all existing items in the destination Search Engine with those from the source Search Engine — plus Cancel and Yes, apply buttons" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>The pop-up describes each option: Add merges the settings from the source Search Engine with the existing items in the destination, while Replace overwrites all the existing items in the destination with those from the source.</p>
+              <p class="theory-callout">That second option is worth treating with real caution: once a <strong>Replace</strong> has been applied, <strong>it can't be undone</strong>, and the destination's original settings can't be recovered.</p>
+
+              <h3>An Example</h3>
+              <figure class="lesson-figure lesson-figure-right" style="width: 400px; max-width: 55%;">
+                  <img src="img/copy-settings-example-before.png" alt="Two Synonyms lists side by side: Search Engine A (source) with the synonym sets sneakers, trainers and hoodie, sweatshirt; and Search Engine B (destination) with the synonym set pants, trousers" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>A Store has two Search Engines, A and B, both in English and with the same products. Search Engine A has two synonym sets, <code>sneakers, trainers</code> and <code>hoodie, sweatshirt</code>, while Search Engine B has one of its own, <code>pants, trousers</code>.</p>
+              <div style="clear: both;"></div>
+              <figure class="lesson-figure lesson-figure-left" style="width: 420px; max-width: 55%;">
+                  <img src="img/copy-settings-example-after.png" alt="Search Engine B's Synonyms list in two versions: after Copy and Add to Existing Settings, with pants, trousers, sneakers, trainers and hoodie, sweatshirt; and after Copy and Replace Existing Settings, with only sneakers, trainers and hoodie, sweatshirt" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>From Search Engine A's Synonyms list, "Copy Settings to…" is used to pick Search Engine B, followed by "Apply". What Search Engine B ends up with depends on the option chosen in the pop-up.</p>
+              <p>With Add, Search Engine B lists three sets: its own <code>pants, trousers</code> plus the two copied from Search Engine A. With Replace, it lists only the two sets copied from Search Engine A — <code>pants, trousers</code> has been deleted, and there's no way to get it back.</p>
+              <table class="theory-table">
+                <thead><tr><th>Option</th><th>Search Engine B's synonyms afterwards</th><th>Search Engine B's own set</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Copy and Add to Existing Settings</strong></td><td><code>pants, trousers</code>, <code>sneakers, trainers</code>, <code>hoodie, sweatshirt</code></td><td>Kept</td></tr>
+                  <tr><td><strong>Copy and Replace Existing Settings</strong></td><td><code>sneakers, trainers</code>, <code>hoodie, sweatshirt</code></td><td>Deleted — it can't be recovered</td></tr>
+                </tbody>
+              </table>`
           }
         ]
       },
@@ -673,10 +701,10 @@ const COURSE = {
             "Merge two Stores into one",
             "Change a Search Engine's language automatically",
             "Copy an entire data feed to a new Store",
-            "Duplicate a configuration set from one Search Engine to another within the same Store"
+            "Duplicate a configuration from one Search Engine to another within the same Store"
           ],
           correct: 3,
-          explain: "Copy Settings duplicates a configuration — like Custom Results or Synonyms — from one Search Engine onto another, within the same Store."
+          explain: "Copy Settings duplicates a configuration — like Custom Results or Synonyms — from one Search Engine onto another, within the same Store. It doesn't touch data feeds, doesn't work across Stores, and doesn't change a Search Engine's language."
         },
         {
           q: "Which of these can Copy Settings duplicate?",
@@ -687,7 +715,7 @@ const COURSE = {
             "The data feed's file format"
           ],
           correct: 2,
-          explain: "Copy Settings covers configuration sets like Custom Results, Banners, Redirections, Synonyms, Filters and Search Fields."
+          explain: "The sets that can be copied are Custom Results, Banners, Redirections, Synonyms, Filters and Search Fields — Search Engine configuration, not Store-level details like domains or IDs, and not the data feed."
         },
         {
           q: "What should be checked before copying settings between two Search Engines?",
@@ -698,62 +726,73 @@ const COURSE = {
             "That the CSS selector is identical on both"
           ],
           correct: 1,
-          explain: "Mismatched product names or languages between source and destination may not be recognized once copied over — it's worth checking both first."
+          explain: "A copied value that doesn't match the destination may not be recognized there, so product names and the two Search Engines' languages are worth checking first. The other options have nothing to do with Copy Settings."
         },
         {
           q: "Where is the \"Copy Settings to…\" option usually found?",
           options: [
+            "At the top of each configuration's own list, like Custom Results or Synonyms",
             "Inside the Security Settings screen",
             "Only in the installation script",
-            "Inside the Results Preview panel",
-            "At the top of a configuration's list, like Custom Results or Synonyms"
-          ],
-          correct: 3,
-          explain: "\"Copy Settings to…\" is typically found at the top of the relevant configuration's list."
-        },
-        {
-          q: "What are the two options offered in the confirmation dialog after clicking Apply?",
-          options: [
-            "Copy Now, or Copy Later",
-            "Copy and Add to Existing Settings, or Copy and Replace Existing Settings",
-            "Export as CSV, or Export as XML",
-            "Enable, or Disable"
-          ],
-          correct: 1,
-          explain: "The dialog offers a choice between adding the copied settings on top of the existing ones, or replacing them entirely."
-        },
-        {
-          q: "What does \"Copy and Add to Existing Settings\" do?",
-          options: [
-            "Deletes every setting on the destination Search Engine",
-            "Only copies Search Fields, nothing else",
-            "Adds the source's settings on top of the destination's, keeping what was already there",
-            "Requires deleting the source Search Engine afterward"
-          ],
-          correct: 2,
-          explain: "This option layers the copied configuration on top of the destination's existing settings, without touching what was already there."
-        },
-        {
-          q: "What does \"Copy and Replace Existing Settings\" do?",
-          options: [
-            "It overwrites the destination's configuration entirely, deleting its original settings",
-            "Nothing changes on the destination Search Engine",
-            "It only replaces Banners, never other settings",
-            "It asks for a second confirmation the next day"
+            "Inside the Results Preview panel"
           ],
           correct: 0,
-          explain: "Replace overwrites the destination Search Engine's configuration completely, deleting whatever was configured there before."
+          explain: "Each configuration's list has its own \"Copy Settings to…\", usually at the top of the list — in Synonyms, for example, it sits next to the \"Add Synonym\" button."
         },
         {
-          q: "Can a \"Copy and Replace Existing Settings\" action be undone afterward?",
+          q: "A destination Search Engine has been picked in the \"Copy Settings to…\" dropdown and \"Apply\" has been clicked. What happens next?",
+          options: [
+            "The settings are copied straight away, with no further choice",
+            "A pop-up asks to choose between Copy and Add to Existing Settings and Copy and Replace Existing Settings, and \"Yes, apply\" saves the changes",
+            "The source Search Engine's settings are deleted",
+            "A CSV file with the settings is downloaded"
+          ],
+          correct: 1,
+          explain: "After \"Apply\", the Copy settings mode pop-up appears with the two options — Add or Replace — and the changes are only saved with \"Yes, apply\"."
+        },
+        {
+          q: "Search Engine <strong>Main</strong> has the synonym sets <code>sofa, couch</code> and <code>lamp, light</code>. Search Engine <strong>Outlet</strong>, in the same Store and language, has <code>rug, carpet</code>. The synonyms are copied from Main to Outlet with <strong>Copy and Add to Existing Settings</strong>. Which synonym sets does Outlet have afterwards?",
+          options: [
+            "Only sofa, couch and lamp, light",
+            "Only rug, carpet",
+            "rug, carpet, sofa, couch and lamp, light",
+            "None, since Outlet already had synonyms of its own"
+          ],
+          correct: 2,
+          explain: "Add puts Main's sets on top of Outlet's, and the sets already created in Outlet remain untouched — so Outlet keeps rug, carpet and gets sofa, couch and lamp, light as well. Losing rug, carpet is what Replace would do."
+        },
+        {
+          q: "Same Search Engines, but this time the synonyms are copied from Main to Outlet with <strong>Copy and Replace Existing Settings</strong>. Which synonym sets does Outlet have afterwards?",
+          options: [
+            "Only sofa, couch and lamp, light — rug, carpet is deleted",
+            "rug, carpet, sofa, couch and lamp, light",
+            "Only rug, carpet, since Outlet's own sets are protected",
+            "None — Replace empties the destination without copying anything"
+          ],
+          correct: 0,
+          explain: "Replace replaces all the sets in Outlet with Main's: the sets already created in Outlet, here rug, carpet, are deleted, and only sofa, couch and lamp, light are left. Keeping all three is what Add would do."
+        },
+        {
+          q: "After a <strong>Copy and Replace Existing Settings</strong>, it turns out the destination's original sets were still needed. Can they be recovered?",
           options: [
             "Yes, at any time from the Reset button",
             "Only within 24 hours",
             "Only if the source Search Engine still exists",
-            "No — once applied, the original settings can't be recovered"
+            "No — once a Replace has been applied, it can't be undone"
           ],
           correct: 3,
-          explain: "Once a Replace has been applied, it can't be undone, and the destination's original settings can't be recovered — so it's worth using with real caution."
+          explain: "Once a Replace has been applied, it can't be undone, and the destination's original settings can't be recovered — there's no Reset button or time window. That's why Replace is worth using with real caution."
+        },
+        {
+          q: "The synonym set <code>sofa, couch</code> is copied from an English Search Engine to a German one in the same Store, whose products are indexed with German terms. What can happen?",
+          options: [
+            "The set may not be considered, since the copied terms don't match the destination's products",
+            "The set is translated into German automatically",
+            "Copy Settings refuses to copy between Search Engines",
+            "The German products get renamed with the English terms"
+          ],
+          correct: 0,
+          explain: "If a copied value doesn't match the destination, it may not be considered: the German products aren't indexed with \"sofa\", so the set has nothing to work on. Copy Settings doesn't translate anything or rename products — which is why languages and product names are worth checking before copying."
         }
       ]
     },
@@ -768,34 +807,69 @@ const COURSE = {
       hasQuiz: true,
       docUrl: "https://support.doofinder.com/search/optimize/redirections",
       theory: {
-        lead: "A <strong>Redirection</strong> sends users from the Search Layer straight to a chosen URL whenever they search for a specific term — instead of showing them a results page at all.",
+        lead: "A <strong>Redirection</strong> takes users from the Search Layer to another page, specified by a URL, when they search for a specific term — instead of showing them a results page.",
         blocks: [
           {
             html: `
-              <figure class="lesson-figure lesson-figure-right" style="width: 400px; max-width: 55%;">
-                  <img src="img/redirections-add-form.png" alt="Add redirection form with Redirection name, Status toggle, Destination URL, a search term set to Broad Match, and the Enable automatic redirection checkbox" data-action="zoom-image">
-                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
-                </figure>
-              <p>A redirection takes a user from the <strong>Search Layer</strong> to another page, specified by a URL, the moment they type a given search term.</p>
-                  <p>It's a way to surface information that doesn't live in the catalogue itself — a privacy policy, a contact page, a company or blog page, or a campaign landing page tied to a brand or a season (Black Friday, a sale, Christmas, and so on).</p>
+              <h3>What It's For</h3>
+              <p>Thanks to Redirections, users can find what they're looking for through the search bar, even when it isn't a product: it's a way to surface information that doesn't live in the catalogue itself. A redirection is useful, for example, to send users to:</p>
+              <ul>
+                <li>The website's privacy policy.</li>
+                <li>The contact page.</li>
+                <li>Other pages with more information — other pages of the company, a blog, related pages, and so on.</li>
+                <li>A specific landing page based on a brand or a campaign, such as Black Friday, Sales or Christmas.</li>
+              </ul>
 
               <h3>Creating a Redirection</h3>
-              <p>Creating one means filling in:</p>
+              <figure class="lesson-figure lesson-figure-right" style="width: 420px; max-width: 55%;">
+                  <img src="img/redirections-form.png" alt="Redirection form in the Admin Panel for a redirection named Contact: Status toggle on, Destination URL https://www.doofinder.com/en/contact, Search Terms with Broad Match selected, a Type a search term box and an Add term button, the term contact added, the Automatic redirection toggle on with the text Redirection will happen automatically as soon as the term is typed, and Cancel and Save buttons" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>Clicking <strong>"Add Redirection"</strong> opens a form with the fields below. In this one, a redirection named <strong>Contact</strong> sends the search term <code>contact</code>, set to Broad Match, to Doofinder's contact page (its Destination URL), with <strong>Status</strong> and <strong>Automatic redirection</strong> both switched on. Each term added shows up below the <strong>Search Terms</strong> box, with the icon of its match type beside it. Once complete, the redirection is saved with <strong>"Save"</strong>.</p>
               <table class="theory-table">
                 <thead><tr><th>Field</th><th>What it's for</th></tr></thead>
                 <tbody>
-                  <tr><td><strong>Redirection name</strong></td><td>To identify it later.</td></tr>
-                  <tr><td><strong>Status</strong> toggle</td><td>To enable or disable it.</td></tr>
-                  <tr><td><strong>Destination URL</strong></td><td>The page it points to.</td></tr>
-                  <tr><td><strong>Search terms</strong></td><td>One or more search terms that trigger it, each set to either <strong>Exact Match</strong> (only that exact term triggers it) or <strong>Broad Match</strong> (triggers as soon as the typed text contains that term).</td></tr>
-                  <tr><td><strong>"Enable automatic redirection"</strong> checkbox</td><td>Leave it unchecked and the redirection only fires once the user presses enter or actually searches; check it and it happens automatically, as soon as the matching term is typed in.</td></tr>
+                  <tr><td><strong>Redirection name</strong></td><td>A custom name to identify each redirection — the title at the top of the form (here, Contact).</td></tr>
+                  <tr><td><strong>Status</strong></td><td>Switched on, it activates the redirection; switched off, it disables it.</td></tr>
+                  <tr><td><strong>Destination URL</strong></td><td>The target URL: the page the redirection points to.</td></tr>
+                  <tr><td><strong>Search Terms</strong></td><td>One or more terms that trigger the redirection, each added with "Add term" and set to either <strong>Exact Match</strong> — triggered only if the user types the exact search term — or <strong>Broad Match</strong> — triggered if the text typed by the user contains the search term.</td></tr>
+                  <tr><td><strong>Automatic redirection</strong></td><td>Switched on, the redirection happens automatically, as soon as the matching term is typed. Switched off, it only happens once the user presses enter or searches in the site.</td></tr>
                 </tbody>
               </table>
 
+              <h3>An Example</h3>
+              <figure class="lesson-figure lesson-figure-left" style="width: 400px; max-width: 55%;">
+                  <img src="img/redirections-example-contact.png" alt="Search Layer of the Doofinder demo store with contact typed in the search box, and an arrow pointing to https://www.doofinder.com/en/contact: the Doofinder Contact page, titled We're Here to Help You, with a Support section and a form with Name and Email fields" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>With the <strong>Contact</strong> redirection above saved, a user who types <strong>contact</strong> in the Search Layer is taken straight to the Destination URL — Doofinder's contact page, titled "We're Here to Help You" — instead of being shown a results page. Since Automatic redirection is switched on, this happens as soon as the term is typed.</p>
+              <p>Which searches trigger it depends on the match type of the term <code>contact</code>:</p>
+              <table class="theory-table">
+                <thead><tr><th>Search typed</th><th>Term set to Exact Match</th><th>Term set to Broad Match</th></tr></thead>
+                <tbody>
+                  <tr><td>"contact"</td><td>Redirects — it's the exact term</td><td>Redirects — the text contains "contact"</td></tr>
+                  <tr><td>"contact page"</td><td>Doesn't redirect — it isn't the exact term</td><td>Redirects — the text contains "contact"</td></tr>
+                  <tr><td>"customer service"</td><td>Doesn't redirect</td><td>Doesn't redirect — the text doesn't contain "contact"</td></tr>
+                </tbody>
+              </table>
+              <p>And when the redirection happens depends on Automatic redirection:</p>
+              <table class="theory-table">
+                <thead><tr><th>Automatic redirection</th><th>A user types "contact" in the Search Layer</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Switched on</strong></td><td>The redirection happens automatically, as soon as the term is typed.</td></tr>
+                  <tr><td><strong>Switched off</strong></td><td>The redirection only happens once the user presses enter or searches in the site.</td></tr>
+                </tbody>
+              </table>
+              <p class="theory-callout">The match type decides <strong>which</strong> searches trigger a redirection; Automatic redirection decides <strong>when</strong> it happens.</p>
+
               <h3>Managing Redirections</h3>
-              <p class="theory-callout">Each Search Engine can hold up to <strong>100 redirections</strong>.</p>
-              <p>Once saved, they show up in a list where each one can be activated or deactivated, edited or deleted from its three-dot menu — and the list itself can be searched, or filtered by date or by status, to make finding a specific one easier as the list grows.</p>
-              <p>A set of redirections can also be copied over to another Search Engine using the "Copy settings to..." dropdown next to the "Add redirection" button, followed by "Apply".</p>`
+              <figure class="lesson-figure lesson-figure-right" style="width: 460px; max-width: 55%;">
+                  <img src="img/redirections-list.png" alt="Redirections list in the Admin Panel with an Add Redirection button, a Search box, a date range filter, a Status: All filter, and one row: the Contact redirection with the term contact, 0 executions, its Status toggle on and a three-dot menu" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>Once saved, redirections show up in a list, where each one can be activated or deactivated with its Status toggle, and edited or deleted from its three-dot menu. To make finding a specific one easier as the list grows, the list can be searched, and filtered by date or by status.</p>
+              <p>The redirections on the list can also be copied over to another Search Engine: clicking the <strong>"Copy settings to..."</strong> dropdown beside the <strong>"Add Redirection"</strong> button, selecting the Search Engine and clicking <strong>"Apply"</strong>.</p>
+              <p class="theory-callout">Each Search Engine has a limit of <strong>100 redirections</strong>.</p>`
           }
         ]
       },
@@ -804,84 +878,95 @@ const COURSE = {
           q: "What does a Redirection do?",
           options: [
             "It removes a product from the results entirely",
-            "It sends the user to a specific URL when they search for a given term",
+            "It takes the user from the Search Layer to a specific URL when they search for a given term",
             "It renames a search term inside the data feed",
-            "It highlights a product with a banner"
+            "It makes two search terms return the same results"
           ],
           correct: 1,
-          explain: "A redirection takes a user from the Search Layer to another page, specified by a URL, when they type a given search term."
+          explain: "A redirection takes a user from the Search Layer to another page, specified by a URL, when they search for a given term — instead of showing a results page. Removing products is what Excluded Results does, and making two terms return the same results is what Synonyms does; a redirection doesn't touch the data feed either."
         },
         {
-          q: "Where are Redirections configured?",
-          options: [
-            "Admin Panel > Search > Optimize > Redirections",
-            "Admin Panel > Configuration > Excluded Results",
-            "Admin Panel > Search > Promotional Tools > Banners",
-            "Inside the product data feed"
-          ],
-          correct: 0,
-          explain: "Redirections are set up from the Admin Panel, under Search > Optimize > Redirections."
-        },
-        {
-          q: "Which of these is a use case mentioned for Redirections?",
+          q: "Which of these is a good use for a Redirection?",
           options: [
             "Converting a product's currency",
-            "Blocking a visitor's IP address",
+            "Hiding out of stock products from the results",
             "Mapping a feed field to a normalized field name",
-            "Pointing a search term to a privacy policy or contact page"
+            "Sending the search \"christmas\" to the Christmas campaign landing page"
           ],
           correct: 3,
-          explain: "Redirections are useful for things like a privacy policy, a contact page, or a campaign landing page — information that doesn't live in the catalogue itself."
+          explain: "Redirections surface information that doesn't live in the catalogue itself — a privacy policy, a contact page, other pages with more information, or a landing page based on a brand or a campaign, such as Christmas. The other options have nothing to do with sending a search to a URL."
         },
         {
-          q: "What's the difference between Exact Match and Broad Match on a redirection's search terms?",
+          q: "A redirection sends the search term <code>size guide</code>, set to <strong>Exact Match</strong>, to the store's size guide page. Which of these searches trigger it?",
           options: [
-            "They behave identically",
-            "Exact Match only triggers on the exact term; Broad Match triggers when the typed text contains it",
-            "Broad Match only works on mobile",
-            "Exact Match applies to brands, Broad Match to categories"
-          ],
-          correct: 1,
-          explain: "Exact Match only triggers on that exact term, while Broad Match triggers as soon as the typed text contains it."
-        },
-        {
-          q: "What happens if \"Enable automatic redirection\" is left unchecked?",
-          options: [
-            "The redirection never fires",
-            "The redirection fires on every keystroke",
-            "The redirection only fires once the user presses enter or actually searches",
-            "The redirection is disabled entirely until re-saved"
+            "\"size guide\" and \"size guide boots\"",
+            "Every search that contains \"size\" or \"guide\"",
+            "Only \"size guide\"",
+            "None, until the term is set to Broad Match"
           ],
           correct: 2,
-          explain: "Left unchecked, the redirection only fires once the user presses enter or searches; checked, it fires automatically as the matching term is typed."
+          explain: "Exact Match only triggers the redirection if the user types the exact search term — so only \"size guide\". \"size guide boots\" contains the term, which would only trigger a Broad Match term, and a search with just \"size\" or \"guide\" doesn't contain the whole term either way."
         },
         {
-          q: "How many redirections can a single Search Engine hold?",
-          options: ["10", "1,000", "Unlimited", "100"],
-          correct: 3,
-          explain: "Each Search Engine can hold up to 100 redirections."
-        },
-        {
-          q: "How can a set of redirections be applied to a different Search Engine?",
+          q: "The same <code>size guide</code> term is switched to <strong>Broad Match</strong>. A user searches for <strong>\"kids size guide\"</strong>. What happens?",
           options: [
-            "Using the \"Copy settings to...\" dropdown, then Apply",
-            "By re-typing them manually on the other Search Engine",
-            "It's not possible — redirections are Search Engine-specific only",
-            "By exporting and re-importing the data feed"
+            "The redirection is triggered, since the typed text contains \"size guide\"",
+            "Nothing, since \"kids size guide\" isn't the exact term",
+            "The redirection is triggered only if the user types \"kids\" last",
+            "The Search Layer shows the size guide page as a product result"
           ],
           correct: 0,
-          explain: "The \"Copy settings to...\" dropdown next to \"Add redirection\" lets a set of redirections be applied to another Search Engine, followed by Apply."
+          explain: "Broad Match triggers the redirection if the text typed by the user contains the search term — \"kids size guide\" contains \"size guide\", so the user is sent to the size guide page. Not being the exact term only matters with Exact Match, and a redirection never shows a page as a product result: it takes the user to the URL."
         },
         {
-          q: "Where can an existing redirection be activated, deactivated, edited or deleted?",
+          q: "A redirection sends the term <code>shipping</code> (Broad Match) to the shipping information page, with <strong>Automatic redirection</strong> switched off. A user types \"shipping costs\" in the Search Layer. When is the user redirected?",
           options: [
-            "Only by contacting <strong>Doofinder</strong> support",
+            "Never, since Automatic redirection is switched off",
+            "Once the user presses enter or searches in the site",
+            "As soon as the letters \"ship\" are typed",
+            "Only if \"shipping costs\" is added as a second term"
+          ],
+          correct: 1,
+          explain: "With Automatic redirection switched off, the redirection only happens once the user presses enter or searches. It still fires — \"shipping costs\" contains the Broad Match term \"shipping\" — so no second term is needed. Redirecting as soon as the term is typed is what happens with Automatic redirection switched on, and \"ship\" alone doesn't contain the term."
+        },
+        {
+          q: "How many redirections can a single Search Engine have?",
+          options: ["10", "1,000", "Unlimited", "100"],
+          correct: 3,
+          explain: "Each Search Engine has a limit of 100 redirections."
+        },
+        {
+          q: "In the redirections list, how is an existing redirection edited or deleted?",
+          options: [
+            "From its three-dot menu",
+            "By creating a new redirection with the same name",
             "From the Field Name Mapping screen",
-            "From its three-dot menu in the redirections list",
             "It can't be changed once saved"
           ],
+          correct: 0,
+          explain: "Each redirection in the list has a three-dot menu to edit or delete it, and a Status toggle to activate or deactivate it. The list can also be searched, and filtered by date or by status, to find a specific one."
+        },
+        {
+          q: "A Store wants the redirections of its English Search Engine on its French Search Engine too. What's the way to do it?",
+          options: [
+            "It's not possible — each Search Engine's redirections can only be created by hand",
+            "Exporting and re-importing the data feed",
+            "The \"Copy settings to...\" dropdown beside \"Add Redirection\", selecting the French Search Engine and clicking \"Apply\"",
+            "Switching on Automatic redirection on every redirection"
+          ],
           correct: 2,
-          explain: "Each redirection in the list can be activated, deactivated, edited or deleted from its three-dot menu."
+          explain: "The \"Copy settings to...\" dropdown beside the \"Add Redirection\" button copies the redirections to the Search Engine selected, once \"Apply\" is clicked — no need to recreate them by hand. The data feed has nothing to do with redirections, and Automatic redirection only decides when a redirection happens."
+        },
+        {
+          q: "A redirection is saved with its <strong>Status</strong> switched off. What does that mean?",
+          options: [
+            "It redirects only once the user presses enter",
+            "It isn't active: Status needs to be switched on to activate the redirection",
+            "It only works with Exact Match terms",
+            "It's deleted from the list"
+          ],
+          correct: 1,
+          explain: "Status is what activates the redirection: switched off, the redirection is disabled, but it stays in the list and can be activated again with its Status toggle. Waiting until the user presses enter is what Automatic redirection switched off does — a different setting."
         }
       ]
     },
@@ -896,71 +981,110 @@ const COURSE = {
       hasQuiz: true,
       docUrl: "https://support.doofinder.com/search/promotional-tools/banners",
       theory: {
-        lead: "<strong>Banners</strong> make it possible to promote a specific product or a marketing campaign right inside the Search Layer's results, triggered by chosen search terms.",
+        lead: "<strong>Banners</strong> make it possible to promote certain products or marketing campaigns right inside the Search Layer's results.",
         blocks: [
           {
             html: `
-              <figure class="lesson-figure lesson-figure-right" style="width: 400px; max-width: 55%;">
-                  <img src="img/banners-add-form.png" alt="Add Banner form with Name, Status, Default Banner toggle, an optional Duration date range, search terms, and image and Target link fields" data-action="zoom-image">
-                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
-                </figure>
-              <p>Banners can be shown for specific search terms, during a chosen time period, or set as the default banner shown across every other search.</p>
-                  <p>Setting one up means filling in:</p>
-                  <ul>
-                    <li>A <strong>Name</strong>, to tell it apart from the others.</li>
-                    <li>A <strong>Status</strong> checkbox, to enable or disable it without deleting it.</li>
-                    <li>Whether it's the <strong>Default Banner</strong> — the one shown for every search term that isn't otherwise covered.</li>
-                    <li>An optional <strong>Duration</strong>, a date range the banner is limited to.</li>
-                    <li>Its search terms, each set to Exact Match (triggers only on that exact term) or Broad Match (triggers whenever the typed text contains it) — unless it's the default banner, which ignores search terms altogether.</li>
-                  </ul>
-              <p class="theory-callout">Only one banner can be default at a time; marking a new one as default automatically un-defaults whichever one held that spot before.</p>
-
-              <h3>The Banner's Visuals</h3>
-              <p>The banner's visuals are set in one of two ways:</p>
+              <h3>Adding a Banner</h3>
+              <p>A banner can be shown for specific search terms, during a chosen time period, or set as the default banner shown for every search term that isn't otherwise covered. A new banner is created with the <strong>"Add Banner"</strong> button, and setting one up means filling in:</p>
               <table class="theory-table">
-                <thead><tr><th>Option</th><th>How it works</th></tr></thead>
+                <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
                 <tbody>
-                  <tr><td><strong>Manual fields</strong></td><td>Uploading an image (or pasting a URL directly), a <strong>Target link</strong> for where a click should lead, and an "Open in new window" checkbox.</td></tr>
-                  <tr><td><strong>HTML code</strong></td><td>For full control, hand-written HTML code, which overrides those manual fields entirely and requires knowing HTML to use.</td></tr>
+                  <tr><td><strong>Name</strong></td><td>Identifies the banner, to tell it apart from the others.</td></tr>
+                  <tr><td><strong>Status</strong></td><td>Enables or disables the banner without deleting it.</td></tr>
+                  <tr><td><strong>Default banner</strong></td><td>Makes it the default banner — the one shown for every search term that isn't otherwise covered, ignoring search terms altogether.</td></tr>
+                  <tr><td><strong>Duration</strong></td><td>Optional: either ongoing, or a date range the banner is limited to ("Set date period").</td></tr>
+                  <tr><td><strong>Search Terms</strong></td><td>The terms that trigger the banner (see below).</td></tr>
                 </tbody>
               </table>
-              <p>An uploaded image needs to meet these requirements:</p>
+              <p class="theory-callout">Only one banner can be default at a time: marking a new one as default automatically un-defaults whichever one held that spot before.</p>
+
+              <h3>Search Terms</h3>
+              <figure class="lesson-figure lesson-figure-right gif-image" style="width: 360px; max-width: 55%;">
+                  <img src="img/banners-search-terms.gif" data-base-src="img/banners-search-terms.gif" alt="Animation of the Search Terms field of a banner: the match type dropdown is set to Exact Match, and the terms doofinder, search and engine are typed and added one by one with Add term, each appearing below the field with its match type icon" data-action="zoom-image">
+                  <canvas class="gif-freeze-canvas"></canvas>
+                  <button type="button" class="gif-toggle-btn" data-action="toggle-gif" aria-label="Pause animation"><svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><rect x="3" y="2" width="3.4" height="12" rx="1"></rect><rect x="9.6" y="2" width="3.4" height="12" rx="1"></rect></svg></button>
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>Several search terms can be typed and added to a banner. Whenever a user types one of them, the banner shows up at the top of the layer results.</p>
+              <p>Each term is added with one of two match types, picked in the dropdown next to it:</p>
+              <ul>
+                <li><strong>Exact Match</strong> — the banner is shown only if the user types exactly that search term.</li>
+                <li><strong>Broad Match</strong> — the banner is shown whenever the text typed by the user contains that search term.</li>
+              </ul>
+              <p>The default banner is the exception: it ignores search terms altogether, and is shown when no banner matches the search terms.</p>
+
+              <h3>The Banner's Visuals</h3>
+              <figure class="lesson-figure lesson-figure-left" style="width: 400px; max-width: 55%;">
+                  <img src="img/banners-visual-config.png" alt="Upload Banner area with the Mode dropdown open, offering Visual Configuration and Code Configuration; a Desktop banner image already uploaded, with its image URL below it; an empty Mobile box with an Upload image button; the accepted formats and recommended sizes under each box; a Target Link field with a URL; and the Open the link in a new window toggle switched on" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>A banner can have an image for desktop screens and one for mobile screens. Its visuals are set in one of two modes:</p>
+              <ul>
+                <li><strong>Visual Configuration</strong> — the image is uploaded with the "Upload image" button, or its URL is typed in directly. The <strong>Target Link</strong> is the URL opened in the browser when the user clicks the banner, and <strong>"Open the link in a new window"</strong> opens it in a new window, so users can keep the current search page.</li>
+                <li><strong>Code Configuration</strong> — for full control, the banner is created or customized with hand-written HTML code, which overrides the manual fields entirely.</li>
+              </ul>
+              <p class="theory-callout">Code Configuration requires knowing HTML to use.</p>
+
+              <h3>Image Size</h3>
+              <p>There's no standard size for banners, since the Layer size is variable. An image needs to meet these requirements:</p>
               <table class="theory-table">
                 <thead><tr><th>Requirement</th><th>Value</th></tr></thead>
                 <tbody>
                   <tr><td>Format</td><td>.jpg, .jpeg, .gif or .png</td></tr>
-                  <tr><td>Maximum size</td><td>150 KB</td></tr>
-                  <tr><td>Recommended size (desktop)</td><td>Roughly 150×500–800 pixels</td></tr>
-                  <tr><td>Recommended size (mobile)</td><td>640×100 pixels</td></tr>
+                  <tr><td>Maximum size</td><td>150 KB, when the image is uploaded to Doofinder's servers</td></tr>
+                  <tr><td>Recommended size (desktop)</td><td>500–800 pixels wide and 150 pixels high</td></tr>
+                  <tr><td>Recommended size (mobile)</td><td>640 pixels wide and 100 pixels high</td></tr>
                 </tbody>
               </table>
-              <p>The sizes are only what <strong>Doofinder</strong> recommends — a banner can be sized however best fits the Layer it's shown in. As with most configuration screens, remember to actually click Save before navigating away.</p>
+              <p>The sizes are only what <strong>Doofinder</strong> recommends, not mandatory — a banner can be sized however best fits the Layer it's shown in. As with most configuration screens, the changes need to be saved with <strong>"Save"</strong> before leaving the page.</p>
 
-              <h3>Editing and Deleting</h3>
-              <p>Existing banners can be edited by clicking their name, or through the three-dot menu, which also offers duplicate and delete; deleting instead works by ticking a banner's checkbox and confirming with the red delete button that appears.</p>`
-          },
-          {
-            heading: "Banner Performance",
-            pageBreak: true,
-            html: `
-              <figure class="lesson-figure lesson-figure-left" style="width: 440px; max-width: 55%;">
-                  <img src="img/banners-list-metrics.png" alt="Banners list showing Name, search terms, Impressions, Clicks, CTR, active date period, Status, and a star marking the current default banner" data-action="zoom-image">
+              <h3>An Example</h3>
+              <figure class="lesson-figure lesson-figure-right" style="width: 360px; max-width: 55%;">
+                  <img src="img/banners-layer-match.png" alt="Search Layer with the search ray-ban sunglasses: 2 results found, an orange Summer Sale Sunglasses banner with a Shop the collection button at the top of the results, and below it the Ray-Ban Unisex Sunglasses at 124,00 € and the Ray-Ban Andy Sunglasses at 119,00 €, with a Brands filter listing Ray-Ban (2)" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
-              <p>The Banners list shows, per banner:</p>
-              <table class="theory-table" style="clear: none; width: auto;">
-                    <thead><tr><th>Column</th><th>What it shows</th></tr></thead>
-                    <tbody>
-                      <tr><td><strong>Name</strong></td><td>The banner's name</td></tr>
-                      <tr><td><strong>Search terms</strong></td><td>The search terms that trigger it</td></tr>
-                      <tr><td><strong>Impressions</strong></td><td>Counted once per minute, regardless of how many times it actually appeared in that window</td></tr>
-                      <tr><td><strong>Clicks</strong></td><td>Its clicks</td></tr>
-                      <tr><td><strong>CTR</strong></td><td>Click-through rate</td></tr>
-                      <tr><td><strong>Date period</strong></td><td>The active date period</td></tr>
-                      <tr><td><strong>Status</strong></td><td>Enabled, only if its search terms are matching, or disabled</td></tr>
-                      <tr><td><strong>⭐</strong></td><td>Marks whichever banner is currently the default</td></tr>
-                    </tbody>
-                  </table>`
+              <p>Take a Store that sells sunglasses and hoodies and runs a summer sale on sunglasses. A banner is added with the search term <code>sunglasses</code> set to <strong>Broad Match</strong>, and its Target Link points to the sale page. It isn't the default banner.</p>
+              <p>When a user searches for "ray-ban sunglasses", the text typed contains the term "sunglasses", so the banner shows up at the top of the layer results. The Search Layer shows 2 results found, with the banner above the Ray-Ban Unisex Sunglasses and the Ray-Ban Andy Sunglasses, and the Brands filter counts two Ray-Ban products.</p>
+              <div style="clear: both;"></div>
+              <figure class="lesson-figure lesson-figure-left" style="width: 400px; max-width: 55%;">
+                  <img src="img/banners-layer-nomatch.png" alt="Search Layer with the search hoodie: 3 results found and no banner — the Nike Sportswear Phoenix Hoodie at 68,00 €, the Adidas Originals Trefoil Hoodie at 58,00 € (down from 63,00 €) and the Adidas Sportswear Hoodie at 49,00 € — with a Brands filter listing Adidas (2) and Nike (1)" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>A search for "hoodie" doesn't contain the term, so the Search Layer shows the three hoodies found and no banner. If the Store had a default banner, this search would show that one instead, since no banner matches the search terms.</p>
+              <p>With the term set to <strong>Exact Match</strong> instead, only the exact search "sunglasses" would show the banner:</p>
+              <table class="theory-table">
+                <thead><tr><th>Search</th><th>Term set to Broad Match</th><th>Term set to Exact Match</th></tr></thead>
+                <tbody>
+                  <tr><td>"sunglasses"</td><td>Banner shown</td><td>Banner shown</td></tr>
+                  <tr><td>"ray-ban sunglasses"</td><td>Banner shown — the text typed contains the term</td><td>No banner — it isn't exactly the term</td></tr>
+                  <tr><td>"hoodie"</td><td>No banner</td><td>No banner</td></tr>
+                </tbody>
+              </table>
+
+              <h3>The Banners List</h3>
+              <p>Once banners are created, they're listed in a table that also shows how each one performs:</p>
+              <table class="theory-table">
+                <thead><tr><th>Column</th><th>What it shows</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Name</strong></td><td>The banner's name</td></tr>
+                  <tr><td><strong>Terms</strong></td><td>The search terms that trigger it</td></tr>
+                  <tr><td><strong>Impressions</strong></td><td>Each display, counted once per minute, regardless of how many times it actually appeared within that minute</td></tr>
+                  <tr><td><strong>Clicks</strong></td><td>How many times the banner has been clicked</td></tr>
+                  <tr><td><strong>CTR</strong></td><td>Click-through rate: the clicks divided by the number of times the banner is shown</td></tr>
+                  <tr><td><strong>Date Period</strong></td><td>The active date range, or "Ongoing"</td></tr>
+                  <tr><td><strong>Status</strong></td><td>Enabled (shown if someone types one of its search terms) or disabled (not shown), switched by clicking it</td></tr>
+                  <tr><td><strong>⭐</strong></td><td>Next to the name, marks whichever banner is currently the default</td></tr>
+                </tbody>
+              </table>
+
+              <h3>Editing and Deleting</h3>
+              <figure class="lesson-figure lesson-figure-left" style="width: 440px; max-width: 55%;">
+                  <img src="img/banners-list.png" alt="Banners list with an Add Banner button, a search box, a date range and a Status: All filter, and a table with the columns Name, Terms, Impressions, Clicks, CTR, Date Period and Status: one banner, Doofinder, marked with a star, with 0 impressions, 0 clicks, CTR 0.0, Ongoing, its Status toggle switched on, a checkbox before its name and a three-dot menu at the end of the row" data-action="zoom-image">
+                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
+                </figure>
+              <p>An existing banner can be edited by clicking its name in the list, or through the three-dot menu, which also offers duplicating or deleting it.</p>
+              <p>Banners can also be deleted by ticking the checkbox next to their name and confirming with the red delete button that appears.</p>`
           }
         ]
       },
@@ -969,74 +1093,90 @@ const COURSE = {
           q: "What are Banners used for?",
           options: [
             "Blocking bot traffic by IP",
-            "Promoting a specific product or marketing campaign inside the search results",
+            "Promoting certain products or marketing campaigns inside the search results",
             "Mapping feed fields to normalized field names",
             "Generating search suggestions automatically"
           ],
           correct: 1,
-          explain: "Banners let you promote certain products or marketing campaigns right inside the search results."
+          explain: "Banners promote certain products or marketing campaigns right inside the Search Layer's results. Blocking traffic, mapping fields and search suggestions have nothing to do with them."
         },
         {
-          q: "How many banners can be set as default at the same time?",
-          options: ["Up to three", "One per search term", "Unlimited", "Only one"],
-          correct: 3,
-          explain: "Only one banner can be set as default — marking a new one as default automatically un-defaults the previous one."
-        },
-        {
-          q: "What happens when a new banner is marked as Default?",
+          q: "A Store already has a default banner, and a new banner is marked as <strong>Default banner</strong>. What happens?",
           options: [
-            "The previous default banner is automatically unset",
-            "Nothing changes for other banners",
-            "All other banners are deleted",
-            "The new banner's search terms are ignored"
+            "Both banners become default and take turns",
+            "The new banner can't be saved until the old one is deleted",
+            "Nothing changes for the old banner, and the new one is ignored",
+            "The previous default banner is automatically un-defaulted"
+          ],
+          correct: 3,
+          explain: "Only one banner can be default at a time: marking a new one as default automatically un-defaults whichever one held that spot before. There's no need to delete or change the old one by hand, and two banners can never be default together."
+        },
+        {
+          q: "A Store adds a banner with the search term <code>raincoat</code> set to <strong>Broad Match</strong>. A user searches for \"yellow raincoat\". What happens?",
+          options: [
+            "No banner, since the search isn't exactly \"raincoat\"",
+            "The banner is shown only if it's also the default banner",
+            "The banner shows up at the top of the layer results, since the text typed contains \"raincoat\"",
+            "The user is taken straight to the banner's Target Link"
+          ],
+          correct: 2,
+          explain: "With Broad Match, the banner is shown whenever the text typed contains the term — \"yellow raincoat\" contains \"raincoat\". Requiring the exact term is what Exact Match does. A banner is shown at the top of the results; it only opens its Target Link when the user clicks it."
+        },
+        {
+          q: "The same <code>raincoat</code> banner is switched to <strong>Exact Match</strong>. Which of these searches shows it?",
+          options: [
+            "Only \"raincoat\"",
+            "\"raincoat\" and \"yellow raincoat\"",
+            "Only \"yellow raincoat\"",
+            "Any search, since it's the only banner"
           ],
           correct: 0,
-          explain: "Whenever a banner is set as default, the previous one (if it exists) is automatically unset."
+          explain: "With Exact Match, the banner is shown only if the user types exactly that search term, so \"yellow raincoat\" no longer triggers it. Being the only banner doesn't make it show everywhere — that's what the Default banner setting does."
+        },
+        {
+          q: "A Store has a banner for the search term <code>raincoat</code> (Broad Match) and another banner set as the default banner. A user searches for \"wellington boots\". Which banner is shown?",
+          options: [
+            "The raincoat banner, since it was created with search terms",
+            "The default banner, since no banner matches the search terms",
+            "Both banners, one above the other",
+            "No banner, since \"wellington boots\" isn't a search term of any banner"
+          ],
+          correct: 1,
+          explain: "\"wellington boots\" doesn't contain \"raincoat\", so the raincoat banner doesn't match. The default banner is shown for every search term that isn't otherwise covered, so that's the one shown here."
         },
         {
           q: "What overrides a banner's manual image and link fields?",
-          options: ["The Duration field", "The Default Banner toggle", "Hand-written HTML code", "The three-dot menu"],
+          options: ["The Duration setting", "The Default banner toggle", "Hand-written HTML code in Code Configuration", "The three-dot menu"],
           correct: 2,
-          explain: "Using HTML code to build or customize a banner overrides the manual fields, and requires knowing HTML to use."
+          explain: "In Code Configuration, the banner is built with HTML code, which overrides the manual fields entirely — and it requires knowing HTML to use. Duration and Default banner only decide when the banner is shown, and the three-dot menu is for editing, duplicating or deleting it."
         },
         {
-          q: "What's the maximum file size for an uploaded banner image?",
+          q: "What's the maximum file size for a banner image uploaded to Doofinder's servers?",
           options: ["50 KB", "500 KB", "1 MB", "150 KB"],
           correct: 3,
           explain: "An uploaded banner image can be at most 150 KB, in .jpg, .jpeg, .gif or .png format."
         },
         {
-          q: "Is the recommended banner size (e.g. 150×500–800px for desktop) mandatory?",
+          q: "Is the recommended banner size (500–800 pixels wide and 150 pixels high on desktop) mandatory?",
           options: [
-            "No, it's only a recommendation — a banner can be sized to fit its Layer",
+            "No, it's only a recommendation — a banner can be sized to best fit its Layer",
             "Yes, uploads outside that size are rejected",
             "Only for the default banner",
             "Only on mobile"
           ],
           correct: 0,
-          explain: "The recommended dimensions aren't mandatory — banners can be sized however best fits the Layer they're shown in."
+          explain: "There's no standard size for banners, since the Layer size is variable: the recommended sizes aren't mandatory, and a banner can be sized however best fits the Layer it's shown in. The only hard limits on an uploaded image are its format and the 150 KB maximum."
         },
         {
-          q: "How are a banner's Impressions counted in the main panel?",
+          q: "A banner appears 5 times within the same minute. How many Impressions does the Banners list count for that minute?",
           options: [
-            "Once per click",
-            "Once per minute, regardless of how many times it actually appeared",
-            "Once per <strong>Doofinder</strong> account, ever",
-            "They aren't tracked at all"
+            "5, one per appearance",
+            "1, since each display is counted once per minute",
+            "0, since only clicks are counted",
+            "It depends on the CTR"
           ],
           correct: 1,
-          explain: "Impressions are counted once per minute, regardless of the actual number of occurrences in that window."
-        },
-        {
-          q: "What does the star (⭐) symbol indicate in the Banners list?",
-          options: [
-            "That the banner is currently set as default",
-            "That the banner has the highest CTR",
-            "That the banner uses HTML code",
-            "That the banner is disabled"
-          ],
-          correct: 0,
-          explain: "The star marks whichever banner is currently set as the default one, shown for every other search term."
+          explain: "Impressions count each banner display once per minute, regardless of how many times it actually appeared within that minute. Clicks are a separate column, and CTR is calculated from clicks and displays — it doesn't decide how impressions are counted."
         }
       ]
     },
@@ -1058,12 +1198,12 @@ const COURSE = {
           {
             html: `
               <ul>
-                <li>Figure out why the shoe variants aren't grouping into a single result, and fix the data feed behind it.</li>
-                <li>Exclude the discontinued Kids line from search entirely.</li>
-                <li>Make "sneakers" and "trainers" return the same results.</li>
-                <li>Set up redirections so "return policy" and "contact us" land on the right page.</li>
-                <li>Get a Black Friday banner live, pointing to the campaign page.</li>
-                <li>Mirror the finished setup on the Spanish Search Engine.</li>
+                <li>Figure out why the same shoe shows up once per size, and fix it.</li>
+                <li>Make sure the discontinued Kids line stops showing up in search.</li>
+                <li>Make searching "trainers" find the products it should.</li>
+                <li>Make "return policy" and "contact us" searches lead somewhere useful.</li>
+                <li>Point people to the Black Friday campaign page from the search.</li>
+                <li>Get the Spanish Search Engine to match the English one.</li>
               </ul>
               <p>Work through each step the same way you would in the real Doofinder Admin Panel — that will help you choose the right answers, and you'll actually need to do them for real to finalize all the steps of the exercise.</p>`
           }
@@ -1072,12 +1212,12 @@ const COURSE = {
       exercise: {
         lead: `You reread Amanda's message on Slack and start working through her list, one task at a time.</p>
           <ul>
-            <li>Figure out why Doostride's shoe variants aren't grouping into a single result.</li>
+            <li>Figure out why the same shoe shows up once per size in the Search Layer.</li>
             <li>Make sure discontinued Doostride Kids products stop showing up in search.</li>
-            <li>Make "sneakers" and "trainers" return the same results.</li>
-            <li>Set up redirections so "return policy" and "contact us" searches land on the right page.</li>
-            <li>Get a Black Friday banner live, pointing users to the campaign page.</li>
-            <li>Mirror the finished setup on the Spanish Search Engine.</li>
+            <li>Make searching "trainers" find the products it should.</li>
+            <li>Make "return policy" and "contact us" searches lead somewhere useful.</li>
+            <li>Point people to the Black Friday campaign page from the search.</li>
+            <li>Get the Spanish Search Engine to match the English one.</li>
           </ul>`,
         doneNote: "Doostride's search is clean and grouped again — Kids products are gone, sneakers and trainers behave the same, the right pages come up instantly, Black Friday is ready to go, and the Spanish storefront now matches too.",
         replyButtonLabel: "Reply to Amanda",
@@ -1085,39 +1225,40 @@ const COURSE = {
           {
             key: "grouping-diagnosis",
             title: "1. Grouping Product Variants — Part 1",
-            question: "Amanda already enabled <strong>\"Group variants as a single item\"</strong> on the English Search Engine a while ago — the setting shown below has been on for weeks.",
-            scenarioImage: { src: "img/final-grouping-toggle-on.png", alt: "Indices Configuration section showing the 'Group variants as a single item' toggle already switched on" },
-            mediumMedia: true,
-            scenario: "Yet every size of the AXEL RUNNER shoe still shows up as a separate result in the Search Layer.</p><p class=\"exercise-scenario-text\">What's the most likely reason grouping still isn't working?",
+            question: "Quick reminder of what needs fixing: the same shoe keeps appearing several times in a row in the Search Layer, once for each size. To check it, you search for <strong>CONVERSE | TODDLER CHUCK TAYLOR ALL STAR AXEL MID</strong>:",
+            scenarioImage: { src: "img/final-grouping-search-converse.png", alt: "Search Layer with the search CONVERSE | TODDLER CHUCK TAYLOR ALL STAR AXEL MID: 6 results found — the product itself and its sizes 5, 6, 7, 8 and 9 in black, all at 70,00 € — with Categories (Shoes 6), Brands (CONVERSE 6) and Price (70 to 70 €) filters on the left" },
+            stackedMedia: true,
+            wideMedia: true,
+            scenario: "Six results show up for the same shoe: the product itself and each of its sizes, from 5 to 9 — all with the same image and the same price.</p><p class=\"exercise-scenario-text\">What's the most likely reason?",
             fields: [
               { key: "reason", label: "", type: "choice", layout: "column", options: [
-                "The variants in the data feed don't all share the same group_id, or none of them sets group_leader",
+                "Grouping isn't set up: the variants don't share the same group_id in the data feed, and \"Group variants as a single item\" needs to be enabled",
                 "The Search Engine needs to be deleted and recreated from scratch",
                 "Grouping only works when indexing via API, never via File or URL",
                 "The CSS Selector needs to include a comma-separated mobile selector"
-              ], correct: "The variants in the data feed don't all share the same group_id, or none of them sets group_leader" }
+              ], correct: "Grouping isn't set up: the variants don't share the same group_id in the data feed, and \"Group variants as a single item\" needs to be enabled" }
             ],
-            explain: "Turning the toggle on only switches grouping on — it still depends entirely on the feed itself: every variant of the same product needs to share the exact same group_id, and ideally one of them needs group_leader set to true. Recreating the Search Engine, the indexing method, and the CSS Selector have nothing to do with how grouping resolves, so none of them would fix this."
+            explain: "For the variants of a product to show up as a single result, they need to be grouped: every variant needs the same group_id in the data feed, and \"Group variants as a single item\" needs to be enabled on the Search Engine. Recreating the Search Engine, the indexing method and the CSS Selector have nothing to do with grouping, so none of them would fix this."
           },
           {
             key: "grouping-feed",
             title: "1. Grouping Product Variants — Part 2",
-            question: "You go check the data feed and find two other versions of the whole catalogue floating around from an earlier attempt at grouping.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Analyze the 3 full data feeds below and figure out which one actually gets the AXEL RUNNER's variants — and every other product's — to group correctly.",
+            question: "You go check the data feed and find two other versions of the whole catalogue floating around from an earlier attempt at grouping.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Analyze the 3 full data feeds below and figure out which one actually gets every product's variants — the CONVERSE | TODDLER CHUCK TAYLOR ALL STAR AXEL MID's included — to group correctly.",
             beforeFields: `
               <div class="feed-preview-grid">
                 <div class="feed-preview-card" style="flex-basis: 0; min-width: 200px;">
                   <p class="feed-preview-label">Data feed 1</p>
-                  <img src="img/final-group-feed1-preview.png" alt="Preview of the full catalogue feed: id, title, price, color, size and the rest of the usual columns — no group_id or group_leader column at all" data-action="zoom-image" class="feed-preview-img">
+                  <img src="img/final-group-feed1-preview.png" alt="Preview of the full catalogue feed, showing the 6 rows of CONVERSE | TODDLER CHUCK TAYLOR ALL STAR AXEL MID (the product and its sizes 5 to 9) with the columns id, title, color, size and price — no group_id or group_leader column at all" data-action="zoom-image" class="feed-preview-img">
                   <a href="feeds/doostride-group-feed-1.csv" download class="btn btn-ghost feed-download-btn">Download data feed 1</a>
                 </div>
                 <div class="feed-preview-card" style="flex-basis: 0; min-width: 200px;">
                   <p class="feed-preview-label">Data feed 2</p>
-                  <img src="img/final-group-feed2-preview.png" alt="Preview of the full catalogue feed with a group_id column added, but spelled differently on each row of the same product — for AXEL RUNNER: 7841002000, 78410020000, 784100200 — and an empty group_leader column" data-action="zoom-image" class="feed-preview-img">
+                  <img src="img/final-group-feed2-preview.png" alt="Preview of the full catalogue feed with a group_id column added, but spelled differently on each row of the same product — for the 6 rows of CONVERSE | TODDLER CHUCK TAYLOR ALL STAR AXEL MID: 6170310705322, 61703107053220, 617031070532 — and an empty group_leader column" data-action="zoom-image" class="feed-preview-img">
                   <a href="feeds/doostride-group-feed-2.csv" download class="btn btn-ghost feed-download-btn">Download data feed 2</a>
                 </div>
                 <div class="feed-preview-card" style="flex-basis: 0; min-width: 200px;">
                   <p class="feed-preview-label">Data feed 3</p>
-                  <img src="img/final-group-feed3-preview.png" alt="Preview of the full catalogue feed with a group_id column set to the group leader's own id on every row of that group — for AXEL RUNNER: 7841002000 on all 5 rows — and group_leader set to true on exactly the leader row, false on the rest" data-action="zoom-image" class="feed-preview-img">
+                  <img src="img/final-group-feed3-preview.png" alt="Preview of the full catalogue feed with a group_id column set to the group leader's own id on every row of that group — for CONVERSE | TODDLER CHUCK TAYLOR ALL STAR AXEL MID: 6170310705322 on all 6 rows — and group_leader set to true on exactly the leader row, false on the rest" data-action="zoom-image" class="feed-preview-img">
                   <a href="feeds/doostride-group-feed-3.csv" download class="btn btn-ghost feed-download-btn">Download data feed 3</a>
                 </div>
               </div>
@@ -1125,14 +1266,27 @@ const COURSE = {
             fields: [
               { key: "validfeed", label: "", type: "choice", layout: "column", options: ["Data feed 1", "Data feed 2", "Data feed 3"], correct: "Data feed 3" }
             ],
-            explain: "Data feed 3 is the only one that works: every variant of a product shares the exact same group_id — its group leader's own id (for AXEL RUNNER, the leader is id 7841002000, so all 5 rows carry group_id 7841002000) — and exactly one row per group has group_leader set to true, so Doofinder knows which one to show first. Data feed 1 doesn't have a group_id column at all, so Doofinder has no way to know which rows belong together. Data feed 2 does have a group_id column, but each row's value is spelled slightly differently (7841002000, 78410020000, 784100200 for AXEL RUNNER alone) — since the values don't match exactly, Doofinder treats them as different groups, so nothing actually groups together."
+            explain: "Data feed 3 is the only one that works: every variant of a product shares the exact same group_id — its group leader's own id (for the CONVERSE | TODDLER CHUCK TAYLOR ALL STAR AXEL MID, the leader is id 6170310705322, so all 6 rows carry group_id 6170310705322) — and exactly one row per group has group_leader set to true, so Doofinder knows which one to show first. Data feed 1 doesn't have a group_id column at all, so Doofinder has no way to know which rows belong together. Data feed 2 does have a group_id column, but each row's value is spelled slightly differently (6170310705322, 61703107053220, 617031070532 for the Converse Axel Mid alone) — since the values don't match exactly, Doofinder treats them as different groups, so nothing actually groups together."
+          },
+          {
+            key: "problem-features",
+            title: "2. Picking the right feature for each problem",
+            question: "With the variants grouped, you go back over the rest of Amanda's list and work out which <strong>Doofinder</strong> feature, among the ones you've learned in this section — <strong>Excluded Results</strong>, <strong>Synonyms</strong>, <strong>Redirections</strong>, <strong>Banners</strong> and <strong>Copy Settings</strong> — is the right tool for each problem.</p><ul style=\"margin:0 0 16px; padding-left:20px;\"><li style=\"margin-bottom:14px;\"><strong>Problem 1:</strong> A couple of products from the <strong>Kids</strong> line, discontinued last month, still show up in search. You need a feature that stops them — and any other Kids product — from appearing, without touching the data feed.</li><li style=\"margin-bottom:14px;\"><strong>Problem 2:</strong> Searching <strong>\"trainers\"</strong> returns no results at all, since Doostride's catalogue always calls those products \"sneakers\". You need a feature that makes \"trainers\" find the same products.</li><li style=\"margin-bottom:14px;\"><strong>Problem 3:</strong> Searching <strong>\"return policy\"</strong> or <strong>\"contact us\"</strong> shows a results page full of products nobody was looking for. You need a feature that takes those searches straight to the right page instead.</li><li style=\"margin-bottom:14px;\"><strong>Problem 4:</strong> <strong>Black Friday</strong> is coming up, and nothing in the Search Layer points people to the campaign page. You need a feature that shows something promoting it, linking to that page.</li><li><strong>Problem 5:</strong> Once everything is sorted on the English Search Engine, the <strong>Spanish</strong> one needs the same setup, without rebuilding it all by hand.</li></ul><p class=\"theory-lead\" style=\"margin-bottom:16px;\">For each problem below, choose the most suitable feature to solve it:",
+            fields: [
+              { key: "problem1", label: "Problem 1", type: "select", options: ["Banners", "Copy Settings", "Excluded Results", "Redirections", "Synonyms"], correct: "Excluded Results" },
+              { key: "problem2", label: "Problem 2", type: "select", options: ["Banners", "Copy Settings", "Excluded Results", "Redirections", "Synonyms"], correct: "Synonyms" },
+              { key: "problem3", label: "Problem 3", type: "select", options: ["Banners", "Copy Settings", "Excluded Results", "Redirections", "Synonyms"], correct: "Redirections" },
+              { key: "problem4", label: "Problem 4", type: "select", options: ["Banners", "Copy Settings", "Excluded Results", "Redirections", "Synonyms"], correct: "Banners" },
+              { key: "problem5", label: "Problem 5", type: "select", options: ["Banners", "Copy Settings", "Excluded Results", "Redirections", "Synonyms"], correct: "Copy Settings" }
+            ],
+            explain: "<strong>Excluded Results</strong> fixes the first problem: it removes products from the Search Engine even though they're still in the data feed. <strong>Synonyms</strong> fixes the second: it associates an indexed term with another one, so the other term finds the same products. <strong>Redirections</strong> fixes the third: it takes users from the Search Layer straight to a URL when they search for a specific term. <strong>Banners</strong> fixes the fourth: it shows a promotional image in the Search Layer, linking to a page. <strong>Copy Settings</strong> fixes the fifth: it duplicates a Search Engine's configuration onto another one in the same Store. In the next steps, you'll work out how to configure each of these."
           },
           {
             key: "excluded-results-kids",
-            title: "2. Excluded Results",
+            title: "3. Excluded Results",
             question: "Doostride discontinued its entire <strong>Kids</strong> line last month, but a customer just complained about finding a Kids product in a search.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Choose the right way to make sure none of them show up again:",
-            scenarioImage: { src: "img/final-kids-still-showing.png", alt: "Search Layer results for a query still showing a Doostride Kids product, despite the Kids line being discontinued" },
-            smallMedia: true,
+            scenarioImage: { src: "img/final-kids-still-showing.png", alt: "Search Layer with the search chuck taylor: 3 results found — CONVERSE | TODDLER CHUCK TAYLOR ALL STAR AXEL MID at 70,00 € (a Kids product), CONVERSE | CHUCK TAYLOR ALL STAR LO at 100,00 € and CONVERSE | CHUCK TAYLOR ALL STAR II HI at 140,00 € — with Categories and Brands filters on the left" },
+            stackedMedia: true,
             fields: [
               { key: "method", label: "", type: "choice", layout: "column", options: [
                 "Add an Excluded Results rule: gender is Kids",
@@ -1145,7 +1299,7 @@ const COURSE = {
           },
           {
             key: "synonyms-sneakers",
-            title: "3. Synonyms",
+            title: "4. Synonyms",
             question: "Searching <strong>\"trainers\"</strong> currently returns no results at all: Doostride's own catalogue always calls this category <strong>\"sneakers\"</strong> (that's the word used in the feed's own <code>category</code> and <code>title</code> fields), and the word \"trainers\" never appears in it.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Choose the synonym configuration that fixes this without breaking the existing \"sneakers\" searches:",
             fields: [
               { key: "synonymtype", label: "", type: "choice", layout: "column", options: [
@@ -1159,39 +1313,40 @@ const COURSE = {
           },
           {
             key: "redirections-support-pages",
-            title: "4. Redirections",
+            title: "5. Redirections",
             question: "Amanda also wants a search to skip the results page entirely and go straight to the page users are actually looking for: <strong>\"return policy\"</strong> should land on Doostride's returns page.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Set up that redirection — choose the right configuration for each of the following:",
             fields: [
               { key: "matchtype", label: "Which match type should \"return policy\" use?", type: "select", options: ["Exact Match", "Broad Match"], correct: "Broad Match" },
-              { key: "auto", label: "Should \"Enable automatic redirection\" be checked?", type: "select", options: ["Yes, check it", "No, leave it unchecked"], correct: "No, leave it unchecked" },
+              { key: "auto", label: "Should \"Automatic redirection\" be switched on?", type: "select", options: ["Yes, switch it on", "No, leave it off"], correct: "No, leave it off" },
               { key: "url", label: "Destination URL", type: "text", freeform: true }
             ],
-            explain: "Broad Match is the safer choice for a full phrase like this — it also catches close variants such as \"what's your return policy\" or \"return policy for shoes\", where Exact Match would only trigger on that exact wording. Leaving \"Enable automatic redirection\" unchecked means the redirect only fires once the user actually searches, instead of pulling them away mid-keystroke while they might still be typing something else entirely."
+            explain: "Broad Match is the safer choice for a full phrase like this — it also catches close variants such as \"what's your return policy\" or \"return policy for shoes\", where Exact Match would only trigger on that exact wording. Leaving \"Automatic redirection\" switched off means the redirection only happens once the user presses enter or actually searches, instead of as soon as the term is typed — while they might still be typing something else entirely."
           },
           {
             key: "banners-black-friday",
-            title: "5. Banners",
-            question: "Black Friday is coming up, and Amanda wants a banner live for it, linking to Doostride's campaign landing page.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Analyze the 3 banner configurations below and choose the one that actually does what Amanda wants:",
+            title: "6. Banners",
+            question: "Black Friday is coming up, and Amanda wants a banner for it, linking to Doostride's campaign landing page. It needs to show up on <strong>every search</strong>, and to stop on Black Friday itself, <strong>27 November</strong>. Doostride doesn't have any other banner.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Analyze the 4 banner configurations below and choose the one that actually does what Amanda wants:",
             fields: [
-              { key: "correctbanner", type: "image-select", layout: "column", thumbCols: 3, mediaWidth: 800, options: [
-                { value: "a", src: "img/final-banner-a.png", alt: "Add Banner form for 'BLACK FRIDAY', with the Default Banner toggle turned on instead of search terms, and Target link set to the Black Friday landing page", caption: "Option A" },
-                { value: "b", src: "img/final-banner-b.png", alt: "Add Banner form for 'BLACK FRIDAY' with the search term black friday set to Exact Match, and Target link set to the Black Friday landing page", caption: "Option B" },
-                { value: "c", src: "img/final-banner-c.png", alt: "Add Banner form for 'BLACK FRIDAY' with the search term black friday set to Broad Match, a Duration covering the Black Friday weekend, and Target link set to the Black Friday landing page", caption: "Option C" }
-              ], correct: "c" }
+              { key: "correctbanner", type: "image-select", layout: "column", thumbCols: 2, stacked: true, options: [
+                { value: "a", src: "img/final-banner-a.png", alt: "Add Banner form for BLACK FRIDAY: Status on, Default banner on, Duration set to Run this result continously starting today (ongoing), no search terms added, and Target Link https://doostride.com/black-friday", caption: "Option A" },
+                { value: "b", src: "img/final-banner-b.png", alt: "Add Banner form for BLACK FRIDAY: Status on, Default banner on, Duration set to the date period 20/11/2026 – 27/11/2026, no search terms added, and Target Link https://doostride.com/black-friday", caption: "Option B" },
+                { value: "c", src: "img/final-banner-c.png", alt: "Add Banner form for BLACK FRIDAY: Status on, Default banner off, Duration set to the date period 20/11/2026 – 27/11/2026, the search term black friday set to Broad Match, and Target Link https://doostride.com/black-friday", caption: "Option C" },
+                { value: "d", src: "img/final-banner-d.png", alt: "Add Banner form for BLACK FRIDAY: Status on, Default banner on, Duration set to the date period 20/11/2026 – 30/11/2026, no search terms added, and Target Link https://doostride.com/black-friday", caption: "Option D" }
+              ], correct: "b" }
             ],
-            explain: "Option C is correct: Broad Match on \"black friday\" also catches close searches like \"black friday sale\" or \"black friday deals\", it's scoped to a Duration instead of running forever, and it isn't marked Default, so it only shows for those searches rather than every single one. Option A marks it as the Default Banner, which ignores search terms entirely and would show the Black Friday banner on every search, not just Black Friday ones. Option B uses Exact Match, so it would only fire on the literal phrase \"black friday\" and miss every close variant."
+            explain: "Option B is correct: as the Default banner, it shows whenever no banner matches the search terms — and since Doostride has no other banner, that means every search — and its date period ends on 27/11/2026, Black Friday itself. Option A is also the Default banner, but it's ongoing, so it would keep showing after Black Friday. Option C ends on the right day, but it isn't the Default banner: it only shows for searches containing \"black friday\", not on every search. Option D is the Default banner with a date period, but it runs until 30/11/2026, three days past Black Friday."
           },
           {
             key: "copy-settings-spanish",
-            title: "6. Copy Settings",
-            question: "With English sorted, Amanda wants the exact same Excluded Results, Synonyms, Redirections and Banners mirrored on the <strong>Spanish</strong> Search Engine — but the Spanish Search Engine already has its own Spanish-language redirection for \"política de privacidad\" that needs to stay untouched.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Choose the right Copy Settings option:",
+            title: "7. Copy Settings",
+            question: "With English sorted, Amanda wants the exact same Synonyms, Redirections and Banners mirrored on the <strong>Spanish</strong> Search Engine — but the Spanish Search Engine already has its own Spanish-language redirection for \"política de privacidad\" that needs to stay untouched.</p><p class=\"theory-lead\" style=\"margin-bottom:16px;\">Choose the right Copy Settings option:",
             fields: [
               { key: "copymode", label: "", type: "choice", layout: "column", options: [
                 "Copy and Add to Existing Settings",
                 "Copy and Replace Existing Settings"
               ], correct: "Copy and Add to Existing Settings" }
             ],
-            explain: "Add to Existing Settings layers the English configuration on top of whatever the Spanish Search Engine already has, so the existing política de privacidad redirection survives untouched. Replace would wipe out the Spanish Search Engine's configuration entirely before applying the copy — including that existing redirection — and, as covered in the lesson, a Replace can't be undone afterward."
+            explain: "Add to Existing Settings layers the English configuration on top of whatever the Spanish Search Engine already has, so the existing política de privacidad redirection survives untouched. Replace would wipe out the Spanish Search Engine's configuration entirely before applying the copy — including that existing redirection — and, as covered in the lesson, a Replace can't be undone afterward. Keep in mind the two Search Engines are in different languages: once copied, English terms like \"return policy\" or \"black friday\" need translating on the Spanish Search Engine, or they may not be recognized there."
           }
         ],
         replySlack: {
@@ -1202,7 +1357,7 @@ const COURSE = {
             "Hey Amanda, hope you're enjoying the break! 🌴",
             "Quick update before you're back: variants are grouping properly now — a couple of the size variants had a typo in group_id, so I swapped in a clean feed and set a group_leader on each product.",
             "Also excluded the whole Kids line, merged \"sneakers\" and \"trainers\" into one synonym set, and set up the redirection for \"return policy\".",
-            "Black Friday banner is live too, and I copied everything over to the Spanish Search Engine — added it on top, so your política de privacidad redirection is still exactly where you left it.",
+            "Black Friday banner is live too, and I copied the synonyms, the redirection and the banner over to the Spanish Search Engine — added them on top, so your política de privacidad redirection is still exactly where you left it. I'm translating the copied terms into Spanish next.",
             "Enjoy the rest of your vacation, see you soon!"
           ],
           times: ["11:02", "11:02", "11:03", "11:04", "11:04"]

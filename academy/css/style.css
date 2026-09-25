@@ -734,6 +734,7 @@ code { background: var(--bg-page); border: 1px solid var(--border); padding: 1px
 .exercise-scenario-split.stacked-media { flex-direction: column; }
 .exercise-scenario-split.stacked-media .exercise-scenario-media { width: 100%; max-width: 520px; }
 .exercise-scenario-split.stacked-media .exercise-scenario-media.image-choice-media { width: 100%; max-width: 100%; }
+.exercise-scenario-split.stacked-media .exercise-scenario-media.wide-media { max-width: 100%; }
 .exercise-scenario-split.stacked-media .exercise-scenario-side { width: 100%; min-width: 0; }
 .exercise-scenario-fields-row { display: flex; gap: 16px; flex-wrap: wrap; }
 .exercise-scenario-fields-row .field-row { flex: 1 1 180px; }

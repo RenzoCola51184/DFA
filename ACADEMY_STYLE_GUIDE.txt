@@ -191,6 +191,16 @@ ONLY layout and images — never the content (verify with a text diff, below).
     headless Chrome at 2x and cropped to the content. Product photos come
     from real sources (e.g. the support article's images), never invented.
     Show only the filters relevant to the point being made.
+  - Use an animated GIF instead of a still image when the point is a
+    sequence of clicks in one screen (e.g. "Copy Settings to…" → pick the
+    Search Engine → Apply → Copy settings mode → Yes, apply; typing and
+    adding search terms). Take the GIF from the support article, crop it
+    to the useful area with ffmpeg (crop + palettegen/paletteuse, keeps the
+    file small), and float it like any figure with the pause/play control:
+    <figure class="lesson-figure lesson-figure-right gif-image" style="...">
+      <img src="img/x.gif" data-base-src="img/x.gif" ... data-action="zoom-image">
+      <canvas class="gif-freeze-canvas"></canvas> + gif-toggle-btn + zoom badge
+    Keep a still image when the point is one state (a form, a result).
   - A new image is created only when the user asks for it or when the text
     already describes that data/screen and has no image for it — never
     invent content for it.
@@ -203,7 +213,12 @@ ONLY layout and images — never the content (verify with a text diff, below).
   the text use `stacked: true` (images full width, question below) instead
   of a `mediaWidth` that leaves an empty strip or overflows the card. A
   scenarioImage shorter than its text column can use `imgClass:
-  "taller-scenario-img"`.
+  "taller-scenario-img"`. A wide screenshot (e.g. a whole Search Layer with
+  several results) uses `stackedMedia: true` + `wideMedia: true`, so it
+  spans the full width above the question instead of shrinking beside it.
+- Data feeds used in exercises: every product of the same group (the
+  parent and its variants) has the same price, sale_price and
+  availability.
 - VERIFY:
   - `node -c` the data file.
   - Text diff: strip tags plus `alt=` / `style=` from the old and new file;
@@ -456,6 +471,13 @@ rules below.
   not memory. E.g. theory uses "boots" with Relevance 4 vs 2 × 1.5; the quiz
   uses "sandals" with 6 vs 3 × 1.5. The `explain` walks through the maths.
 
+- NO HINTS IN THE ASK: the intro message (and the exercise's own task
+  lists) describe each PROBLEM and the desired outcome only — never the
+  feature that solves it ("there's nothing in the search pointing people
+  to the campaign page", not "we don't have a banner"). The final exercise
+  then has a "Picking the right feature for each problem" step (a select
+  per problem, options = the section's features in alphabetical order)
+  before the per-feature steps, as in Sections 2 and 3.
 - FINAL EXERCISE: one phase per lesson topic, in the same order as the
   intro's complaint list, using only the established field types (select,
   choice, text with freeform:true, image-select, multi-choice) — never
