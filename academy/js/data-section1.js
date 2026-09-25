@@ -273,29 +273,23 @@ const COURSE = {
         blocks: [
           {
             html: `
-              <figure class="lesson-figure lesson-figure-right" style="width: 340px; max-width: 55%;">
-                  <img src="img/install-home-create-store.png" alt="Doofinder Home section with the Welcome to Doofinder screen, explaining what a Store is and why to create one, and the Create store button" data-action="zoom-image">
-                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
-                </figure>
-              <p>To create the account's first Store, go to the <strong>Home</strong> section of the account and click <strong>Create store</strong>. This opens the guided flow.</p>
-
               <h3>The Four Steps</h3>
-              <table class="theory-table">
-                <thead><tr><th>Step</th><th>What it involves</th></tr></thead>
-                <tbody>
-                  <tr><td><strong>1. Create a Store</strong></td><td>Provide the site's full URL, its industry, and the platform it runs on (custom sites are detected as "Other")</td></tr>
-                  <tr><td><strong>2. Create a Search Engine</strong></td><td>Configure the data type (Product or Other data), the indexing method (File or Feed URL, or API), the results language, and — for product data — the currency</td></tr>
-                  <tr><td><strong>3. Set the CSS selector manually</strong></td><td>This identifies which element on the page needs to be clicked for the Search Layer to appear</td></tr>
-                  <tr><td><strong>4. Connect the store with an installation script</strong></td><td>Once the Store and Search Engine exist, add the script provided into the website's code to finish the connection</td></tr>
-                </tbody>
-              </table>
-              <div class="install-step-carousel">
-                  <img src="img/install-step1-create-store-landing.png" alt="Doofinder home screen with a Create store button, next to an explanation of what a Store is and why to create one" data-action="zoom-image" class="is-active">
-                  <img src="img/install-step1-create-store-form.png" alt="Create Store form asking for the site's URL, the platform it runs on, and its industry" data-action="zoom-image">
-                  <img src="img/install-step2-create-search-engine.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
-                  <img src="img/install-step3-css-selector.png" alt="Tell us where your search bar is screen, with a CSS selector field that accepts a format like #search-box, input[name='q'], .input-search, and a Create button" data-action="zoom-image">
-                  <img src="img/install-step4-connect-store.png" alt="Store connection screen showing the installation script to copy into the website's code, with a stepper marking Store information, Search Engine creation and Search bar location as already complete" data-action="zoom-image">
-                  <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
+              <div class="install-steps">
+                <div class="install-step-carousel">
+                    <img src="img/install-step1-create-store-landing.png" alt="Doofinder home screen with a Create store button, next to an explanation of what a Store is and why to create one" data-action="zoom-image" class="is-active">
+                    <img src="img/install-step1-create-store-form.png" alt="Create Store form asking for the site's URL, the platform it runs on, and its industry" data-action="zoom-image">
+                    <img src="img/install-step2-create-search-engine.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
+                    <img src="img/install-step3-css-selector.png" alt="Tell us where your search bar is screen, with a CSS selector field that accepts a format like #search-box, input[name='q'], .input-search, and a Create button" data-action="zoom-image">
+                    <img src="img/install-step4-connect-store.png" alt="Store connection screen showing the installation script to copy into the website's code, with a stepper marking Store information, Search Engine creation and Search bar location as already complete" data-action="zoom-image">
+                    <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
+                </div>
+                <div class="install-step-captions">
+                  <div class="install-step-caption is-active"><span class="install-step-caption-label">Getting started</span><strong>Click Create store</strong><p>To create the account's first Store, go to the <strong>Home</strong> section of the account and click <strong>Create store</strong>. This opens the guided flow.</p></div>
+                  <div class="install-step-caption"><span class="install-step-caption-label">Step 1 of 4</span><strong>Create a Store</strong><p>Provide the site's full URL, its industry, and the platform it runs on (custom sites are detected as "Other").</p></div>
+                  <div class="install-step-caption"><span class="install-step-caption-label">Step 2 of 4</span><strong>Create a Search Engine</strong><p>Configure the data type (Product or Other data), the indexing method (File or Feed URL, or API), the results language, and — for product data — the currency.</p></div>
+                  <div class="install-step-caption"><span class="install-step-caption-label">Step 3 of 4</span><strong>Set the CSS selector manually</strong><p>This identifies which element on the page needs to be clicked for the Search Layer to appear.</p></div>
+                  <div class="install-step-caption"><span class="install-step-caption-label">Step 4 of 4</span><strong>Connect the store with an installation script</strong><p>Once the Store and Search Engine exist, add the script provided into the website's code to finish the connection.</p></div>
+                </div>
               </div>
 
               <h3>The Installation Script</h3>

@@ -961,8 +961,12 @@ document.addEventListener("click", e => {
     const carousel = target.closest(".install-step-carousel");
     const imgs = [...carousel.querySelectorAll("img")];
     const activeIndex = imgs.findIndex(img => img.classList.contains("is-active"));
+    const nextIndex = (activeIndex + 1) % imgs.length;
     imgs[activeIndex].classList.remove("is-active");
-    imgs[(activeIndex + 1) % imgs.length].classList.add("is-active");
+    imgs[nextIndex].classList.add("is-active");
+    // Captions beside the carousel (if any) follow the active slide
+    const captions = carousel.closest(".install-steps")?.querySelectorAll(".install-step-caption") || [];
+    captions.forEach((cap, i) => cap.classList.toggle("is-active", i === nextIndex));
   } else if (action === "toggle-gif") {
     toggleGifPlayback(target);
   } else if (action === "zoom-video") {

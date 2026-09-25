@@ -393,6 +393,24 @@ code { background: var(--bg-page); border: 1px solid var(--border); padding: 1px
 }
 .install-step-carousel img.is-active { display: block; }
 .install-step-carousel img:hover { filter: brightness(1.08); }
+.install-steps { display: flex; gap: 24px; align-items: center; margin: 10px 0 16px; }
+.install-steps .install-step-carousel { flex: 0 0 500px; height: 400px; margin-top: 0; }
+.install-step-captions { flex: 1; min-width: 0; }
+.install-step-caption { display: none; text-align: left; }
+.install-step-caption.is-active { display: block; }
+.install-step-caption-label {
+  display: block; margin-bottom: 6px;
+  color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+}
+.install-step-caption > strong { display: block; color: var(--text-primary); font-size: 18px; }
+.install-step-caption p { margin: 8px 0 0; text-align: left; }
+@media (max-width: 1500px) {
+  .install-steps .install-step-carousel { flex-basis: 420px; height: 340px; }
+}
+@media (max-width: 1100px) {
+  .install-steps { flex-direction: column; align-items: stretch; }
+  .install-steps .install-step-carousel { flex: none; width: 100%; }
+}
 .carousel-next-btn {
   position: absolute; right: 8px; bottom: 8px; z-index: 1;
   padding: 5px 12px; border: 1px solid rgba(255, 255, 255, .1);
