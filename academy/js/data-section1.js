@@ -307,17 +307,20 @@ const COURSE = {
             heading: "Create a Search Engine",
             pageBreak: true,
             html: `
-              <figure class="lesson-figure lesson-figure-left" style="width: 340px; max-width: 55%;">
-                  <img src="img/create-search-engine-es-button.png" alt="Search Engine selector dropdown with the Create Search Engine button highlighted" data-action="zoom-image">
-                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
-                </figure>
               <p>A Search Engine is a configured instance that stores and indexes a specific type of data — once a Store has one, it's common to end up needing several more.</p>
+              <div class="install-steps">
+                <div class="install-step-carousel">
+                  <img src="img/create-search-engine-es-dropdown.png" alt="SE selector dropdown open, listing the current Search Engine with a Create Search Engine button below it" data-action="zoom-image" class="is-active">
+                  <img src="img/install-step2-create-search-engine.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
+                  <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
+                </div>
+                <div class="install-step-captions">
+                  <div class="install-step-caption is-active"><span class="install-step-caption-label">Step 1 of 2</span><strong>Click Create Search Engine</strong><p>Open the <strong>SE</strong> (Search Engine) selector at the top of the Admin Panel and click <strong>Create Search Engine</strong>.</p></div>
+                  <div class="install-step-caption"><span class="install-step-caption-label">Step 2 of 2</span><strong>Configure the Search Engine</strong><p>Choose the data type (Product or Other data), the indexing method (File or Feed URL, or API), the results language, and — for product data — the currency.</p></div>
+                </div>
+              </div>
 
               <h3>Why Several Search Engines</h3>
-              <figure class="lesson-figure lesson-figure-right" style="width: 320px; max-width: 55%;">
-                  <img src="img/install-step2-create-search-engine.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
-                  <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
-                </figure>
               <p>That's usually because ecommerces and websites often operate across different markets, each with its own language and currency. A store might sell to both an English-speaking and a Spanish-speaking market at the same time, or price the same products in different currencies depending on where they're sold.</p>
                   <p>Products can even have different URLs between storefronts, since the same domain can serve more than one storefront configuration — each combination of language, currency and product links needs its own data feed, and therefore its own Search Engine, each getting its own Hash ID.</p>
                   <p>For example, a store selling in both English and Spanish would typically create one Search Engine per language, each indexing its own translated catalogue. Splitting them this way also splits their statistics, since Doofinder reports them separately per Search Engine — useful for comparing how each one is performing on its own.</p>
