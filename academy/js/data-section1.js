@@ -310,12 +310,12 @@ const COURSE = {
               <p>A Search Engine is a configured instance that stores and indexes a specific type of data — once a Store has one, it's common to end up needing several more.</p>
               <div class="install-steps">
                 <div class="install-step-carousel">
-                  <img src="img/create-search-engine-es-dropdown.png" alt="SE selector dropdown open, listing the current Search Engine with a Create Search Engine button below it" data-action="zoom-image" class="is-active">
+                  <img src="img/create-search-engine-es-button.png" alt="Store and SE selectors at the top of the Admin Panel, with the SE dropdown open showing the current Search Engine and a Create Search Engine button" data-action="zoom-image" class="is-active">
                   <img src="img/install-step2-create-search-engine.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
                   <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
                 </div>
                 <div class="install-step-captions">
-                  <div class="install-step-caption is-active"><span class="install-step-caption-label">Step 1 of 2</span><strong>Click Create Search Engine</strong><p>Open the <strong>SE</strong> (Search Engine) selector at the top of the Admin Panel and click <strong>Create Search Engine</strong>.</p></div>
+                  <div class="install-step-caption is-active"><span class="install-step-caption-label">Step 1 of 2</span><strong>Click Create Search Engine</strong><p>Open the <strong>SE</strong> (Search Engine) selector next to the Store selector and click <strong>Create Search Engine</strong>.</p></div>
                   <div class="install-step-caption"><span class="install-step-caption-label">Step 2 of 2</span><strong>Configure the Search Engine</strong><p>Choose the data type (Product or Other data), the indexing method (File or Feed URL, or API), the results language, and — for product data — the currency.</p></div>
                 </div>
               </div>

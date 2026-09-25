@@ -151,8 +151,9 @@ RESTRUCTURING AN EXISTING LESSON — NEVER REMOVE CONTENT
     paragraphs, move that text into them — don't keep it twice.
   · Don't float it — the wrapper is a flex row (carousel 500px, 420px under
     1500px wide) and stacks the caption under the image below 1300px.
-  · Crop very wide/short screenshots (e.g. a dropdown strip) to the relevant
-    part, otherwise they render tiny inside the 500×400 box.
+  · Never crop away UI context from a screenshot (e.g. the Store selector
+    next to the SE dropdown) just to make it render bigger — wide/short
+    shots stay whole; ask before trimming anything but empty background.
   · No JS needed: the existing `carousel-next` handler syncs the captions.
     After editing style.css/app.js, bump their `?v=` in every *.html or the
     browser shows the cached old CSS (all captions stacked, unstyled).
