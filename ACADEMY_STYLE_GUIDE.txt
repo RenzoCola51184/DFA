@@ -108,7 +108,7 @@ RESTRUCTURING AN EXISTING LESSON — NEVER REMOVE CONTENT
         </svg>
       </p>
     </figure>
-  The default width is 320px — override with an inline `style="width: NNNpx; max-width: 55%;"`
+  The default width is 460px — override with an inline `style="width: NNNpx; max-width: 60%;"`
   case by case so the image's height roughly matches the height of the text
   it floats beside (neither the text nor the image should trail far below
   the other — check in the browser and adjust the width up or down).
@@ -123,7 +123,7 @@ RESTRUCTURING AN EXISTING LESSON — NEVER REMOVE CONTENT
       <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
     </div>
   Add `float-left` to the wrapper class when it needs to sit beside running
-  text (`.install-step-carousel.float-left` is fixed at 500px/400px tall).
+  text (`.install-step-carousel.float-left` is fixed at 720px wide (max 60%), 580px tall).
 - CAROUSEL WITH STEP CAPTIONS (preferred for a guided flow — reference:
   Module 1 Section 1, "Installing Doofinder" → The Four Steps, and its
   "Create a Search Engine" sub-page). A caption band INSIDE the carousel
@@ -149,17 +149,42 @@ RESTRUCTURING AN EXISTING LESSON — NEVER REMOVE CONTENT
   · Title = the action in a few words ("Click Create Search Engine");
     body = what the screen asks for. When the captions replace a table or
     paragraphs, move that text into them — don't keep it twice.
-  · Don't float it and don't put text beside it — `.has-captions` is a
-    full-width block, 620px tall (480px under 1300px wide), on its own row.
-    Tried and rejected: captions in a column beside the carousel, and a
-    synced step list beside it.
+  · Two variants — pick by how much text the captions carry:
+    - BAND (no longer used — every step carousel uses SIDE): captions inside the
+      frame, above the image, as in the HTML above. Full-width block, 820px
+      tall (600px under 1300px wide). For short captions / wide shots.
+    - SIDE (reference: The Four Steps, "Create a Search Engine", and
+      "Indices and the Data Feed" — the ONLY layout to use): a smaller carousel with the
+      captions in a column beside it. Wrap both in `.install-steps` and put
+      `.install-step-captions` AFTER the carousel, not inside it; the
+      carousel has no `has-captions` class:
+        <div class="install-steps">
+          <div class="install-step-carousel"> <img…> … <button…>Next step →</button> </div>
+          <div class="install-step-captions"> <div class="install-step-caption is-active">…</div> … </div>
+        </div>
+      ALL captions are visible at once; the one for the current slide
+      lights up (orange left border + tint), the others are dimmed. Give
+      each caption `data-action="carousel-goto"` so clicking it jumps the
+      carousel to that slide. The carousel is 560px wide and stretches to
+      the height of the caption column (min 420px); below 1500px wide the
+      captions stack under a full-width, 560px-tall carousel.
+      ALWAYS use this side layout for step carousels, even with wide
+      screenshots — never a full-width carousel with the captions below
+      (tried and rejected). When the steps follow a floated figure, put the
+      <h3> plus a one-line intro beside the figure — `.install-steps`
+      clears the float itself.
+    Pad every screenshot of one carousel onto the SAME canvas size
+    (background colour taken from the screenshot's edge, never cropping),
+    so all slides render at the same scale — otherwise a narrow screenshot
+    gets blown up and looks bigger than the others.
+    Neither variant floats.
   · Never crop away UI context from a screenshot (e.g. the Store selector
     next to the SE dropdown) just to make it render bigger — wide/short
     shots stay whole; ask before trimming anything but empty background.
   · To show a UI element the caption names (an icon, a button), crop it
     tight from the slide's own screenshot, upscale it 2x, and put it inline:
     <img class="inline-ui-img" src="img/icon-....png" alt="Search icon">
-    (1.8em tall; works anywhere in theory text, not only in captions).
+    (2.1em tall; works anywhere in theory text, not only in captions).
     Reference: every caption of The Four Steps and "Create a Search Engine"
     (Module 1 Section 1). Each caption ends with the button that moves the
     flow on ("then click [Continue]"), shown as its inline image; icons and
@@ -187,9 +212,9 @@ This lesson's page structure, text/image arrangement and image sizes are the
 approved model for every lesson and exercise. Relaying out a page changes
 ONLY layout and images — never the content (verify with a text diff, below).
 - FIGURES: every image is a floated
-    <figure class="lesson-figure lesson-figure-left|right" style="width: NNNpx; max-width: 55%;">
+    <figure class="lesson-figure lesson-figure-left|right" style="width: NNNpx; max-width: 60%;">
   with the zoom badge, placed right BEFORE the paragraph(s) it goes with.
-  Always add `max-width: 55%` so on narrower screens the text beside it never
+  Always add `max-width: 60%` so on narrower screens the text beside it never
   shrinks to a 2-3 word column. Sides alternate left/right.
 - SIZES: tune the width so the image's rendered height ≈ the height of the
   text beside it. Rough guide: wide/short images (feed tables) 440-500px;
@@ -212,7 +237,7 @@ ONLY layout and images — never the content (verify with a text diff, below).
      sub-topic, next to a longer run of text.
   2. Remove a `clear` that isn't needed (never leave two images side by
      side).
-  3. Adjust the figure width (keeping `max-width: 55%`) without making it
+  3. Adjust the figure width (keeping `max-width: 60%`) without making it
      unreadable.
   4. Crop the image's empty margins so it's shorter.
   5. Only then, add or extend ONE sentence that is fully consistent with
@@ -255,7 +280,7 @@ ONLY layout and images — never the content (verify with a text diff, below).
   layout flags (smallMedia / mediumMedia / mediaRight) are tuned; related
   cards (e.g. the three feed previews) must be the same size so none stands
   out and hints at the answer.
-  With the 1000px cap, image-choice steps whose thumbnails don't fit beside
+  With the 1200px cap, image-choice steps whose thumbnails don't fit beside
   the text use `stacked: true` (images full width, question below) instead
   of a `mediaWidth` that leaves an empty strip or overflows the card. A
   scenarioImage shorter than its text column can use `imgClass:
@@ -271,7 +296,7 @@ ONLY layout and images — never the content (verify with a text diff, below).
     the visible text must be identical.
   - Screenshot every lesson page (every pageBreak sub-page) and every
     exercise step touched, at window widths 1920, 1400 AND 1200, and fix any
-    gap. Course pages are capped at 1000px wide (`.main-inner:has(>
+    gap. Course pages are capped at 1200px wide (`.main-inner:has(>
     .page-head)` in style.css) so a fixed-px image keeps matching its text
     on wide screens; if a gap remains, first move the figure, then add a
     sentence consistent with the content (e.g. describing what the image
@@ -586,7 +611,7 @@ CHECKLIST TO RUN AGAINST ANY OTHER SECTION
 [ ] No gaps beside images at 1920, 1400 and 1200 wide (section 2b, "Filling
     a gap"); any sentence added to fill one is consistent with the lesson.
 [ ] Layout follows section 2b ("Grouping Product Variants" reference):
-    `max-width: 55%` on every figure, no clear before an <h3> that leaves a
+    `max-width: 60%` on every figure, no clear before an <h3> that leaves a
     gap, callouts beside images when that fills space, images cropped tight
     and rendered at 2x, checked at 1400 and 1200 wide.
 [ ] Image widths are tuned so image height ≈ beside-text height (no big

@@ -948,6 +948,14 @@ function renderMain() {
 }
 
 /* ---------- Event delegation ---------- */
+/* Shows slide `index` of an install-step carousel; its step captions (inside
+   the carousel, or beside it in .install-steps) follow the active slide */
+function showCarouselSlide(carousel, index) {
+  carousel.querySelectorAll(":scope > img").forEach((img, i) => img.classList.toggle("is-active", i === index));
+  const captions = (carousel.closest(".install-steps") || carousel).querySelectorAll(".install-step-caption");
+  captions.forEach((cap, i) => cap.classList.toggle("is-active", i === index));
+}
+
 document.addEventListener("click", e => {
   const target = e.target.closest("[data-action]");
   if (!target) {
@@ -961,12 +969,12 @@ document.addEventListener("click", e => {
     const carousel = target.closest(".install-step-carousel");
     const imgs = [...carousel.querySelectorAll(":scope > img")];
     const activeIndex = imgs.findIndex(img => img.classList.contains("is-active"));
-    const nextIndex = (activeIndex + 1) % imgs.length;
-    imgs[activeIndex].classList.remove("is-active");
-    imgs[nextIndex].classList.add("is-active");
-    // Step captions inside the carousel (if any) follow the active slide
-    const captions = carousel.querySelectorAll(".install-step-caption");
-    captions.forEach((cap, i) => cap.classList.toggle("is-active", i === nextIndex));
+    showCarouselSlide(carousel, (activeIndex + 1) % imgs.length);
+  } else if (action === "carousel-goto") {
+    // Clicking a caption in the side column jumps the carousel to that slide
+    const wrap = target.closest(".install-steps");
+    const captions = [...wrap.querySelectorAll(".install-step-caption")];
+    showCarouselSlide(wrap.querySelector(".install-step-carousel"), captions.indexOf(target));
   } else if (action === "toggle-gif") {
     toggleGifPlayback(target);
   } else if (action === "zoom-video") {

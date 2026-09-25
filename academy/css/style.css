@@ -165,7 +165,7 @@ html, body {
 .main-inner { max-width: 1200px; margin: 0 auto; }
 /* Course lessons, quizzes and exercises: cap the width so floated images keep
    matching the height of the text beside them on wide screens */
-.main-inner:has(> .page-head) { max-width: 1000px; }
+.main-inner:has(> .page-head) { max-width: 1200px; }
 .main-inner p, .main-inner li { text-align: justify; }
 
 .doclinks {
@@ -340,7 +340,7 @@ code { background: var(--bg-page); border: 1px solid var(--border); padding: 1px
 /* Editorial figures — images that sit inside the flowing text, magazine-style,
    instead of a two-column split (which left empty space when text ran short). */
 .lesson-figure {
-  width: 320px; max-width: 100%;
+  width: 460px; max-width: 100%;
   margin: 4px 0 16px;
   position: relative;
 }
@@ -377,11 +377,11 @@ code { background: var(--bg-page); border: 1px solid var(--border); padding: 1px
 }
 
 .install-step-carousel {
-  position: relative; margin-top: 10px; max-width: 600px; height: 400px;
+  position: relative; margin-top: 10px; max-width: 860px; height: 580px;
   background: #fff;
   border-radius: 8px; border: 1px solid var(--border);
 }
-.install-step-carousel.float-left { float: left; width: 500px; margin: 0 24px 14px 0; }
+.install-step-carousel.float-left { float: left; width: 720px; max-width: 60%; margin: 0 24px 14px 0; }
 @media (max-width: 720px) {
   .install-step-carousel.float-left { float: none; width: 100%; margin: 0 0 16px; }
 }
@@ -393,10 +393,28 @@ code { background: var(--bg-page); border: 1px solid var(--border); padding: 1px
 }
 .install-step-carousel img.is-active { display: block; }
 .install-step-carousel img:hover { filter: brightness(1.08); }
+/* Carousel with the step captions in a column beside it (see style guide, section 2) */
+.install-steps { display: flex; gap: 28px; align-items: stretch; margin: 10px 0 16px; clear: both; }
+.install-steps .install-step-carousel { flex: 0 0 560px; height: auto; min-height: 420px; margin: 0; }
+.install-steps .install-step-captions { flex: 1; min-width: 0; padding: 0; background: none; border: 0; }
+/* Side variant: every caption is visible; the one for the current slide lights up */
+.install-steps .install-step-captions { display: flex; flex-direction: column; gap: 6px; }
+.install-steps .install-step-caption {
+  display: block; padding: 10px 14px; border-left: 3px solid transparent; border-radius: 0 6px 6px 0;
+  opacity: .45; cursor: pointer; transition: opacity .2s, background .2s, border-color .2s;
+}
+.install-steps .install-step-caption:hover { opacity: .75; }
+.install-steps .install-step-caption.is-active { opacity: 1; border-left-color: var(--accent); background: var(--accent-soft); }
+.install-steps .install-step-caption > strong { font-size: 16px; }
+.install-steps .install-step-caption p { font-size: 14px; line-height: 1.55; margin-top: 4px; }
+@media (max-width: 1500px) {
+  .install-steps { flex-direction: column; align-items: stretch; }
+  .install-steps .install-step-carousel { flex: none; width: 100%; max-width: none; height: 560px; }
+}
 /* Carousel with a step-caption band on top (see style guide, section 2) */
 .install-step-carousel.has-captions {
   display: flex; flex-direction: column; overflow: hidden;
-  max-width: none; width: 100%; height: 620px; margin: 10px 0 16px;
+  max-width: none; width: 100%; height: 820px; margin: 10px 0 16px;
 }
 .install-step-carousel.has-captions img { flex: 1; min-height: 0; height: auto; border-radius: 0; }
 .install-step-captions {
@@ -412,11 +430,11 @@ code { background: var(--bg-page); border: 1px solid var(--border); padding: 1px
 .install-step-caption > strong { display: block; color: var(--text-primary); font-size: 16px; }
 .install-step-caption p { margin: 4px 0 0; font-size: 14px; line-height: 1.5; text-align: left; }
 @media (max-width: 1300px) {
-  .install-step-carousel.has-captions { height: 480px; }
+  .install-step-carousel.has-captions { height: 600px; }
 }
 /* Small cropped UI element (icon, button) shown inline in running text */
 .inline-ui-img,
-.install-step-carousel .install-step-caption img.inline-ui-img { display: inline-block; height: 1.8em; width: auto; vertical-align: middle; border-radius: 4px; }
+.install-step-carousel .install-step-caption img.inline-ui-img { display: inline-block; height: 2.1em; width: auto; vertical-align: middle; border-radius: 4px; }
 .carousel-next-btn {
   position: absolute; right: 8px; bottom: 8px; z-index: 1;
   padding: 5px 12px; border: 1px solid rgba(255, 255, 255, .1);
@@ -428,7 +446,7 @@ code { background: var(--bg-page); border: 1px solid var(--border); padding: 1px
 .carousel-next-btn:hover { background: rgba(10, 20, 40, .92); }
 
 .gif-preview { display: flex; align-items: flex-start; gap: 20px; margin-top: 10px; flex-wrap: wrap; }
-.gif-preview .gif-image { flex: 3 1 600px; max-width: 800px; position: relative; }
+.gif-preview .gif-image { flex: 3 1 860px; max-width: 1150px; position: relative; }
 .gif-preview .gif-image img[data-action="zoom-image"] {
   display: block;
   width: 100%;
@@ -492,7 +510,7 @@ code { background: var(--bg-page); border: 1px solid var(--border); padding: 1px
   margin: 18px 0; padding: 26px 20px;
   background: var(--bg-page); border: 1px solid var(--border); border-radius: 10px;
 }
-.theory-diagram svg { width: 320px; max-width: 100%; height: auto; display: block; margin: 0; cursor: zoom-in; transition: filter .15s; }
+.theory-diagram svg { width: 460px; max-width: 100%; height: auto; display: block; margin: 0; cursor: zoom-in; transition: filter .15s; }
 .theory-diagram svg:hover { filter: brightness(1.12); }
 
 .diagram-split { display: flex; gap: 24px; align-items: flex-start; margin: 18px 0; flex-wrap: wrap; }
@@ -736,7 +754,7 @@ code { background: var(--bg-page); border: 1px solid var(--border); padding: 1px
 }
 
 .exercise-scenario-split { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; margin-bottom: 4px; clear: both; }
-.exercise-scenario-media { width: 620px; flex-shrink: 0; position: relative; }
+.exercise-scenario-media { width: 890px; flex-shrink: 0; position: relative; }
 .exercise-scenario-img {
   display: block; width: 100%; border-radius: 8px; border: 1px solid var(--border); cursor: zoom-in;
 }
@@ -745,18 +763,18 @@ code { background: var(--bg-page); border: 1px solid var(--border); padding: 1px
 }
 .exercise-scenario-side { flex: 1 1 280px; min-width: 280px; }
 .exercise-scenario-text { margin: 0 0 14px; font-size: 15.5px; color: var(--text-secondary); line-height: 1.75; }
-.exercise-scenario-media.image-choice-media { width: 800px; }
-.exercise-scenario-media.video-media { width: 620px; }
+.exercise-scenario-media.image-choice-media { width: 1150px; }
+.exercise-scenario-media.video-media { width: 890px; }
 .exercise-scenario-split:has(.video-media) .exercise-scenario-side { min-width: 240px; }
-.exercise-scenario-media.small-media { width: 300px; }
+.exercise-scenario-media.small-media { width: 430px; }
 .exercise-scenario-split:has(.small-media) .exercise-scenario-side { min-width: 260px; }
-.exercise-scenario-media.medium-media { width: 420px; }
+.exercise-scenario-media.medium-media { width: 600px; }
 .exercise-scenario-video { position: relative; width: 100%; height: 0; padding-bottom: 56.25%; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
 .exercise-scenario-video iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 .video-enlarge-hint { display: inline-block; margin-top: 8px; font-size: 12px; color: var(--text-secondary); cursor: zoom-in; font-style: italic; }
 .video-enlarge-hint:hover { color: var(--text-primary); }
 .exercise-scenario-split.stacked-media { flex-direction: column; }
-.exercise-scenario-split.stacked-media .exercise-scenario-media { width: 100%; max-width: 520px; }
+.exercise-scenario-split.stacked-media .exercise-scenario-media { width: 100%; max-width: 740px; }
 .exercise-scenario-split.stacked-media .exercise-scenario-media.image-choice-media { width: 100%; max-width: 100%; }
 .exercise-scenario-split.stacked-media .exercise-scenario-media.wide-media { max-width: 100%; }
 .exercise-scenario-split.stacked-media .exercise-scenario-side { width: 100%; min-width: 0; }

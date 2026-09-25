@@ -99,13 +99,13 @@ const COURSE = {
           {
             html: `
               <h3>Every Variant Is Indexed</h3>
-              <figure class="lesson-figure lesson-figure-left" style="width: 440px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 640px; max-width: 60%;">
                   <img src="img/grouping-feed-variants.png" alt="Data feed with the columns id, title, color and size, and two rows: 1001, Nike Sportswear Phoenix Hoodie, Baby pink, S; and 1002, Nike Sportswear Phoenix Hoodie, Mint green, M" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
               <p>For every variant to be searchable, each one needs to be indexed — so they all need to be loaded into the index. In the data feed, the two variants of the hoodie look like this.</p>
               <div style="clear: both;"></div>
-              <figure class="lesson-figure lesson-figure-right" style="width: 300px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 430px; max-width: 60%;">
                   <img src="img/grouping-layer-ungrouped.png" alt="Search Layer with the search Nike Sportswear Phoenix Hoodie: 2 results found, one Nike Sportswear Phoenix Hoodie in S / Baby pink and one in M / Mint green, both at 68,00 €, with Categories, Brands and Price filters on the left" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -113,13 +113,13 @@ const COURSE = {
               <p>The solution is to show only one variant in the Search Layer, and then use a filter to choose the variant wanted. This lesson explains how to group the variants — applying filters in the Search Layer is covered later in the course.</p>
 
               <h3>The group_id Field</h3>
-              <figure class="lesson-figure lesson-figure-right" style="width: 460px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 660px; max-width: 60%;">
                   <img src="img/grouping-feed-group-id.png" alt="Data feed with the columns id, title, color, size and group_id: 1001, Nike Sportswear Phoenix Hoodie, Baby pink, S, H100; 1002, Nike Sportswear Phoenix Hoodie, Mint green, M, H100; and 1003, Nike Club Fleece Joggers, Black, M, J200" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
               <p>To group the variants, a field called <code>group_id</code> needs to be indexed: products with the same <code>group_id</code> can be grouped under the same group.</p>
               <div style="clear: both;"></div>
-              <figure class="lesson-figure lesson-figure-left" style="width: 280px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 410px; max-width: 60%;">
                   <img src="img/grouping-layer-grouped.png" alt="Search Layer with the search Nike Sportswear Phoenix Hoodie: 1 result found, the Nike Sportswear Phoenix Hoodie in S / Baby pink at 68,00 €, with only the Color (Baby pink, Mint green) and Size (S, M) filters on the left" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -127,7 +127,7 @@ const COURSE = {
               <p>With the two hoodies grouped, the same search for "Nike Sportswear Phoenix Hoodie" shows a single result, and both colors and sizes are available as filters to choose the variant wanted. The Search Layer shows 1 result found, with Baby pink and Mint green under Color, and S and M under Size.</p>
 
               <h3>Group Variants As a Single Item</h3>
-              <figure class="lesson-figure lesson-figure-right" style="width: 520px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 740px; max-width: 60%;">
                   <img src="img/grouping-variants-toggle.png" alt="Indices Configuration section with the 'Group variants as a single item' toggle switched on, the 'Automatic Indexing' toggle switched off, and a Save button" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -150,7 +150,7 @@ const COURSE = {
               </table>
 
               <h3>The group_leader Field</h3>
-              <figure class="lesson-figure lesson-figure-left" style="width: 500px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 720px; max-width: 60%;">
                   <img src="img/grouping-feed-group-leader.png" alt="Data feed with the columns id, title, color, size, group_id and group_leader: 1001, Nike Sportswear Phoenix Hoodie, Baby pink, S, H100, false; and 1002, Nike Sportswear Phoenix Hoodie, Mint green, M, H100, true" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -165,7 +165,7 @@ const COURSE = {
                 </tbody>
               </table>
               <p class="theory-callout"><code>group_leader</code> only decides between variants with the same score: a variant with more score for the query is still the one shown.</p>
-              <figure class="lesson-figure lesson-figure-right" style="width: 500px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 720px; max-width: 60%;">
                   <img src="img/grouping-feed-group-leader-parent.png" alt="Data feed with the columns id, title, color, size, group_id and group_leader: 1000, Nike Sportswear Phoenix Hoodie, no color, no size, H100, true; 1001, Nike Sportswear Phoenix Hoodie, Baby pink, S, H100, false; and 1002, Nike Sportswear Phoenix Hoodie, Mint green, M, H100, false" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -316,26 +316,26 @@ const COURSE = {
               <p>Since a Search Engine feeds every <strong>Doofinder</strong> product, excluded products don't appear in any of them — the Search Layer, Recommendations, Quiz Maker, and so on.</p>
 
               <h3>An Example</h3>
-              <figure class="lesson-figure lesson-figure-left" style="width: 440px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 640px; max-width: 60%;">
                   <img src="img/excluded-feed-sunglasses.png" alt="Data feed with the columns id, title, brand and price: 3001, Ray-Ban Unisex Sunglasses, Ray-Ban, 124.00; 3002, Ray-Ban Andy Sunglasses, Ray-Ban, 119.00; and 3003, Gucci GG Round Acetate Sunglasses, Gucci, 195.00" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
               <p>Take a data feed with these three sunglasses: two Ray-Ban models and one Gucci model. Each row is a product, with its <code>id</code>, <code>title</code>, <code>brand</code> and <code>price</code>, and all three are loaded into the index.</p>
               <div style="clear: both;"></div>
-              <figure class="lesson-figure lesson-figure-right" style="width: 380px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 550px; max-width: 60%;">
                   <img src="img/excluded-layer-before.png" alt="Search Layer with the search sunglasses: 3 results found — Ray-Ban Unisex Sunglasses at 124,00 €, Ray-Ban Andy Sunglasses at 119,00 € and Gucci GG Round Acetate Sunglasses at 195,00 € — with a Brands filter listing Ray-Ban (2) and Gucci (1)" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
               <p>Searching for "sunglasses" in the Search Layer, all three show up — each one with its image, title and price — and the Brands filter counts two Ray-Ban products and one Gucci product.</p>
               <p>Now, the <strong>Gucci GG Round Acetate Sunglasses</strong> shouldn't show up anymore, but the product stays in the data feed. Excluded Results makes that possible without touching the feed at all.</p>
               <div style="clear: both;"></div>
-              <figure class="lesson-figure lesson-figure-left" style="width: 360px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 520px; max-width: 60%;">
                   <img src="img/excluded-admin-individual-item.png" alt="Excluded Results screen in the Admin Panel with the Gucci GG Round Acetate Sunglasses listed under Individual items, an Add results link and a Save button" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
               <p>In the Admin Panel, the product is added to <strong>Excluded Results</strong> as an individual item — clicking "+ Add results" → "Individual items", picking the product and clicking "Add item" — and the change is saved. More than one product can be picked at a time, if several need to be excluded.</p>
               <div style="clear: both;"></div>
-              <figure class="lesson-figure lesson-figure-right" style="width: 380px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 550px; max-width: 60%;">
                   <img src="img/excluded-layer-after.png" alt="Search Layer with the same search sunglasses: 2 results found — Ray-Ban Unisex Sunglasses at 124,00 € and Ray-Ban Andy Sunglasses at 119,00 € — with a Brands filter listing only Ray-Ban (2)" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -461,7 +461,7 @@ const COURSE = {
           {
             html: `
               <h3>The Problem</h3>
-              <figure class="lesson-figure lesson-figure-right" style="width: 190px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 280px; max-width: 60%;">
                   <img src="img/synonyms-layer-before.png" alt="Search Layer with the search training: 0 results found and a No results found message" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -471,14 +471,14 @@ const COURSE = {
               <p><strong>Synonyms</strong> is a feature that helps fix this. It associates an indexed term with another term, so that the other term gets indexed too.</p>
               <p>So, for the <strong>Sport Shoes</strong> to also be found with the query "training shoes", a synonym can be created between the two terms "sport" and "training".</p>
               <div style="clear: both;"></div>
-              <figure class="lesson-figure lesson-figure-left" style="width: 330px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 480px; max-width: 60%;">
                   <img src="img/synonyms-admin-set.png" alt="Add synonym dialog in the Admin Panel: Status toggle on, Synonym selected as the way to make the replacement (the other option is Explicit replacement), the terms sport, training in the list of terms separated by commas, and Cancel and Save buttons" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
               <p>In the Admin Panel, that's a synonym of the <strong>Synonyms</strong> type with the terms <code>sport</code> and <code>training</code>, written as <code>sport, training</code>.</p>
               <p>In the <strong>Add synonym</strong> dialog, <strong>Synonym</strong> is selected as the way to make the replacement, the terms are added as a list separated by commas, and the synonym is saved with <strong>"Save"</strong>. The <strong>Status</strong> toggle, switched on, keeps the synonym active. In this case, it's as if the product were indexed as <strong>"Sport Training Shoes"</strong>.</p>
               <div style="clear: both;"></div>
-              <figure class="lesson-figure lesson-figure-right" style="width: 190px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 280px; max-width: 60%;">
                   <img src="img/synonyms-layer-after.png" alt="Search Layer with the search training: 1 result found, the Sport Shoes at 59,00 €" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -506,7 +506,7 @@ const COURSE = {
               <p class="theory-callout">With Explicit Replacement, the original indexed term stops working as a search term — only the replacement does. With the Synonyms type, both terms keep working.</p>
 
               <h3>AI SynonymBoost</h3>
-              <figure class="lesson-figure lesson-figure-right" style="width: 420px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 600px; max-width: 60%;">
                   <img src="img/synonyms-ai-synonymboost.png" alt="AI SynonymBoost section with a New synonyms to see label next to its title, and a carousel of suggested synonym sets — eyeliner, perfilador, lapiz de ojos; esmaltes, pintaúñas, laca de uñas — each with a + button and a trash button, and an arrow to see more" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -641,7 +641,7 @@ const COURSE = {
               <p>Before copying anything, it's worth checking that <strong>product names</strong> and the two Search Engines' <strong>languages</strong> actually match between source and destination — a mismatched value may simply not be recognized once it lands on the target Search Engine. For example, a synonym set like <code>sneakers, trainers</code> copied from an English Search Engine to a Spanish one may not be considered, since the Spanish products aren't indexed with those English terms.</p>
 
               <h3>How to Use It</h3>
-              <figure class="lesson-figure lesson-figure-right gif-image" style="width: 460px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right gif-image" style="width: 660px; max-width: 60%;">
                   <img src="img/copy-settings-flow.gif" data-base-src="img/copy-settings-flow.gif" alt="Animation of Copy Settings in the Synonyms list: the Copy Settings to... dropdown opens next to Add Synonym, one Search Engine of the Store (DE) is ticked, Apply is clicked, the Copy settings mode pop-up appears with Copy and Add to Existing Settings selected, and Yes, apply is clicked" data-action="zoom-image">
                   <canvas class="gif-freeze-canvas"></canvas>
                   <button type="button" class="gif-toggle-btn" data-action="toggle-gif" aria-label="Pause animation"><svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><rect x="3" y="2" width="3.4" height="12" rx="1"></rect><rect x="9.6" y="2" width="3.4" height="12" rx="1"></rect></svg></button>
@@ -664,7 +664,7 @@ const COURSE = {
                   <tr><td><strong>Copy and Replace Existing Settings</strong></td><td>Replaces all the sets in the destination Search Engine with the source's. The sets already created in the destination Search Engine are deleted.</td></tr>
                 </tbody>
               </table>
-              <figure class="lesson-figure lesson-figure-left" style="width: 360px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 520px; max-width: 60%;">
                   <img src="img/copy-settings-mode-dialog.png" alt="Copy settings mode pop-up with the heading Choose how you want to copy settings between Search Engines and two options: Copy and Add to Existing Settings (selected) — This option will merge settings from the source Search Engine with the existing items in the destination Search Engine — and Copy and Replace Existing Settings — This option will overwrite all existing items in the destination Search Engine with those from the source Search Engine — plus Cancel and Yes, apply buttons" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -672,13 +672,13 @@ const COURSE = {
               <p class="theory-callout">That second option is worth treating with real caution: once a <strong>Replace</strong> has been applied, <strong>it can't be undone</strong>, and the destination's original settings can't be recovered.</p>
 
               <h3>An Example</h3>
-              <figure class="lesson-figure lesson-figure-right" style="width: 400px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 580px; max-width: 60%;">
                   <img src="img/copy-settings-example-before.png" alt="Two Synonyms lists side by side: Search Engine A (source) with the synonym sets sneakers, trainers and hoodie, sweatshirt; and Search Engine B (destination) with the synonym set pants, trousers" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
               <p>A Store has two Search Engines, A and B, both in English and with the same products. Search Engine A has two synonym sets, <code>sneakers, trainers</code> and <code>hoodie, sweatshirt</code>, while Search Engine B has one of its own, <code>pants, trousers</code>.</p>
               <div style="clear: both;"></div>
-              <figure class="lesson-figure lesson-figure-left" style="width: 420px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 600px; max-width: 60%;">
                   <img src="img/copy-settings-example-after.png" alt="Search Engine B's Synonyms list in two versions: after Copy and Add to Existing Settings, with pants, trousers, sneakers, trainers and hoodie, sweatshirt; and after Copy and Replace Existing Settings, with only sneakers, trainers and hoodie, sweatshirt" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -821,7 +821,7 @@ const COURSE = {
               </ul>
 
               <h3>Creating a Redirection</h3>
-              <figure class="lesson-figure lesson-figure-right" style="width: 420px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 600px; max-width: 60%;">
                   <img src="img/redirections-form.png" alt="Redirection form in the Admin Panel for a redirection named Contact: Status toggle on, Destination URL https://www.doofinder.com/en/contact, Search Terms with Broad Match selected, a Type a search term box and an Add term button, the term contact added, the Automatic redirection toggle on with the text Redirection will happen automatically as soon as the term is typed, and Cancel and Save buttons" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -838,7 +838,7 @@ const COURSE = {
               </table>
 
               <h3>An Example</h3>
-              <figure class="lesson-figure lesson-figure-left" style="width: 400px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 580px; max-width: 60%;">
                   <img src="img/redirections-example-contact.png" alt="Search Layer of the Doofinder demo store with contact typed in the search box, and an arrow pointing to https://www.doofinder.com/en/contact: the Doofinder Contact page, titled We're Here to Help You, with a Support section and a form with Name and Email fields" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -863,7 +863,7 @@ const COURSE = {
               <p class="theory-callout">The match type decides <strong>which</strong> searches trigger a redirection; Automatic redirection decides <strong>when</strong> it happens.</p>
 
               <h3>Managing Redirections</h3>
-              <figure class="lesson-figure lesson-figure-right" style="width: 460px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 660px; max-width: 60%;">
                   <img src="img/redirections-list.png" alt="Redirections list in the Admin Panel with an Add Redirection button, a Search box, a date range filter, a Status: All filter, and one row: the Contact redirection with the term contact, 0 executions, its Status toggle on and a three-dot menu" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -1000,7 +1000,7 @@ const COURSE = {
               <p class="theory-callout">Only one banner can be default at a time: marking a new one as default automatically un-defaults whichever one held that spot before.</p>
 
               <h3>Search Terms</h3>
-              <figure class="lesson-figure lesson-figure-right gif-image" style="width: 360px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right gif-image" style="width: 520px; max-width: 60%;">
                   <img src="img/banners-search-terms.gif" data-base-src="img/banners-search-terms.gif" alt="Animation of the Search Terms field of a banner: the match type dropdown is set to Exact Match, and the terms doofinder, search and engine are typed and added one by one with Add term, each appearing below the field with its match type icon" data-action="zoom-image">
                   <canvas class="gif-freeze-canvas"></canvas>
                   <button type="button" class="gif-toggle-btn" data-action="toggle-gif" aria-label="Pause animation"><svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><rect x="3" y="2" width="3.4" height="12" rx="1"></rect><rect x="9.6" y="2" width="3.4" height="12" rx="1"></rect></svg></button>
@@ -1015,7 +1015,7 @@ const COURSE = {
               <p>The default banner is the exception: it ignores search terms altogether, and is shown when no banner matches the search terms.</p>
 
               <h3>The Banner's Visuals</h3>
-              <figure class="lesson-figure lesson-figure-left" style="width: 400px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 580px; max-width: 60%;">
                   <img src="img/banners-visual-config.png" alt="Upload Banner area with the Mode dropdown open, offering Visual Configuration and Code Configuration; a Desktop banner image already uploaded, with its image URL below it; an empty Mobile box with an Upload image button; the accepted formats and recommended sizes under each box; a Target Link field with a URL; and the Open the link in a new window toggle switched on" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -1040,14 +1040,14 @@ const COURSE = {
               <p>The sizes are only what <strong>Doofinder</strong> recommends, not mandatory — a banner can be sized however best fits the Layer it's shown in. As with most configuration screens, the changes need to be saved with <strong>"Save"</strong> before leaving the page.</p>
 
               <h3>An Example</h3>
-              <figure class="lesson-figure lesson-figure-right" style="width: 360px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 520px; max-width: 60%;">
                   <img src="img/banners-layer-match.png" alt="Search Layer with the search ray-ban sunglasses: 2 results found, an orange Summer Sale Sunglasses banner with a Shop the collection button at the top of the results, and below it the Ray-Ban Unisex Sunglasses at 124,00 € and the Ray-Ban Andy Sunglasses at 119,00 €, with a Brands filter listing Ray-Ban (2)" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
               <p>Take a Store that sells sunglasses and hoodies and runs a summer sale on sunglasses. A banner is added with the search term <code>sunglasses</code> set to <strong>Broad Match</strong>, and its Target Link points to the sale page. It isn't the default banner.</p>
               <p>When a user searches for "ray-ban sunglasses", the text typed contains the term "sunglasses", so the banner shows up at the top of the layer results. The Search Layer shows 2 results found, with the banner above the Ray-Ban Unisex Sunglasses and the Ray-Ban Andy Sunglasses, and the Brands filter counts two Ray-Ban products.</p>
               <div style="clear: both;"></div>
-              <figure class="lesson-figure lesson-figure-left" style="width: 400px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 580px; max-width: 60%;">
                   <img src="img/banners-layer-nomatch.png" alt="Search Layer with the search hoodie: 3 results found and no banner — the Nike Sportswear Phoenix Hoodie at 68,00 €, the Adidas Originals Trefoil Hoodie at 58,00 € (down from 63,00 €) and the Adidas Sportswear Hoodie at 49,00 € — with a Brands filter listing Adidas (2) and Nike (1)" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -1079,7 +1079,7 @@ const COURSE = {
               </table>
 
               <h3>Editing and Deleting</h3>
-              <figure class="lesson-figure lesson-figure-left" style="width: 440px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 640px; max-width: 60%;">
                   <img src="img/banners-list.png" alt="Banners list with an Add Banner button, a search box, a date range and a Status: All filter, and a table with the columns Name, Terms, Impressions, Clicks, CTR, Date Period and Status: one banner, Doofinder, marked with a star, with 0 impressions, 0 clicks, CTR 0.0, Ongoing, its Status toggle switched on, a checkbox before its name and a three-dot menu at the end of the row" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>

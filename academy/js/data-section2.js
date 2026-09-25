@@ -245,7 +245,7 @@ const COURSE = {
           {
             html: `
               <h3>What It Shows</h3>
-              <figure class="lesson-figure lesson-figure-right" style="width: 500px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 720px; max-width: 60%;">
                 <img src="img/results-preview-overview.png" alt="Results Preview screen in the Admin Panel: a search bar with a Refresh button, below it Results: 56, Query type: match_all and Custom Sorting: _score, and a product list with Item, Relevance, Boosting and Score columns, each row with a + button" data-action="zoom-image">
                 <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
               </figure>
@@ -276,7 +276,7 @@ const COURSE = {
               <p class="theory-callout">When a search is performed with one or more terms, Doofinder first looks for products that contain all of the search terms — if that returns something, it's a <code>match_and</code>, returning only the products with those terms. If there's no <code>match_and</code>, it falls back to <code>match_or</code>; and if there's no <code>match_or</code> either, it falls back to <code>fuzzy</code>, using that same logic for returning products.</p>
 
               <h3>In Practice</h3>
-              <figure class="lesson-figure lesson-figure-left" style="width: 340px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 490px; max-width: 60%;">
                   <img src="img/results-preview-example.png" alt="Results Preview panel for the query 'shoe', showing 159 results with query type match_and, a Synonym indicator, and the first product expanded to reveal all of its loaded fields" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -420,7 +420,7 @@ const COURSE = {
           {
             html: `
               <h3>Field Weights</h3>
-              <figure class="lesson-figure lesson-figure-left" style="width: 400px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 580px; max-width: 60%;">
                   <img src="img/search-fields-advanced-preferences.png" alt="Advanced Preferences > Search Fields screen, with a warning about the impact of changes, a Field/Weight selector to add a new field, and a configured list showing brand, categories, description, df_all, gtin, mpn, title and title.autocomplete with their weights" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -585,7 +585,7 @@ const COURSE = {
               <p>One special case is the <code>availability</code> field: it's a text field (usually "in stock" / "out of stock"), but it still sorts cleanly — set to <strong>A to Z</strong>, in stock items come before out of stock ones.</p>
 
               <h3>Default and Additional Criteria</h3>
-              <figure class="lesson-figure lesson-figure-right" style="width: 420px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 600px; max-width: 60%;">
                 <img src="img/relevance-criteria-default.png" alt="Advanced Preferences > Relevance criteria tab in its default configuration: a warning that changing the Score field position may decrease search quality, a single Score field set to Highest to Lowest, an Add field button and a Save button" data-action="zoom-image">
                 <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
               </figure>
@@ -595,7 +595,7 @@ const COURSE = {
 
               <h3>Why the Order Matters</h3>
               <p class="theory-callout">Criteria are applied one after the other, in the order they're listed: if products tie on the first criterion, the second one decides between them, and so on. That's why the order in which the criteria are listed affects how results end up arranged.</p>
-              <figure class="lesson-figure lesson-figure-left" style="width: 340px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 490px; max-width: 60%;">
                   <img src="img/relevance-criteria-score-price.png" alt="Relevance Criteria screen with Score listed first (Highest to lowest) and best_price listed second (Highest to lowest)" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -606,7 +606,7 @@ const COURSE = {
                 <tbody><tr><td>1</td><td><strong>Product C</strong></td><td>7</td><td>50</td></tr><tr><td>2</td><td><strong>Product B</strong></td><td>5</td><td>120</td></tr><tr><td>3</td><td><strong>Product A</strong></td><td>5</td><td>80</td></tr><tr><td>4</td><td><strong>Product D</strong></td><td>3</td><td>80</td></tr></tbody>
               </table>
               <div style="clear: both;"></div>
-              <figure class="lesson-figure lesson-figure-right" style="width: 340px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 490px; max-width: 60%;">
                   <img src="img/relevance-criteria-price-score.png" alt="Relevance Criteria screen with best_price listed first (Highest to lowest) and Score listed second (Highest to lowest)" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -772,7 +772,7 @@ const COURSE = {
                   <tr><td><strong>Boosting Through Data Feed</strong></td><td>By indexing the <code>df_manual_boost</code> field, a manual boosting can be applied to products directly through indexation, and it overwrites whatever manual boost was set in the Admin Panel.</td></tr>
                 </tbody>
               </table>
-              <figure class="lesson-figure lesson-figure-left" style="width: 224px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 320px; max-width: 60%;">
                   <img src="img/boosting-rules-edit-example.png" alt="Edit Boosting Rule panel named 'Expensive Shoes' with a Boost value of 1.5, Search Terms disabled, and conditions requiring all results to match categories Is Shoes and best_price Not in range 0.0–100.0" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -787,7 +787,7 @@ const COURSE = {
 
               <h3>Combining Them</h3>
               <p class="theory-callout">These four ways apply simultaneously to the final score. Combining a manual boosting of <strong>1.5</strong> with a Boosting Rules value of another <strong>1.5</strong> takes a product's initial score of <strong>1</strong> up to <strong>2.25</strong>: 1 × 1.5 × 1.5 = 2.25.</p>
-              <figure class="lesson-figure lesson-figure-right" style="width: 440px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 640px; max-width: 60%;">
                   <img src="img/boosting-final-score-example.png" alt="Results Preview row for a product showing an info tooltip with Automatic boosting: -, Manual boosting: 1.5, Boosting rules: 1.5, and Final Boosting: 1.5 x 1.5 = 2.25, next to a Total of 2.25" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -936,14 +936,14 @@ const COURSE = {
                   <tr><td><strong>AND + OR</strong></td><td>Both can be combined at once</td><td>Category "Shoes" whose color is "blue" or "red" mixes an AND (category + color) with an OR (blue vs red) in the same rule</td></tr>
                 </tbody>
               </table>
-              <figure class="lesson-figure lesson-figure-left" style="width: 280px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 410px; max-width: 60%;">
                 <img src="img/custom-results-and-rule.png" alt="Include Rule pop-up with two conditions on separate rows: categories SHOES and brand NIKE, with an Add condition button and an Add rule button" data-action="zoom-image">
                 <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
               </figure>
               <p class="theory-callout">"And" logic can't be applied twice to the same field within one rule — though a field can still hold more than one value.</p>
               <p>This rule has two conditions on two different fields — <code>categories</code> is SHOES and <code>brand</code> is NIKE — so it's an <strong>AND</strong>: only Nike shoes enter the list. A pair of Adidas shoes or a Nike cap wouldn't match.</p>
               <div style="clear: both;"></div>
-              <figure class="lesson-figure lesson-figure-right" style="width: 280px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 410px; max-width: 60%;">
                 <img src="img/custom-results-or-rule.png" alt="Include Rule pop-up with a single brand condition holding three values in the same row: ADIDAS, NIKE and VANS" data-action="zoom-image">
                 <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
               </figure>
@@ -952,7 +952,7 @@ const COURSE = {
               <div style="clear: both;"></div>
 
               <h3>Display and Duration</h3>
-              <figure class="lesson-figure lesson-figure-right" style="width: 420px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 600px; max-width: 60%;">
                 <img src="img/custom-results-form.png" alt="Custom Result form with numbered fields: 1 Name, 2 Status toggle, 3 Duration (ongoing or set date period), 4 Display results (only the selected results, or the selected results first then natural results), 5 Search Terms with Exact Match and Add term, 6 Included results and 7 Excluded results, each with an Add results button" data-action="zoom-image">
                 <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
               </figure>
@@ -965,13 +965,13 @@ const COURSE = {
               <p>Custom Results can be applied for a specific period, or it can always be active.</p>
 
               <h3 style="clear: both;">An Example</h3>
-              <figure class="lesson-figure lesson-figure-left" style="width: 290px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 420px; max-width: 60%;">
                 <img src="img/custom-results-example-config.png" alt="Custom Result configured with the Exact Match search terms sun accesories, sunnies and sunglasses; Included results Ray-Ban Unisex Sunglasses, Ray-Ban Andy Sunglasses and Gucci GG Round Acetate Sunglasses; Excluded results Gucci Web GG Rectangular Flat-Top Acetate Sunglasses" data-action="zoom-image">
                 <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
               </figure>
               <p>This Custom Result is triggered by three Exact Match search terms — "sun accesories", "sunnies" and "sunglasses". It includes three products, in this order: Ray-Ban Unisex Sunglasses, Ray-Ban Andy Sunglasses and Gucci GG Round Acetate Sunglasses. It also excludes one: Gucci Web GG Rectangular Flat-Top Acetate Sunglasses.</p>
               <div style="clear: both;"></div>
-              <figure class="lesson-figure lesson-figure-right" style="width: 260px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 370px; max-width: 60%;">
                 <img src="img/custom-results-example-layer.png" alt="Search Layer for the query sunglasses showing Products (3): Ray-Ban Unisex Sunglasses, Ray-Ban Andy Sunglasses and Gucci GG Round Acetate Sunglasses, in that order" data-action="zoom-image">
                 <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
               </figure>
@@ -1228,7 +1228,7 @@ const COURSE = {
             title: "5. Search Fields",
             question: "Analyze the 5 images above, each showing a different Search Fields configuration, and choose the one that gets you what you want:",
             fields: [
-              { key: "correctconfig", type: "image-select", layout: "column", thumbCols: 4, thumbAspect: "1.65", stacked: true, mediaWidth: 1000,
+              { key: "correctconfig", type: "image-select", layout: "column", thumbCols: 4, thumbAspect: "1.65", stacked: true, mediaWidth: 1200,
                 trailingNote: "Quick reminder of what needs fixing: Doostride's catalogue now has an <strong>mpn</strong> field: 4 three-character blocks — category, brand, color and size — like <code>SHODRMBLA005</code> for a size 5 black Dr Martens shoe. You want the team to search by just <strong>part</strong> of that code: typing <code>SHOCON</code> should find every <strong>Shoes</strong> product from <strong>Converse</strong>, and <code>SHODRMRED</code> every red <strong>Shoes</strong> product from <strong>Dr Martens</strong> — without anyone typing the full code.",
                 options: [
                 { value: "a", src: "img/search-fields-final-a.png", alt: "Search Fields with brand 2, categories 2, description 1, df_all 1, gtin 1, mpn 1, mpn.light_explode 1, title 3, title.autocomplete 1", caption: "Option A" },

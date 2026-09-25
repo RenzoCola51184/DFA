@@ -274,7 +274,15 @@ const COURSE = {
           {
             html: `
               <h3>The Four Steps</h3>
-              <div class="install-step-carousel has-captions">
+              <div class="install-steps">
+                <div class="install-step-carousel">
+                  <img src="img/install-step1-create-store-landing.png" alt="Doofinder home screen with a Create store button, next to an explanation of what a Store is and why to create one" data-action="zoom-image" class="is-active">
+                  <img src="img/install-step1-create-store-form.png" alt="Create Store form asking for the site's URL, the platform it runs on, and its industry" data-action="zoom-image">
+                  <img src="img/install-step2-create-search-engine-padded.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
+                  <img src="img/install-step3-css-selector.png" alt="Tell us where your search bar is screen, with a CSS selector field that accepts a format like #search-box, input[name='q'], .input-search, and a Create button" data-action="zoom-image">
+                  <img src="img/install-step4-connect-store.png" alt="Store connection screen showing the installation script to copy into the website's code, with a stepper marking Store information, Search Engine creation and Search bar location as already complete" data-action="zoom-image">
+                  <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
+                </div>
                 <div class="install-step-captions">
                   <div class="install-step-caption is-active"><span class="install-step-caption-label">Getting started</span><strong>Click Create store</strong><p>To create the account's first Store, go to the <img class="inline-ui-img" src="img/icon-home-nav.png" alt="Home menu item"> section of the account and click <img class="inline-ui-img" src="img/btn-create-store.png" alt="Create store button">. This opens the guided flow.</p></div>
                   <div class="install-step-caption"><span class="install-step-caption-label">Step 1 of 4</span><strong>Create a Store</strong><p>Provide the site's full URL, its industry, and the platform it runs on (custom sites are detected as "Other" <img class="inline-ui-img" src="img/tile-platform-other.png" alt="Other platform tile">), then click <img class="inline-ui-img" src="img/btn-continue.png" alt="Continue button">.</p></div>
@@ -282,12 +290,6 @@ const COURSE = {
                   <div class="install-step-caption"><span class="install-step-caption-label">Step 3 of 4</span><strong>Set the CSS selector manually</strong><p>This identifies which element on the page needs to be clicked for the Search Layer to appear. Enter it and click <img class="inline-ui-img" src="img/btn-create-css-selector.png" alt="Create button">.</p></div>
                   <div class="install-step-caption"><span class="install-step-caption-label">Step 4 of 4</span><strong>Connect the store with an installation script</strong><p>Once the Store and Search Engine exist, copy the script provided with <img class="inline-ui-img" src="img/btn-copy-script.png" alt="Copy button">, add it into the website's code and click <img class="inline-ui-img" src="img/btn-connect.png" alt="Connect button"> to finish the connection.</p></div>
                 </div>
-                <img src="img/install-step1-create-store-landing.png" alt="Doofinder home screen with a Create store button, next to an explanation of what a Store is and why to create one" data-action="zoom-image" class="is-active">
-                <img src="img/install-step1-create-store-form.png" alt="Create Store form asking for the site's URL, the platform it runs on, and its industry" data-action="zoom-image">
-                <img src="img/install-step2-create-search-engine.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
-                <img src="img/install-step3-css-selector.png" alt="Tell us where your search bar is screen, with a CSS selector field that accepts a format like #search-box, input[name='q'], .input-search, and a Create button" data-action="zoom-image">
-                <img src="img/install-step4-connect-store.png" alt="Store connection screen showing the installation script to copy into the website's code, with a stepper marking Store information, Search Engine creation and Search bar location as already complete" data-action="zoom-image">
-                <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
               </div>
 
               <h3>The Installation Script</h3>
@@ -306,14 +308,16 @@ const COURSE = {
             pageBreak: true,
             html: `
               <p>A Search Engine is a configured instance that stores and indexes a specific type of data — once a Store has one, it's common to end up needing several more.</p>
-              <div class="install-step-carousel has-captions">
-                <div class="install-step-captions">
-                  <div class="install-step-caption is-active"><span class="install-step-caption-label">Step 1 of 2</span><strong>Click Create Search Engine</strong><p>Click the magnifying glass icon <img class="inline-ui-img" src="img/icon-search-magnifier.png" alt="Search icon"> (<strong>Search</strong>) in the left menu, open the <strong>SE</strong> (Search Engine) dropdown at the top and click <img class="inline-ui-img" src="img/btn-create-search-engine.png" alt="Create Search Engine button">.</p></div>
-                  <div class="install-step-caption"><span class="install-step-caption-label">Step 2 of 2</span><strong>Configure the Search Engine</strong><p>Choose the data type (Product or Other data), the indexing method (File or Feed URL, or API), the results language, and — for product data — the currency.</p></div>
+              <div class="install-steps">
+                <div class="install-step-carousel">
+                  <img src="img/create-search-engine-se-selector-padded.png" alt="Search section of the Admin Panel on Results preview, with the Store and SE selectors at the top and the SE dropdown open showing the current Search Engine, a Create Search Engine button and a View all button" data-action="zoom-image" class="is-active">
+                  <img src="img/install-step2-create-search-engine-wide.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
+                  <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
                 </div>
-                <img src="img/create-search-engine-se-selector.png" alt="Search section of the Admin Panel on Results preview, with the Store and SE selectors at the top and the SE dropdown open showing the current Search Engine, a Create Search Engine button and a View all button" data-action="zoom-image" class="is-active">
-                <img src="img/install-step2-create-search-engine.png" alt="Create Search Engine form with data type, indexing method, language and currency fields" data-action="zoom-image">
-                <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
+                <div class="install-step-captions">
+                  <div class="install-step-caption is-active" data-action="carousel-goto"><span class="install-step-caption-label">Step 1 of 2</span><strong>Click Create Search Engine</strong><p>Click the magnifying glass icon <img class="inline-ui-img" src="img/icon-search-magnifier.png" alt="Search icon"> (<strong>Search</strong>) in the left menu, open the <strong>SE</strong> (Search Engine) dropdown at the top and click <img class="inline-ui-img" src="img/btn-create-search-engine.png" alt="Create Search Engine button">.</p></div>
+                  <div class="install-step-caption" data-action="carousel-goto"><span class="install-step-caption-label">Step 2 of 2</span><strong>Configure the Search Engine</strong><p>Choose the data type (Product or Other data), the indexing method (File or Feed URL, or API), the results language, and — for product data — the currency.</p></div>
+                </div>
               </div>
 
               <h3>Why Several Search Engines</h3>
@@ -462,7 +466,7 @@ const COURSE = {
               <p class="theory-callout">A few habits keep a selector from breaking after a redesign: prefer IDs and hand-placed wrapper <code>div</code>s over autogenerated classes; keep selectors short; and check both desktop and mobile in dev tools, combining both selectors with a comma when the markup differs between them (e.g. <code>#search-desktop, #search-mobile</code>).</p>
 
               <h3>A Real Case</h3>
-              <figure class="lesson-figure lesson-figure-left" style="width: 420px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 600px; max-width: 60%;">
                   <img src="img/CSS_Selector.png" alt="Chrome dev tools Inspect panel highlighting the search box on Doostride's demo store, showing button.search-bar__input" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -594,6 +598,19 @@ const COURSE = {
           {
             html: `
               <p>We've already said the Search Engine is where an item's data is managed. But how is that data actually stored? The data is stored in <strong>indices</strong>.</p>
+              <div class="install-steps">
+                <div class="install-step-carousel">
+                  <img src="img/add-source-step1-search-engines.png" alt="Configuration section of the Admin Panel on Search Engines, listing the published Search Engine with its language, currency, last indexing date and a See indices button" data-action="zoom-image" class="is-active">
+                  <img src="img/add-source-step2-add-source.png" alt="Indices tab of a Search Engine, showing the products index with an Indexing with File source under Sources and an Add source button below it" data-action="zoom-image">
+                  <img src="img/add-source-step3-new-source.png" alt="New source box marked Not added yet, with a field to enter a feed URL or drop a file, an Upload file button and an Add button, below the existing Indexing with File source" data-action="zoom-image">
+                  <button type="button" class="carousel-next-btn" data-action="carousel-next">Next step →</button>
+                </div>
+                <div class="install-step-captions">
+                  <div class="install-step-caption is-active" data-action="carousel-goto"><span class="install-step-caption-label">Step 1 of 3</span><strong>Open the Search Engine's indices</strong><p>Click the gear icon <img class="inline-ui-img" src="img/icon-configuration-gear.png" alt="Configuration icon"> (<strong>Configuration</strong>) in the left menu, go to <strong>Search Engines</strong> and click <img class="inline-ui-img" src="img/btn-see-indices.png" alt="See indices button"> on the Search Engine.</p></div>
+                  <div class="install-step-caption" data-action="carousel-goto"><span class="install-step-caption-label">Step 2 of 3</span><strong>Click Add source</strong><p>In the <strong>Indices</strong> tab, the index lists its current sources under <strong>Sources</strong>. Below them, click <img class="inline-ui-img" src="img/btn-add-source.png" alt="Add source button">.</p></div>
+                  <div class="install-step-caption" data-action="carousel-goto"><span class="install-step-caption-label">Step 3 of 3</span><strong>Add the new source</strong><p>A <strong>New source</strong> box appears, marked "Not added yet". Enter the feed URL, or upload a file with <img class="inline-ui-img" src="img/btn-upload-file.png" alt="Upload file button">, then click <img class="inline-ui-img" src="img/btn-add-source-add.png" alt="Add button">.</p></div>
+                </div>
+              </div>
               <p>An index is like a box where data is processed and organized, ready to be searched. This process is called <strong>indexing</strong>.</p>
 
               <h3>Two Ways to Feed an Index</h3>
@@ -608,7 +625,7 @@ const COURSE = {
               <p class="theory-callout">The main difference between these two ways is that, via File or URL, the index needs to be processed in order to keep the data updated in Doofinder, while via API, since the API calls are launched directly into the index, the index is kept updated in real time.</p>
 
               <h3>Indices and Sources</h3>
-              <figure class="lesson-figure lesson-figure-left" style="width: 340px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 490px; max-width: 60%;">
                   <img src="img/indices-admin-panel.png" alt="Doofinder Admin Panel index screen, showing the products index with an Indexing with URL source and an Indexing with File source under Sources, plus an Add Source and a Process Now button" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -622,7 +639,7 @@ const COURSE = {
               <p>The most common way to index is via just one File or just one URL, usually a product data feed (a source can be classifed as product or generic, this one for the content data). Let's keep it simple for now and focus on using just one index, fed by just one product data feed (indexing via API, as well as the use of multiple indices, is explained later in the course).</p>
 
               <h3>What a Data Feed Is</h3>
-              <figure class="lesson-figure lesson-figure-right" style="width: 400px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 580px; max-width: 60%;">
                   <img src="img/data-feed-spreadsheet-example.png" alt="Sample of a data feed opened as a spreadsheet, with a header row of field names (brand, id, price, title) followed by one row per item" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -664,7 +681,7 @@ const COURSE = {
               </table>
 
               <h3>XML, Google Shopping and Plugin Feeds</h3>
-              <figure class="lesson-figure lesson-figure-left" style="width: 340px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 490px; max-width: 60%;">
                   <img src="img/data-feed-xml-example.png" alt="Same data feed opened directly as a .xml file at a feed URL, showing the raw channel/item structure with fields like availability, brand, categories, description, id, image_link, link, price and title" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -687,7 +704,7 @@ const COURSE = {
                       <tr><td><strong>Field Aliases</strong></td><td>The name(s) used in the feed itself, e.g. <code>product_id</code>, <code>name</code>, <code>base_price</code></td></tr>
                     </tbody>
                   </table>
-                  <figure class="lesson-figure lesson-figure-right" style="width: 230px; max-width: 55%;">
+                  <figure class="lesson-figure lesson-figure-right" style="width: 340px; max-width: 60%;">
                   <img src="img/field-name-mapping-popup.png" alt="Field name mapping pop-up, with a Normalized Field Name column (availability, brand, categories, description, group_id, gtin) next to a Field Aliases column listing the matching feed field names in several languages" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -822,7 +839,7 @@ const COURSE = {
               <p>By default only allowlisted, or 'authorized', domains can query the Store client-side, while unwanted IPs can be shut out at the network level.</p>
 
               <h3>Authorized Domains</h3>
-              <figure class="lesson-figure lesson-figure-right" style="width: 420px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-right" style="width: 600px; max-width: 60%;">
                   <img src="img/security-settings-tab.png" alt="Store General settings Security tab, showing the Enable CORS toggle, the Authorized domains list with two entries, and an empty Blocked IPs list" data-action="zoom-image">
                   <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
                 </figure>
@@ -1023,7 +1040,7 @@ const COURSE = {
             key: "store-ids",
             title: "5. Create the Store and Search Engines, and save their IDs",
             question: `Now try to create the <strong>Store</strong> and both <strong>Search Engines</strong> yourself, from your Doofinder Admin Panel.</p>
-              <figure class="lesson-figure lesson-figure-left" style="width: 360px; max-width: 55%;">
+              <figure class="lesson-figure lesson-figure-left" style="width: 520px; max-width: 60%;">
                 <img src="img/store-url-field.png" alt="Store form field 'What's your store's URL?' filled in with https://www.doofinder.com/ and a green check mark, with the hint 'Add the full address of your website'" data-action="zoom-image">
                 <p class="example-caption" title="Click the image to enlarge it" aria-label="Click the image to enlarge it"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"></circle><line x1="10" y1="10" x2="14" y2="14" stroke-linecap="round"></line></svg></p>
               </figure>
